@@ -11,8 +11,14 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const formSchema = z.object({
-  videoId: z.string(),
-  comment: z.string(),
+  videoId: z.string().min(11,{
+    message:'動画IDは11文字です。'
+  }).max(11,{
+    message:'動画IDは11文字です。'
+  }),
+  comment: z.string().min(1, {
+    message: '投稿者コメントは必須項目です。'
+  }),
   detailComment: z.string().optional(),
 })
 
@@ -44,7 +50,7 @@ const PostForm = () => {
             <FormItem>
               <FormLabel>youtube ID</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input maxLength={11} {...field} />
               </FormControl>
               <FormDescription>
                 動画URLに含まれる11文字を記入してください
@@ -85,7 +91,7 @@ const PostForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isValid}>Submit</Button>
       </form>
     </Form>
   )
