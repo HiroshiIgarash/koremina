@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 
 const useVideoImage = (id: string) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [isFetching,setIsFetching] = useState(false)
 
   useEffect(() => {
     let ignore = false;
 
     const fetchImageSrc = async (id: string) => {
-      console.log("fetching image", id);
+      setIsFetching(true)
       await axios.get(`api/videoimage/${id}`).then((res) => {
+        setIsFetching(false)
+
         if(ignore) return
 
         if (!res.data.src) {
@@ -28,7 +31,7 @@ const useVideoImage = (id: string) => {
     };
   }, [id]);
 
-  return imageSrc;
+  return {imageSrc,isFetching};
 };
 
 export default useVideoImage;

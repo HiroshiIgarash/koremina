@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import clsx from "clsx"
@@ -28,6 +29,7 @@ const formSchema = z.object({
 
 const PostForm = () => {
   const router = useRouter()
+  const {toast} = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,7 +46,12 @@ const PostForm = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     axios.post('/api/post',values)
-    .then(() => router.push('/'))
+    .then(() => {
+      toast({
+        description: "投稿が完了しました。"
+      })
+      router.push('/')
+    })
   }
 
   
