@@ -1,10 +1,11 @@
 'use server'
 
 import prisma from "@/lib/db"
-import { NextResponse } from "next/server"
 import getCurrentUser from "./getCurrentUser"
+import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
-const postComment = async (postId:string,formData: FormData) => {
+const postComment = async (postId: string, formData: FormData) => {
   const currentUser = await getCurrentUser()
 
   if (!currentUser) {
@@ -15,13 +16,13 @@ const postComment = async (postId:string,formData: FormData) => {
     comment: formData.get('comment')
   }
 
-  
+
   if (!rawFormData.comment) {
     return 'InvalidData'
   }
-  
+
   try {
-    const newComment = await prisma.comment.create({
+    await prisma.comment.create({
       data: {
         content: rawFormData.comment.toString(),
         author: {
@@ -37,11 +38,12 @@ const postComment = async (postId:string,formData: FormData) => {
       }
     })
 
-    return newComment.content
-
   } catch (error) {
     return 'error'
   }
+
+  revalidatePath(`/post/${postId}`)
+  redirect(`/post/${postId}`)
 }
 
 export default postComment

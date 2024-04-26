@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { User } from "@prisma/client"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 interface CommentFormProps {
@@ -16,9 +15,8 @@ interface CommentFormProps {
 
 const CommentForm = ({ user, postId }: CommentFormProps) => {
   const { toast } = useToast()
-  const router = useRouter()
   const [comment, setComment] = useState('')
-  const [isSubmitting,setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
 
   return (
@@ -31,14 +29,13 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
           })
           setIsSubmitting(false)
           setComment('')
-          router.refresh()
         }
       }
-      onSubmit={()=>setIsSubmitting(true)}
+      onSubmit={() => setIsSubmitting(true)}
       className="flex gap-4 items-center"
     >
       <Avatar user={user} />
-      <Input value={comment} name="comment" onChange={(e)=>setComment(e.target.value)} placeholder="コメントする" />
+      <Input value={comment} name="comment" onChange={(e) => setComment(e.target.value)} placeholder="コメントする" />
       <Button disabled={isSubmitting}>送信</Button>
     </form>
   )

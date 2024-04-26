@@ -1,4 +1,5 @@
 import getCurrentUser from "@/app/action/getCurrentUser"
+import getRecentPostsByUserId from "@/app/action/getRecentPostsByUserId"
 import Avatar from "@/components/Avatar"
 import SignOutButton from "@/components/SignOutButton"
 import ChangeNicknameDialog from "@/components/feature/setting/ChangeNicknameDialog"
@@ -11,9 +12,12 @@ const Page = async () => {
 
   const currentUser = await getCurrentUser()
 
+
   if (!currentUser) {
     redirect('/')
   }
+
+  const recentPosts = await getRecentPostsByUserId({ userId: currentUser.id })
 
   return (
     <div className="max-w-7xl mx-auto w-full px-4 space-y-8">
@@ -49,17 +53,15 @@ const Page = async () => {
           <p className="text-center">最近の投稿</p>
           <div className="grid grid-cols-1 gap-4 px-4 max-w-7xl mx-auto">
 
-            <RecentPostItem id="k9Eewd8TEWE" />
-            <RecentPostItem id="k9Eewd8TEWE" />
-            <RecentPostItem id="oKMoybTf-TM" />
-            <RecentPostItem id="n7j3bxOwC9Y" />
-            <RecentPostItem id="F5uzlCUrFiI" />
-            <RecentPostItem id="xMpTFCca9qo" />
-            <RecentPostItem id="lAUYSiqJnS8" />
-            <RecentPostItem id="WNWMXzZ2_eU" />
-            <RecentPostItem id="hG0OMmvC9NE" />
-            <RecentPostItem id="JV4KsTf301w" />
-        </div>
+            {recentPosts.map(post => (
+              <RecentPostItem
+                key={post.id}
+                postId={post.id}
+                videoId={post.videoId}
+                comment={post.comment}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div >

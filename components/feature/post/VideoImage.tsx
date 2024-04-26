@@ -1,9 +1,9 @@
 "use client";
 
-import useVideoImage from "@/app/hooks/useVideoImage";
+import getVideoImage from "@/app/action/getVideoImage";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState, useTransition } from "react";
 
 interface VideoImageProps {
   id: string;
@@ -11,15 +11,26 @@ interface VideoImageProps {
 }
 
 const VideoImage = ({ id, setIsValidVideoId }: VideoImageProps) => {
-  const { imageSrc } = useVideoImage(id);
+  const [isPending, startTransition] = useTransition()
+  const [imageSrc, setImageSrc] = useState<string | null>('')
 
-  setIsValidVideoId(!!imageSrc)
+  useEffect(() => {
+    let ignore = false
+    startTransition(async () => {
+      const src = await getVideoImage(id)
+      if (!ignore) {
+        setImageSrc(src)
+        setIsValidVideoId(!!src)
+      }
+    })
+    return () => { ignore = false }
+  }, [id, setIsValidVideoId])
 
 
 
   return (
     <div>
-      {imageSrc === undefined ? (
+      {isPending ? (
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       ) : imageSrc ? (
         <Image

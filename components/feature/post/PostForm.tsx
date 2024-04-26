@@ -1,6 +1,5 @@
 "use client"
 
-import VideoImage from "@/components/VideoImage"
 import { Button } from "@/components/ui/button"
 import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -13,6 +12,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import VideoImage from "./VideoImage"
 
 const formSchema = z.object({
   videoId: z.string().min(11, {

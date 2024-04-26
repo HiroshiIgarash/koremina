@@ -3,10 +3,9 @@ import getCurrentUser from "@/app/action/getCurrentUser"
 import Avatar from "@/components/Avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import CommentForm from "./CommentForm"
 import getCommentsByPostId from "@/app/action/getCommentsByPostId"
-import { comment } from "postcss"
+import DeleteCommentButton from "./DeleteCommentButton"
 
 interface CommentAreaProps {
   postId: string
@@ -32,11 +31,16 @@ const CommentArea = async ({ postId }: CommentAreaProps) => {
           (comments && comments.length > 0) ?
             comments.map(comment => (
               <Card key={comment.id}>
-                <CardHeader className="pb-2">
+                <CardHeader className="pb-2 flex-row justify-between">
                   <div className="flex items-center gap-2">
                     <Avatar user={comment.author} size={32} />
                     <span className="text-sm">{comment.author.nickname || comment.author.name}</span>
                   </div>
+                  {
+                    comment.authorId === currentUser?.id && (
+                      <DeleteCommentButton commentId={comment.id} postId={postId} />
+                    )
+                  }
                 </CardHeader>
                 <CardContent>
                   <p>

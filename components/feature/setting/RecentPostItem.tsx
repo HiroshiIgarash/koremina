@@ -4,29 +4,33 @@ import Image from "next/image"
 import Link from "next/link"
 
 interface RecentPostItemProps {
-  id: string
+  postId: string
+  videoId: string
+  comment: string
 }
 
 
-const RecentPostItem = async ({ id }: RecentPostItemProps) => {
-  const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${id}&part=snippet&key=${process.env.YT_API_KEY}`)
+const RecentPostItem = async ({ postId, videoId, comment }: RecentPostItemProps) => {
+  const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
+  if (res.data.items.length === 0) return null
+
   const title = res.data.items[0].snippet.title
   return (
 
-    <Link href={`/post/${id}`}>
+    <Link href={`/post/${postId}`}>
       <Card className="flex h-full sm:max-lg:flex-col gap-4 hover:border-sky-300 hover:bg-sky-50 transition p-8">
-        <div className="w-[49%] sm:max-lg:w-full">
+        <div className="w-[49%] sm:max-lg:w-full shrink-0">
           <Image
-            src={`https://i.ytimg.com/vi/${id}/hq720.jpg`}
+            src={`https://i.ytimg.com/vi/${videoId}/hq720.jpg`}
             alt=""
             width={1600}
             height={900}
           />
-          <p>{title}</p>
+          <p className="text-xs mt-2">{title}</p>
         </div>
-        <div className="flex flex-col justify-between">
-          <CardTitle>
-            〇〇すきに絶対見て欲しい！
+        <div className="flex flex-col justify-between grow">
+          <CardTitle className="text-lg md:h-[4em] leading-tight">
+            {comment}
           </CardTitle>
           <div className="flex items-end flex-col space-y-2 text-sm">
             <div className="flex gap-2 justify-self-end">
