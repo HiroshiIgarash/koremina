@@ -41,7 +41,6 @@ const Page = async () => {
             <ChannelIcon channelId="@AngeKatrina" />
             <ChannelIcon channelId="@AngeKatrina" />
             <ChannelIcon channelId="@AngeKatrina" />
-
           </div>
 
 

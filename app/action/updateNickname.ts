@@ -12,7 +12,7 @@ const updateNickname = async(formData: FormData) => {
 
   const newNickname = formData.get('newNickname')?.toString()
 
-  if (!newNickname || newNickname === '' || newNickname.length > 11) {
+  if (!newNickname || newNickname === '') {
     return null
   }
 
