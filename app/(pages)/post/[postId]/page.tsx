@@ -35,13 +35,7 @@ const Page = async ({ params }: { params: IParams }) => {
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4">
       <div>
         <div className="sticky top-28 space-y-4">
-          <Image
-            src={`https://i.ytimg.com/vi/${post.videoId}/hq720.jpg`}
-            alt=""
-            width={1600}
-            height={900}
-            className=""
-          />
+        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${post.videoId}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
           <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
             <Link href={`https://www.youtube.com/watch?v=${post.videoId}`} target="_blank">Youtubeで視聴する</Link>
           </Button>
@@ -55,13 +49,13 @@ const Page = async ({ params }: { params: IParams }) => {
             </CardTitle>
             <div className="flex items-center gap-2 my-8">
               <Avatar user={post.postedUser} size={32} />
-              <span className="text-sm">{post.postedUser.name}</span>
+              <p className="text-sm">{post.postedUser.nickname || post.postedUser.name}</p>
             </div>
           </CardHeader>
           <CardContent>
             {
               post.detailComment && (
-                <p>{post.detailComment}</p>
+                <pre className="mt-4">{post.detailComment}</pre>
               )
             }
             <Separator className="my-4" />
