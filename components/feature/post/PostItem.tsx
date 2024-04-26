@@ -15,6 +15,8 @@ interface PostItemProps {
 
 const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostItemProps) => {
   const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
+  if (res.data.items.length === 0) return null
+  
   const title = res.data.items[0].snippet.title
   return (
     <Link href={`/post/${id}`}>

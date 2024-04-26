@@ -3,13 +3,19 @@
 import useVideoImage from "@/app/hooks/useVideoImage";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
 interface VideoImageProps {
   id: string;
+  setIsValidVideoId: Dispatch<SetStateAction<boolean>>
 }
 
-const VideoImage = ({ id }: VideoImageProps) => {
+const VideoImage = ({ id, setIsValidVideoId }: VideoImageProps) => {
   const { imageSrc } = useVideoImage(id);
+
+  setIsValidVideoId(!!imageSrc)
+
+
 
   return (
     <div>

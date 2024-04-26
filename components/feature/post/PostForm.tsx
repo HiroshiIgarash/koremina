@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import clsx from "clsx"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -30,6 +31,7 @@ const formSchema = z.object({
 const PostForm = () => {
   const router = useRouter()
   const { toast } = useToast()
+  const [isValidVideoId, setIsValidVideoId] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,8 +46,8 @@ const PostForm = () => {
   const watchVideoId = form.watch("videoId")
   const watchComment = form.watch("comment")
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    axios.post('/api/post', values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await axios.post('/api/post', values)
       .then(() => {
         toast({
           description: "投稿が完了しました。"
@@ -54,9 +56,13 @@ const PostForm = () => {
       })
   }
 
-  const handleConvert = (value: string) => {
-    if (!URL.canParse(value)) return
-    
+  const handleBlur = (value: string) => {
+
+    if (!URL.canParse(value)) {
+      form.trigger('videoId')
+      return
+    }
+
     const url = new URL(value)
 
     // https://www.youtube.com/watch〜 の場合、v= 以降を返す
@@ -64,21 +70,18 @@ const PostForm = () => {
       const paramV = url.searchParams.get('v')
 
       if (!paramV) return
-      
+
       form.setValue('videoId', paramV.toString())
 
-      return
-    }
-
-    // https://youtu.be〜 の場合、スラッシュ以降を返す
-    if (url.origin === 'https://youtu.be') {
+      // https://youtu.be〜 の場合、スラッシュ以降を返す
+    } else if (url.origin === 'https://youtu.be') {
       const path = url.pathname // '/videoId'
       const removedSlashPath = path.slice(1)
-      
-      form.setValue('videoId', removedSlashPath)
 
-      return
+      form.setValue('videoId', removedSlashPath)
     }
+
+    form.trigger('videoId')
   }
 
 
@@ -93,7 +96,7 @@ const PostForm = () => {
               <FormItem>
                 <FormLabel>youtube ID（URLでも可）</FormLabel>
                 <FormControl>
-                  <Input {...field} onBlur={(e)=>handleConvert(e.target.value)} />
+                  <Input {...field} onBlur={(e) => handleBlur(e.target.value)} />
                 </FormControl>
                 <FormDescription>
                   動画IDもしくはURLを記入してください。
@@ -105,7 +108,7 @@ const PostForm = () => {
           {
             watchVideoId.length === 11 && (
               <div className="mt-4">
-                <VideoImage id={watchVideoId} />
+                <VideoImage id={watchVideoId} setIsValidVideoId={setIsValidVideoId} />
               </div>
             )
           }
@@ -120,7 +123,7 @@ const PostForm = () => {
                 <Input placeholder="〇〇好きに見てほしい！" {...field} />
               </FormControl>
               <FormDescription>
-                この動画に対するコメントを30文字以内で記入してください。（<span className={clsx(watchComment.length > 30 && "text-destructive")} >{watchComment.length}</span> / 30）
+                この動画に対するコメントを60文字以内で記入してください。（<span className={clsx(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -142,7 +145,17 @@ const PostForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isValid}>Submit</Button>
+        <Button
+          type="submit"
+          disabled={
+            form.formState.isSubmitting ||
+            form.formState.isSubmitted ||
+            !form.formState.isValid ||
+            !isValidVideoId
+          }
+        >
+          Submit
+        </Button>
       </form>
     </Form>
   )
