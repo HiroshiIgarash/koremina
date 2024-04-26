@@ -14,22 +14,22 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const formSchema = z.object({
-  videoId: z.string().min(11,{
-    message:'動画IDは11文字です。'
-  }).max(11,{
-    message:'動画IDは11文字です。'
+  videoId: z.string().min(11, {
+    message: '動画IDは11文字です。'
+  }).max(11, {
+    message: '動画IDは11文字です。'
   }),
   comment: z.string().min(1, {
     message: '投稿者コメントは必須項目です。'
-  }).max(30, {
-    message: '30文字を超えています。'
+  }).max(60, {
+    message: '60文字を超えています。'
   }),
   detailComment: z.string().optional(),
 })
 
 const PostForm = () => {
   const router = useRouter()
-  const {toast} = useToast()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,31 +45,58 @@ const PostForm = () => {
   const watchComment = form.watch("comment")
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    axios.post('/api/post',values)
-    .then(() => {
-      toast({
-        description: "投稿が完了しました。"
+    axios.post('/api/post', values)
+      .then(() => {
+        toast({
+          description: "投稿が完了しました。"
+        })
+        router.push('/')
       })
-      router.push('/')
-    })
   }
 
-  
+  const handleConvert = (value: string) => {
+    if (!URL.canParse(value)) return
+    
+    const url = new URL(value)
+
+    // https://www.youtube.com/watch〜 の場合、v= 以降を返す
+    if (url.origin === 'https://www.youtube.com' && url.pathname === '/watch') {
+      const paramV = url.searchParams.get('v')
+
+      if (!paramV) return
+      
+      form.setValue('videoId', paramV.toString())
+
+      return
+    }
+
+    // https://youtu.be〜 の場合、スラッシュ以降を返す
+    if (url.origin === 'https://youtu.be') {
+      const path = url.pathname // '/videoId'
+      const removedSlashPath = path.slice(1)
+      
+      form.setValue('videoId', removedSlashPath)
+
+      return
+    }
+  }
+
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-       <div>
+        <div>
           <FormField
             control={form.control}
             name="videoId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>youtube ID</FormLabel>
+                <FormLabel>youtube ID（URLでも可）</FormLabel>
                 <FormControl>
-                  <Input maxLength={11} {...field} />
+                  <Input {...field} onBlur={(e)=>handleConvert(e.target.value)} />
                 </FormControl>
                 <FormDescription>
-                  動画URLに含まれる11文字を記入してください。
+                  動画IDもしくはURLを記入してください。
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -82,7 +109,7 @@ const PostForm = () => {
               </div>
             )
           }
-       </div>
+        </div>
         <FormField
           control={form.control}
           name="comment"

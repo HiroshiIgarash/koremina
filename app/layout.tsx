@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster"
 
-const inter = Inter({ subsets: ["latin"] });
+const noto = Noto_Sans_JP({preload:true,subsets:["latin"]});
 
 export const metadata: Metadata = {
   title: "コレミナ -にじさんじ布教お助けアプリ-",
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={noto.className}>
         <Header />
         <main className="flex min-h-screen flex-col items-center justify-between pt-28 pb-20">
         {children}

@@ -23,6 +23,7 @@ export const POST = async (req: Request) => {
     data: {
       videoId,
       comment,
+      detailComment,
       postedUser: {
         connect: {
           id: currentUser.id

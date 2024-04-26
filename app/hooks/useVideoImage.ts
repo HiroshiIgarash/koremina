@@ -9,7 +9,7 @@ const useVideoImage = (id: string) => {
 
     const fetchImageSrc = async (id: string) => {
 
-      await axios.get(`api/videoimage/${id}`).then((res) => {
+      await axios.get(`api/videoimage/${encodeURIComponent(id)}`).then((res) => {
 
         if(ignore) return
 

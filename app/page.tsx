@@ -9,7 +9,7 @@ export default async function Home() {
       {posts.map(post => (
         <PostItem
           key={post.id}
-          id={post.videoId}
+          id={post.id}
           comment={post.comment}
           videoId={post.videoId}
           postedUserName={post.postedUser.nickname || post.postedUser.name}

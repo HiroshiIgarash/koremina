@@ -17,13 +17,13 @@ const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostI
   const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
   const title = res.data.items[0].snippet.title
   return (
-    <Link href={`/post/vide`}>
+    <Link href={`/post/${id}`}>
       <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 transition">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg md:h-[4em] leading-tight">
             {comment}
           </CardTitle>
-          <div className="flex items-center gap-2">
+          <div className="flex justify-end items-center gap-2">
             <Avatar user={postedUser} size={32} />
             <span className="text-sm">{postedUserName}</span>
           </div>
@@ -51,7 +51,6 @@ const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostI
         </CardFooter>
       </Card>
     </Link>
-
   )
 }
 
