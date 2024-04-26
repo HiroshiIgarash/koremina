@@ -7,10 +7,10 @@ const SignOutButton = () => {
     <form
       action={async () => {
         "use server"
-        await signOut()
+        await signOut({redirectTo:"/"})
       }}
     >
-      <Button>ログアウト</Button>
+      <Button variant='secondary'>ログアウト</Button>
     </form>
   )
 }

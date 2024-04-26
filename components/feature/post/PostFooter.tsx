@@ -3,7 +3,7 @@ import { Textarea } from "@/components/ui/textarea"
 
 const PostFooter = () => {
   return (
-    <div  className="fixed p-4 bottom-0 w-full bg-white border-t">
+    <div  className="fixed  p-4 left-0 bottom-0 w-full bg-white border-t">
       <form className="flex gap-4 items-end">
         <Textarea className="resize-none" />
         <Button>送信</Button>

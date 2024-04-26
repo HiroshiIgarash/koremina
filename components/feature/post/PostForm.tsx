@@ -77,7 +77,9 @@ const PostForm = () => {
           />
           {
             watchVideoId.length === 11 && (
+              <div className="mt-4">
                 <VideoImage id={watchVideoId} />
+              </div>
             )
           }
        </div>

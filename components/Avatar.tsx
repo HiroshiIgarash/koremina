@@ -2,13 +2,13 @@ import { User } from "@prisma/client"
 import Image from "next/image"
 
 interface AvatarProps {
-  user: User
+  user: User | null
   size?: number
 }
 
 const Avatar = ({user,size = 48}:AvatarProps) => {
 
-  if (!user.image) {
+  if (!user || !user.image) {
     return null
   }
 

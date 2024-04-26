@@ -9,11 +9,11 @@ interface VideoImageProps {
 }
 
 const VideoImage = ({ id }: VideoImageProps) => {
-  const { imageSrc, isFetching } = useVideoImage(id);
+  const { imageSrc } = useVideoImage(id);
 
   return (
     <div>
-      {isFetching ? (
+      {imageSrc === undefined ? (
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       ) : imageSrc ? (
         <Image
@@ -23,7 +23,7 @@ const VideoImage = ({ id }: VideoImageProps) => {
           height={900}
           className="w-[50%]"
         />
-      ) : (
+      ) : imageSrc === null && (
         <p className="text-sm font-medium text-destructive">
           サムネイルを取得できませんでした。IDが正しいか確認してください。
         </p>

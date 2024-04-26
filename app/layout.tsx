@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={inter.className}>
         <Header />
-        <main className="flex min-h-screen flex-col items-center justify-between pt-28">
+        <main className="flex min-h-screen flex-col items-center justify-between pt-28 pb-20">
         {children}
         </main>
         <Toaster />

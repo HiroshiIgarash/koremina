@@ -2,20 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const useVideoImage = (id: string) => {
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [isFetching,setIsFetching] = useState(false)
+  const [imageSrc, setImageSrc] = useState<string | null>();
 
   useEffect(() => {
     let ignore = false;
 
     const fetchImageSrc = async (id: string) => {
-      setIsFetching(true)
+
       await axios.get(`api/videoimage/${id}`).then((res) => {
-        setIsFetching(false)
 
         if(ignore) return
 
         if (!res.data.src) {
+          setImageSrc(null);
           return;
         }
 
@@ -31,7 +30,7 @@ const useVideoImage = (id: string) => {
     };
   }, [id]);
 
-  return {imageSrc,isFetching};
+  return {imageSrc};
 };
 
 export default useVideoImage;

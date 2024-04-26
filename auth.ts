@@ -8,5 +8,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   session: {
     strategy:'jwt'
-  }
+  },
 })
