@@ -32,10 +32,10 @@ const Page = async ({ params }: { params: IParams }) => {
   }
 
   return (
-    <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4">
+    <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
       <div>
         <div className="sticky top-28 space-y-4">
-        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${post.videoId}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+        <iframe width="560" height="315" className="w-full h-auto aspect-video" src={`https://www.youtube.com/embed/${post.videoId}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
           <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
             <Link href={`https://www.youtube.com/watch?v=${post.videoId}`} target="_blank">Youtubeで視聴する</Link>
           </Button>
@@ -55,11 +55,11 @@ const Page = async ({ params }: { params: IParams }) => {
           <CardContent>
             {
               post.detailComment && (
-                <pre className="mt-4">{post.detailComment}</pre>
+                <pre className="mt-4 whitespace-pre-wrap">{post.detailComment}</pre>
               )
             }
             <Separator className="my-4" />
-            <CommentArea />
+            <CommentArea postId={post.id} />
           </CardContent>
         </Card>
       </div>

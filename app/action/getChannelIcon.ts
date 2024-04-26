@@ -20,8 +20,6 @@ const getChannelIcon = async ({ channelId, quality = 'default' }: getChannelIcon
   try {
     const res = await axios.get(`https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`)
     
-    // console.log(res.data)
-    
     if (!res.data.items) {
       return null
     }
