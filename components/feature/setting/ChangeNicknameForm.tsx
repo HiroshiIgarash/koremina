@@ -5,9 +5,6 @@ import { Button } from "@/components/ui/button"
 import { User } from "@prisma/client"
 import { useState,Dispatch, SetStateAction } from "react"
 import updateNickname from "@/app/action/updateNickname"
-import { useFormStatus } from "react-dom"
-import { DialogClose } from "@/components/ui/dialog"
-import { revalidatePath } from "next/cache"
 import { useRouter } from "next/navigation"
 
 interface ChangeNicknameFormProps {

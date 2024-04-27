@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/db"
 import getCurrentUser from "./getCurrentUser"
-import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 
 const postComment = async (postId: string, formData: FormData) => {
@@ -43,7 +42,6 @@ const postComment = async (postId: string, formData: FormData) => {
   }
 
   revalidatePath(`/post/${postId}`)
-  redirect(`/post/${postId}`)
 }
 
 export default postComment

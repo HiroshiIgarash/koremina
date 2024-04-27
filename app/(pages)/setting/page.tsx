@@ -4,7 +4,7 @@ import Avatar from "@/components/Avatar"
 import SignOutButton from "@/components/SignOutButton"
 import ChangeNicknameDialog from "@/components/feature/setting/ChangeNicknameDialog"
 import ChannelIcon from "@/components/feature/setting/ChannelIcon"
-import RecentPostItem from "@/components/feature/setting/RecentPostItem"
+import RecentPostList from "@/components/feature/setting/RecentPostList"
 import { SquarePen } from "lucide-react"
 import { redirect } from "next/navigation"
 
@@ -16,8 +16,6 @@ const Page = async () => {
   if (!currentUser) {
     redirect('/')
   }
-
-  const recentPosts = await getRecentPostsByUserId({ userId: currentUser.id })
 
   return (
     <div className="max-w-7xl mx-auto w-full px-4 space-y-8">
@@ -49,20 +47,7 @@ const Page = async () => {
 
 
         </div>
-        <div className="border p-4">
-          <p className="text-center">最近の投稿</p>
-          <div className="grid grid-cols-1 gap-4 px-4 max-w-7xl mx-auto">
-
-            {recentPosts.map(post => (
-              <RecentPostItem
-                key={post.id}
-                postId={post.id}
-                videoId={post.videoId}
-                comment={post.comment}
-              />
-            ))}
-          </div>
-        </div>
+        <RecentPostList currentUser={currentUser} />
       </div>
     </div >
   )

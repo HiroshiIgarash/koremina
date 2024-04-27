@@ -25,6 +25,7 @@ const Page = async ({ params }: { params: IParams }) => {
     notFound()
   }
 
+
   return (
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
       <div>
@@ -59,6 +60,8 @@ const Page = async ({ params }: { params: IParams }) => {
       </div>
     </div>
   );
+
+
 };
 
 export default Page;
