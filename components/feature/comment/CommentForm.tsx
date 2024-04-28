@@ -35,7 +35,7 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
       className="flex gap-4 items-center"
     >
       <Avatar user={user} />
-      <Input value={comment} name="comment" onChange={(e) => setComment(e.target.value)} placeholder="コメントする" />
+      <Input className="text-base md:text-sm" value={comment} name="comment" onChange={(e) => setComment(e.target.value)} placeholder="コメントする" />
       <Button disabled={isSubmitting}>送信</Button>
     </form>
   )

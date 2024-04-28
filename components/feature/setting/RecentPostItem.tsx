@@ -18,18 +18,19 @@ const RecentPostItem = async ({ postId, videoId, comment }: RecentPostItemProps)
   return (
 
     <Link href={`/post/${postId}`}>
-      <Card className="flex h-full sm:max-lg:flex-col gap-4 hover:border-sky-300 hover:bg-sky-50 transition p-8">
-        <div className="w-[49%] sm:max-lg:w-full shrink-0">
+      <Card className="flex h-full flex-col lg:flex-row gap-4 hover:border-sky-300 hover:bg-sky-50 transition p-8">
+        <div className="lg:w-[49%] w-full shrink-0">
           <Image
-            src={`https://i.ytimg.com/vi/${videoId}/hq720.jpg`}
+            src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
             alt=""
             width={1600}
             height={900}
+            className="aspect-video object-cover"
           />
           <p className="text-xs mt-2">{title}</p>
         </div>
         <div className="flex flex-col justify-between grow">
-          <CardTitle className="text-lg md:h-[4em] leading-tight">
+          <CardTitle className="text-lg lg:h-[4em] leading-tight">
             {comment}
           </CardTitle>
           <div className="flex items-end flex-col space-y-2 text-sm">

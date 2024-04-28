@@ -1,5 +1,5 @@
 import Avatar from "@/components/Avatar"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { User } from "@prisma/client"
 import axios from "axios"
 import Image from "next/image"
@@ -32,10 +32,11 @@ const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostI
         </CardHeader>
         <CardContent className="grow space-y-2 pb-2">
           <Image
-            src={`https://i.ytimg.com/vi/${videoId}/hq720.jpg`}
+            src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
             alt=""
             width={1600}
             height={900}
+            className="aspect-video object-cover"
           />
           <p className="text-xs">{title}</p>
         </CardContent>

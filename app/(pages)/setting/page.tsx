@@ -1,9 +1,8 @@
 import getCurrentUser from "@/app/action/getCurrentUser"
-import getRecentPostsByUserId from "@/app/action/getRecentPostsByUserId"
 import Avatar from "@/components/Avatar"
 import SignOutButton from "@/components/SignOutButton"
 import ChangeNicknameDialog from "@/components/feature/setting/ChangeNicknameDialog"
-import ChannelIcon from "@/components/feature/setting/ChannelIcon"
+import FavoriteLiversArea from "@/components/feature/setting/FavoriteLiversArea"
 import RecentPostList from "@/components/feature/setting/RecentPostList"
 import { SquarePen } from "lucide-react"
 import { redirect } from "next/navigation"
@@ -29,24 +28,9 @@ const Page = async () => {
           <SignOutButton />
         </div>
       </div>
-      <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
-        <div className="border text-center p-4">
-          最推しライバー
-          <div className="flex justify-center">
-            <ChannelIcon channelId="@AngeKatrina" size={112} quality="medium" />
-          </div>
 
-          推しライバー
-          <div className="flex justify-center -space-x-1">
-            <ChannelIcon channelId="@InuiToko" />
-            <ChannelIcon channelId="@LizeHelesta" />
-            <ChannelIcon channelId="@AngeKatrina" />
-            <ChannelIcon channelId="@AngeKatrina" />
-            <ChannelIcon channelId="@AngeKatrina" />
-          </div>
-
-
-        </div>
+      <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 items-start">
+        <FavoriteLiversArea />
         <RecentPostList currentUser={currentUser} />
       </div>
     </div >

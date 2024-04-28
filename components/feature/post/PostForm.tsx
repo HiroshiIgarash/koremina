@@ -96,7 +96,7 @@ const PostForm = () => {
               <FormItem>
                 <FormLabel>youtube ID（URLでも可）</FormLabel>
                 <FormControl>
-                  <Input {...field} onBlur={(e) => handleBlur(e.target.value)} />
+                  <Input className="text-base" {...field} onBlur={(e) => handleBlur(e.target.value)} />
                 </FormControl>
                 <FormDescription>
                   動画IDもしくはURLを記入してください。
@@ -120,7 +120,7 @@ const PostForm = () => {
             <FormItem>
               <FormLabel>投稿者コメント（必須）</FormLabel>
               <FormControl>
-                <Input placeholder="〇〇好きに見てほしい！" {...field} />
+                <Input className="text-base" placeholder="〇〇好きに見てほしい！" {...field} />
               </FormControl>
               <FormDescription>
                 この動画に対するコメントを60文字以内で記入してください。（<span className={clsx(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
@@ -136,7 +136,7 @@ const PostForm = () => {
             <FormItem>
               <FormLabel>投稿者コメント（詳細）</FormLabel>
               <FormControl>
-                <Textarea className="resize-none" {...field} />
+                <Textarea className="resize-none text-base" {...field} />
               </FormControl>
               <FormDescription>
                 コメントを細かく書くことができます。

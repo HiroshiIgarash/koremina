@@ -5,7 +5,7 @@ import axios from "axios";
 const getVideoImage = async (id: string) => {
 
   const res = await axios
-    .get(`https://i.ytimg.com/vi/${id}/hq720.jpg`)
+    .get(`https://i.ytimg.com/vi/${id}/hqdefault.jpg`)
     .catch(() => {
       return null;
     });
@@ -14,7 +14,7 @@ const getVideoImage = async (id: string) => {
     return null
   }
 
-  return `https://i.ytimg.com/vi/${id}/hq720.jpg`
+  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
 }
 
 export default getVideoImage
