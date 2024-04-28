@@ -38,7 +38,7 @@ const VideoImage = ({ id, setIsValidVideoId }: VideoImageProps) => {
           alt=""
           width={1600}
           height={900}
-          className="w-[50%]"
+          className="w-[50%] aspect-video object-cover"
         />
       ) : imageSrc === null && (
         <p className="text-sm font-medium text-destructive">
