@@ -1,5 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-import axios from "axios"
+import { Card, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -11,10 +10,23 @@ interface RecentPostItemProps {
 
 
 const RecentPostItem = async ({ postId, videoId, comment }: RecentPostItemProps) => {
-  const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
-  if (res.data.items.length === 0) return null
 
-  const title = res.data.items[0].snippet.title
+  //動画タイトルの取得
+  // const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
+  //   .then(r => {
+  //     if (r.status === 200) {
+  //       return r.json()
+  //     } else {
+  //       throw new Error()
+  //     }
+  //   })
+  //   .catch(() => {
+  //     return []
+  //   })
+
+  const res:any = []
+  const title = res.items?.[0].snippet.title
+
   return (
 
     <Link href={`/post/${postId}`}>

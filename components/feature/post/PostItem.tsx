@@ -14,10 +14,22 @@ interface PostItemProps {
 }
 
 const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostItemProps) => {
-  const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
-  if (res.data.items.length === 0) return null
+
+  //動画タイトルの取得
+  const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
+    .then(r => {
+      if (r.status === 200) {
+        return r.json()
+      } else {
+        throw new Error()
+      }
+    })
+    .catch(() => {
+      return []
+    })
+
+  const title = res.items?.[0].snippet.title
   
-  const title = res.data.items[0].snippet.title
   return (
     <Link href={`/post/${id}`}>
       <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 transition">

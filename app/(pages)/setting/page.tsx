@@ -1,37 +1,28 @@
-import getCurrentUser from "@/app/action/getCurrentUser"
-import Avatar from "@/components/Avatar"
-import SignOutButton from "@/components/SignOutButton"
-import ChangeNicknameDialog from "@/components/feature/setting/ChangeNicknameDialog"
+import { auth } from "@/auth"
 import FavoriteLiversArea from "@/components/feature/setting/FavoriteLiversArea"
-import RecentPostList from "@/components/feature/setting/RecentPostList"
-import { SquarePen } from "lucide-react"
+import RecentPostArea from "@/components/feature/setting/RecentPostArea"
+import SkeletonUserInfo from "@/components/feature/setting/SkeletonUserInfo"
+import UserInfo from "@/components/feature/setting/UserInfo"
 import { redirect } from "next/navigation"
+import { Suspense } from "react"
 
 const Page = async () => {
 
-  const currentUser = await getCurrentUser()
+  const session = await auth()
 
-
-  if (!currentUser) {
+  if (!session) {
     redirect('/')
   }
 
   return (
     <div className="max-w-7xl mx-auto w-full px-4 space-y-8">
-      <div className="flex items-center gap-2">
-        <Avatar user={currentUser} size={48} />
-        <span>{currentUser?.nickname}</span>
-        <ChangeNicknameDialog user={currentUser}>
-          <SquarePen size='1em' />
-        </ChangeNicknameDialog>
-        <div className="ml-8">
-          <SignOutButton />
-        </div>
-      </div>
+      <Suspense fallback={<SkeletonUserInfo />}>
+        <UserInfo />
+      </Suspense>
 
       <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 items-start">
         <FavoriteLiversArea />
-        <RecentPostList currentUser={currentUser} />
+        <RecentPostArea />
       </div>
     </div >
   )

@@ -1,8 +1,5 @@
-import { auth, signIn } from "@/auth"
 import { Button } from "./ui/button"
 import SignInButton from "./SignInButton"
-import Image from "next/image"
-import SignOutButton from "./SignOutButton"
 import getCurrentUser from "@/app/action/getCurrentUser"
 import Avatar from "./Avatar"
 import Link from "next/link"

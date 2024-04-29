@@ -25,6 +25,10 @@ model User {
   updatedAt DateTime  @updatedAt
   Video     Video[]
   Comment   Comment[]
+
+  mostFavoriteLiver   Liver?   @relation("mostFavoriteLiver", fields: [mostFavoriteLiverId], references: [id])
+  mostFavoriteLiverId String?
+  favoriteLivers      Liver[] @relation("favoriteLivers")
 }
 
 model Account {
@@ -86,7 +90,7 @@ model Video {
 }
 
 model Comment {
-  id        String      @id @default(cuid())
+  id        String   @id @default(cuid())
   content   String
   video     Video    @relation(fields: [videoId], references: [id])
   videoId   String
@@ -94,4 +98,12 @@ model Comment {
   authorId  String // コメントの作者
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Liver {
+  id               String @id @default(cuid())
+  name             String
+  channelHandle    String
+  mostFavoriteUser User[] @relation("mostFavoriteLiver")
+  favoriteUser     User[] @relation("favoriteLivers")
 }
