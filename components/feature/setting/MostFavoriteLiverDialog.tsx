@@ -16,7 +16,7 @@ const MostFavoriteLiverDialog = ({ children,user }: { children: React.ReactNode,
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="space-y-4">
-          <DialogTitle>ニックネームを編集</DialogTitle>
+          <DialogTitle>最推しライバーを編集</DialogTitle>
             <MostFavoriteLiverForm user={user} setOpen={setOpen} />
         </DialogHeader>
       </DialogContent>

@@ -2,11 +2,11 @@
 
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
-import MostFavoriteLiverForm from "./MostFavoriteLiverForm"
+import FavoriteLiversForm from "./FavoriteLiversForm"
 import { useState } from "react"
-import { User } from "@prisma/client"
+import { Liver, User } from "@prisma/client"
 
-const FavoriteLiversDialog = ({ children,user }: { children: React.ReactNode,user:User|null }) => {
+const FavoriteLiversDialog = ({ children, user }: { children: React.ReactNode, user: User & {favoriteLivers: Liver[]} |null }) => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -15,9 +15,9 @@ const FavoriteLiversDialog = ({ children,user }: { children: React.ReactNode,use
         {children}
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader className="space-y-4">
+        <DialogHeader className="space-y-4 items-start">
           <DialogTitle>ニックネームを編集</DialogTitle>
-            <MostFavoriteLiverForm user={user} setOpen={setOpen} />
+            <FavoriteLiversForm user={user} setOpen={setOpen} />
         </DialogHeader>
       </DialogContent>
     </Dialog>

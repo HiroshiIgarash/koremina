@@ -19,7 +19,7 @@ interface MostFavoriteLiverFormProps {
 }
 
 const FormSchema = z.object({
-  liverId: z.string(),
+  liverId: z.string().optional(),
 })
 
 const MostFavoriteLiverForm = ({ user, setOpen }: MostFavoriteLiverFormProps) => {
@@ -42,9 +42,11 @@ const MostFavoriteLiverForm = ({ user, setOpen }: MostFavoriteLiverFormProps) =>
   function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async() => {
       const newMostFavoriteLiver = await updateMostFavoriteLiver(data)
-      if (newMostFavoriteLiver !== 'Unauthorized' && newMostFavoriteLiver) {
+      if (newMostFavoriteLiver !== 'Unauthorized') {
         toast({
-          description: `最推しライバーを${newMostFavoriteLiver.name}に登録しました。`
+          description: newMostFavoriteLiver ?
+            `最推しライバーを${newMostFavoriteLiver.name}に登録しました。` :
+            '最推しライバーを未設定にしました。'
         })
         setOpen(false)
       }

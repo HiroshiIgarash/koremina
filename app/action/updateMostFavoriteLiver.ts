@@ -4,7 +4,7 @@ import prisma from "@/lib/db"
 import getCurrentUser from "./getCurrentUser"
 import { revalidatePath } from "next/cache"
 
-const updateMostFavoriteLiver = async (data: { liverId: string}) => {
+const updateMostFavoriteLiver = async (data: { liverId?: string | undefined}) => {
   const currentUser = await getCurrentUser()
 
   if (!currentUser) {
@@ -12,18 +12,23 @@ const updateMostFavoriteLiver = async (data: { liverId: string}) => {
   }
 
   const { liverId } = data
+
+  const updateData = liverId ? 
+  {
+    mostFavoriteLiver: {
+      connect: {
+        id:liverId
+      }
+    }
+  } : {
+    mostFavoriteLiverId: null
+  }
   
   const user = await prisma.user.update({
     where: {
       id: currentUser.id
     },
-    data: {
-      mostFavoriteLiver: {
-        connect: {
-          id:liverId
-        }
-      }
-    },
+    data: updateData,
     include: {
       mostFavoriteLiver: true
     }

@@ -13,7 +13,8 @@ const getCurrentUser = async () => {
       email: session.user.email
     },
     include: {
-      mostFavoriteLiver: true
+      mostFavoriteLiver: true,
+      favoriteLivers: true
     }
   })
 

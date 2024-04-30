@@ -14,7 +14,7 @@ const FavoriteLiversArea = async () => {
     <Card>
       <CardContent className="p-8 space-y-12">
         <div>
-          <p className="font-bold text-xl text-center my-4">最推しライバー</p>
+          <p className="font-semibold text-xl text-center my-4">最推しライバー</p>
           <div className="flex flex-col items-center justify-center">
             {
               currentUser.mostFavoriteLiver && (
@@ -30,21 +30,14 @@ const FavoriteLiversArea = async () => {
           </div>
         </div>
         <div>
-          <p className="font-bold text-xl text-center my-4">推しライバー</p>
+          <p className="font-semibold text-xl text-center my-4">推しライバー</p>
           <div className="flex flex-col items-center justify-center">
-            <div className="grid grid-cols-[repeat(5,auto)] justify-center [&>*]:-ml-1">
-              <ChannelIcon channelId="@InuiToko" />
-              <ChannelIcon channelId="@LizeHelesta" />
-              <ChannelIcon channelId="@AngeKatrina" />
-              <ChannelIcon channelId="@InuiToko" />
-              <ChannelIcon channelId="@LizeHelesta" />
-              <ChannelIcon channelId="@AngeKatrina" />
-              <ChannelIcon channelId="@InuiToko" />
-              <ChannelIcon channelId="@LizeHelesta" />
-              <ChannelIcon channelId="@AngeKatrina" />
-              <ChannelIcon channelId="@InuiToko" />
-              <ChannelIcon channelId="@LizeHelesta" />
-              <ChannelIcon channelId="@AngeKatrina" />
+            <div className="grid grid-cols-[repeat(5,auto)] justify-center">
+              {
+                currentUser.favoriteLivers.map(liver => (
+                  <ChannelIcon key={liver.id} channelId={liver.channelHandle} />
+                ))
+              }
             </div>
             <FavoriteLiversDialog user={currentUser} >
               <Button className="mt-8">推しライバーを選択</Button>
