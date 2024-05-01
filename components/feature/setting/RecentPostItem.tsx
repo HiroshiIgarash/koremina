@@ -11,20 +11,19 @@ interface RecentPostItemProps {
 
 const RecentPostItem = async ({ postId, videoId, comment }: RecentPostItemProps) => {
 
-  //動画タイトルの取得
-  // const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
-  //   .then(r => {
-  //     if (r.status === 200) {
-  //       return r.json()
-  //     } else {
-  //       throw new Error()
-  //     }
-  //   })
-  //   .catch(() => {
-  //     return []
-  //   })
+  // 動画タイトルの取得
+  const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,{cache: 'force-cache'})
+    .then(r => {
+      if (r.status === 200) {
+        return r.json()
+      } else {
+        throw new Error()
+      }
+    })
+    .catch(() => {
+      return []
+    })
 
-  const res:any = []
   const title = res.items?.[0].snippet.title
 
   return (

@@ -16,7 +16,7 @@ interface PostItemProps {
 const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostItemProps) => {
 
   //動画タイトルの取得
-  const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`)
+  const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,{cache: 'force-cache'})
     .then(r => {
       if (r.status === 200) {
         return r.json()
