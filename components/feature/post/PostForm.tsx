@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import clsx from "clsx"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import VideoImage from "./VideoImage"
@@ -53,6 +53,7 @@ const PostForm = () => {
           description: "投稿が完了しました。"
         })
         router.push('/')
+        router.refresh()
       })
   }
 
