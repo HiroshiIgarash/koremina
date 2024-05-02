@@ -26,7 +26,7 @@ model User {
   Video     Video[]
   Comment   Comment[]
 
-  mostFavoriteLiver   Liver?   @relation("mostFavoriteLiver", fields: [mostFavoriteLiverId], references: [id])
+  mostFavoriteLiver   Liver?  @relation("mostFavoriteLiver", fields: [mostFavoriteLiverId], references: [id])
   mostFavoriteLiverId String?
   favoriteLivers      Liver[] @relation("favoriteLivers")
 }
@@ -81,6 +81,7 @@ model Video {
   postedUserId  String
   postedAt      DateTime  @default(now())
   comments      Comment[]
+  liver         Liver[]
   good          Int       @default(0)
   bad           Int       @default(0)
   love          Int       @default(0)
@@ -101,9 +102,10 @@ model Comment {
 }
 
 model Liver {
-  id               String @id @default(cuid())
+  id               String  @id @default(cuid())
   name             String
   channelHandle    String
-  mostFavoriteUser User[] @relation("mostFavoriteLiver")
-  favoriteUser     User[] @relation("favoriteLivers")
+  mostFavoriteUser User[]  @relation("mostFavoriteLiver")
+  favoriteUser     User[]  @relation("favoriteLivers")
+  video            Video[]
 }

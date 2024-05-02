@@ -13,10 +13,11 @@ export const POST = async (req: Request) => {
   const {
     videoId,
     comment,
-    detailComment
+    detailComment,
+    liver:liversId
   } = body
 
-  if (!videoId || !comment) {
+  if (!videoId || !comment || liversId.length === 0) {
     return new NextResponse('Invalid data', { status: 400 })
   }
 
@@ -29,6 +30,9 @@ export const POST = async (req: Request) => {
         connect: {
           id: currentUser.id
         }
+      },
+      liver: {
+        set: (liversId as string[]).map(l=>({id:l}))
       }
     }
   })
