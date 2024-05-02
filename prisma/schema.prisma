@@ -29,6 +29,13 @@ model User {
   mostFavoriteLiver   Liver?  @relation("mostFavoriteLiver", fields: [mostFavoriteLiverId], references: [id])
   mostFavoriteLiverId String?
   favoriteLivers      Liver[] @relation("favoriteLivers")
+
+  goodVideo  Video[] @relation("good")
+  badVideo   Video[] @relation("bad")
+  loveVideo  Video[] @relation("love")
+  funnyVideo Video[] @relation("funny")
+  cryVideo   Video[] @relation("cry")
+  angelVideo Video[] @relation("angel")
 }
 
 model Account {
@@ -82,12 +89,13 @@ model Video {
   postedAt      DateTime  @default(now())
   comments      Comment[]
   liver         Liver[]
-  good          Int       @default(0)
-  bad           Int       @default(0)
-  love          Int       @default(0)
-  funny         Int       @default(0)
-  cry           Int       @default(0)
-  angel         Int       @default(0)
+
+  good  User[] @relation("good")
+  bad   User[] @relation("bad")
+  love  User[] @relation("love")
+  funny User[] @relation("funny")
+  cry   User[] @relation("cry")
+  angel User[] @relation("angel")
 }
 
 model Comment {

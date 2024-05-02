@@ -17,6 +17,7 @@ const RecentPostList = async () => {
           postId={post.id}
           videoId={post.videoId}
           comment={post.comment}
+          livers={post.liver}
         />
       ))}
     </>

@@ -1,4 +1,6 @@
+import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle } from "@/components/ui/card"
+import { Liver } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -6,10 +8,11 @@ interface RecentPostItemProps {
   postId: string
   videoId: string
   comment: string
+  livers: Liver[]
 }
 
 
-const RecentPostItem = async ({ postId, videoId, comment }: RecentPostItemProps) => {
+const RecentPostItem = async ({ postId, videoId, comment, livers }: RecentPostItemProps) => {
 
   // 動画タイトルの取得
   const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,{cache: 'force-cache'})
@@ -41,6 +44,13 @@ const RecentPostItem = async ({ postId, videoId, comment }: RecentPostItemProps)
           <p className="text-xs mt-2">{title}</p>
         </div>
         <div className="flex flex-col justify-between grow">
+          <div className="flex flex-wrap gap-2 mb-4">
+          {
+              livers.map(liver=>(
+                <Badge key={liver.id} variant="outline">{liver.name}</Badge>
+              ))
+            }
+          </div>
           <CardTitle className="text-lg lg:h-[4em] leading-tight">
             {comment}
           </CardTitle>

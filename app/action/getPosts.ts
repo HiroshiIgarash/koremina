@@ -6,7 +6,8 @@ const getPosts = async () => {
       postedAt: 'desc'
     },
     include: {
-      postedUser: true
+      postedUser: true,
+      liver: true
     },
   })
 

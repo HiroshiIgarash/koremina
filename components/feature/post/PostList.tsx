@@ -17,6 +17,7 @@ const PostList = async() => {
           videoId={post.videoId}
           postedUserName={post.postedUser.nickname || post.postedUser.name}
           postedUser={post.postedUser}
+          livers={post.liver}
           />
         </Suspense>
         

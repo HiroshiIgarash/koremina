@@ -1,7 +1,7 @@
 import Avatar from "@/components/Avatar"
+import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-import { User } from "@prisma/client"
-import axios from "axios"
+import { Liver, User } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -10,10 +10,11 @@ interface PostItemProps {
   comment: string
   videoId: string
   postedUserName: string | null
-  postedUser: User
+  postedUser: User,
+  livers: Liver[]
 }
 
-const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostItemProps) => {
+const PostItem = async ({ id, comment,videoId,postedUserName,postedUser,livers }: PostItemProps) => {
 
   //動画タイトルの取得
   const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,{cache: 'force-cache'})
@@ -43,6 +44,13 @@ const PostItem = async ({ id, comment,videoId,postedUserName,postedUser }: PostI
           </div>
         </CardHeader>
         <CardContent className="grow space-y-2 pb-2">
+          <div className="flex flex-wrap gap-2">
+            {
+              livers.map(liver=>(
+                <Badge key={liver.id} variant="outline">{liver.name}</Badge>
+              ))
+            }
+          </div>
           <Image
             src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
             alt=""

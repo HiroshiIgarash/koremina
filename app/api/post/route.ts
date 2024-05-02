@@ -1,6 +1,7 @@
 import getCurrentUser from "@/app/action/getCurrentUser";
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {

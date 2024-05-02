@@ -1,6 +1,7 @@
 import getPostById from "@/app/action/getPostById";
 import Avatar from "@/components/Avatar";
 import CommentArea from "@/components/feature/comment/CommentArea";
+import ReactionButton from "@/components/feature/post/ReactionButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -31,9 +32,14 @@ const Page = async ({ params }: { params: IParams }) => {
       <div>
         <div className="sticky top-28 space-y-4">
           <iframe width="560" height="315" className="w-full h-auto aspect-video" src={`https://www.youtube.com/embed/${post.videoId}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-          <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
-            <Link href={`https://www.youtube.com/watch?v=${post.videoId}`} target="_blank">Youtubeで視聴する</Link>
-          </Button>
+          <div className="flex justify-between">
+            <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
+              <Link href={`https://www.youtube.com/watch?v=${post.videoId}`} target="_blank">Youtubeで視聴する</Link>
+            </Button>
+            <div>
+              <ReactionButton reaction="good" active={true} display="👍" postId={postId} />
+            </div>
+          </div>
         </div>
       </div>
       <div>

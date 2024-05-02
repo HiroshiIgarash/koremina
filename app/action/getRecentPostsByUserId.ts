@@ -1,25 +1,29 @@
-import prisma from "@/lib/db"
+import prisma from "@/lib/db";
 
 interface getRecentPostsByUserIdProps {
   userId: string;
-  count?: number
+  count?: number;
 }
 
-const getRecentPostsByUserId = async ({ userId, count = 10 }: getRecentPostsByUserIdProps) => {
+const getRecentPostsByUserId = async ({
+  userId,
+  count = 10,
+}: getRecentPostsByUserIdProps) => {
   const posts = await prisma.video.findMany({
     where: {
-      postedUserId: userId
+      postedUserId: userId,
     },
     take: count,
     orderBy: {
-      postedAt: 'desc'
+      postedAt: "desc",
     },
     include: {
-      postedUser: true
+      postedUser: true,
+      liver: true,
     },
-  })
+  });
 
-  return posts
-}
+  return posts;
+};
 
-export default getRecentPostsByUserId
+export default getRecentPostsByUserId;
