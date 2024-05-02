@@ -16,7 +16,7 @@ const getChannelIcon = async ({ channelId, quality = 'default' }: getChannelIcon
   }
 
   try {
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`)
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,{cache: 'force-cache'})
       .then(r => {
         if (r.status === 200) {
           return r.json()

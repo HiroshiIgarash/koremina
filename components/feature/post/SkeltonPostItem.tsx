@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 const SkeltonPostItem = () => {
   return (
-    <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 transition">
+    <Card className="flex flex-col h-full">
     <CardHeader className="pb-2">
       <CardTitle className="text-lg md:h-[4em] leading-tight">
         <Skeleton className="h-4 w-full my-2" />

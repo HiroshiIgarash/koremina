@@ -9,10 +9,21 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import clsx from "clsx"
 import { useRouter } from "next/navigation"
-import { useState, useTransition } from "react"
+import { useCallback, useEffect, useRef, useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import VideoImage from "./VideoImage"
+import {
+  Command,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { Command as CommandPrimitive } from "cmdk";
+import { Liver } from "@prisma/client"
+import { Badge } from "@/components/ui/badge"
+import { Loader2, X } from "lucide-react"
+import { register } from "module"
 
 const formSchema = z.object({
   videoId: z.string().min(11, {
@@ -26,6 +37,7 @@ const formSchema = z.object({
     message: '60文字を超えています。'
   }),
   detailComment: z.string().optional(),
+  liver: z.string().array()
 })
 
 const PostForm = () => {
@@ -33,15 +45,25 @@ const PostForm = () => {
   const { toast } = useToast()
   const [isValidVideoId, setIsValidVideoId] = useState(false)
 
+  const [livers, setLivers] = useState<Liver[]>([])
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<Liver[]>([]);
+  const [inputValue, setInputValue] = useState("");
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       videoId: "",
       comment: "",
       detailComment: "",
+      liver: []
     },
     mode: "onBlur"
   })
+
+  form.setValue('liver', selected.map(s => s.id))
 
   const watchVideoId = form.watch("videoId")
   const watchComment = form.watch("comment")
@@ -86,6 +108,42 @@ const PostForm = () => {
   }
 
 
+  const handleUnselect = useCallback((liver: Liver) => {
+    setSelected(prev => prev.filter(s => s.id !== liver.id));
+  }, []);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    const input = inputRef.current
+    if (input) {
+      if (e.key === "Delete" || e.key === "Backspace") {
+        if (input.value === "") {
+          setSelected(prev => {
+            const newSelected = [...prev];
+            newSelected.pop();
+            return newSelected;
+          })
+        }
+      }
+      // This is not a default behaviour of the <input /> field
+      if (e.key === "Escape") {
+        input.blur();
+      }
+    }
+  }, []);
+
+  const selectables = livers.filter(liver => !selected.some(s => s.id === liver.id));
+
+
+  useEffect(() => {
+    const fetchAndSetLivers = async () => {
+      const livers = await axios.get('/api/liver') as { data: Liver[] }
+      setLivers(livers.data)
+    }
+
+    fetchAndSetLivers()
+  }, [])
+
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -114,6 +172,78 @@ const PostForm = () => {
             )
           }
         </div>
+        <div className="space-y-2">
+          <FormLabel>このライバーを推すときにおすすめしたい！（必須）</FormLabel>
+          <Command onKeyDown={handleKeyDown} className="overflow-visible bg-transparent">
+            <div
+              className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
+            >
+              <div className="flex gap-1 flex-wrap">
+                {selected.map((liver) => {
+                  return (
+                    <Badge key={liver.id} variant="secondary">
+                      {liver.name}
+                      <button
+                        className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            handleUnselect(liver);
+                          }
+                        }}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        onClick={() => handleUnselect(liver)}
+                      >
+                        <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
+                      </button>
+                    </Badge>
+                  )
+                })}
+                {/* Avoid having the "Search" Icon */}
+                <CommandPrimitive.Input
+                  ref={inputRef}
+                  value={inputValue}
+                  onValueChange={setInputValue}
+                  onBlur={() => setOpen(false)}
+                  onFocus={() => setOpen(true)}
+                  placeholder="ライバーを選択"
+                  className="text-base md:text-sm ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1"
+                />
+              </div>
+            </div>
+            <div className="relative mt-2">
+              {open && selectables.length > 0 ?
+                <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
+                  <CommandList>
+                    <CommandGroup className="max-h-[20vh] md:max-h-none h-full overflow-auto">
+                      {selectables.map((liver) => {
+                        return (
+                          <CommandItem
+                            key={liver.id}
+                            onMouseDown={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }}
+                            onSelect={(value) => {
+                              setInputValue("")
+                              setSelected(prev => [...prev, liver])
+                            }}
+                            className={"cursor-pointer"}
+                          >
+                            {liver.name}
+                          </CommandItem>
+                        );
+                      })}
+                    </CommandGroup>
+                  </CommandList>
+                </div>
+                : null}
+            </div>
+          </Command >
+        </div>
+        <input type="hidden" {...form.register('liver')} />
         <FormField
           control={form.control}
           name="comment"
@@ -121,7 +251,7 @@ const PostForm = () => {
             <FormItem>
               <FormLabel>投稿者コメント（必須）</FormLabel>
               <FormControl>
-                <Input className="text-base" placeholder="〇〇好きに見てほしい！" {...field} />
+                <Input className="text-base md:text-sm" placeholder="〇〇好きに見てほしい！" {...field} />
               </FormControl>
               <FormDescription>
                 この動画に対するコメントを60文字以内で記入してください。（<span className={clsx(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
@@ -137,7 +267,7 @@ const PostForm = () => {
             <FormItem>
               <FormLabel>投稿者コメント（詳細）</FormLabel>
               <FormControl>
-                <Textarea className="resize-none text-base" {...field} />
+                <Textarea className="resize-none text-base md:text-sm" {...field} />
               </FormControl>
               <FormDescription>
                 コメントを細かく書くことができます。
@@ -146,16 +276,23 @@ const PostForm = () => {
             </FormItem>
           )}
         />
+
         <Button
           type="submit"
           disabled={
             form.formState.isSubmitting ||
-            form.formState.isSubmitted ||
+            form.formState.isSubmitSuccessful ||
             !form.formState.isValid ||
-            !isValidVideoId
+            !isValidVideoId ||
+            selected.length === 0
           }
         >
-          Submit
+          投稿
+          {
+            (form.formState.isSubmitting ||
+              form.formState.isSubmitSuccessful) &&
+            <Loader2 />
+          }
         </Button>
       </form>
     </Form>

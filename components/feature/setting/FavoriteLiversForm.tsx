@@ -3,14 +3,8 @@
 import { Button } from "@/components/ui/button"
 import { Liver, User } from "@prisma/client"
 import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState, useTransition } from "react"
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { toast } from "@/components/ui/use-toast"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import axios from "axios"
-import updateMostFavoriteLiver from "@/app/action/updateMostFavoriteLiver"
 
 import { X } from "lucide-react";
 
@@ -74,7 +68,7 @@ const FavoriteLiversForm = ({ user, setOpen: setOpenDialog }: FavoriteLiversForm
     }
 
     fetchAndSetLivers()
-  }, [user?.favoriteLivers])
+  }, [])
 
   function handleSubmit(liversId:string[]) {
     startTransition(async () => {
