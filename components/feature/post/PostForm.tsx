@@ -287,11 +287,6 @@ const PostForm = () => {
           }
         >
           投稿
-          {
-            (form.formState.isSubmitting ||
-              form.formState.isSubmitSuccessful) &&
-            <Loader2 />
-          }
         </Button>
       </form>
     </Form>

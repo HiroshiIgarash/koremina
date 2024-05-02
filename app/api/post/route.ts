@@ -32,7 +32,7 @@ export const POST = async (req: Request) => {
         }
       },
       liver: {
-        set: (liversId as string[]).map(l=>({id:l}))
+        connect: (liversId as string[]).map(l=>({id:l}))
       }
     }
   })
