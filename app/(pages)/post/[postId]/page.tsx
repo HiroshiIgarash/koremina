@@ -1,7 +1,9 @@
+import getCurrentUser from "@/app/action/getCurrentUser";
 import getPostById from "@/app/action/getPostById";
 import Avatar from "@/components/Avatar";
 import CommentArea from "@/components/feature/comment/CommentArea";
 import ReactionButton from "@/components/feature/post/ReactionButton";
+import ReactionButtonList from "@/components/feature/post/ReactionButtonList";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,6 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 interface IParams {
   postId: string;
@@ -36,9 +39,9 @@ const Page = async ({ params }: { params: IParams }) => {
             <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
               <Link href={`https://www.youtube.com/watch?v=${post.videoId}`} target="_blank">Youtubeで視聴する</Link>
             </Button>
-            <div>
-              <ReactionButton reaction="good" active={true} display="👍" postId={postId} />
-            </div>
+            <Suspense>
+              <ReactionButtonList post={post} />
+            </Suspense>
           </div>
         </div>
       </div>

@@ -23,16 +23,8 @@ const SkeltonPostItem = () => {
       <Skeleton className="w-full h-4 my-2" />
     </CardContent>
     <CardFooter className="flex items-end flex-col space-y-2 text-sm">
-      <div className="flex gap-2 justify-self-end">
-        <span className=" rounded-full px-2">👍 3</span>
-        <span className=" rounded-full px-2">👎 3</span>
-      </div>
-      <div className="flex gap-2">
-        <span className=" rounded-full px-2">😍 3</span>
-        <span className=" rounded-full px-2">🤣 3</span>
-        <span className=" rounded-full px-2">😭 3</span>
-        <span className=" rounded-full px-2">😇 3</span>
-      </div>
+      <Skeleton className="w-20 h-4 my-2" />
+      <Skeleton className="w-40 h-4 my-2" />
     </CardFooter>
   </Card>
   )

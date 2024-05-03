@@ -1,1 +1,1 @@
-export type Reaction = "good" | "bad" | "love" | "funny" | "cry" | "angle"
+export type Reaction = "good" | "bad" | "love" | "funny" | "cry" | "angel"
