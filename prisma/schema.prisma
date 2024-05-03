@@ -6,22 +6,36 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
   id            String    @id @default(cuid())
   name          String?
+  nickname      String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   Video     Video[]
+  Comment   Comment[]
+
+  mostFavoriteLiver   Liver?  @relation("mostFavoriteLiver", fields: [mostFavoriteLiverId], references: [id])
+  mostFavoriteLiverId String?
+  favoriteLivers      Liver[] @relation("favoriteLivers")
+
+  goodVideo  Video[] @relation("good")
+  badVideo   Video[] @relation("bad")
+  loveVideo  Video[] @relation("love")
+  funnyVideo Video[] @relation("funny")
+  cryVideo   Video[] @relation("cry")
+  angelVideo Video[] @relation("angel")
 }
 
 model Account {
@@ -66,17 +80,40 @@ model VerificationToken {
 }
 
 model Video {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   videoId       String
   comment       String
   detailComment String?
-  postedUser    User     @relation(fields: [postedUserId], references: [id])
+  postedUser    User      @relation(fields: [postedUserId], references: [id])
   postedUserId  String
-  postedAt      DateTime @default(now())
-  good          Int      @default(0)
-  bad           Int      @default(0)
-  love          Int      @default(0)
-  funny         Int      @default(0)
-  cry           Int      @default(0)
-  angel         Int      @default(0)
+  postedAt      DateTime  @default(now())
+  comments      Comment[]
+  liver         Liver[]
+
+  good  User[] @relation("good")
+  bad   User[] @relation("bad")
+  love  User[] @relation("love")
+  funny User[] @relation("funny")
+  cry   User[] @relation("cry")
+  angel User[] @relation("angel")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  video     Video    @relation(fields: [videoId], references: [id])
+  videoId   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String // コメントの作者
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Liver {
+  id               String  @id @default(cuid())
+  name             String
+  channelHandle    String
+  mostFavoriteUser User[]  @relation("mostFavoriteLiver")
+  favoriteUser     User[]  @relation("favoriteLivers")
+  video            Video[]
 }

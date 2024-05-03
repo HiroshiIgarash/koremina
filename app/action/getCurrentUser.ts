@@ -11,6 +11,10 @@ const getCurrentUser = async () => {
   const user = await prisma.user.findUnique({
     where: {
       email: session.user.email
+    },
+    include: {
+      mostFavoriteLiver: true,
+      favoriteLivers: true
     }
   })
 

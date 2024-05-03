@@ -1,5 +1,7 @@
 import getCurrentUser from "@/app/action/getCurrentUser";
 import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
@@ -12,10 +14,11 @@ export const POST = async (req: Request) => {
   const {
     videoId,
     comment,
-    detailComment
+    detailComment,
+    liver:liversId
   } = body
 
-  if (!videoId || !comment) {
+  if (!videoId || !comment || liversId.length === 0) {
     return new NextResponse('Invalid data', { status: 400 })
   }
 
@@ -23,13 +26,19 @@ export const POST = async (req: Request) => {
     data: {
       videoId,
       comment,
+      detailComment,
       postedUser: {
         connect: {
           id: currentUser.id
         }
+      },
+      liver: {
+        connect: (liversId as string[]).map(l=>({id:l}))
       }
     }
   })
+
+  revalidatePath('/')
 
   return NextResponse.json(newPost)
 }
