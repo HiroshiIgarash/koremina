@@ -10,7 +10,7 @@ interface ReactionButtonProps {
   reaction: Reaction
   display: string
   user: User
-  post: Video & { [k in Reaction]: User[] }
+  post: { [k in Reaction]: {id:string}[] } & {id:string}
 }
 
 const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) => {

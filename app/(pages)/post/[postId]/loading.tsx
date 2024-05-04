@@ -1,5 +1,6 @@
 "use client"
 
+import SkeletonReactionButtonList from "@/components/feature/post/SkeletonReactionButtonList"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -11,9 +12,12 @@ const Loading = () => {
       <div>
         <div className="sticky top-28 space-y-4">
           <Skeleton className="full h-auto aspect-video" />
-          <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
-            Youtubeで視聴する
-          </Button>
+          <div className="flex justify-between">
+            <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
+              Youtubeで視聴する
+            </Button>
+            <SkeletonReactionButtonList />
+          </div>
         </div>
       </div>
       <div>

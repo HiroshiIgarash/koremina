@@ -2,15 +2,18 @@ import { User, Video } from "@prisma/client"
 import ReactionButton from "./ReactionButton"
 import { Reaction } from "@/types/type"
 import getCurrentUser from "@/app/action/getCurrentUser"
+import getReactionsByPostId from "@/app/action/getReactionsByPostId"
 
 interface ReactionButtonListProps {
-  post: Video & {[k in Reaction]:User[]}
+  postId: string
 }
 
-const ReactionButtonList = async({ post }:ReactionButtonListProps) => {
+const ReactionButtonList = async({ postId }:ReactionButtonListProps) => {
   const currentUser = await getCurrentUser()
+  const post = await getReactionsByPostId(postId)
 
-  if(!currentUser) return
+  if (!currentUser || !post) return
+  
 
   return (
     <div className="flex flex-col items-end gap-2">

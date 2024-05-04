@@ -4,6 +4,8 @@ import Avatar from "@/components/Avatar";
 import CommentArea from "@/components/feature/comment/CommentArea";
 import ReactionButton from "@/components/feature/post/ReactionButton";
 import ReactionButtonList from "@/components/feature/post/ReactionButtonList";
+import SkeletonReactionButton from "@/components/feature/post/SkeletonReactionButton";
+import SkeletonReactionButtonList from "@/components/feature/post/SkeletonReactionButtonList";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -39,8 +41,8 @@ const Page = async ({ params }: { params: IParams }) => {
             <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
               <Link href={`https://www.youtube.com/watch?v=${post.videoId}`} target="_blank">Youtubeで視聴する</Link>
             </Button>
-            <Suspense>
-              <ReactionButtonList post={post} />
+            <Suspense fallback={<SkeletonReactionButtonList />}>
+              <ReactionButtonList postId={postId} />
             </Suspense>
           </div>
         </div>

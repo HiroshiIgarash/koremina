@@ -8,12 +8,6 @@ const getPostById = async (id: string) => {
     },
     include: {
       postedUser: true,
-      good: true,
-      bad: true,
-      love: true,
-      funny: true,
-      cry: true,
-      angel: true,
     },
   })
 
