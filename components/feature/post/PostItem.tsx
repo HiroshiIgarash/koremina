@@ -2,6 +2,7 @@ import getPostById from "@/app/action/getPostById"
 import Avatar from "@/components/Avatar"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Reaction } from "@/types/type"
 import { Liver, User } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
@@ -14,15 +15,10 @@ interface PostItemProps {
   postedUserName: string | null
   postedUser: User,
   livers: Liver[]
+  reactions: {[k in Reaction]:User[]}
 }
 
-const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, livers }: PostItemProps) => {
-  
-  const post = await getPostById(id)
-
-  if (!post) {
-    notFound()
-  }
+const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, livers, reactions }: PostItemProps) => {
 
   //動画タイトルの取得
   const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,{cache: 'force-cache'})
@@ -70,14 +66,14 @@ const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, live
         </CardContent>
         <CardFooter className="flex items-end flex-col space-y-2 text-sm">
           <div className="flex gap-2 justify-self-end">
-            <span className=" rounded-full px-2">👍 { post.good.length}</span>
-            <span className=" rounded-full px-2">👎 {post.bad.length}</span>
+            <span className=" rounded-full px-2">👍 { reactions.good.length}</span>
+            <span className=" rounded-full px-2">👎 {reactions.bad.length}</span>
           </div>
           <div className="flex gap-2">
-            <span className=" rounded-full px-2">😍 {post.love.length}</span>
-            <span className=" rounded-full px-2">🤣 {post.funny.length}</span>
-            <span className=" rounded-full px-2">😭 {post.cry.length}</span>
-            <span className=" rounded-full px-2">😇 {post.angel.length}</span>
+            <span className=" rounded-full px-2">😍 {reactions.love.length}</span>
+            <span className=" rounded-full px-2">🤣 {reactions.funny.length}</span>
+            <span className=" rounded-full px-2">😭 {reactions.cry.length}</span>
+            <span className=" rounded-full px-2">😇 {reactions.angel.length}</span>
           </div>
         </CardFooter>
       </Card>

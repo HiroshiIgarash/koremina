@@ -1,15 +1,22 @@
 import getPosts from "@/app/action/getPosts"
+import getTotalPosts from "@/app/action/getTotalPosts"
+import PostItem from "@/components/feature/post/PostItem"
+import PostPagination from "@/components/feature/post/PostPagination"
+import SkeltonPostItem from "@/components/feature/post/SkeltonPostItem"
 import { Suspense } from "react"
-import PostItem from "./PostItem"
-import SkeltonPostItem from "./SkeltonPostItem"
-import PostPagination from "./PostPagination"
 
-const PostList = async () => {
-  const page = 2
-  const postsPerPage = 4
+interface IParams {
+  pageNum: string
+}
 
-  const posts = await getPosts({ skip: (page - 1) * postsPerPage, take: postsPerPage })
-  // const postsCount = await getPostsCount()
+const Page = async ({ params }: { params: IParams }) => {
+  const currentPage = parseInt(params.pageNum)
+  const postsPerPage = 16
+
+  console.time("getPosts")
+  const posts = await getPosts({ skip: (currentPage - 1) * postsPerPage, take: postsPerPage })
+  console.timeEnd("getPosts")
+  const totalPosts = await getTotalPosts()
 
 
   return (
@@ -37,15 +44,17 @@ const PostList = async () => {
 
         ))}
       </div>
-      {/* <div>総ポスト：{postsCount}</div> */}
-      <PostPagination
-        showPages={5}
-        currentPage={1}
-        totalPosts={39}
-        postsPerPage={4}
-      />
+      <div className="mt-8">
+        <PostPagination
+          showPages={5}
+          currentPage={currentPage}
+          totalPosts={totalPosts}
+          postsPerPage={postsPerPage}
+        />
+      </div>
     </>
   )
+
 }
 
-export default PostList
+export default Page
