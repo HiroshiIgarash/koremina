@@ -144,152 +144,155 @@ const PostForm = () => {
 
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div>
+    <>
+      <h1 className="text-3xl font-bold mb-8">おすすめ動画を投稿する</h1>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <div className="space-y-2">
+            <FormLabel>このライバーを推すときにおすすめしたい！（必須）</FormLabel>
+            <Command onKeyDown={handleKeyDown} className="overflow-visible bg-transparent">
+              <div
+                className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
+              >
+                <div className="flex gap-1 flex-wrap">
+                  {selected.map((liver) => {
+                    return (
+                      <Badge key={liver.id} variant="secondary">
+                        {liver.name}
+                        <button
+                          className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              handleUnselect(liver);
+                            }
+                          }}
+                          onMouseDown={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }}
+                          onClick={() => handleUnselect(liver)}
+                        >
+                          <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
+                        </button>
+                      </Badge>
+                    )
+                  })}
+                  {/* Avoid having the "Search" Icon */}
+                  <CommandPrimitive.Input
+                    ref={inputRef}
+                    value={inputValue}
+                    onValueChange={setInputValue}
+                    onBlur={() => setOpen(false)}
+                    onFocus={() => setOpen(true)}
+                    placeholder="ライバーを選択"
+                    className="text-base md:text-sm ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1"
+                  />
+                </div>
+              </div>
+              <div className="relative mt-2">
+                {open && selectables.length > 0 ?
+                  <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
+                    <CommandList>
+                      <CommandGroup className="max-h-[20vh] md:max-h-none h-full overflow-auto">
+                        {selectables.map((liver) => {
+                          return (
+                            <CommandItem
+                              key={liver.id}
+                              onMouseDown={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                              }}
+                              onSelect={(value) => {
+                                setInputValue("")
+                                setSelected(prev => [...prev, liver])
+                              }}
+                              className={"cursor-pointer"}
+                            >
+                              {liver.name}
+                            </CommandItem>
+                          );
+                        })}
+                      </CommandGroup>
+                    </CommandList>
+                  </div>
+                  : null}
+              </div>
+            </Command >
+          </div>
+          <input type="hidden" {...form.register('liver')} />
+          <div>
+            <FormField
+              control={form.control}
+              name="videoId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>youtube ID（URLでも可）</FormLabel>
+                  <FormControl>
+                    <Input className="text-base" {...field} onBlur={(e) => handleBlur(e.target.value)} />
+                  </FormControl>
+                  <FormDescription>
+                    動画IDもしくはURLを記入してください。
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {
+              watchVideoId.length === 11 && (
+                <div className="mt-4">
+                  <VideoImage id={watchVideoId} setIsValidVideoId={setIsValidVideoId} />
+                </div>
+              )
+            }
+          </div>
           <FormField
             control={form.control}
-            name="videoId"
+            name="comment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>youtube ID（URLでも可）</FormLabel>
+                <FormLabel>投稿者コメント（必須）</FormLabel>
                 <FormControl>
-                  <Input className="text-base" {...field} onBlur={(e) => handleBlur(e.target.value)} />
+                  <Input className="text-base md:text-sm" placeholder="〇〇好きに見てほしい！" {...field} />
                 </FormControl>
                 <FormDescription>
-                  動画IDもしくはURLを記入してください。
+                  この動画に対するコメントを60文字以内で記入してください。（<span className={clsx(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {
-            watchVideoId.length === 11 && (
-              <div className="mt-4">
-                <VideoImage id={watchVideoId} setIsValidVideoId={setIsValidVideoId} />
-              </div>
-            )
-          }
-        </div>
-        <div className="space-y-2">
-          <FormLabel>このライバーを推すときにおすすめしたい！（必須）</FormLabel>
-          <Command onKeyDown={handleKeyDown} className="overflow-visible bg-transparent">
-            <div
-              className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
-            >
-              <div className="flex gap-1 flex-wrap">
-                {selected.map((liver) => {
-                  return (
-                    <Badge key={liver.id} variant="secondary">
-                      {liver.name}
-                      <button
-                        className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            handleUnselect(liver);
-                          }
-                        }}
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                        onClick={() => handleUnselect(liver)}
-                      >
-                        <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
-                      </button>
-                    </Badge>
-                  )
-                })}
-                {/* Avoid having the "Search" Icon */}
-                <CommandPrimitive.Input
-                  ref={inputRef}
-                  value={inputValue}
-                  onValueChange={setInputValue}
-                  onBlur={() => setOpen(false)}
-                  onFocus={() => setOpen(true)}
-                  placeholder="ライバーを選択"
-                  className="text-base md:text-sm ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1"
-                />
-              </div>
-            </div>
-            <div className="relative mt-2">
-              {open && selectables.length > 0 ?
-                <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
-                  <CommandList>
-                    <CommandGroup className="max-h-[20vh] md:max-h-none h-full overflow-auto">
-                      {selectables.map((liver) => {
-                        return (
-                          <CommandItem
-                            key={liver.id}
-                            onMouseDown={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                            }}
-                            onSelect={(value) => {
-                              setInputValue("")
-                              setSelected(prev => [...prev, liver])
-                            }}
-                            className={"cursor-pointer"}
-                          >
-                            {liver.name}
-                          </CommandItem>
-                        );
-                      })}
-                    </CommandGroup>
-                  </CommandList>
-                </div>
-                : null}
-            </div>
-          </Command >
-        </div>
-        <input type="hidden" {...form.register('liver')} />
-        <FormField
-          control={form.control}
-          name="comment"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>投稿者コメント（必須）</FormLabel>
-              <FormControl>
-                <Input className="text-base md:text-sm" placeholder="〇〇好きに見てほしい！" {...field} />
-              </FormControl>
-              <FormDescription>
-                この動画に対するコメントを60文字以内で記入してください。（<span className={clsx(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="detailComment"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>投稿者コメント（詳細）</FormLabel>
-              <FormControl>
-                <Textarea className="resize-none text-base md:text-sm" {...field} />
-              </FormControl>
-              <FormDescription>
-                コメントを細かく書くことができます。
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="detailComment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>投稿者コメント（詳細）</FormLabel>
+                <FormControl>
+                  <Textarea className="resize-none text-base md:text-sm" {...field} />
+                </FormControl>
+                <FormDescription>
+                  コメントを細かく書くことができます。
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Button
-          type="submit"
-          disabled={
-            form.formState.isSubmitting ||
-            form.formState.isSubmitSuccessful ||
-            !form.formState.isValid ||
-            !isValidVideoId ||
-            selected.length === 0
-          }
-        >
-          投稿
-        </Button>
-      </form>
-    </Form>
+          <Button
+            type="submit"
+            disabled={
+              form.formState.isSubmitting ||
+              form.formState.isSubmitSuccessful ||
+              !form.formState.isValid ||
+              !isValidVideoId ||
+              selected.length === 0
+            }
+          >
+            投稿
+          </Button>
+        </form>
+      </Form>
+    </>
   )
 }
 

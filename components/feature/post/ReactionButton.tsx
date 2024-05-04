@@ -1,8 +1,6 @@
 "use client"
 
-import getPostById from "@/app/action/getPostById"
 import updateReaction from "@/app/action/updateReaction"
-import { Button } from "@/components/ui/button"
 import { Reaction } from "@/types/type"
 import { User, Video } from "@prisma/client"
 import clsx from "clsx"
@@ -16,29 +14,38 @@ interface ReactionButtonProps {
 }
 
 const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) => {
-  const active = post[reaction].some(u => u.id === user.id)
-  const [optimisticActive, addOptimisticActive] = useOptimistic(
-    active,
-    (state, newActive) => !state
+  const [optimisticReactionUsers, addOptimisticReactionUsers] = useOptimistic(
+    post[reaction],
+    (state, register:boolean) => {
+      if (register) {
+        return state.filter(u => u.id !== user.id)
+      } else {
+        return [...state,user]
+      }
+    }
   )
+  const active = optimisticReactionUsers.some(u => u.id === user.id)
 
 
   const handleReaction = useCallback((reaction: Reaction, register: boolean) => {
-    addOptimisticActive(active)
+    addOptimisticReactionUsers(register)
     updateReaction(reaction, post.id, register, user)
-  }, [active, addOptimisticActive, post.id, user])
+  }, [addOptimisticReactionUsers, post.id, user])
 
 
   return (
     <button
       className={
         clsx(
-          "rounded-full border w-12",
-          optimisticActive && "bg-sky-50 border-sky-300"
+          "rounded-full border w-14 px-2",
+          active && "bg-sky-50 border-sky-300"
         )
       }
       onClick={() => handleReaction(reaction, active)}>
-      {display}
+      <span className="flex items-center justify-between">
+        {display}
+        <span className="text-xs">{ optimisticReactionUsers.length < 100 ? optimisticReactionUsers.length : "99+" }</span>
+      </span>
     </button>
   )
 }
