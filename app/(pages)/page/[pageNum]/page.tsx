@@ -31,14 +31,7 @@ const Page = async ({ params }: { params: IParams }) => {
               postedUserName={post.postedUser.nickname || post.postedUser.name}
               postedUser={post.postedUser}
               livers={post.liver}
-              reactions={{
-                good: post.good,
-                bad: post.bad,
-                love: post.love,
-                funny: post.funny,
-                cry: post.cry,
-                angel: post.angel
-              }}
+              reactionsCount={post._count}
             />
           </Suspense>
 

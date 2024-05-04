@@ -12,13 +12,21 @@ const getPosts = async ({take, skip}: getPostsProps = {}) => {
     },
     include: {
       postedUser: true,
-      liver: true,
-      good: true,
-      bad: true,
-      love: true,
-      funny: true,
-      cry: true,
-      angel: true,
+      liver: {
+        select: {
+          name: true
+        }
+      },
+      _count: {
+        select: {
+          good: true,
+          bad: true,
+          love: true,
+          funny: true,
+          cry: true,
+          angel: true,
+        }
+      },
     },
     take,
     skip

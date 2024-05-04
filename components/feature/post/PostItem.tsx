@@ -14,11 +14,11 @@ interface PostItemProps {
   videoId: string
   postedUserName: string | null
   postedUser: User,
-  livers: Liver[]
-  reactions: {[k in Reaction]:User[]}
+  livers: {name: string}[]
+  reactionsCount: {[k in Reaction]:Number}
 }
 
-const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, livers, reactions }: PostItemProps) => {
+const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, livers, reactionsCount }: PostItemProps) => {
 
   //動画タイトルの取得
   const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,{cache: 'force-cache'})
@@ -51,7 +51,7 @@ const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, live
           <div className="flex flex-wrap gap-2">
             {
               livers.map(liver=>(
-                <Badge key={liver.id} variant="outline">{liver.name}</Badge>
+                <Badge key={liver.name} variant="outline">{liver.name}</Badge>
               ))
             }
           </div>
@@ -66,14 +66,14 @@ const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, live
         </CardContent>
         <CardFooter className="flex items-end flex-col space-y-2 text-sm">
           <div className="flex gap-2 justify-self-end">
-            <span className=" rounded-full px-2">👍 { reactions.good.length}</span>
-            <span className=" rounded-full px-2">👎 {reactions.bad.length}</span>
+            <span className=" rounded-full px-2">👍 {`${reactionsCount.good}`}</span>
+            <span className=" rounded-full px-2">👎 {`${reactionsCount.bad}`}</span>
           </div>
           <div className="flex gap-2">
-            <span className=" rounded-full px-2">😍 {reactions.love.length}</span>
-            <span className=" rounded-full px-2">🤣 {reactions.funny.length}</span>
-            <span className=" rounded-full px-2">😭 {reactions.cry.length}</span>
-            <span className=" rounded-full px-2">😇 {reactions.angel.length}</span>
+            <span className=" rounded-full px-2">😍 {`${reactionsCount.love}`}</span>
+            <span className=" rounded-full px-2">🤣 {`${reactionsCount.funny}`}</span>
+            <span className=" rounded-full px-2">😭 {`${reactionsCount.cry}`}</span>
+            <span className=" rounded-full px-2">😇 {`${reactionsCount.angel}`}</span>
           </div>
         </CardFooter>
       </Card>
