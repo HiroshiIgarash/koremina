@@ -3,13 +3,16 @@ import { Suspense } from "react"
 import PostItem from "./PostItem"
 import SkeltonPostItem from "./SkeltonPostItem"
 import PostPagination from "./PostPagination"
+import getTotalPosts from "@/app/action/getTotalPosts"
 
 const PostList = async () => {
-  const page = 2
-  const postsPerPage = 4
+  const currentPage = 1
+  const postsPerPage = 16
 
-  const posts = await getPosts({ skip: (page - 1) * postsPerPage, take: postsPerPage })
-  // const postsCount = await getPostsCount()
+  console.time("getPosts")
+  const posts = await getPosts({ skip: (currentPage - 1) * postsPerPage, take: postsPerPage })
+  console.timeEnd("getPosts")
+  const totalPosts = await getTotalPosts()
 
 
   return (
@@ -30,13 +33,14 @@ const PostList = async () => {
 
         ))}
       </div>
-      {/* <div>総ポスト：{postsCount}</div> */}
-      <PostPagination
-        showPages={5}
-        currentPage={1}
-        totalPosts={39}
-        postsPerPage={4}
-      />
+      <div className="mt-8">
+        <PostPagination
+          showPages={5}
+          currentPage={currentPage}
+          totalPosts={totalPosts}
+          postsPerPage={postsPerPage}
+        />
+      </div>
     </>
   )
 }

@@ -19,7 +19,7 @@ const FavoriteLiversArea = async () => {
             {
               currentUser.mostFavoriteLiver && (
                 <>
-                  <ChannelIcon channelId={currentUser.mostFavoriteLiver.channelHandle} size={112} quality="medium" />
+                  <ChannelIcon channelId={currentUser.mostFavoriteLiver.channelHandle} size={200} quality="medium" />
                   <span>{currentUser.mostFavoriteLiver.name}</span>
                 </>
               )
@@ -32,10 +32,10 @@ const FavoriteLiversArea = async () => {
         <div>
           <p className="font-semibold text-xl text-center my-4">推しライバー</p>
           <div className="flex flex-col items-center justify-center">
-            <div className="grid grid-cols-[repeat(5,auto)] justify-center">
+            <div className="grid grid-cols-[repeat(5,auto)] justify-center gap-2">
               {
                 currentUser.favoriteLivers.map(liver => (
-                  <ChannelIcon key={liver.id} channelId={liver.channelHandle} />
+                  <ChannelIcon key={liver.id} channelId={liver.channelHandle} size={64} />
                 ))
               }
             </div>
