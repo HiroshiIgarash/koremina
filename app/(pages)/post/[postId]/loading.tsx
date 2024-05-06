@@ -12,7 +12,7 @@ const Loading = () => {
       <div>
         <div className="sticky top-28 space-y-4">
           <Skeleton className="full h-auto aspect-video" />
-          <div className="flex justify-between">
+          <div className="flex flex-col space-y-4 md:flex-row justify-between">
             <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
               Youtubeで視聴する
             </Button>

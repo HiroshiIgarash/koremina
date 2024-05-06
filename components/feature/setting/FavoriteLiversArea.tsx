@@ -12,7 +12,7 @@ const FavoriteLiversArea = async () => {
 
   return (
     <Card>
-      <CardContent className="p-8 space-y-12">
+      <CardContent className="p-4 md:p-8 space-y-12">
         <div>
           <p className="font-semibold text-xl text-center my-4">最推しライバー</p>
           <div className="flex flex-col items-center justify-center">
@@ -23,7 +23,7 @@ const FavoriteLiversArea = async () => {
                   <span>{currentUser.mostFavoriteLiver.name}</span>
                 </>
               ) : (
-                <p>あなたの「最推し」ライバーを設定しましょう！</p>
+                <p className="text-center">あなたの「最推し」ライバーを<br className="md:hidden" />設定しましょう！</p>
               )
             }
             <MostFavoriteLiverDialog user={currentUser}>

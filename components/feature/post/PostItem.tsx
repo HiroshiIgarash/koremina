@@ -1,12 +1,10 @@
-import getPostById from "@/app/action/getPostById"
 import Avatar from "@/components/Avatar"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Reaction } from "@/types/type"
-import { Liver, User } from "@prisma/client"
+import { User } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
-import { notFound } from "next/navigation"
 
 interface PostItemProps {
   id: string
@@ -50,7 +48,7 @@ const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, live
         <CardContent className="grow space-y-2 pb-2">
           <div className="flex items-center gap-2">
             <span className="hidden shrink-0 md:grid place-items-center text-xs bg-gray-300 rounded-full aspect-square w-4">{ livers.length }</span>
-            <div className="flex flex-wrap md:flex-nowrap gap-2 overflow-x-scroll md:hidden-scrollbar">
+            <div className="flex flex-wrap md:flex-nowrap gap-2 md:overflow-x-scroll md:hidden-scrollbar">
               {
                 livers.map(liver=>(
                   <Badge key={liver.name} variant="outline" className="whitespace-nowrap">{liver.name}</Badge>

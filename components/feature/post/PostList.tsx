@@ -48,7 +48,7 @@ const PostList = async ({filterLiver,currentPage,postsPerPage}:PostListProps) =>
           </>
 
         ) : (
-            <p className="grow text-center text-xl leading-loose">
+            <p className="p-4 grow text-center text-xl leading-loose">
               投稿はまだありません😭<br />
               おすすめの動画を投稿して盛り上げていきましょう！
             </p>
