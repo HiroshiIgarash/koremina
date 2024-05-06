@@ -1,6 +1,7 @@
 "use client"
 
 import getLivers from "@/app/action/getLivers"
+import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Liver } from "@prisma/client"
@@ -28,9 +29,18 @@ const PostFilter = ({ filterLiversId }: PostFilterProps) => {
   const filterLiver = livers.find(l => l.id === filterLiversId)
 
   const handleChange = (value: string) => {
-    const href = value === 'all' ? '/page/1' : `/page/1?liver=${value}`
+    if (value === filterLiversId) return
+    const href = value === 'all' ? '/page/' : `/page/?liver=${value}`
     startRoutingTransition(() => {
       router.push(href)
+    })
+  }
+
+  const handleRandomClick = () => {
+    const rand = Math.floor(Math.random() * livers.length + 1)
+    const randomLiverId = livers[rand].id
+    startRoutingTransition(() => {
+      router.push(`/page/?liver=${randomLiverId}`)
     })
   }
 
@@ -38,7 +48,7 @@ const PostFilter = ({ filterLiversId }: PostFilterProps) => {
     <div className="self-start mb-8 px-4 w-full max-w-7xl mx-auto">
       <Label>ライバーで絞り込む</Label>
       <div className="flex items-center gap-8 mt-2">
-        <Select  onValueChange={handleChange}>
+        <Select  onValueChange={handleChange} value={filterLiver?filterLiver?.id:'all'}>
           <SelectTrigger className="w-52">
             <SelectValue placeholder="ライバー絞り込み" />
           </SelectTrigger>
@@ -64,6 +74,7 @@ const PostFilter = ({ filterLiversId }: PostFilterProps) => {
             }
           </SelectContent>
         </Select>
+        <Button onClick={handleRandomClick}>ランダム</Button>
         {isRoutingPending && <span className="text-gray-400">検索中...</span>}
       </div>
     </div>

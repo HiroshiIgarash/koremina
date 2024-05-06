@@ -5,9 +5,10 @@ interface PaginationProps {
   currentPage: number
   totalPosts: number
   postsPerPage: number
+  filterLiver?:string
 }
 
-const PostPagination = ({ showPages = 5, currentPage, totalPosts, postsPerPage }: PaginationProps) => {
+const PostPagination = ({ showPages = 5, currentPage, totalPosts, postsPerPage,filterLiver }: PaginationProps) => {
 
   const pageEnd = Math.ceil(totalPosts / postsPerPage)
 
@@ -27,7 +28,7 @@ const PostPagination = ({ showPages = 5, currentPage, totalPosts, postsPerPage }
         {
           currentPage > 1 && (
             <PaginationItem>
-              <PaginationPrevious href={`/page/${currentPage - 1}`} />
+              <PaginationPrevious  href={`/page?page=${currentPage - 1}${filterLiver ? `&liver=${filterLiver}`:''}`} />
             </PaginationItem>
           )
         }
@@ -42,7 +43,7 @@ const PostPagination = ({ showPages = 5, currentPage, totalPosts, postsPerPage }
           showPageArr.map(page => (
             <PaginationItem key={page}>
               <PaginationLink
-                href={`/page/${page}`}
+                href={`/page?page=${page}${filterLiver ? `&liver=${filterLiver}`:''}`}
                 isActive={page === currentPage}
               >
                 {page}
@@ -60,7 +61,7 @@ const PostPagination = ({ showPages = 5, currentPage, totalPosts, postsPerPage }
         {
           currentPage < pageEnd && (
             <PaginationItem>
-              <PaginationNext href={`/page/${currentPage + 1}`} />
+              <PaginationNext href={`?page=${currentPage + 1}${filterLiver ? `&liver=${filterLiver}`:''}`} />
             </PaginationItem>
           )
         }

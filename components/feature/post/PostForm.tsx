@@ -188,7 +188,10 @@ const PostForm = () => {
                   <CommandPrimitive.Input
                     ref={inputRef}
                     value={inputValue}
-                    onValueChange={setInputValue}
+                    onValueChange={(e) => {
+                      if(!(livers.length > 0))return
+                      setInputValue(e)
+                    }}
                     onBlur={() => setOpen(false)}
                     onFocus={() => setOpen(true)}
                     placeholder="ライバーを選択"
