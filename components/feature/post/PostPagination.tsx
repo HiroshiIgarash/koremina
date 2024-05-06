@@ -61,7 +61,7 @@ const PostPagination = ({ showPages = 5, currentPage, totalPosts, postsPerPage,f
         {
           currentPage < pageEnd && (
             <PaginationItem>
-              <PaginationNext href={`?page=${currentPage + 1}${filterLiver ? `&liver=${filterLiver}`:''}`} />
+              <PaginationNext href={`/page?page=${currentPage + 1}${filterLiver ? `&liver=${filterLiver}`:''}`} />
             </PaginationItem>
           )
         }
