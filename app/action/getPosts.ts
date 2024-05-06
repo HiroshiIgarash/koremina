@@ -3,10 +3,18 @@ import prisma from "@/lib/db"
 interface getPostsProps {
   take?: number
   skip?: number
+  filterLiver?: string
 }
 
-const getPosts = async ({take, skip}: getPostsProps = {}) => {
+const getPosts = async ({take, skip,filterLiver}: getPostsProps = {}) => {
   const posts = await prisma.video.findMany({
+    where: filterLiver ? {
+      liver: {
+        some: {
+          id: filterLiver
+        }
+      }
+    }: {},
     orderBy: {
       postedAt: 'desc'
     },
