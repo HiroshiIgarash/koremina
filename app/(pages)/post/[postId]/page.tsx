@@ -37,7 +37,7 @@ const Page = async ({ params }: { params: IParams }) => {
       <div>
         <div className="sticky top-28 space-y-4">
           <iframe width="560" height="315" className="w-full h-auto aspect-video" src={`https://www.youtube.com/embed/${post.videoId}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-          <div className="flex justify-between">
+          <div className="flex flex-col space-y-4 md:flex-row justify-between">
             <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
               <Link href={`https://www.youtube.com/watch?v=${post.videoId}`} target="_blank">Youtubeで視聴する</Link>
             </Button>

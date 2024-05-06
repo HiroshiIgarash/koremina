@@ -7,7 +7,10 @@ const nextConfig = {
       hostname: 'i.ytimg.com'
     }, {
       hostname: 'yt3.ggpht.com'
-    }]
+    }, {
+      hostname: 'pbs.twimg.com'
+    }
+    ]
   }
 };
 

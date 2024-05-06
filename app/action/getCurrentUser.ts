@@ -4,13 +4,13 @@ import prisma from "@/lib/db"
 const getCurrentUser = async () => {
   const session = await auth()
 
-  if (!session?.user?.email) {
+  if (!session?.user?.id) {
     return null
   }
 
   const user = await prisma.user.findUnique({
     where: {
-      email: session.user.email
+      id: session.user.id
     },
     include: {
       mostFavoriteLiver: true,
