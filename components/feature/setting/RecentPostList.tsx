@@ -11,15 +11,19 @@ const RecentPostList = async () => {
 
   return (
     <>
-      {recentPosts.map(post => (
-        <RecentPostItem
-          key={post.id}
-          postId={post.id}
-          videoId={post.videoId}
-          comment={post.comment}
-          livers={post.liver}
-        />
-      ))}
+      {
+        recentPosts.length > 0 ? recentPosts.map(post => (
+          <RecentPostItem
+            key={post.id}
+            postId={post.id}
+            videoId={post.videoId}
+            comment={post.comment}
+            livers={post.liver}
+          />
+        )) : (
+          <p>あなたの推しを布教するときにおすすめしたい動画を投稿しましょう！</p>
+        )
+      }
     </>
 
   )
