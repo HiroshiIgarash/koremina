@@ -12,7 +12,7 @@ const UserInfo = async () => {
   return (
     <div className="flex items-center gap-2">
       <Avatar user={currentUser} size={48} />
-      <span>{currentUser?.nickname}</span>
+      <span>{currentUser?.nickname || currentUser?.name}</span>
       <ChangeNicknameDialog user={currentUser}>
         <SquarePen size='1em' />
       </ChangeNicknameDialog>
