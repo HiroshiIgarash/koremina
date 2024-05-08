@@ -48,12 +48,14 @@ const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, live
         <CardContent className="grow space-y-2 pb-2">
           <div className="flex items-center gap-2">
             <span className="hidden shrink-0 md:grid place-items-center text-xs bg-gray-300 rounded-full aspect-square w-4">{ livers.length }</span>
-            <div className="flex flex-wrap md:flex-nowrap gap-2 md:overflow-x-scroll md:hidden-scrollbar">
-              {
-                livers.map(liver=>(
-                  <Badge key={liver.name} variant="outline" className="whitespace-nowrap">{liver.name}</Badge>
-                ))
-              }
+            <div className="marquee">
+              <div className="flex flex-wrap md:flex-nowrap gap-2">
+                {
+                  livers.map(liver=>(
+                    <Badge key={liver.name} variant="outline" className="whitespace-nowrap">{liver.name}</Badge>
+                  ))
+                }
+              </div>
             </div>
           </div>
           <Image
