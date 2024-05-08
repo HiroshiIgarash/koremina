@@ -97,7 +97,7 @@
     
     .marquee > * {
       &:hover {
-        animation: marquee 2.8s linear both;
+        animation: marquee linear both;
       }
     }
     

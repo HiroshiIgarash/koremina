@@ -49,7 +49,7 @@ const PostItem = async ({ id, comment, videoId, postedUserName, postedUser, live
           <div className="flex items-center gap-2">
             <span className="hidden shrink-0 md:grid place-items-center text-xs bg-gray-300 rounded-full aspect-square w-4">{ livers.length }</span>
             <div className="marquee">
-              <div className="flex flex-wrap md:flex-nowrap gap-2">
+              <div className="flex flex-wrap md:flex-nowrap gap-2" style={{animationDuration: `${livers.length - 1}s`}}>
                 {
                   livers.map(liver=>(
                     <Badge key={liver.name} variant="outline" className="whitespace-nowrap">{liver.name}</Badge>
