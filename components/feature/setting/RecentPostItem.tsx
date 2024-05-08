@@ -44,16 +44,18 @@ const RecentPostItem = async ({ postId, videoId, comment, livers }: RecentPostIt
           <p className="text-xs mt-2">{title}</p>
         </div>
         <div className="flex flex-col justify-between grow">
-          <div className="flex flex-wrap gap-2 mb-4">
-          {
-              livers.map(liver=>(
-                <Badge key={liver.id} variant="outline">{liver.name}</Badge>
-              ))
-            }
+          <div className="space-y-2">
+            <CardTitle className="text-lg leading-tight">
+              {comment}
+            </CardTitle>
+            <div className="flex flex-wrap gap-2 mb-4">
+            {
+                livers.map(liver=>(
+                  <Badge key={liver.id} variant="outline">{liver.name}</Badge>
+                ))
+              }
+            </div>
           </div>
-          <CardTitle className="text-lg lg:h-[4em] leading-tight">
-            {comment}
-          </CardTitle>
           <div className="flex items-end flex-col space-y-2 text-sm">
             <div className="flex gap-2 justify-self-end">
               <span className=" rounded-full py-1 px-2">👍 3</span>
