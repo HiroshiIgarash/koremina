@@ -16,8 +16,10 @@ import {
 } from "@/components/ui/tooltip";
 import { Reaction } from "@/types/type";
 import { User } from "@prisma/client";
+import { Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import BookmarkButton from "./BookMarkButton";
 
 interface PostItemProps {
   id: string;
@@ -26,7 +28,7 @@ interface PostItemProps {
   postedUserName: string | null;
   postedUser: User;
   livers: { name: string }[];
-  reactionsCount: { [k in Reaction]: Number };
+  reactionsCount: { [k in Reaction]: Number } & {comments: Number};
 }
 
 const PostItem = async ({
@@ -58,7 +60,10 @@ const PostItem = async ({
 
   return (
     <Link href={`/post/${id}`}>
-      <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 transition">
+      <Card className="relative flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 transition">
+        <div className="absolute top-4 right-4">
+          <BookmarkButton active={true}  />
+        </div>
         <CardHeader className="pb-2">
           <CardTitle className="text-lg md:h-[4em] leading-tight">
             {comment}
@@ -114,6 +119,9 @@ const PostItem = async ({
         </CardContent>
         <CardFooter className="flex items-end flex-col space-y-2 text-sm">
           <div className="flex gap-2 justify-self-end">
+            <span className=" rounded-full px-2">
+              💬 {`${reactionsCount.comments}`}
+            </span>
             <span className=" rounded-full px-2">
               👍 {`${reactionsCount.good}`}
             </span>

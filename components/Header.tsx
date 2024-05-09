@@ -8,7 +8,7 @@ const Header = async () => {
   const currentUser = await getCurrentUser()
 
   return (
-    <header className="sticky top-0 w-full py-4 px-8 md:px-12 border-b shadow z-50 bg-white">
+    <header className="sticky top-0 w-full py-4 px-8 md:px-12 border-b shadow z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex justify-between items-center">
         <div>
           <Link href="/">

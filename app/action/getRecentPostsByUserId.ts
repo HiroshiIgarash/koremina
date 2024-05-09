@@ -20,6 +20,17 @@ const getRecentPostsByUserId = async ({
     include: {
       postedUser: true,
       liver: true,
+      _count: {
+        select: {
+          good: true,
+          bad: true,
+          love: true,
+          funny: true,
+          cry: true,
+          angel: true,
+          comments: true
+        }
+      },
     },
   });
 

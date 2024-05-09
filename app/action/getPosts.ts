@@ -33,6 +33,7 @@ const getPosts = async ({take, skip,filterLiver}: getPostsProps = {}) => {
           funny: true,
           cry: true,
           angel: true,
+          comments: true
         }
       },
     },
