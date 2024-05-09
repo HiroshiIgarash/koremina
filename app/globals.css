@@ -85,3 +85,25 @@
       @apply bg-background text-foreground;
     }
   }
+
+  @layer components {
+    .marquee {
+      display: grid;
+      width: 100%;
+      container-type: inline-size;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    
+    .marquee > * {
+      &:hover {
+        animation: marquee linear both;
+      }
+    }
+    
+    @keyframes marquee {
+      100% {
+        translate: calc(100cqw - 100%) 0 0;
+      }
+    }
+  }
