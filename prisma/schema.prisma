@@ -30,6 +30,8 @@ model User {
   mostFavoriteLiverId String?
   favoriteLivers      Liver[] @relation("favoriteLivers")
 
+  bookmarks Video[] @relation("bookmarks")
+
   goodVideo  Video[] @relation("good")
   badVideo   Video[] @relation("bad")
   loveVideo  Video[] @relation("love")
@@ -89,6 +91,8 @@ model Video {
   postedAt      DateTime  @default(now())
   comments      Comment[]
   liver         Liver[]
+
+  bookmarkedUser User[] @relation("bookmarks")
 
   good  User[] @relation("good")
   bad   User[] @relation("bad")

@@ -31,6 +31,7 @@ const PostList = async ({filterLiver,currentPage,postsPerPage}:PostListProps) =>
                     postedUserName={post.postedUser.nickname || post.postedUser.name}
                     postedUser={post.postedUser}
                     livers={post.liver}
+                    bookmarkedUsers = {post.bookmarkedUser}
                     reactionsCount={post._count}
                   />
                 </Suspense>

@@ -8,6 +8,11 @@ const getPostById = async (id: string) => {
     },
     include: {
       postedUser: true,
+      bookmarkedUser: {
+        select: {
+          id: true
+        }
+      },
     },
   })
 
