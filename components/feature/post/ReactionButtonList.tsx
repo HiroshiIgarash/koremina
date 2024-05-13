@@ -12,7 +12,7 @@ const ReactionButtonList = async({ postId }:ReactionButtonListProps) => {
   const currentUser = await getCurrentUser()
   const post = await getReactionsByPostId(postId)
 
-  if (!currentUser || !post) return
+  if ( !post) return
   
 
   return (

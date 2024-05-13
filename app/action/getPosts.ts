@@ -25,6 +25,7 @@ const getPosts = async ({take, skip,filterLiver}: getPostsProps = {}) => {
           name: true
         }
       },
+      Bookmark: true,
       _count: {
         select: {
           good: true,
@@ -33,6 +34,7 @@ const getPosts = async ({take, skip,filterLiver}: getPostsProps = {}) => {
           funny: true,
           cry: true,
           angel: true,
+          comments: true
         }
       },
     },

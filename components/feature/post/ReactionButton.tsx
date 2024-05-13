@@ -9,7 +9,7 @@ import { useCallback, useOptimistic } from "react"
 interface ReactionButtonProps {
   reaction: Reaction
   display: string
-  user: User
+  user: User | null
   post: { [k in Reaction]: {id:string}[] } & {id:string}
 }
 
@@ -17,6 +17,7 @@ const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) 
   const [optimisticReactionUsers, addOptimisticReactionUsers] = useOptimistic(
     post[reaction],
     (state, register:boolean) => {
+      if (!user) return state
       if (register) {
         return state.filter(u => u.id !== user.id)
       } else {
@@ -24,10 +25,11 @@ const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) 
       }
     }
   )
-  const active = optimisticReactionUsers.some(u => u.id === user.id)
+  const active = !!user && optimisticReactionUsers.some(u => u.id === user.id)
 
 
   const handleReaction = useCallback((reaction: Reaction, register: boolean) => {
+    if(!user) return
     addOptimisticReactionUsers(register)
     updateReaction(reaction, post.id, register, user)
   }, [addOptimisticReactionUsers, post.id, user])
@@ -35,9 +37,11 @@ const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) 
 
   return (
     <button
+    disabled={!user}
       className={
         clsx(
-          "rounded-full border w-14 px-2",
+          "rounded-full w-14 px-2",
+          user && "border",
           active && "bg-sky-50 border-sky-300"
         )
       }

@@ -19,6 +19,7 @@ const RecentPostList = async () => {
             videoId={post.videoId}
             comment={post.comment}
             livers={post.liver}
+            reactionsCount={post._count}
           />
         )) : (
           <p>あなたの推しを布教するときにおすすめしたい動画を投稿しましょう！</p>
