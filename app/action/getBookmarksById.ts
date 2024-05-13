@@ -1,10 +1,12 @@
 import prisma from "@/lib/db";
 
 interface IParam {
+  take?: number
+  skip?: number
   userId: string;
 }
 
-const getBookmarksById = async ({ userId }: IParam) => {
+const getBookmarksById = async ({take,skip,userId }: IParam) => {
   const bookmarks = await prisma.bookmark.findMany({
     where: {
       userId: userId
@@ -13,8 +15,27 @@ const getBookmarksById = async ({ userId }: IParam) => {
       createdAt: 'desc'
     },
     include: {
-      post: true
-    }
+      post: {
+        include: {
+          postedUser: true,
+          liver: true,
+          Bookmark: true,
+          _count: {
+            select: {
+              good: true,
+              bad: true,
+              love: true,
+              funny: true,
+              cry: true,
+              angel: true,
+              comments: true
+            }
+          },
+        }
+      },
+    },
+    take,
+    skip
   })
 
   return bookmarks
