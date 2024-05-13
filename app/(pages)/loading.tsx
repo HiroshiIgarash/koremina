@@ -4,7 +4,6 @@ const loading = () => {
   return(
     <>
       <Loader2 className="animate-spin" />
-      <p>loading...</p>
     </>
   )
 }

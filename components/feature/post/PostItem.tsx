@@ -75,7 +75,7 @@ const PostItem = async ({
       <Link href={`/post/${id}`}>
         <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 transition">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg md:h-[4em] leading-tight">
+            <CardTitle className="text-lg md:h-[4em] leading-tight pr-6">
               {comment}
             </CardTitle>
             <div className="flex justify-end items-center gap-2">

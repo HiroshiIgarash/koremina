@@ -1,13 +1,9 @@
-import getBookmarksById from "@/app/action/getBookmarksById";
 import getCurrentUser from "@/app/action/getCurrentUser";
 import getPostById from "@/app/action/getPostById";
-import { auth } from "@/auth";
 import Avatar from "@/components/Avatar";
 import CommentArea from "@/components/feature/comment/CommentArea";
 import BookmarkButton from "@/components/feature/post/BookMarkButton";
-import ReactionButton from "@/components/feature/post/ReactionButton";
 import ReactionButtonList from "@/components/feature/post/ReactionButtonList";
-import SkeletonReactionButton from "@/components/feature/post/SkeletonReactionButton";
 import SkeletonReactionButtonList from "@/components/feature/post/SkeletonReactionButtonList";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -66,9 +62,8 @@ const Page = async ({ params }: { params: IParams }) => {
             <button className="absolute top-4 right-4">
               <BookmarkButton
                 postId={postId}
-                active={post.Bookmark.some(
-                  (b) => b.userId === currentUser.id
-                )}
+                user={currentUser}
+                bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
               />
             </button>
           )}
