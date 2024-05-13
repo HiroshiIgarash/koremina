@@ -25,11 +25,7 @@ const getPosts = async ({take, skip,filterLiver}: getPostsProps = {}) => {
           name: true
         }
       },
-      bookmarkedUser: {
-        select: {
-          id: true
-        }
-      },
+      Bookmark: true,
       _count: {
         select: {
           good: true,

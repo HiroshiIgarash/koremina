@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Reaction } from "@/types/type";
-import { User } from "@prisma/client";
+import { Bookmark, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import BookmarkButton from "./BookMarkButton";
@@ -27,7 +27,7 @@ interface PostItemProps {
   postedUserName: string | null;
   postedUser: User;
   livers: { name: string }[];
-  bookmarkedUsers: { id: string }[];
+  bookmark:Bookmark[];
   reactionsCount: { [k in Reaction]: Number } & { comments: Number };
 }
 
@@ -38,7 +38,7 @@ const PostItem = async ({
   postedUserName,
   postedUser,
   livers,
-  bookmarkedUsers,
+  bookmark,
   reactionsCount,
 }: PostItemProps) => {
   //動画タイトルの取得
@@ -67,7 +67,8 @@ const PostItem = async ({
         <button className="absolute top-4 right-4">
           <BookmarkButton
             postId={id}
-            active={bookmarkedUsers.some((u) => u.id === currentUser.id)}
+            bookmarkedUsersId = {bookmark.map(b=>b.userId)}
+            user = {currentUser}
           />
         </button>
       )}

@@ -30,14 +30,25 @@ model User {
   mostFavoriteLiverId String?
   favoriteLivers      Liver[] @relation("favoriteLivers")
 
-  bookmarks Video[] @relation("bookmarks")
+  goodVideo  Video[]    @relation("good")
+  badVideo   Video[]    @relation("bad")
+  loveVideo  Video[]    @relation("love")
+  funnyVideo Video[]    @relation("funny")
+  cryVideo   Video[]    @relation("cry")
+  angelVideo Video[]    @relation("angel")
+  Bookmark   Bookmark[]
+}
 
-  goodVideo  Video[] @relation("good")
-  badVideo   Video[] @relation("bad")
-  loveVideo  Video[] @relation("love")
-  funnyVideo Video[] @relation("funny")
-  cryVideo   Video[] @relation("cry")
-  angelVideo Video[] @relation("angel")
+model Bookmark {
+  id     String  @id @default(cuid())
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+  postId String
+  post   Video  @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
+
+  createdAt DateTime @default(now())
 }
 
 model Account {
@@ -92,14 +103,13 @@ model Video {
   comments      Comment[]
   liver         Liver[]
 
-  bookmarkedUser User[] @relation("bookmarks")
-
-  good  User[] @relation("good")
-  bad   User[] @relation("bad")
-  love  User[] @relation("love")
-  funny User[] @relation("funny")
-  cry   User[] @relation("cry")
-  angel User[] @relation("angel")
+  good     User[]     @relation("good")
+  bad      User[]     @relation("bad")
+  love     User[]     @relation("love")
+  funny    User[]     @relation("funny")
+  cry      User[]     @relation("cry")
+  angel    User[]     @relation("angel")
+  Bookmark Bookmark[]
 }
 
 model Comment {

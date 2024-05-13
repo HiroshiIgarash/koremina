@@ -8,13 +8,24 @@ const BookmarkContainer = async () => {
 
   if(!currentUser) notFound()
 
-  const posts = await getBookmarksById({userId: currentUser.id})
+  const bookmarks = await getBookmarksById({userId: currentUser.id})
 
   
 
   return (
     <div>
-      Bookmark
+      {
+        bookmarks?.map(bookmark => {
+          const {post} = bookmark
+          return (
+            <div key={post.id}>
+              <p>{post.id}</p>
+              <p>{post.comment}</p>
+              <p>{bookmark.createdAt.toISOString()}</p>
+            </div>
+        )
+        })
+      }
     </div>
   )
 }

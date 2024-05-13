@@ -1,44 +1,41 @@
-"use server"
+"use server";
 
 import prisma from "@/lib/db";
-import { NextResponse } from "next/server";
 import getCurrentUser from "./getCurrentUser";
+import { revalidatePath } from "next/cache";
 
-const updateBookmark = async (
-  postId: string,
-  active: boolean,
-) => {
-  const currentUser = await getCurrentUser()
-  
+const updateBookmark = async (postId: string, active: boolean) => {
+  const currentUser = await getCurrentUser();
+
   if (!currentUser) {
     return "Unauthorized";
   }
 
-  const user = await prisma.user.findUnique({
-    where: {
-      id: currentUser.id,
-    },
-    include: { bookmarks: { select: { id: true } } },
-  });
+  const bookmark = active
+    ? await prisma.bookmark.delete({
+        where: {
+          userId_postId: {
+            postId,
+            userId: currentUser.id,
+          },
+        },
+      })
+    : await prisma.bookmark.upsert({
+        where: {
+          userId_postId: {
+            userId: currentUser.id,
+            postId,
+          },
+        },
+        create: {
+          userId: currentUser.id,
+          postId,
+        },
+        update: {},
+      });
 
-  if (!user) {
-    return new NextResponse("Unauthorized", { status: 401 });
-  }
-
-  const updateData = active
-    ? [...user.bookmarks.filter((post) => post.id !== postId)]
-    : [...user.bookmarks.map((post) => ({ id: post.id })), { id: postId }];
-
-  await prisma.user.update({
-    where: {
-      id: currentUser.id,
-    },
-    data: {
-      bookmarks: {
-        set: updateData,
-      },
-    },
-  });
+  revalidatePath("/");
+  return bookmark;
 };
 
 export default updateBookmark;

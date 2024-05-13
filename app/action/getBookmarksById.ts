@@ -5,12 +5,19 @@ interface IParam {
 }
 
 const getBookmarksById = async ({ userId }: IParam) => {
-  const user = await prisma.user.findUnique({
-    where: {id: userId},
-    select: {bookmarks: true}
+  const bookmarks = await prisma.bookmark.findMany({
+    where: {
+      userId: userId
+    },
+    orderBy: {
+      createdAt: 'desc'
+    },
+    include: {
+      post: true
+    }
   })
 
-  return user?.bookmarks
+  return bookmarks
 };
 
 export default getBookmarksById;

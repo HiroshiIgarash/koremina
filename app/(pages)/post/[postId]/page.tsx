@@ -1,3 +1,4 @@
+import getBookmarksById from "@/app/action/getBookmarksById";
 import getCurrentUser from "@/app/action/getCurrentUser";
 import getPostById from "@/app/action/getPostById";
 import { auth } from "@/auth";
@@ -65,8 +66,8 @@ const Page = async ({ params }: { params: IParams }) => {
             <button className="absolute top-4 right-4">
               <BookmarkButton
                 postId={postId}
-                active={post.bookmarkedUser.some(
-                  (u) => u.id === currentUser.id
+                active={post.Bookmark.some(
+                  (b) => b.userId === currentUser.id
                 )}
               />
             </button>
