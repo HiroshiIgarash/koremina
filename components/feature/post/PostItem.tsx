@@ -18,7 +18,7 @@ import { Bookmark, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import BookmarkButton from "./BookMarkButton";
-import getCurrentUser from "@/app/action/getCurrentUser";
+import { auth } from "@/auth";
 
 interface PostItemProps {
   id: string;
@@ -59,16 +59,17 @@ const PostItem = async ({
 
   const title = res.items?.[0].snippet.title;
 
-  const currentUser = await getCurrentUser();
+  const session = await auth();
+  
 
   return (
     <div className="relative">
-      {currentUser && (
+      {session?.user?.id && (
         <button className="absolute top-4 right-4">
           <BookmarkButton
             postId={id}
             bookmarkedUsersId = {bookmark.map(b=>b.userId)}
-            user = {currentUser}
+            userId = {session.user.id}
           />
         </button>
       )}

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import BookmarkList from "./BookmarkList";
 import getTotalBookmarksById from "@/app/action/getTotalBookmarksById";
 import BookmarkPagination from "./BookmarkPagination";
+import { auth } from "@/auth";
 
 interface BookmarkContainerProps {
   currentPage: number;
@@ -14,17 +15,18 @@ const BookmarkContainer = async ({
   currentPage,
   postsPerPage,
 }: BookmarkContainerProps) => {
-  const currentUser = await getCurrentUser();
+  const session = await auth();
 
-  if (!currentUser) notFound();
+  if (!session?.user?.id) notFound();
 
-  const bookmarks = await getBookmarksById({
-    userId: currentUser.id,
-    skip: (currentPage - 1) * postsPerPage,
-    take: postsPerPage,
-  });
-
-  const totalPosts = await getTotalBookmarksById({userId:currentUser.id});
+  const [bookmarks, totalPosts] = await Promise.all([
+    getBookmarksById({
+      userId: session.user.id,
+      skip: (currentPage - 1) * postsPerPage,
+      take: postsPerPage,
+    }),
+    getTotalBookmarksById({ userId: session.user.id }),
+  ]);
 
   return (
     <>

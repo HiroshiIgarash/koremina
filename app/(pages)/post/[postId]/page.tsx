@@ -62,7 +62,7 @@ const Page = async ({ params }: { params: IParams }) => {
             <button className="absolute top-4 right-4">
               <BookmarkButton
                 postId={postId}
-                user={currentUser}
+                userId={currentUser.id}
                 bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
               />
             </button>
@@ -71,7 +71,7 @@ const Page = async ({ params }: { params: IParams }) => {
             <CardTitle className="leading-tight">
               <div>{post.comment}</div>
             </CardTitle>
-            <Link href={`/user/${post.postedUser.id}`} className="my-8">
+            <Link href={`/user/${post.postedUser.id}`} className="my-8 w-fit hover:opacity-70 transition-opacity">
               <div className="flex items-center gap-2">
                 <Avatar user={post.postedUser} size={32} />
                 <p className="text-sm">

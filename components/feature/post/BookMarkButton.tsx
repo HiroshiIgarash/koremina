@@ -1,30 +1,29 @@
 "use client"
 
 import updateBookmark from "@/app/action/updateBookmark"
-import { User } from "@prisma/client"
 import { BookmarkIcon } from "lucide-react"
 import { useOptimistic, useTransition } from "react"
 
 interface BookmarkButtonProps {
   postId: string
   bookmarkedUsersId: string[]
-  user: User
+  userId: string
 }
 
-const BookmarkButton = ({postId,bookmarkedUsersId,user}:BookmarkButtonProps) => {
+const BookmarkButton = ({postId,bookmarkedUsersId,userId}:BookmarkButtonProps) => {
   const [isPending,startTransition] = useTransition()
   const [optimisticBookmarkedUsersId, addOptimisticBookmarkedUsersId] = useOptimistic(
     bookmarkedUsersId, 
     (currentBookmarkedUsersId) => {
-      if (currentBookmarkedUsersId.includes(user.id)) {
-        return currentBookmarkedUsersId.filter(bookmarkedUserId => bookmarkedUserId !== user.id)
+      if (currentBookmarkedUsersId.includes(userId)) {
+        return currentBookmarkedUsersId.filter(bookmarkedUserId => bookmarkedUserId !== userId)
       } else {
-        return [...currentBookmarkedUsersId, user.id]
+        return [...currentBookmarkedUsersId, userId]
       }
       
     }
   )
-  const isActive = optimisticBookmarkedUsersId.includes(user.id)
+  const isActive = optimisticBookmarkedUsersId.includes(userId)
 
 
   const handleClick = () => {
