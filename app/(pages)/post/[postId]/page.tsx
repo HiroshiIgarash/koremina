@@ -71,12 +71,14 @@ const Page = async ({ params }: { params: IParams }) => {
             <CardTitle className="leading-tight">
               <div>{post.comment}</div>
             </CardTitle>
-            <div className="flex items-center gap-2 my-8">
-              <Avatar user={post.postedUser} size={32} />
-              <p className="text-sm">
-                {post.postedUser.nickname || post.postedUser.name}
-              </p>
-            </div>
+            <Link href={`/user/${post.postedUser.id}`} className="my-8">
+              <div className="flex items-center gap-2">
+                <Avatar user={post.postedUser} size={32} />
+                <p className="text-sm">
+                  {post.postedUser.nickname || post.postedUser.name}
+                </p>
+              </div>
+            </Link>
           </CardHeader>
           <CardContent>
             {post.detailComment && (
