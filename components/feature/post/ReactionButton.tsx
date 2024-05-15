@@ -40,8 +40,8 @@ const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) 
     disabled={!user}
       className={
         clsx(
-          "rounded-full w-14 px-2 hover:border hover:border-sky-500",
-          user && "border",
+          "rounded-full w-14 px-2",
+          user && "border hover:border hover:border-sky-500",
           active && "bg-sky-50 border-sky-300"
         )
       }
