@@ -9,6 +9,8 @@ const nextConfig = {
       hostname: 'yt3.ggpht.com'
     }, {
       hostname: 'pbs.twimg.com'
+    }, {
+      hostname: '1oe7z4chqcuzcgh4.public.blob.vercel-storage.com'
     }
     ]
   }

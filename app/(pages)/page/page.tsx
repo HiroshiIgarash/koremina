@@ -3,20 +3,12 @@ import PostList from "@/components/feature/post/PostList";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import { Suspense } from "react";
 
-interface IParams {
-  pageNum: string;
-}
 interface ISearchParams {
   liver: string;
   page: string;
 }
 
-const Page = ({
-  searchParams,
-}: {
-  params: IParams;
-  searchParams?: ISearchParams;
-}) => {
+const Page = ({ searchParams }: { searchParams?: ISearchParams }) => {
   const filterLiver = searchParams?.liver;
 
   const currentPage = parseInt(searchParams?.page || "1");

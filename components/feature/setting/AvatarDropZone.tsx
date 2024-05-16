@@ -7,9 +7,10 @@ import { useDropzone } from "react-dropzone";
 interface AvatarDropZoneProps {
   file: ReturnType<typeof useState<File & { preview: string }>>[0];
   setFile: ReturnType<typeof useState<File & { preview: string }>>[1];
+  disabled?: boolean;
 }
 
-const AvatarDropZone = ({ file, setFile }: AvatarDropZoneProps) => {
+const AvatarDropZone = ({ file, setFile, disabled }: AvatarDropZoneProps) => {
   useEffect(() => {
     return () => {
       file && URL.revokeObjectURL(file.preview);
@@ -32,6 +33,7 @@ const AvatarDropZone = ({ file, setFile }: AvatarDropZoneProps) => {
       },
       onDrop,
       maxFiles: 1,
+      disabled,
     });
 
   return (
