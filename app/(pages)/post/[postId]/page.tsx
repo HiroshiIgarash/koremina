@@ -8,9 +8,13 @@ import SkeletonReactionButtonList from "@/components/feature/post/SkeletonReacti
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import clsx from "clsx";
+import { FilePenLine, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { noto } from "../../layout";
+import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
 
 interface IParams {
   postId: string;
@@ -59,16 +63,34 @@ const Page = async ({ params }: { params: IParams }) => {
       <div>
         <Card className="relative">
           {currentUser && (
-            <button className="absolute top-4 right-4">
+            <div className="absolute top-4 right-4 flex gap-2">
+              {
+                post.postedUserId === currentUser.id && (
+                  <>
+                  <Link href={`/post/edit/${postId}`}>
+                    <FilePenLine />
+                  </Link>
+                  <PostDeleteDialog postId={postId}>
+                    <Trash2 color="red" />
+                  </PostDeleteDialog>
+                  </>
+                )
+              }
+            <button>
               <BookmarkButton
                 postId={postId}
                 userId={currentUser.id}
                 bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
-              />
+                />
             </button>
+                </div>
           )}
           <CardHeader className="space-y-4 pb-0">
-            <CardTitle className="leading-tight">
+            <CardTitle className={clsx("leading-tight",
+              post.postedUserId === currentUser?.id ? 
+              "pr-20":
+              "pr-6"
+            )}>
               <div>{post.comment}</div>
             </CardTitle>
             <Link href={`/user/${post.postedUser.id}`} className="my-8 w-fit hover:opacity-70 transition-opacity">
@@ -82,7 +104,7 @@ const Page = async ({ params }: { params: IParams }) => {
           </CardHeader>
           <CardContent>
             {post.detailComment && (
-              <pre className="mt-4 whitespace-pre-wrap">
+              <pre className={clsx("mt-4 whitespace-pre-wrap",noto.className)}>
                 {post.detailComment}
               </pre>
             )}

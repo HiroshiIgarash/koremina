@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster"
 import NextTopLoader from 'nextjs-toploader';
 
-const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
+export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "コレミナ -にじさんじ布教お助けアプリ-",

@@ -7,7 +7,7 @@ interface getRecentPostsByUserIdProps {
 
 const getRecentPostsByUserId = async ({
   userId,
-  count = 10,
+  count,
 }: getRecentPostsByUserIdProps) => {
   const posts = await prisma.video.findMany({
     where: {
