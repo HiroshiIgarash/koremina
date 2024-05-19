@@ -103,9 +103,16 @@ const PostForm = () => {
       form.setValue('videoId', removedSlashPath)
 
     // https://www.youtube.com/live〜 の場合、live/以降を返す
-    } else if (url.origin === 'https://www.youtube.com' && url.pathname.startsWith('/live/')) {
+    } else if (url.origin.match(/https:\/\/(www\.)?youtube\.com/) && url.pathname.startsWith('/live/')) {
       const path = url.pathname // '/live/videoId'
       const extractedPath = path.split('/')[2] // ['','live',videoId]
+        
+      form.setValue('videoId', extractedPath)
+
+    // https://www.youtube.com/shorts〜 の場合、shorts/以降を返す
+    } else if (url.origin.match(/https:\/\/(www\.)?youtube\.com/) && url.pathname.startsWith('/shorts/')) {
+      const path = url.pathname // '/shorts/videoId'
+      const extractedPath = path.split('/')[2] // ['','shorts',videoId]
         
       form.setValue('videoId', extractedPath)
     }

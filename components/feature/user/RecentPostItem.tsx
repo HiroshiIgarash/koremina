@@ -40,8 +40,20 @@ const RecentPostItem = async ({
 
   return (
     <Link href={`/post/${postId}`}>
-      <Card className="flex h-full flex-col lg:flex-row gap-4 hover:border-sky-300 hover:bg-sky-50 transition p-8">
-        <div className="lg:w-[49%] w-full shrink-0">
+      <Card className="grid lg:grid-cols-[49%,auto] h-full gap-4 hover:border-sky-300 hover:bg-sky-50 transition p-4">
+
+        <div className="space-y-2 lg:col-start-2">
+          <CardTitle className="text-lg leading-tight">{comment}</CardTitle>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {livers.map((liver) => (
+              <Badge key={liver.id} variant="outline">
+                {liver.name}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        <div className="lg:row-start-1 lg:row-span-2 w-full shrink-0">
           <Image
             src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
             alt=""
@@ -51,45 +63,35 @@ const RecentPostItem = async ({
           />
           <p className="text-xs mt-2">{title}</p>
         </div>
-        <div className="flex flex-col justify-between grow">
-          <div className="space-y-2">
-            <CardTitle className="text-lg leading-tight">{comment}</CardTitle>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {livers.map((liver) => (
-                <Badge key={liver.id} variant="outline">
-                  {liver.name}
-                </Badge>
-              ))}
-            </div>
+
+        <div className="lg:self-end flex items-end flex-col space-y-2 text-sm">
+          <div className="flex gap-2 justify-self-end">
+            <span className=" rounded-full py-1 px-2">
+              💬 {`${reactionsCount.comments}`}
+            </span>
+            <span className=" rounded-full py-1 px-2">
+              👍 {`${reactionsCount.good}`}
+            </span>
+            <span className=" rounded-full py-1 px-2">
+              👎 {`${reactionsCount.bad}`}
+            </span>
           </div>
-          <div className="flex items-end flex-col space-y-2 text-sm">
-            <div className="flex gap-2 justify-self-end">
-              <span className=" rounded-full py-1 px-2">
-                💬 {`${reactionsCount.comments}`}
-              </span>
-              <span className=" rounded-full py-1 px-2">
-                👍 {`${reactionsCount.good}`}
-              </span>
-              <span className=" rounded-full py-1 px-2">
-                👎 {`${reactionsCount.bad}`}
-              </span>
-            </div>
-            <div className="flex gap-2">
-              <span className=" rounded-full py-1 px-2">
-                😍 {`${reactionsCount.love}`}
-              </span>
-              <span className=" rounded-full py-1 px-2">
-                🤣 {`${reactionsCount.funny}`}
-              </span>
-              <span className=" rounded-full py-1 px-2">
-                😭 {`${reactionsCount.cry}`}
-              </span>
-              <span className=" rounded-full py-1 px-2">
-                😇 {`${reactionsCount.angel}`}
-              </span>
-            </div>
+          <div className="flex gap-2">
+            <span className=" rounded-full py-1 px-2">
+              😍 {`${reactionsCount.love}`}
+            </span>
+            <span className=" rounded-full py-1 px-2">
+              🤣 {`${reactionsCount.funny}`}
+            </span>
+            <span className=" rounded-full py-1 px-2">
+              😭 {`${reactionsCount.cry}`}
+            </span>
+            <span className=" rounded-full py-1 px-2">
+              😇 {`${reactionsCount.angel}`}
+            </span>
           </div>
         </div>
+
       </Card>
     </Link>
   );
