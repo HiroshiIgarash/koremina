@@ -22,9 +22,11 @@ interface IParams {
 
 const Page = async ({ params }: { params: IParams }) => {
   const { postId } = params;
-  const currentUser = await getCurrentUser();
 
-  const post = await getPostById(postId);
+  const [currentUser, post] = await Promise.all([
+    getCurrentUser(),
+    getPostById(postId),
+  ]);
 
   if (!post) {
     notFound();
@@ -64,36 +66,38 @@ const Page = async ({ params }: { params: IParams }) => {
         <Card className="relative">
           {currentUser && (
             <div className="absolute top-4 right-4 flex gap-2">
-              {
-                post.postedUserId === currentUser.id && (
-                  <>
+              {post.postedUserId === currentUser.id && (
+                <>
                   <Link href={`/post/edit/${postId}`}>
                     <FilePenLine />
                   </Link>
                   <PostDeleteDialog postId={postId}>
                     <Trash2 color="red" />
                   </PostDeleteDialog>
-                  </>
-                )
-              }
-            <button>
-              <BookmarkButton
-                postId={postId}
-                userId={currentUser.id}
-                bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
+                </>
+              )}
+              <button>
+                <BookmarkButton
+                  postId={postId}
+                  userId={currentUser.id}
+                  bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
                 />
-            </button>
-                </div>
+              </button>
+            </div>
           )}
           <CardHeader className="space-y-4 pb-0">
-            <CardTitle className={clsx("leading-tight",
-              post.postedUserId === currentUser?.id ? 
-              "pr-20":
-              "pr-6"
-            )}>
+            <CardTitle
+              className={clsx(
+                "leading-tight",
+                post.postedUserId === currentUser?.id ? "pr-20" : "pr-6"
+              )}
+            >
               <div>{post.comment}</div>
             </CardTitle>
-            <Link href={`/user/${post.postedUser.id}`} className="my-8 w-fit hover:opacity-70 transition-opacity">
+            <Link
+              href={`/user/${post.postedUser.id}`}
+              className="my-8 w-fit hover:opacity-70 transition-opacity"
+            >
               <div className="flex items-center gap-2">
                 <Avatar user={post.postedUser} size={32} />
                 <p className="text-sm">
@@ -104,7 +108,7 @@ const Page = async ({ params }: { params: IParams }) => {
           </CardHeader>
           <CardContent>
             {post.detailComment && (
-              <pre className={clsx("mt-4 whitespace-pre-wrap",noto.className)}>
+              <pre className={clsx("mt-4 whitespace-pre-wrap", noto.className)}>
                 {post.detailComment}
               </pre>
             )}
