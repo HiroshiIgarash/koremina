@@ -1,4 +1,3 @@
-import getCurrentUser from "@/app/action/getCurrentUser";
 import getPostById from "@/app/action/getPostById";
 import Avatar from "@/components/Avatar";
 import CommentArea from "@/components/feature/comment/CommentArea";
@@ -15,6 +14,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { noto } from "../../layout";
 import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
+import { auth } from "@/auth";
 
 interface IParams {
   postId: string;
@@ -23,10 +23,12 @@ interface IParams {
 const Page = async ({ params }: { params: IParams }) => {
   const { postId } = params;
 
-  const [currentUser, post] = await Promise.all([
-    getCurrentUser(),
+  const [session, post] = await Promise.all([
+    auth(),
     getPostById(postId),
   ]);
+
+  const currentUser = session?.user
 
   if (!post) {
     notFound();
@@ -47,7 +49,7 @@ const Page = async ({ params }: { params: IParams }) => {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-          <div className="flex flex-col space-y-4 md:flex-row justify-between">
+          <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
             <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
               <Link
                 href={`https://www.youtube.com/watch?v=${post.videoId}`}
@@ -64,7 +66,7 @@ const Page = async ({ params }: { params: IParams }) => {
       </div>
       <div>
         <Card className="relative">
-          {currentUser && (
+          {currentUser?.id && (
             <div className="absolute top-4 right-4 flex gap-2">
               {post.postedUserId === currentUser.id && (
                 <>
