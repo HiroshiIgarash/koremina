@@ -13,7 +13,10 @@ const HeaderRight = async () => {
           <SignOutButton className="w-full" variant="ghost" />
         </HeaderPopover>
       ) : (
-        <SignInButton />
+        <>
+          <SignInButton variant="link">ログイン</SignInButton>
+          <SignInButton>投稿する</SignInButton>
+        </>
       )}
     </div>
   );

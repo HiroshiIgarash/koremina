@@ -1,20 +1,23 @@
-import { signIn } from "@/auth"
-import { Button } from "./ui/button"
+import { signIn } from "@/auth";
+import { Button, ButtonProps } from "./ui/button";
+import { ReactNode } from "react";
 
-const SignInButton = () => {
+interface SignInButtonProps {
+  children: ReactNode;
+  variant?: ButtonProps["variant"];
+}
 
-
-
+const SignInButton = ({ children, variant }: SignInButtonProps) => {
   return (
     <form
       action={async () => {
-        "use server"
-        await signIn()
+        "use server";
+        await signIn();
       }}
     >
-      <Button>ログイン</Button>
-    </form >
-  )
-}
+      <Button variant={variant}>{children}</Button>
+    </form>
+  );
+};
 
-export default SignInButton
+export default SignInButton;
