@@ -4,7 +4,7 @@ import PostForm from "@/components/feature/post/PostForm"
 const Page = async() => {
   const session = await auth()
   if(!session) {
-    await signIn()
+    await signIn(undefined, {redirectTo:'/post'})
   }
   
   return (
