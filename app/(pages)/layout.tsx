@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header";
-import { Toaster } from "@/components/ui/toaster"
-import NextTopLoader from 'nextjs-toploader';
+import { Toaster } from "@/components/ui/toaster";
+import NextTopLoader from "nextjs-toploader";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "コレミナ -にじさんじ布教お助けアプリ-",
-  description: "koreminaはにじさんじを他人におすすめする際の手助けとなるアプリです。おすすめの動画を共有しましょう。",
+  description:
+    "koreminaはにじさんじを他人におすすめする際の手助けとなるアプリです。おすすめの動画を共有しましょう。",
 };
 
 export default function RootLayout({
@@ -18,14 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <body className={noto.className}>
-        <NextTopLoader showSpinner={false} height={2} />
-        <Header />
-        <main className="flex flex-col items-center pt-12 pb-20">
-          {children}
-        </main>
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system">
+          <NextTopLoader showSpinner={false} height={2} />
+          <Header />
+          <main className="flex flex-col items-center pt-12 pb-20">
+            {children}
+          </main>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

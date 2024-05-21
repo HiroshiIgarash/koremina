@@ -42,7 +42,7 @@ const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) 
         clsx(
           "rounded-full w-14 px-2",
           user && "border hover:border hover:border-sky-500",
-          active && "bg-sky-50 border-sky-300"
+          active && "bg-sky-50 border-sky-300 dark:bg-accent"
         )
       }
       onClick={() => handleReaction(reaction, active)}>
