@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={noto.className}>
         <NextTopLoader showSpinner={false} height={2} />
         <Header />
-        <main className="flex min-h-screen flex-col items-center pt-12 pb-20">
+        <main className="flex flex-col items-center pt-12 pb-20">
           {children}
         </main>
         <Toaster />
