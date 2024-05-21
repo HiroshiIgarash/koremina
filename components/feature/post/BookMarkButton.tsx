@@ -2,6 +2,7 @@
 
 import updateBookmark from "@/app/action/updateBookmark"
 import { BookmarkIcon } from "lucide-react"
+import { useTheme } from "next-themes"
 import { useOptimistic, useTransition } from "react"
 
 interface BookmarkButtonProps {
@@ -11,6 +12,7 @@ interface BookmarkButtonProps {
 }
 
 const BookmarkButton = ({postId,bookmarkedUsersId,userId}:BookmarkButtonProps) => {
+  const {theme} = useTheme()
   const [isPending,startTransition] = useTransition()
   const [optimisticBookmarkedUsersId, addOptimisticBookmarkedUsersId] = useOptimistic(
     bookmarkedUsersId, 
@@ -24,6 +26,7 @@ const BookmarkButton = ({postId,bookmarkedUsersId,userId}:BookmarkButtonProps) =
     }
   )
   const isActive = optimisticBookmarkedUsersId.includes(userId)
+  const activeColor = theme === "dark" ? "currentColor" : "orange"
 
 
   const handleClick = () => {
@@ -34,7 +37,7 @@ const BookmarkButton = ({postId,bookmarkedUsersId,userId}:BookmarkButtonProps) =
   }
 
   return (
-    <BookmarkIcon onClick={handleClick} stroke={isActive ? 'blue' : 'currentColor'} fill={isActive ? 'blue' : 'none'}  />
+    <BookmarkIcon onClick={handleClick} stroke={isActive ? activeColor : 'currentColor'} fill={isActive ? activeColor : 'none'}  />
   )
 }
 

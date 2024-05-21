@@ -50,7 +50,7 @@ const Page = async ({ params }: { params: IParams }) => {
             allowFullScreen
           ></iframe>
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
-            <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)]">
+            <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)] text-white">
               <Link
                 href={`https://www.youtube.com/watch?v=${post.videoId}`}
                 target="_blank"

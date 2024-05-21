@@ -75,7 +75,7 @@ const PostItem = async ({
         </button>
       )}
       <Link href={`/post/${id}`}>
-        <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 transition">
+        <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-accent transition">
           <CardHeader className="pb-2">
             <CardTitle className={clsx("text-lg md:h-[4em] leading-tight",session?.user?.id && "pr-6")}>
               {comment}
