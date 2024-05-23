@@ -21,12 +21,26 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
   return (
     <form
       action={async (formData) => {
-        await postComment(postId, formData);
-        toast({
-          description: "コメントを投稿しました",
-        });
+        const result = await postComment(postId, formData);
+        if (result?.error) {
+          console.log(result.error);
+          toast({
+            description: (
+              <>
+                登録に失敗しました。
+                <br />
+                何度も失敗する場合は、お問い合わせよりご連絡ください。
+              </>
+            ),
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            description: "コメントを投稿しました",
+          });
+          setComment("");
+        }
         setIsSubmitting(false);
-        setComment("");
       }}
       onSubmit={() => setIsSubmitting(true)}
       className="flex gap-4 items-center"

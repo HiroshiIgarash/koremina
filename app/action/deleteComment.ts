@@ -1,21 +1,27 @@
-"use server"
+"use server";
 
-import prisma from "@/lib/db"
-import { revalidatePath } from "next/cache"
+import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 interface deleteCommentProps {
-  commentId: string
-  postId: string
+  commentId: string;
+  postId: string;
 }
 
 const deleteComment = async ({ commentId, postId }: deleteCommentProps) => {
-  await prisma.comment.delete({
-    where: {
-      id: commentId
-    }
-  })
+  try {
+    await prisma.comment.delete({
+      where: {
+        id: commentId,
+      },
+    });
+  } catch (error) {
+    return {
+      error: "Failed to delete comment",
+    };
+  }
 
-  revalidatePath(`/post/${postId}`)
-}
+  revalidatePath(`/post/${postId}`);
+};
 
-export default deleteComment
+export default deleteComment;

@@ -1,47 +1,46 @@
-'use server'
+"use server";
 
-import prisma from "@/lib/db"
-import getCurrentUser from "./getCurrentUser"
-import { revalidatePath } from "next/cache"
+import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
 
 const postComment = async (postId: string, formData: FormData) => {
-  const currentUser = await getCurrentUser()
-
-  if (!currentUser) {
-    return 'Unauthorized'
-  }
-
-  const rawFormData = {
-    comment: formData.get('comment')
-  }
-
-
-  if (!rawFormData.comment) {
-    return 'InvalidData'
-  }
-
+  const session = await auth();
   try {
+    if (!session?.user?.id) {
+      return { error: "Unauthorized" };
+    }
+
+    const rawFormData = {
+      comment: formData.get("comment"),
+    };
+
+    if (!rawFormData.comment) {
+      return { error: "InvalidData" };
+    }
+
     await prisma.comment.create({
       data: {
         content: rawFormData.comment.toString(),
         author: {
           connect: {
-            id: currentUser.id
-          }
+            id: session.user.id,
+          },
         },
         video: {
           connect: {
-            id: postId
-          }
-        }
-      }
-    })
-
+            id: postId,
+          },
+        },
+      },
+    });
   } catch (error) {
-    return 'error'
+    return {
+      error: "Failed to post comment",
+    };
   }
 
-  revalidatePath(`/post/${postId}`)
-}
+  revalidatePath(`/post/${postId}`);
+};
 
-export default postComment
+export default postComment;
