@@ -1,42 +1,53 @@
-'use server'
+"use server";
 
-import prisma from "@/lib/db"
-import getCurrentUser from "./getCurrentUser"
-import { revalidatePath } from "next/cache"
+import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
 
-const updateMostFavoriteLiver = async (data: { liverId?: string | undefined}) => {
-  const currentUser = await getCurrentUser()
+const updateMostFavoriteLiver = async (data: {
+  liverId?: string | undefined;
+}) => {
 
-  if (!currentUser) {
-    return 'Unauthorized'
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return {
+        error: "Unauthorized",
+      };
+    }
+
+    const { liverId } = data;
+
+    const updateData = liverId
+      ? {
+          mostFavoriteLiver: {
+            connect: {
+              id: liverId,
+            },
+          },
+        }
+      : {
+          mostFavoriteLiverId: null,
+        };
+
+  await prisma.user.update({
+      where: {
+        id: session.user.id,
+      },
+      data: updateData,
+      include: {
+        mostFavoriteLiver: true,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return {
+      error: "Failed to update most favorite liver",
+    };
   }
 
-  const { liverId } = data
+  revalidatePath("/setting");
+};
 
-  const updateData = liverId ? 
-  {
-    mostFavoriteLiver: {
-      connect: {
-        id:liverId
-      }
-    }
-  } : {
-    mostFavoriteLiverId: null
-  }
-  
-  const user = await prisma.user.update({
-    where: {
-      id: currentUser.id
-    },
-    data: updateData,
-    include: {
-      mostFavoriteLiver: true
-    }
-  })
-
-  revalidatePath('/setting')
-
-  return user.mostFavoriteLiver
-}
-
-export default updateMostFavoriteLiver
+export default updateMostFavoriteLiver;
