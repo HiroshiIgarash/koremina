@@ -40,7 +40,7 @@ const RecentPostItem = async ({
 
   return (
     <Link href={`/post/${postId}`}>
-      <Card className="grid lg:grid-cols-[49%,auto] h-full gap-4 hover:border-sky-300 hover:bg-sky-50 transition p-4">
+      <Card className="grid lg:grid-cols-[49%,auto] h-full gap-4 hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-accent transition p-4">
 
         <div className="space-y-2 lg:col-start-2">
           <CardTitle className="text-lg leading-tight">{comment}</CardTitle>

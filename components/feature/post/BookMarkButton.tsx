@@ -12,7 +12,7 @@ interface BookmarkButtonProps {
 }
 
 const BookmarkButton = ({postId,bookmarkedUsersId,userId}:BookmarkButtonProps) => {
-  const {theme} = useTheme()
+  const {resolvedTheme} = useTheme()
   const [isPending,startTransition] = useTransition()
   const [optimisticBookmarkedUsersId, addOptimisticBookmarkedUsersId] = useOptimistic(
     bookmarkedUsersId, 
@@ -26,7 +26,7 @@ const BookmarkButton = ({postId,bookmarkedUsersId,userId}:BookmarkButtonProps) =
     }
   )
   const isActive = optimisticBookmarkedUsersId.includes(userId)
-  const activeColor = theme === "dark" ? "currentColor" : "orange"
+  const activeColor = resolvedTheme === "dark" ? "currentColor" : "orange"
 
 
   const handleClick = () => {
