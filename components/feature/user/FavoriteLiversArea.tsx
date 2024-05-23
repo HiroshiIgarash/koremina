@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import ChannelIcon from "../setting/ChannelIcon";
 import { User } from "@prisma/client";
+import Link from "next/link";
 
 interface FavoriteLiversAreaProps {
   user: User & {
@@ -30,11 +31,18 @@ const FavoriteLiversArea = async ({ user }: FavoriteLiversAreaProps) => {
           <div className="flex flex-col items-center justify-center">
             {user.mostFavoriteLiver ? (
               <>
-                <ChannelIcon
-                  channelId={user.mostFavoriteLiver.channelHandle}
-                  size={200}
-                  quality="medium"
-                />
+                <Link
+                  key={user.mostFavoriteLiver.id}
+                  href={`https://www.youtube.com/${user.mostFavoriteLiver.channelHandle}`}
+                  className="rounded-full hover:opacity-70 transition-opacity"
+                  target="_blank"
+                >
+                  <ChannelIcon
+                    channelId={user.mostFavoriteLiver.channelHandle}
+                    size={200}
+                    quality="medium"
+                  />
+                </Link>
                 <span>{user.mostFavoriteLiver.name}</span>
               </>
             ) : (
@@ -48,11 +56,18 @@ const FavoriteLiversArea = async ({ user }: FavoriteLiversAreaProps) => {
             {user.favoriteLivers.length > 0 ? (
               <div className="grid grid-cols-[repeat(5,auto)] justify-center gap-2">
                 {user.favoriteLivers.map((liver) => (
-                  <ChannelIcon
+                  <Link
                     key={liver.id}
-                    channelId={liver.channelHandle}
-                    size={64}
-                  />
+                    href={`https://www.youtube.com/${liver.channelHandle}`}
+                    className="rounded-full hover:opacity-70 transition-opacity"
+                    target="_blank"
+                  >
+                    <ChannelIcon
+                      key={liver.id}
+                      channelId={liver.channelHandle}
+                      size={64}
+                    />
+                  </Link>
                 ))}
               </div>
             ) : (
