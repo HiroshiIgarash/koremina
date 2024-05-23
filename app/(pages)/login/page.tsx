@@ -5,9 +5,11 @@ import { signIn } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Page = () => {
-  const {theme} = useTheme()
+  const [isMounted, setIsMounted] = useState(false)
+  const {resolvedTheme} = useTheme()
   const searchParams = useSearchParams();
 
   const callbackUrl = searchParams.get("callbackUrl") || undefined;
@@ -15,6 +17,12 @@ const Page = () => {
   const handleLogin = (provider: "google" | "twitter") => {
     signIn(provider, { callbackUrl });
   };
+
+  useEffect(() => {
+    setIsMounted(true)
+  },[])
+
+  if(!isMounted) return null;
 
   return (
     <>
@@ -44,7 +52,7 @@ const Page = () => {
               className="rounded-full w-full"
             >
               <Image
-                src={theme === "dark" ? "/x-logo-white.png" : "/x-logo-black.png"}
+                src={resolvedTheme === "dark" ? "/x-logo-white.png" : "/x-logo-black.png"}
                 alt=""
                 width={16}
                 height={16}
