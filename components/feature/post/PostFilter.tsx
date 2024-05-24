@@ -139,7 +139,7 @@ const PostFilter = ({ filterLiversId }: PostFilterProps) => {
           </SelectContent>
         </Select>
         <Button onClick={handleRandomClick}>ランダム</Button>
-        {isRoutingPending && <span className="text-gray-400">検索中...</span>}
+        {isRoutingPending && <span className="text-muted-foreground">検索中...</span>}
       </div>
     </div>
   )

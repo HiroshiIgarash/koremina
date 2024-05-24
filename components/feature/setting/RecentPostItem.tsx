@@ -48,7 +48,7 @@ const RecentPostItem = async ({
             height={900}
             className="aspect-video object-cover"
           />
-            <p className={cn("text-xs mt-2",title.error && "text-gray-400")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
+            <p className={cn("text-xs mt-2",title.error && "text-muted-foreground")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
         </div>
 
         <div className="lg:self-end flex items-end flex-col space-y-2 text-sm">

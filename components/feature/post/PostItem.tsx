@@ -117,7 +117,7 @@ const PostItem = async ({
               height={900}
               className="aspect-video object-cover"
             />
-            <p className={cn("text-xs",title.error && "text-gray-400")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
+            <p className={cn("text-xs",title.error && "text-muted-foreground")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
           </CardContent>
           <CardFooter className="flex items-end flex-col space-y-2 text-sm">
             <div className="flex gap-2 justify-self-end">
