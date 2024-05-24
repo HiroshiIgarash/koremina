@@ -1,6 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Reaction } from "@/types/type";
+import getYoutubeTitleById from "@/utils";
 import { Liver } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,22 +23,7 @@ const RecentPostItem = async ({
   reactionsCount,
 }: RecentPostItemProps) => {
   // 動画タイトルの取得
-  const res = await fetch(
-    `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,
-    { cache: "force-cache" }
-  )
-    .then((r) => {
-      if (r.status === 200) {
-        return r.json();
-      } else {
-        throw new Error();
-      }
-    })
-    .catch(() => {
-      return [];
-    });
-
-  const title = res.items?.[0].snippet.title;
+  const title = await getYoutubeTitleById(videoId)
 
   return (
     <Link href={`/post/${postId}`}>
@@ -61,7 +48,7 @@ const RecentPostItem = async ({
             height={900}
             className="aspect-video object-cover"
           />
-          <p className="text-xs mt-2">{title}</p>
+            <p className={cn("text-xs mt-2",title.error && "text-gray-400")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
         </div>
 
         <div className="lg:self-end flex items-end flex-col space-y-2 text-sm">

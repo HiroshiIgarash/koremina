@@ -20,6 +20,8 @@ import Link from "next/link";
 import BookmarkButton from "./BookMarkButton";
 import { auth } from "@/auth";
 import clsx from "clsx";
+import getYoutubeTitleById from "@/utils";
+import { cn } from "@/lib/utils";
 
 interface PostItemProps {
   id: string;
@@ -42,25 +44,13 @@ const PostItem = async ({
   bookmark,
   reactionsCount,
 }: PostItemProps) => {
+
   //動画タイトルの取得
-  const res = await fetch(
-    `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${process.env.YT_API_KEY}`,
-    { cache: "force-cache" }
-  )
-    .then((r) => {
-      if (r.status === 200) {
-        return r.json();
-      } else {
-        throw new Error();
-      }
-    })
-    .catch(() => {
-      return [];
-    });
 
-  const title = res.items?.[0].snippet.title;
-
-  const session = await auth();
+  const [session, title] = await Promise.all([
+    auth(),
+    getYoutubeTitleById(videoId)
+  ])
   
 
   return (
@@ -127,7 +117,7 @@ const PostItem = async ({
               height={900}
               className="aspect-video object-cover"
             />
-            <p className="text-xs">{title}</p>
+            <p className={cn("text-xs",title.error && "text-gray-400")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
           </CardContent>
           <CardFooter className="flex items-end flex-col space-y-2 text-sm">
             <div className="flex gap-2 justify-self-end">

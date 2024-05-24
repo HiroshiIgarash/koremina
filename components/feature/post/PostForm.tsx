@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import clsx from "clsx"
 import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import VideoImage from "./VideoImage"
@@ -50,6 +50,7 @@ const PostForm = () => {
   const [selected, setSelected] = useState<Liver[]>([]);
   const [inputValue, setInputValue] = useState("");
 
+  const [isPending, startTransition] = useTransition()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,14 +69,16 @@ const PostForm = () => {
   const watchComment = form.watch("comment")
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await axios.post('/api/post', values)
-      .then(() => {
-        toast({
-          description: "投稿が完了しました。"
+    startTransition(async () => {
+      await axios.post('/api/post', values)
+        .then(() => {
+          toast({
+            description: "投稿が完了しました。"
+          })
+          router.push('/')
+          router.refresh()
         })
-        router.push('/')
-        router.refresh()
-      })
+    })
   }
 
   const handleBlur = (value: string) => {
@@ -102,18 +105,18 @@ const PostForm = () => {
 
       form.setValue('videoId', removedSlashPath)
 
-    // https://www.youtube.com/live〜 の場合、live/以降を返す
+      // https://www.youtube.com/live〜 の場合、live/以降を返す
     } else if (url.origin.match(/https:\/\/(www\.)?youtube\.com/) && url.pathname.startsWith('/live/')) {
       const path = url.pathname // '/live/videoId'
       const extractedPath = path.split('/')[2] // ['','live',videoId]
-        
+
       form.setValue('videoId', extractedPath)
 
-    // https://www.youtube.com/shorts〜 の場合、shorts/以降を返す
+      // https://www.youtube.com/shorts〜 の場合、shorts/以降を返す
     } else if (url.origin.match(/https:\/\/(www\.)?youtube\.com/) && url.pathname.startsWith('/shorts/')) {
       const path = url.pathname // '/shorts/videoId'
       const extractedPath = path.split('/')[2] // ['','shorts',videoId]
-        
+
       form.setValue('videoId', extractedPath)
     }
 
@@ -196,7 +199,7 @@ const PostForm = () => {
                     ref={inputRef}
                     value={inputValue}
                     onValueChange={(e) => {
-                      if(!(livers.length > 0))return
+                      if (!(livers.length > 0)) return
                       setInputValue(e)
                     }}
                     onBlur={() => setOpen(false)}
@@ -306,6 +309,11 @@ const PostForm = () => {
             }
           >
             投稿
+            {
+              isPending && (
+                <Loader2 className="animate-spin" />
+              )
+            }
           </Button>
         </form>
       </Form>
