@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "@/components/Footer";
 
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
@@ -24,10 +25,13 @@ export default function RootLayout({
       <body className={noto.className}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <NextTopLoader showSpinner={false} height={2} />
-          <Header />
-          <main className="flex flex-col items-center pt-12 pb-20">
-            {children}
-          </main>
+          <div className="min-h-dvh grid grid-rows-[auto,1fr,auto]">
+            <Header />
+            <main className="flex flex-col items-center pt-12 pb-20">
+              {children}
+            </main>
+            <Footer />
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>
