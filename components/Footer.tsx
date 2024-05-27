@@ -3,7 +3,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="px-4 py-6 border-t">
-      <ul className="mx-auto mb-4 flex flex-col md:flex-row gap-12 justify-center">
+      <ul className="mx-auto mb-4 flex flex-col md:flex-row gap-4 md:gap-12 justify-center items-center">
         <li>
           <Link className="text-sm hover:underline" href="/about">
             このサイトについて
