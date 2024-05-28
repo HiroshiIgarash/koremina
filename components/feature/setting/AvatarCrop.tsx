@@ -46,7 +46,7 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
           method: "POST",
           body: blob,
         });
-        console.log(res)
+
         const data = await res.json();
         const url = data.url;
 

@@ -10,12 +10,12 @@ import { Button } from "@/components/ui/button";
 import updateAvatar from "@/app/action/updateAvatar";
 import { useToast } from "@/components/ui/use-toast";
 
-interface ChangeNicknameFormProps {
+interface ChangeAvatarFormProps {
   user: User | null;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const ChangeNicknameForm = ({ user, setOpen }: ChangeNicknameFormProps) => {
+const ChangeAvatarForm = ({ user, setOpen }: ChangeAvatarFormProps) => {
   const [file, setFile] = useState<File & { preview: string }>();
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
@@ -63,4 +63,4 @@ const ChangeNicknameForm = ({ user, setOpen }: ChangeNicknameFormProps) => {
   );
 };
 
-export default ChangeNicknameForm;
+export default ChangeAvatarForm;

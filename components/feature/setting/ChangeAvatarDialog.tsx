@@ -11,7 +11,7 @@ const ChangeAvatarDialog = ({ children,user }: { children: React.ReactNode,user:
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger className="shrink-0">
         {children}
       </DialogTrigger>
       <DialogContent>

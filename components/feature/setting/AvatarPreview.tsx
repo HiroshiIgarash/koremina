@@ -1,7 +1,4 @@
-import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
 import { Crop } from "react-image-crop";
-import { useDebounce } from "use-debounce";
 
 interface AvatarPreviewProps {
   imageRef: HTMLImageElement | null;

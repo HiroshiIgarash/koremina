@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:host": "next dev -H 192.168.223.84",
+    "dev:host": "next dev -H 192.168.11.31",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",

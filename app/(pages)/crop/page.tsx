@@ -1,8 +1,7 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactCrop, { type Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { useDropzone } from "react-dropzone";
@@ -38,21 +37,17 @@ const Page = () => {
   }, [file]);
 
   const handleClick = () => {
-    if(!file) return
+    if (!file) return;
     AvatarPreview({
       imageRef: imageRef.current,
       crop,
-    }).then(async(blob) => {
-      if(blob) {
-      
-        const res = await fetch(
-          `/api/upload?filename=${file.name}`,
-          {
-            method: 'POST',
-            body: blob,
-          },
-        )
-        console.log(res)
+    }).then(async (blob) => {
+      if (blob) {
+        const res = await fetch(`/api/upload?filename=${file.name}`, {
+          method: "POST",
+          body: blob,
+        });
+        console.log(res);
       }
     });
   };
@@ -67,7 +62,12 @@ const Page = () => {
         <p>ここにファイルをドラッグ&ドロップしてください。</p>
       </div>
 
-      <ReactCrop aspect={1} crop={crop} onChange={(c) => setCrop(c)} circularCrop>
+      <ReactCrop
+        aspect={1}
+        crop={crop}
+        onChange={(c) => setCrop(c)}
+        circularCrop
+      >
         {file && (
           <Image
             ref={imageRef}
