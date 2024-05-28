@@ -1,35 +1,24 @@
 "use client"
 
 import getCurrentUser from "@/app/action/getCurrentUser"
-import getLivers from "@/app/action/getLivers"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Liver } from "@prisma/client"
 import { useRouter } from "next/navigation"
-import { useEffect, useState, useTransition } from "react"
+import { useTransition } from "react"
 
 interface PostFilterProps {
   filterLiversId: string | undefined
+  livers:Liver[]
+  user:Awaited<ReturnType<typeof getCurrentUser>> | null
+  isPending?:boolean
 }
 
-const PostFilter = ({ filterLiversId }: PostFilterProps) => {
-  const [isPending, startTransition] = useTransition()
+const PostFilter = ({ filterLiversId,livers,user,isPending=false }: PostFilterProps) => {
   const [isRoutingPending, startRoutingTransition] = useTransition()
-  const [livers, setLivers] = useState<Liver[]>([])
-  const [user, setUser] = useState<Awaited<ReturnType<typeof getCurrentUser>> | null>(null)
   const router = useRouter()
 
-  useEffect(() => {
-    startTransition(() => {
-      getLivers()
-        .then(livers => setLivers(livers))
-      getCurrentUser()
-        .then(user => {
-          setUser(user)
-        })
-    })
-  }, [])
 
   const filterLiver = livers.find(l => l.id === filterLiversId)
 

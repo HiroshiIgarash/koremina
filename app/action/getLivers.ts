@@ -3,9 +3,14 @@
 import prisma from "@/lib/db"
 
 const getLivers = async() => {
-  const livers = await prisma.liver.findMany()
+  try {
+    const livers = await prisma.liver.findMany()
+    return livers
+  } catch (error) {
+    console.log(error)
+    return []
+  }
 
-  return livers
 }
 
 export default getLivers

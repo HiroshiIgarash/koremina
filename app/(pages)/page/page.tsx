@@ -1,4 +1,5 @@
 import PostFilter from "@/components/feature/post/PostFilter";
+import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import { Suspense } from "react";
@@ -16,7 +17,18 @@ const Page = ({ searchParams }: { searchParams?: ISearchParams }) => {
 
   return (
     <>
-      <PostFilter filterLiversId={filterLiver} />
+      <Suspense
+        fallback={
+          <PostFilter
+            filterLiversId={filterLiver}
+            livers={[]}
+            user={null}
+            isPending
+          />
+        }
+      >
+        <PostFilterContainer filterLiver={filterLiver} />
+      </Suspense>
       <Suspense fallback={<SkeletonPostList />}>
         <PostList
           filterLiver={filterLiver}
