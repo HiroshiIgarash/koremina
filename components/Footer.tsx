@@ -15,6 +15,11 @@ const Footer = () => {
           </Link>
         </li>
         <li>
+          <Link className="text-sm hover:underline" href="/faq">
+            FAQ
+          </Link>
+        </li>
+        <li>
           <Link
             className="text-sm hover:underline"
             href="https://forms.gle/qi3w8h1Ao6HDJbyJA"
