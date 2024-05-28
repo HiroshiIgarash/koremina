@@ -10,8 +10,8 @@ const AvatarPreview = async ({ imageRef, crop }: AvatarPreviewProps) => {
     const canvas: HTMLCanvasElement = document.createElement("canvas");
     const scaleX = imageRef.naturalWidth / imageRef.width;
     const scaleY = imageRef.naturalHeight / imageRef.height;
-    canvas.width = 48;
-    canvas.height = 48;
+    canvas.width = 96;
+    canvas.height = 96;
     const ctx = canvas.getContext("2d");
     if (ctx !== null) {
       ctx.drawImage(
@@ -22,8 +22,8 @@ const AvatarPreview = async ({ imageRef, crop }: AvatarPreviewProps) => {
         crop.height * scaleY,
         0,
         0,
-        48,
-        48
+        96,
+        96
       );
     }
     return await new Promise<Blob | null>((resolve) => {
