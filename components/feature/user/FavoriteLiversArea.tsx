@@ -33,7 +33,7 @@ const FavoriteLiversArea = async ({ user }: FavoriteLiversAreaProps) => {
               <>
                 <Link
                   key={user.mostFavoriteLiver.id}
-                  href={`/page?liver=${user.mostFavoriteLiver.channelHandle}`}
+                  href={`/page?liver=${user.mostFavoriteLiver.id}`}
                   className="rounded-full hover:opacity-70 transition-opacity"
                 >
                   <ChannelIcon
@@ -57,9 +57,8 @@ const FavoriteLiversArea = async ({ user }: FavoriteLiversAreaProps) => {
                 {user.favoriteLivers.map((liver) => (
                   <Link
                     key={liver.id}
-                    href={`/page?liver=${liver.channelHandle}`}
+                    href={`/page?liver=${liver.id}`}
                     className="rounded-full hover:opacity-70 transition-opacity"
-                    target="_blank"
                   >
                     <ChannelIcon
                       key={liver.id}

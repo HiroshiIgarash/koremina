@@ -42,7 +42,7 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
         if (!blob) throw new Error("invalid data");
 
         // vercel Blob にアップ
-        const res = await fetch(`/api/vercelblob?filename=${file.name}.png`, {
+        const res = await fetch(`/api/vercelblob?filename=${file.name}.jpg`, {
           method: "POST",
           body: blob,
         });

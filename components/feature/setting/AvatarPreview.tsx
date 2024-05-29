@@ -1,4 +1,5 @@
 import { Crop } from "react-image-crop";
+import sharp from 'sharp'
 
 interface AvatarPreviewProps {
   imageRef: HTMLImageElement | null;
@@ -29,7 +30,7 @@ const AvatarPreview = async ({ imageRef, crop }: AvatarPreviewProps) => {
     return await new Promise<Blob | null>((resolve) => {
       canvas.toBlob((blob) => {
         resolve(blob);
-      });
+      },"image/jpeg",0.2);
     });
   }
 };

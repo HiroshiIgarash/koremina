@@ -72,7 +72,7 @@ const PostItem = async ({
             </CardTitle>
             <div className="flex justify-end items-center gap-2">
               <Avatar user={postedUser} size={32} />
-              <span className="text-sm">{postedUserName}</span>
+              <span className="text-sm truncate max-w-40">{postedUserName}</span>
             </div>
           </CardHeader>
           <CardContent className="grow space-y-2 pb-2">
@@ -80,7 +80,7 @@ const PostItem = async ({
               <TooltipProvider delayDuration={100}>
                 <Tooltip>
                   <TooltipTrigger>
-                    <span className="hidden shrink-0 md:grid place-items-center text-xs bg-gray-300 rounded-full aspect-square w-4">
+                    <span className="hidden shrink-0 md:grid text-black place-items-center text-xs bg-gray-300 rounded-full aspect-square w-4">
                       {livers.length}
                     </span>
                   </TooltipTrigger>
