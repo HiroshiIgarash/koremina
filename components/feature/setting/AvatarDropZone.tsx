@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useEffect, type useState } from "react";
+import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface AvatarDropZoneProps {
@@ -11,6 +11,7 @@ interface AvatarDropZoneProps {
 }
 
 const AvatarDropZone = ({ file, setFile, disabled }: AvatarDropZoneProps) => {
+  const [isError, setIsError] = useState(false)
   useEffect(() => {
     return () => {
       file && URL.revokeObjectURL(file.preview);
@@ -18,7 +19,10 @@ const AvatarDropZone = ({ file, setFile, disabled }: AvatarDropZoneProps) => {
   }, [file]);
 
   const onDrop = (acceptedFiles: File[]) => {
-    if (!acceptedFiles.length) return;
+    if (!acceptedFiles.length) {
+      setIsError(true)
+      return;
+    };
     setFile(
       Object.assign(acceptedFiles[0], {
         preview: URL.createObjectURL(acceptedFiles[0]),
@@ -50,6 +54,7 @@ const AvatarDropZone = ({ file, setFile, disabled }: AvatarDropZoneProps) => {
         <input {...getInputProps()} />
         <p>クリックで画像選択 もしくはドラッグ&amp;ドロップ</p>
       </div>
+      {isError && <p className="text-sm text-destructive">もう一度画像を選択してください。複数選択されていたか、画像ファイルでなかった可能性があります。</p>}
     </>
   );
 };

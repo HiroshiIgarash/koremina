@@ -94,6 +94,10 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
           className="shrink-0"
         />
       </div>
+      <p className="text-sm text-left">
+        スマホやタブレットの場合、一本指でスワイプして範囲を選択してください<br />
+        複数の指で操作すると挙動が不安定になります。
+      </p>
       <Button onClick={handleUpload} disabled={isUncropped || isPending}>
         {isUncropped
           ? "範囲を選択してください"
