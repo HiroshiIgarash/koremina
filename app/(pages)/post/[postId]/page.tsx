@@ -7,7 +7,7 @@ import SkeletonReactionButtonList from "@/components/feature/post/SkeletonReacti
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 import { FilePenLine, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -89,7 +89,7 @@ const Page = async ({ params }: { params: IParams }) => {
           )}
           <CardHeader className="space-y-4 pb-0">
             <CardTitle
-              className={clsx(
+              className={cn(
                 "leading-tight",
                 post.postedUserId === currentUser?.id ? "pr-20" : "pr-6"
               )}
@@ -98,11 +98,11 @@ const Page = async ({ params }: { params: IParams }) => {
             </CardTitle>
             <Link
               href={`/user/${post.postedUser.id}`}
-              className="my-8 w-fit hover:opacity-70 transition-opacity"
+              className="my-8 w-fit hover:opacity-70 transition-opacity ml-auto"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex justify-end items-center gap-2">
                 <Avatar user={post.postedUser} size={32} />
-                <p className="text-sm">
+                <p className="text-sm truncate max-w-40">
                   {post.postedUser.nickname || post.postedUser.name}
                 </p>
               </div>
@@ -110,7 +110,7 @@ const Page = async ({ params }: { params: IParams }) => {
           </CardHeader>
           <CardContent>
             {post.detailComment && (
-              <pre className={clsx("mt-4 whitespace-pre-wrap", noto.className)}>
+              <pre className={cn("mt-4 whitespace-pre-wrap", noto.className)}>
                 {post.detailComment}
               </pre>
             )}

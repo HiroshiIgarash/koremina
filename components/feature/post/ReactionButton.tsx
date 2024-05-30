@@ -3,7 +3,7 @@
 import updateReaction from "@/app/action/updateReaction"
 import { Reaction } from "@/types/type"
 import { User, Video } from "@prisma/client"
-import clsx from "clsx"
+import { cn } from "@/lib/utils";
 import { useCallback, useOptimistic } from "react"
 
 interface ReactionButtonProps {
@@ -39,7 +39,7 @@ const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) 
     <button
     disabled={!user}
       className={
-        clsx(
+        cn(
           "rounded-full w-14 px-2",
           user && "border hover:border hover:border-sky-500",
           active && "bg-sky-50 border-sky-300 dark:bg-accent"

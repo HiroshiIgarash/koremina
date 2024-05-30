@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
-import clsx from "clsx"
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useRef, useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
@@ -275,7 +275,7 @@ const PostForm = () => {
                   <Input className="text-base md:text-sm" placeholder="〇〇好きに見てほしい！" {...field} />
                 </FormControl>
                 <FormDescription>
-                  この動画に対するコメントを60文字以内で記入してください。（<span className={clsx(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
+                  この動画に対するコメントを60文字以内で記入してください。（<span className={cn(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
                 </FormDescription>
                 <FormMessage />
               </FormItem>

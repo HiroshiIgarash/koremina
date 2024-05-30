@@ -18,10 +18,10 @@ const CommentList = async ({ postId, currentUser }: CommentListProps) => {
         (comments && comments.length > 0) ?
           comments.map(comment => (
             <Card key={comment.id}>
-              <CardHeader className="pb-2 flex-row justify-between">
-                <div className="flex items-center gap-2">
+              <CardHeader className="pb-2 flex-row gap-2 justify-between">
+                <div className="flex items-center gap-2 overflow-hidden">
                   <Avatar user={comment.author} size={32} />
-                  <span className="text-sm">{comment.author.nickname || comment.author.name}</span>
+                  <span className="text-sm truncate max-w-[50vw] md:max-w-none">{comment.author.nickname || comment.author.name}</span>
                 </div>
                 {
                   comment.authorId === currentUser?.id && (

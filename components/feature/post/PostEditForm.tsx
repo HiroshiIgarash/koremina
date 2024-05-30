@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -317,7 +317,7 @@ const PostEditForm = ({
                 <FormDescription>
                   この動画に対するコメントを60文字以内で記入してください。（
                   <span
-                    className={clsx(
+                    className={cn(
                       watchComment.length > 60 && "text-destructive"
                     )}
                   >
