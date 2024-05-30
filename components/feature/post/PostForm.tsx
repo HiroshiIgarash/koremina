@@ -1,18 +1,26 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/components/ui/use-toast"
-import { zodResolver } from "@hookform/resolvers/zod"
-import axios from "axios"
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useRef, useState, useTransition } from "react"
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import VideoImage from "./VideoImage"
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import VideoImage from "./VideoImage";
 import {
   Command,
   CommandGroup,
@@ -20,37 +28,43 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Command as CommandPrimitive } from "cmdk";
-import { Liver } from "@prisma/client"
-import { Badge } from "@/components/ui/badge"
-import { Loader2, X } from "lucide-react"
+import { Liver } from "@prisma/client";
+import { Badge } from "@/components/ui/badge";
+import { Loader2, X } from "lucide-react";
 
 const formSchema = z.object({
-  videoId: z.string().min(11, {
-    message: '動画IDは11文字です。'
-  }).max(11, {
-    message: '動画IDは11文字です。'
-  }),
-  comment: z.string().min(1, {
-    message: '投稿者コメントは必須項目です。'
-  }).max(60, {
-    message: '60文字を超えています。'
-  }),
+  videoId: z
+    .string()
+    .min(11, {
+      message: "動画IDは11文字です。",
+    })
+    .max(11, {
+      message: "動画IDは11文字です。",
+    }),
+  comment: z
+    .string()
+    .min(1, {
+      message: "投稿者コメントは必須項目です。",
+    })
+    .max(60, {
+      message: "60文字を超えています。",
+    }),
   detailComment: z.string().optional(),
-  liver: z.string().array()
-})
+  liver: z.string().array(),
+});
 
 const PostForm = () => {
-  const router = useRouter()
-  const { toast } = useToast()
-  const [isValidVideoId, setIsValidVideoId] = useState(false)
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isValidVideoId, setIsValidVideoId] = useState(false);
 
-  const [livers, setLivers] = useState<Liver[]>([])
+  const [livers, setLivers] = useState<Liver[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Liver[]>([]);
   const [inputValue, setInputValue] = useState("");
 
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,107 +72,116 @@ const PostForm = () => {
       videoId: "",
       comment: "",
       detailComment: "",
-      liver: []
+      liver: [],
     },
-    mode: "onBlur"
-  })
+    mode: "onBlur",
+  });
 
-  form.setValue('liver', selected.map(s => s.id))
+  form.setValue(
+    "liver",
+    selected.map((s) => s.id)
+  );
 
-  const watchVideoId = form.watch("videoId")
-  const watchComment = form.watch("comment")
+  const watchVideoId = form.watch("videoId");
+  const watchComment = form.watch("comment");
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      await axios.post('/api/post', values)
-        .then(() => {
-          toast({
-            description: "投稿が完了しました。"
-          })
-          router.push('/')
-          router.refresh()
-        })
-    })
+      await axios.post("/api/post", values).then(() => {
+        toast({
+          description: "投稿が完了しました。",
+        });
+        router.push("/");
+        router.refresh();
+      });
+    });
   }
 
   const handleBlur = (value: string) => {
-
     if (!URL.canParse(value)) {
-      form.trigger('videoId')
-      return
+      form.trigger("videoId");
+      return;
     }
 
-    const url = new URL(value)
+    const url = new URL(value);
 
     // https://www.youtube.com/watch〜 の場合、v= 以降を返す
-    if (url.origin === 'https://www.youtube.com' && url.pathname === '/watch') {
-      const paramV = url.searchParams.get('v')
+    if (url.origin === "https://www.youtube.com" && url.pathname === "/watch") {
+      const paramV = url.searchParams.get("v");
 
-      if (!paramV) return
+      if (!paramV) return;
 
-      form.setValue('videoId', paramV.toString())
+      form.setValue("videoId", paramV.toString());
 
       // https://youtu.be〜 の場合、スラッシュ以降を返す
-    } else if (url.origin === 'https://youtu.be') {
-      const path = url.pathname // '/videoId'
-      const removedSlashPath = path.slice(1)
+    } else if (url.origin === "https://youtu.be") {
+      const path = url.pathname; // '/videoId'
+      const removedSlashPath = path.slice(1);
 
-      form.setValue('videoId', removedSlashPath)
+      form.setValue("videoId", removedSlashPath);
 
       // https://www.youtube.com/live〜 の場合、live/以降を返す
-    } else if (url.origin.match(/https:\/\/(www\.)?youtube\.com/) && url.pathname.startsWith('/live/')) {
-      const path = url.pathname // '/live/videoId'
-      const extractedPath = path.split('/')[2] // ['','live',videoId]
+    } else if (
+      url.origin.match(/https:\/\/(www\.)?youtube\.com/) &&
+      url.pathname.startsWith("/live/")
+    ) {
+      const path = url.pathname; // '/live/videoId'
+      const extractedPath = path.split("/")[2]; // ['','live',videoId]
 
-      form.setValue('videoId', extractedPath)
+      form.setValue("videoId", extractedPath);
 
       // https://www.youtube.com/shorts〜 の場合、shorts/以降を返す
-    } else if (url.origin.match(/https:\/\/(www\.)?youtube\.com/) && url.pathname.startsWith('/shorts/')) {
-      const path = url.pathname // '/shorts/videoId'
-      const extractedPath = path.split('/')[2] // ['','shorts',videoId]
+    } else if (
+      url.origin.match(/https:\/\/(www\.)?youtube\.com/) &&
+      url.pathname.startsWith("/shorts/")
+    ) {
+      const path = url.pathname; // '/shorts/videoId'
+      const extractedPath = path.split("/")[2]; // ['','shorts',videoId]
 
-      form.setValue('videoId', extractedPath)
+      form.setValue("videoId", extractedPath);
     }
 
-    form.trigger('videoId')
-  }
-
+    form.trigger("videoId");
+  };
 
   const handleUnselect = useCallback((liver: Liver) => {
-    setSelected(prev => prev.filter(s => s.id !== liver.id));
+    setSelected((prev) => prev.filter((s) => s.id !== liver.id));
   }, []);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
-    const input = inputRef.current
-    if (input) {
-      if (e.key === "Delete" || e.key === "Backspace") {
-        if (input.value === "") {
-          setSelected(prev => {
-            const newSelected = [...prev];
-            newSelected.pop();
-            return newSelected;
-          })
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      const input = inputRef.current;
+      if (input) {
+        if (e.key === "Delete" || e.key === "Backspace") {
+          if (input.value === "") {
+            setSelected((prev) => {
+              const newSelected = [...prev];
+              newSelected.pop();
+              return newSelected;
+            });
+          }
+        }
+        // This is not a default behaviour of the <input /> field
+        if (e.key === "Escape") {
+          input.blur();
         }
       }
-      // This is not a default behaviour of the <input /> field
-      if (e.key === "Escape") {
-        input.blur();
-      }
-    }
-  }, []);
+    },
+    []
+  );
 
-  const selectables = livers.filter(liver => !selected.some(s => s.id === liver.id));
-
+  const selectables = livers.filter(
+    (liver) => !selected.some((s) => s.id === liver.id)
+  );
 
   useEffect(() => {
     const fetchAndSetLivers = async () => {
-      const livers = await axios.get('/api/liver') as { data: Liver[] }
-      setLivers(livers.data)
-    }
+      const livers = (await axios.get("/api/liver")) as { data: Liver[] };
+      setLivers(livers.data);
+    };
 
-    fetchAndSetLivers()
-  }, [])
-
+    fetchAndSetLivers();
+  }, []);
 
   return (
     <>
@@ -166,11 +189,14 @@ const PostForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="space-y-2">
-            <FormLabel>このライバーを推すときにおすすめしたい！（必須）</FormLabel>
-            <Command onKeyDown={handleKeyDown} className="overflow-visible bg-transparent">
-              <div
-                className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
-              >
+            <FormLabel>
+              このライバーを推すときにおすすめしたい！（必須）
+            </FormLabel>
+            <Command
+              onKeyDown={handleKeyDown}
+              className="overflow-visible bg-transparent"
+            >
+              <div className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
                 <div className="flex gap-1 flex-wrap">
                   {selected.map((liver) => {
                     return (
@@ -192,15 +218,15 @@ const PostForm = () => {
                           <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
                         </button>
                       </Badge>
-                    )
+                    );
                   })}
                   {/* Avoid having the "Search" Icon */}
                   <CommandPrimitive.Input
                     ref={inputRef}
                     value={inputValue}
                     onValueChange={(e) => {
-                      if (!(livers.length > 0)) return
-                      setInputValue(e)
+                      if (!(livers.length > 0)) return;
+                      setInputValue(e);
                     }}
                     onBlur={() => setOpen(false)}
                     onFocus={() => setOpen(true)}
@@ -210,7 +236,7 @@ const PostForm = () => {
                 </div>
               </div>
               <div className="relative mt-2">
-                {open && selectables.length > 0 ?
+                {open && selectables.length > 0 ? (
                   <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
                     <CommandList>
                       <CommandGroup className="max-h-[20vh] md:max-h-none h-full overflow-auto">
@@ -223,8 +249,8 @@ const PostForm = () => {
                                 e.stopPropagation();
                               }}
                               onSelect={(value) => {
-                                setInputValue("")
-                                setSelected(prev => [...prev, liver])
+                                setInputValue("");
+                                setSelected((prev) => [...prev, liver]);
                               }}
                               className={"cursor-pointer"}
                             >
@@ -235,11 +261,11 @@ const PostForm = () => {
                       </CommandGroup>
                     </CommandList>
                   </div>
-                  : null}
+                ) : null}
               </div>
-            </Command >
+            </Command>
           </div>
-          <input type="hidden" {...form.register('liver')} />
+          <input type="hidden" {...form.register("liver")} />
           <div>
             <FormField
               control={form.control}
@@ -248,7 +274,11 @@ const PostForm = () => {
                 <FormItem>
                   <FormLabel>youtube ID（URLでも可）</FormLabel>
                   <FormControl>
-                    <Input className="text-base" {...field} onBlur={(e) => handleBlur(e.target.value)} />
+                    <Input
+                      className="text-base"
+                      {...field}
+                      onBlur={(e) => handleBlur(e.target.value)}
+                    />
                   </FormControl>
                   <FormDescription>
                     動画IDもしくはURLを記入してください。
@@ -257,13 +287,14 @@ const PostForm = () => {
                 </FormItem>
               )}
             />
-            {
-              watchVideoId.length === 11 && (
-                <div className="mt-4">
-                  <VideoImage id={watchVideoId} setIsValidVideoId={setIsValidVideoId} />
-                </div>
-              )
-            }
+            {watchVideoId.length === 11 && (
+              <div className="mt-4">
+                <VideoImage
+                  id={watchVideoId}
+                  setIsValidVideoId={setIsValidVideoId}
+                />
+              </div>
+            )}
           </div>
           <FormField
             control={form.control}
@@ -272,10 +303,22 @@ const PostForm = () => {
               <FormItem>
                 <FormLabel>投稿者コメント（必須）</FormLabel>
                 <FormControl>
-                  <Input className="text-base md:text-sm" placeholder="〇〇好きに見てほしい！" {...field} />
+                  <Input
+                    className="text-base md:text-sm"
+                    placeholder="〇〇好きに見てほしい！"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>
-                  この動画に対するコメントを60文字以内で記入してください。（<span className={cn(watchComment.length > 60 && "text-destructive")} >{watchComment.length}</span> / 60）
+                  この動画に対するコメントを60文字以内で記入してください。（
+                  <span
+                    className={cn(
+                      watchComment.length > 60 && "text-destructive"
+                    )}
+                  >
+                    {watchComment.length}
+                  </span>{" "}
+                  / 60）
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -288,7 +331,10 @@ const PostForm = () => {
               <FormItem>
                 <FormLabel>投稿者コメント（詳細）</FormLabel>
                 <FormControl>
-                  <Textarea className="resize-none text-base md:text-sm" {...field} />
+                  <Textarea
+                    className="resize-none text-base md:text-sm"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>
                   コメントを細かく書くことができます。
@@ -309,16 +355,12 @@ const PostForm = () => {
             }
           >
             投稿
-            {
-              isPending && (
-                <Loader2 className="animate-spin" />
-              )
-            }
+            {isPending && <Loader2 className="animate-spin" />}
           </Button>
         </form>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default PostForm
+export default PostForm;

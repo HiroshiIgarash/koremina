@@ -1,29 +1,45 @@
-'use server'
+"use server";
 
-import prisma from "@/lib/db"
-import getCurrentUser from "./getCurrentUser"
+import prisma from "@/lib/db";
+import { auth } from "@/auth";
+import { NicknameSchema, nicknameSchema } from "@/schema";
+import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
-const updateNickname = async(formData: FormData) => {
-  const currentUser = await getCurrentUser()
+const updateNickname = async (name: NicknameSchema) => {
+  try {
+    const session = await auth();
 
-  if (!currentUser) {
-    return null
-  }
+    const currentUserId = session?.user?.id;
 
-  const newNickname = formData.get('newNickname')?.toString()
-
-  if (!newNickname || newNickname === '') {
-    return null
-  }
-
-  await prisma.user.update({
-    where: {
-      id: currentUser.id
-    },
-    data: {
-      nickname: newNickname
+    if (!currentUserId) {
+      return {
+        error: "Unauthorized",
+      };
     }
-  })
-}
 
-export default updateNickname
+    const newNickname = name.newNickname;
+    nicknameSchema.parse({ newNickname });
+
+    await prisma.user.update({
+      where: {
+        id: currentUserId,
+      },
+      data: {
+        nickname: newNickname,
+      },
+    });
+
+    revalidatePath("/setting");
+  } catch (error) {
+    console.log(error);
+    if (error instanceof z.ZodError) {
+      return { error: { username: "username is invalid" } };
+    }
+    return {
+      error: "Failed to update nickname",
+    };
+  }
+};
+
+export default updateNickname;

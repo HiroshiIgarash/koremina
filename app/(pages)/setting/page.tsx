@@ -1,17 +1,16 @@
-import { auth } from "@/auth"
-import FavoriteLiversArea from "@/components/feature/setting/FavoriteLiversArea"
-import RecentPostArea from "@/components/feature/setting/RecentPostArea"
-import SkeletonUserInfo from "@/components/feature/setting/SkeletonUserInfo"
-import UserInfo from "@/components/feature/setting/UserInfo"
-import { redirect } from "next/navigation"
-import { Suspense } from "react"
+import { auth } from "@/auth";
+import FavoriteLiversArea from "@/components/feature/setting/FavoriteLiversArea";
+import RecentPostArea from "@/components/feature/setting/RecentPostArea";
+import SkeletonUserInfo from "@/components/feature/setting/SkeletonUserInfo";
+import UserInfo from "@/components/feature/setting/UserInfo";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 const Page = async () => {
-
-  const session = await auth()
+  const session = await auth();
 
   if (!session) {
-    redirect('/')
+    redirect("/");
   }
 
   return (
@@ -24,8 +23,8 @@ const Page = async () => {
         <FavoriteLiversArea />
         <RecentPostArea />
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default Page
+export default Page;
