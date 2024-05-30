@@ -51,7 +51,7 @@ const ChangeNicknameForm = ({ user, setOpen }: ChangeNicknameFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex items-center gap-4">
-        <Input {...register("newNickname")} />
+        <Input {...register("newNickname")} className="text-base md:text-sm" />
         <Button disabled={!!errors.newNickname || isPending}>
           変更
           {isPending && <Loader2 className="animate-spin" />}

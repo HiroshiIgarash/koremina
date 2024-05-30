@@ -64,7 +64,7 @@ const Page = async ({ params }: { params: IParams }) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="min-w-0">
         <Card className="relative">
           {currentUser?.id && (
             <div className="absolute top-4 right-4 flex gap-2">
