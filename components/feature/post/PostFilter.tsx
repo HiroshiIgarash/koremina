@@ -31,7 +31,7 @@ const PostFilter = ({ filterLiversId,livers,user,isPending=false }: PostFilterPr
   }
 
   const handleRandomClick = () => {
-    const rand = Math.floor(Math.random() * livers.length + 1)
+    const rand = Math.floor(Math.random() * livers.length)
     const randomLiverId = livers[rand].id
     startRoutingTransition(() => {
       router.push(`/page/?liver=${randomLiverId}`)

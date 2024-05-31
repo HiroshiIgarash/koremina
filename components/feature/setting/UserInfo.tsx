@@ -10,17 +10,20 @@ const UserInfo = async () => {
   const currentUser = await getCurrentUser();
 
   return (
-    <div className="flex items-center gap-2">
-      <ChangeAvatarDialog user={currentUser}>
-        <Avatar user={currentUser} size={48} />
-      </ChangeAvatarDialog>
-      <span>{currentUser?.nickname || currentUser?.name}</span>
-      <ChangeNicknameDialog user={currentUser}>
-        <SquarePen size="1em" />
-      </ChangeNicknameDialog>
-      <div className="ml-8">
-        <SignOutButton />
+    <div className="space-y-2">
+      <div className="flex items-center gap-2">
+        <ChangeAvatarDialog user={currentUser}>
+          <Avatar user={currentUser} size={48} />
+        </ChangeAvatarDialog>
+        <span>{currentUser?.nickname || currentUser?.name}</span>
+        <ChangeNicknameDialog user={currentUser}>
+          <SquarePen size="1em" />
+        </ChangeNicknameDialog>
+        <div className="ml-8">
+          <SignOutButton />
+        </div>
       </div>
+      <p className="text-sm text-muted-foreground">ユーザーID: {currentUser?.id}</p>
     </div>
   );
 };

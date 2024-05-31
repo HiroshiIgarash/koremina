@@ -119,7 +119,7 @@ const MostFavoriteLiverForm = ({
           type="submit"
           disabled={form.formState.isSubmitting || form.formState.isSubmitted}
         >
-          Submit
+          送信
         </Button>
       </form>
     </Form>

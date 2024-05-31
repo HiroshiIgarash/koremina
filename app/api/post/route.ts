@@ -58,6 +58,8 @@ export const PUT = async (req: Request) => {
     liver:liversId
   } = body
 
+  console.log(liversId)
+
   if (!videoId || !comment || liversId.length === 0) {
     return new NextResponse('Invalid data', { status: 400 })
   }
@@ -76,7 +78,7 @@ export const PUT = async (req: Request) => {
         }
       },
       liver: {
-        connect: (liversId as string[]).map(l=>({id:l}))
+        set: (liversId as string[]).map(l=>({id:l}))
       }
     }
   })

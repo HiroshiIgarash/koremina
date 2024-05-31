@@ -188,7 +188,7 @@ const FavoriteLiversForm = ({
         onClick={() => handleSubmit(selected.map((liver) => liver.id))}
         disabled={isPending}
       >
-        Submit
+        送信
       </Button>
     </>
   );

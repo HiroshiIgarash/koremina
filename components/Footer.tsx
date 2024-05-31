@@ -1,4 +1,7 @@
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { FaXTwitter } from "react-icons/fa6";
+import { Button } from "./ui/button";
 
 const Footer = () => {
   return (
@@ -25,8 +28,18 @@ const Footer = () => {
             href="https://forms.gle/qi3w8h1Ao6HDJbyJA"
             target="_blank"
           >
-            お問い合わせ
+            お問い合わせ<ExternalLink className="inline-block ml-1" width={12} height={12} />
           </Link>
+        </li>
+        <li>
+          <Button asChild variant="ghost">
+            <Link
+              href="https://x.com/jappaann_2434"
+              target="_blank"
+            >
+              <FaXTwitter size={20} />
+            </Link>
+          </Button>
         </li>
       </ul>
       <div className="text-center">
