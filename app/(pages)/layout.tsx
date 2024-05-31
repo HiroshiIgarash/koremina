@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: "コレミナ -にじさんじ布教お助けアプリ-",
   description:
     "koreminaはにじさんじを他人におすすめする際の手助けとなるアプリです。おすすめの動画を共有しましょう。",
+    verification: {
+      google: "C8fA6926hL1V7MBI58KzRrYf0Gj1fT-uR7rW_sSKWUA"
+    }
 };
 
 export default function RootLayout({
