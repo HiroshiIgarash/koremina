@@ -74,7 +74,7 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
           className="md:!max-w-[min(200px,100%)]"
         >
           <Image
-            className="pointer-events-none w-full"
+            className="pointer-events-none w-auto !max-h-[50dvh]"
             ref={imageRef}
             src={file.preview}
             alt=""
