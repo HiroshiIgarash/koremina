@@ -115,7 +115,7 @@ const Page = async ({ params }: { params: IParams }) => {
               </pre>
             )}
             <Separator className="my-4" />
-            <CommentArea postId={post.id} />
+            <CommentArea postId={postId} />
           </CardContent>
         </Card>
       </div>
