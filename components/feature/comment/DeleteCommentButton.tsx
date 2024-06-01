@@ -3,6 +3,7 @@
 import deleteComment from "@/app/action/deleteComment";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
 import { useTransition } from "react";
 
 interface DeleteCommentButtonProps {
@@ -45,6 +46,11 @@ const DeleteCommentButton = ({
       disabled={isPending}
     >
       削除
+      {
+        isPending && (
+          <Loader2 className="animate-spin" />
+        )
+      }
     </Button>
   );
 };

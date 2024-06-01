@@ -103,7 +103,7 @@ const PostEditForm = ({
     startTransition(async() => {
       await axios.put("/api/post", { ...values, postId }).then(() => {
         toast({
-          description: "編集が完了しました。",
+          description: "投稿の更新が完了しました",
         });
         router.push(`/post/${postId}`);
         router.refresh();

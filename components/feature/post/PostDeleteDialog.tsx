@@ -14,8 +14,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ReactNode, useTransition } from "react";
+import { ReactNode, useState, useTransition } from "react";
 
 interface PostDeleteDialogProps {
   children: ReactNode;
@@ -26,6 +27,7 @@ const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
   const router = useRouter();
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
+  const [open, setOpen] = useState(false)
 
   const handleDelete = async () => {
     startTransition(async () => {
@@ -33,12 +35,13 @@ const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
       toast({
         description: "投稿を削除しました。",
       });
+      setOpen(false)
       router.push("/");
       router.refresh();
     });
   };
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -48,11 +51,14 @@ const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>キャンセル</AlertDialogCancel>
-          <Button variant={"destructive"} asChild>
-            <AlertDialogAction onClick={handleDelete} disabled={isPending}>
-              削除する
-            </AlertDialogAction>
+          <AlertDialogCancel disabled={isPending}>キャンセル</AlertDialogCancel>
+          <Button onClick={handleDelete} disabled={isPending} variant={"destructive"}>
+            削除する
+            {
+              isPending && (
+                <Loader2 className="animate-spin" />
+              )
+            }
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
