@@ -126,9 +126,6 @@ const PostItem = async ({
               <span className=" rounded-full px-2">
                 👍 {`${reactionsCount.good}`}
               </span>
-              <span className=" rounded-full px-2">
-                👎 {`${reactionsCount.bad}`}
-              </span>
             </div>
             <div className="flex gap-2">
               <span className=" rounded-full px-2">

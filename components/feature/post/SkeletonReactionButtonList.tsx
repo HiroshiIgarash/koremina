@@ -6,7 +6,6 @@ const SkeletonReactionButtonList = () => {
     <div className="flex flex-col items-end gap-2">
       <div className="flex gap-4 items-start">
         <SkeletonReactionButton />
-        <SkeletonReactionButton />
       </div>
       <div className="flex gap-4 items-start">
       <SkeletonReactionButton />
