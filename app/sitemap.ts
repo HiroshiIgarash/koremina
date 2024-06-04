@@ -10,7 +10,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }, {
     url: `${baseURL}/about`,
     lastModified
-  }];
+  }, {
+    url: `${baseURL}/faq`,
+    lastModified
+  },
+];
 
   return [ ...staticPaths ];
 }

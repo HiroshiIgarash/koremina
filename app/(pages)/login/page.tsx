@@ -8,10 +8,6 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const metadata: Metadata = {
-  title: "ログインページ",
-}
-
 const Page = () => {
   const [isMounted, setIsMounted] = useState(false)
   const {resolvedTheme} = useTheme()
