@@ -62,9 +62,13 @@ const Page = async ({ params }: { params: IParams }) => {
             <Suspense fallback={<SkeletonReactionButtonList />}>
               <div className="text-right">
                 <ReactionButtonList postId={postId} />
-                <ReportDialog postId={postId}>
-                  <button className="text-sm text-destructive mt-2 underline underline-offset-2">通報する</button>
-                </ReportDialog>
+                {
+                  session && (
+                    <ReportDialog postId={postId}>
+                      <button className="text-sm text-destructive mt-2 underline underline-offset-2">通報する</button>
+                    </ReportDialog>
+                  )
+                }
               </div>
             </Suspense>
           </div>
