@@ -11,9 +11,9 @@ import Footer from "@/components/Footer";
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "コレミナ -にじさんじ布教お助けアプリ-",
+  title: "コレミナ -にじさんじおすすめ動画共有サービス-",
   description:
-    "koreminaはにじさんじを他人におすすめする際の手助けとなるアプリです。おすすめの動画を共有しましょう。",
+    "コレミナはにじさんじのおすすめ動画を共有するためのWebサービスです。友人におすすめした動画、自分がライバーを推すきっかけになった動画などを共有し、にじさんじを広めていきましょう！",
     verification: {
       google: "C8fA6926hL1V7MBI58KzRrYf0Gj1fT-uR7rW_sSKWUA"
     }
