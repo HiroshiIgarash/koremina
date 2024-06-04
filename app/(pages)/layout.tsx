@@ -1,4 +1,4 @@
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
@@ -11,12 +11,15 @@ import Footer from "@/components/Footer";
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "コレミナ -にじさんじおすすめ動画共有サービス-",
+  title: {
+    template: "%s | コレミナ",
+    default: "コレミナ -にじさんじおすすめ動画共有サービス-",
+  },
   description:
     "コレミナはにじさんじのおすすめ動画を共有するためのWebサービスです。友人におすすめした動画、自分がライバーを推すきっかけになった動画などを共有し、にじさんじを広めていきましょう！",
-    verification: {
-      google: "C8fA6926hL1V7MBI58KzRrYf0Gj1fT-uR7rW_sSKWUA"
-    }
+  verification: {
+    google: "C8fA6926hL1V7MBI58KzRrYf0Gj1fT-uR7rW_sSKWUA",
+  },
 };
 
 export default function RootLayout({
