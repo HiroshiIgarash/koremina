@@ -1,6 +1,6 @@
 "use client";
 
-import deletePost from "@/app/action/deletePost";
+import sendReportMail from "@/app/action/sendReportMail";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,39 +15,35 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { ReactNode, useState, useTransition } from "react";
 
-interface PostDeleteDialogProps {
+interface ReportDialogProps {
   children: ReactNode;
   postId: string;
 }
 
-const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
-  const router = useRouter();
+const ReportDialog = ({ children, postId }: ReportDialogProps) => {
+  const [open, setOpen] = useState(false)
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
-  const [open, setOpen] = useState(false)
 
   const handleDelete = async () => {
     startTransition(async () => {
-      await deletePost({ postId });
+      await sendReportMail(postId);
       toast({
-        description: "投稿を削除しました。",
+        description: "投稿を通報しました。",
       });
       setOpen(false)
-      router.push("/");
-      router.refresh();
     });
   };
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger>{children}</AlertDialogTrigger>
+      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>投稿を削除しますか？</AlertDialogTitle>
+          <AlertDialogTitle>投稿を報告しますか？</AlertDialogTitle>
           <AlertDialogDescription>
-            投稿を削除するともとに戻せません。リアクション、コメントも同時に削除されます。
+            この投稿を管理者に報告します。にじさんじに全く関係のない動画や明らかに不適切と思われる動画と判断した場合、投稿を削除します。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -57,7 +53,7 @@ const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
             onClick={handleDelete}
             disabled={isPending}
           >
-            削除する
+            通報する
             {isPending && <Loader2 className="animate-spin" />}
           </Button>
         </AlertDialogFooter>
@@ -66,4 +62,4 @@ const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
   );
 };
 
-export default PostDeleteDialog;
+export default ReportDialog;

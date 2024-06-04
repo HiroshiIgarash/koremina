@@ -19,7 +19,6 @@ const ReactionButtonList = async({ postId }:ReactionButtonListProps) => {
     <div className="flex flex-col items-end gap-2">
       <div className="flex gap-4 items-start">
         <ReactionButton reaction="good" user={currentUser} post={post} display="👍" />
-        <ReactionButton reaction="bad" user={currentUser} post={post} display="👎" />
       </div>
       <div className="flex gap-4 items-start">
         <ReactionButton reaction="love" user={currentUser} post={post} display="😍" />

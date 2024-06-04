@@ -15,6 +15,7 @@ import { Suspense } from "react";
 import { noto } from "../../layout";
 import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
 import { auth } from "@/auth";
+import ReportDialog from "@/components/feature/post/ReportDialog";
 
 interface IParams {
   postId: string;
@@ -59,7 +60,12 @@ const Page = async ({ params }: { params: IParams }) => {
               </Link>
             </Button>
             <Suspense fallback={<SkeletonReactionButtonList />}>
-              <ReactionButtonList postId={postId} />
+              <div className="text-right">
+                <ReactionButtonList postId={postId} />
+                <ReportDialog postId={postId}>
+                  <button className="text-sm text-destructive mt-2 underline underline-offset-2">通報する</button>
+                </ReportDialog>
+              </div>
             </Suspense>
           </div>
         </div>
