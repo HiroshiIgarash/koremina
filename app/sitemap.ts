@@ -13,6 +13,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }, {
     url: `${baseURL}/faq`,
     lastModified
+  }, {
+    url: `${baseURL}/policy`,
+    lastModified
   },
 ];
 
