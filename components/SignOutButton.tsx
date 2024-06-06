@@ -1,7 +1,6 @@
 import { signOut } from "@/auth"
-import { Button, ButtonProps, buttonVariants } from "./ui/button"
-import { VariantProps } from "class-variance-authority"
-import { LogOut, LogOutIcon } from "lucide-react"
+import { Button, ButtonProps } from "./ui/button"
+import { LogOutIcon } from "lucide-react"
 
 interface SignOutButtonProps {
   variant?: ButtonProps['variant']
