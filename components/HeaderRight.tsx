@@ -18,8 +18,10 @@ const HeaderRight = async () => {
         </HeaderPopover>
       ) : (
         <>
-          <SignInButton variant="link">ログイン</SignInButton>
-          <Button asChild>
+          <SignInButton className="px-0" variant="link" size="sm">
+            ログイン
+          </SignInButton>
+          <Button asChild size="sm">
             <Link href="/post">投稿する</Link>
           </Button>
         </>

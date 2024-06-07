@@ -13,6 +13,11 @@ const Footer = () => {
           </Link>
         </li>
         <li>
+          <Link className="text-sm hover:underline" href="/history">
+            更新履歴
+          </Link>
+        </li>
+        <li>
           <Link className="text-sm hover:underline" href="/policy">
             プライバシーポリシー
           </Link>
@@ -28,15 +33,17 @@ const Footer = () => {
             href="https://forms.gle/qi3w8h1Ao6HDJbyJA"
             target="_blank"
           >
-            お問い合わせ<ExternalLink className="inline-block ml-1" width={12} height={12} />
+            お問い合わせ
+            <ExternalLink
+              className="inline-block ml-1"
+              width={12}
+              height={12}
+            />
           </Link>
         </li>
         <li>
           <Button asChild variant="ghost">
-            <Link
-              href="https://x.com/jappaann_2434"
-              target="_blank"
-            >
+            <Link href="https://x.com/jappaann_2434" target="_blank">
               <FaXTwitter size={20} />
             </Link>
           </Button>

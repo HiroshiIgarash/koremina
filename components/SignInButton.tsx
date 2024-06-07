@@ -5,9 +5,16 @@ import { ReactNode } from "react";
 interface SignInButtonProps {
   children: ReactNode;
   variant?: ButtonProps["variant"];
+  size?: ButtonProps["size"];
+  className?: string;
 }
 
-const SignInButton = ({ children, variant }: SignInButtonProps) => {
+const SignInButton = ({
+  children,
+  variant,
+  size,
+  className,
+}: SignInButtonProps) => {
   return (
     <form
       action={async () => {
@@ -15,7 +22,9 @@ const SignInButton = ({ children, variant }: SignInButtonProps) => {
         await signIn();
       }}
     >
-      <Button variant={variant}>{children}</Button>
+      <Button className={className} variant={variant} size={size}>
+        {children}
+      </Button>
     </form>
   );
 };

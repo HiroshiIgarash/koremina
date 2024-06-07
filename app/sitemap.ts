@@ -23,6 +23,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified,
     },
     {
+      url: `${baseURL}/history`,
+      lastModified,
+    },
+    {
       url: `${baseURL}/faq`,
       lastModified,
     },

@@ -44,7 +44,7 @@ const HeaderPopover = ({ children, currentUser }: HeaderPopoverProps) => {
           {children}
         </PopoverContent>
       </Popover>
-      <Button asChild>
+      <Button asChild size="sm">
         <Link href="/post">投稿する</Link>
       </Button>
     </>
