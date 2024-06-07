@@ -16,10 +16,15 @@ import { noto } from "../../layout";
 import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
 import { auth } from "@/auth";
 import ReportDialog from "@/components/feature/post/ReportDialog";
+import { Metadata } from "next";
 
 interface IParams {
   postId: string;
 }
+
+export const metadata: Metadata = {
+  title: "投稿ページ"
+};
 
 const Page = async ({ params }: { params: IParams }) => {
   const { postId } = params;
