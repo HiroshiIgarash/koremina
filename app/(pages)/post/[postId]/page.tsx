@@ -17,24 +17,22 @@ import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
 import { auth } from "@/auth";
 import ReportDialog from "@/components/feature/post/ReportDialog";
 import { Metadata } from "next";
+import { Badge } from "@/components/ui/badge";
 
 interface IParams {
   postId: string;
 }
 
 export const metadata: Metadata = {
-  title: "投稿ページ"
+  title: "投稿ページ",
 };
 
 const Page = async ({ params }: { params: IParams }) => {
   const { postId } = params;
 
-  const [session, post] = await Promise.all([
-    auth(),
-    getPostById(postId),
-  ]);
+  const [session, post] = await Promise.all([auth(), getPostById(postId)]);
 
-  const currentUser = session?.user
+  const currentUser = session?.user;
 
   if (!post) {
     notFound();
@@ -67,13 +65,13 @@ const Page = async ({ params }: { params: IParams }) => {
             <Suspense fallback={<SkeletonReactionButtonList />}>
               <div className="text-right">
                 <ReactionButtonList postId={postId} />
-                {
-                  session && (
-                    <ReportDialog postId={postId}>
-                      <button className="text-sm text-destructive mt-2 underline underline-offset-2">通報する</button>
-                    </ReportDialog>
-                  )
-                }
+                {session && (
+                  <ReportDialog postId={postId}>
+                    <button className="text-sm text-destructive mt-2 underline underline-offset-2">
+                      通報する
+                    </button>
+                  </ReportDialog>
+                )}
               </div>
             </Suspense>
           </div>
@@ -124,8 +122,22 @@ const Page = async ({ params }: { params: IParams }) => {
             </Link>
           </CardHeader>
           <CardContent>
+            <div className="mt-2 flex flex-wrap gap-2">
+
+            {post.liver.map((l) => (
+              <Badge
+                key={l.name}
+                variant="outline"
+                className="whitespace-nowrap text-sm hover:border-sky-500 transition"
+              >
+                <Link href={`/page?liver=${l.id}`}>
+                  {l.name}
+                </Link>
+              </Badge>
+            ))}
+            </div>
             {post.detailComment && (
-              <pre className={cn("mt-4 whitespace-pre-wrap", noto.className)}>
+              <pre className={cn("mt-2 whitespace-pre-wrap", noto.className)}>
                 {post.detailComment}
               </pre>
             )}
