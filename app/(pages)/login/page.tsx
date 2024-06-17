@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Metadata } from "next";
 import { signIn } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";

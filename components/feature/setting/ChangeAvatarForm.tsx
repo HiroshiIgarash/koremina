@@ -37,12 +37,12 @@ const ChangeAvatarForm = ({ user, setOpen }: ChangeAvatarFormProps) => {
       ) : (
         <AvatarDropZone file={file} setFile={setFile} disabled={isPending} />
       )}
-      {!file && user?.image && (
+      {!file && (
         <>
           <Separator />
           <div className="flex gap-4 items-center">
             <Image
-              src={user.image}
+              src={user?.image || "/user.png"}
               width={48}
               height={48}
               alt=""

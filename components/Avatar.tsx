@@ -7,13 +7,13 @@ interface AvatarProps {
 }
 
 const Avatar = ({ user, size = 48 }: AvatarProps) => {
-  if (!user || !user.image) {
+  if (!user) {
     return null;
   }
 
   return (
     <Image
-      src={user.uploadedImage || user.image}
+      src={user.uploadedImage || user.image || "/user.png" }
       width={size}
       height={size}
       alt=""
