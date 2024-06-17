@@ -41,15 +41,15 @@ model User {
 }
 
 model Bookmark {
-  id     String  @id @default(cuid())
+  id     String @id @default(cuid())
   userId String
-  user   User @relation(fields: [userId], references: [id],onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   postId String
   post   Video  @relation(fields: [postId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, postId])
-
   createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
 }
 
 model Account {
@@ -98,7 +98,7 @@ model Video {
   videoId       String
   comment       String
   detailComment String?
-  postedUser    User      @relation(fields: [postedUserId], references: [id],onDelete: Cascade)
+  postedUser    User      @relation(fields: [postedUserId], references: [id], onDelete: Cascade)
   postedUserId  String
   postedAt      DateTime  @default(now())
   comments      Comment[]
@@ -126,6 +126,9 @@ model Comment {
 
 model Liver {
   id               String  @id @default(cuid())
+  index            Int @default(0)
+  isRetire         Boolean @default(false)
+  isOverseas       Boolean @default(false)
   name             String
   channelHandle    String
   mostFavoriteUser User[]  @relation("mostFavoriteLiver")
