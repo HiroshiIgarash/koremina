@@ -14,7 +14,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 
-import { X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/command";
 import { Command as CommandPrimitive } from "cmdk";
 import updateFavoriteLivers from "@/app/action/updateFavoriteLivers";
+import getLivers from "@/app/action/getLivers";
 
 interface FavoriteLiversFormProps {
   user: (User & { favoriteLivers: Liver[] }) | null;
@@ -77,8 +78,9 @@ const FavoriteLiversForm = ({
 
   useEffect(() => {
     const fetchAndSetLivers = async () => {
-      const livers = (await axios.get("/api/liver")) as { data: Liver[] };
-      setLivers(livers.data);
+      const livers = await getLivers();
+      const invalidLivers = livers.filter(liver => !liver.isRetire || (liver.isRetire && !liver.isOverseas))
+      setLivers(invalidLivers);
     };
 
     fetchAndSetLivers();
@@ -189,6 +191,7 @@ const FavoriteLiversForm = ({
         disabled={isPending}
       >
         送信
+        {isPending && <Loader2 className="animate-spin" />}
       </Button>
     </>
   );
