@@ -31,6 +31,7 @@ import { Command as CommandPrimitive } from "cmdk";
 import { Liver } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
+import getLivers from "@/app/action/getLivers";
 
 const formSchema = z.object({
   videoId: z
@@ -180,8 +181,9 @@ const PostEditForm = ({
 
   useEffect(() => {
     const fetchAndSetLivers = async () => {
-      const livers = (await axios.get("/api/liver")) as { data: Liver[] };
-      setLivers(livers.data);
+      const livers = await getLivers();
+      const invalidLivers = livers.filter(liver => !liver.isRetire || (liver.isRetire && !liver.isOverseas))
+      setLivers(invalidLivers);
     };
 
     fetchAndSetLivers();
