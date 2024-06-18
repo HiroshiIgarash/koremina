@@ -1,9 +1,12 @@
 import getLivers from "@/app/action/getLivers"
 import { notFound } from "next/navigation"
+import liverData from "@/public/liver.json"
 
 const Page = async () => {
 
   const livers = await getLivers()
+
+  console.log(liverData)
 
   if(process.env.NODE_ENV === 'production') {
     notFound()
