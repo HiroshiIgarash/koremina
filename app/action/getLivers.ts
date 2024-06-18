@@ -5,10 +5,15 @@ import { unstable_cache } from "next/cache";
 
 const getLivers = async () => {
   const getCachedLivers = unstable_cache(
-    async () => prisma.liver.findMany(),
+    async () => prisma.liver.findMany({
+      orderBy: {
+        index: "asc"
+      }
+    }),
     undefined,
     {
       revalidate: 60 * 30
+      // revalidate: 1
     }
   );
 
