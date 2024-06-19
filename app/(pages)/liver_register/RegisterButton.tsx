@@ -2,6 +2,7 @@
 import updateLivers from "@/app/action/updateLivers"
 import { Button } from "@/components/ui/button"
 import { Liver } from "@prisma/client"
+import { Loader2 } from "lucide-react"
 import { useTransition } from "react"
 
 const RegisterButton = () => {
@@ -10,7 +11,7 @@ const RegisterButton = () => {
 
   const handleClick = () => { 
     const liversJSON = [] as Liver[]
-    const liverItems = document.querySelectorAll('.liverItem:first-child');
+    const liverItems = document.querySelectorAll('.liverItem');
 
     liverItems.forEach(liverItem => {
       const pairs = [] as [string,any][]
@@ -41,13 +42,15 @@ const RegisterButton = () => {
       liversJSON.push(obj)
     })
 
+    console.log(liversJSON)
+
     startTransition(async () => {
       await updateLivers(liversJSON)
     })
   }
 
   return (
-    <Button onClick={handleClick} disabled={pending}>登録</Button>
+    <Button onClick={handleClick} disabled={pending}>登録{pending && <Loader2 />}</Button>
   )
 }
 
