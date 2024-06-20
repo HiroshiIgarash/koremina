@@ -51,7 +51,7 @@ const FavoriteLiversArea = async () => {
           <div className="flex flex-col items-center justify-center">
             {currentUser.favoriteLivers.length > 0 ? (
               <div className="grid grid-cols-[repeat(5,auto)] justify-center gap-2">
-                {currentUser.favoriteLivers.map((liver) => (
+                {currentUser.favoriteLivers.toSorted((a,b)=>a.index-b.index).map((liver) => (
                   <Link
                     key={liver.id}
                     href={`/page?liver=${liver.id}`}

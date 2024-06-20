@@ -255,6 +255,7 @@ const PostForm = () => {
                                 setSelected((prev) => [...prev, liver]);
                               }}
                               className={"cursor-pointer"}
+                              keywords={[liver.aliasFirst,liver.aliasSecond].filter((a) => a) as string[]}
                             >
                               {liver.name}
                             </CommandItem>

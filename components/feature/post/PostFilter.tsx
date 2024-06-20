@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSepa
 import { Liver } from "@prisma/client"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
+import ChannelIcon from "../setting/ChannelIcon"
 
 interface PostFilterProps {
   filterLiversId: string | undefined
@@ -126,7 +127,7 @@ const PostFilter = ({ filterLiversId, livers, user, isPending = false }: PostFil
                   </SelectGroup>
                   <SelectSeparator />
                   <SelectGroup>
-                    <SelectLabel>海外ライバー</SelectLabel>
+                    <SelectLabel>にじさんじEN</SelectLabel>
                     {
                       livers.map(liver => {
                         if (mostFavoriteLiver?.id === liver.id) return

@@ -12,8 +12,8 @@ const getLivers = async () => {
     }),
     undefined,
     {
-      // revalidate: 60 * 30
-      revalidate: 1
+      revalidate: 60 * 30
+      // revalidate: 1
     }
   );
 

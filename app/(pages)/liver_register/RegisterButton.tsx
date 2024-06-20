@@ -5,13 +5,17 @@ import { Liver } from "@prisma/client"
 import { Loader2 } from "lucide-react"
 import { useTransition } from "react"
 
-const RegisterButton = () => {
+interface RegisterButtonProps {
+  listId?:string
+}
+
+const RegisterButton = ({listId}:RegisterButtonProps) => {
 
   const [pending, startTransition] = useTransition()
 
   const handleClick = () => { 
     const liversJSON = [] as Liver[]
-    const liverItems = document.querySelectorAll('.liverItem');
+    const liverItems = document.querySelectorAll(`${listId?'#' + listId +' ':''}.liverItem`);
 
     liverItems.forEach(liverItem => {
       const pairs = [] as [string,any][]
@@ -50,7 +54,7 @@ const RegisterButton = () => {
   }
 
   return (
-    <Button onClick={handleClick} disabled={pending}>登録{pending && <Loader2 />}</Button>
+    <Button onClick={handleClick} disabled={pending}>登録{pending && <Loader2 className="animate-spin" />}</Button>
   )
 }
 
