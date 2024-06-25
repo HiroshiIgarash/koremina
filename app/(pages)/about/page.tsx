@@ -15,12 +15,12 @@ const Page = () => {
       <h1 className="text-3xl font-bold mb-20 text-center">コレミナについて</h1>
 
       <h2 className="text-5xl md:text-6xl text-center leading-normal md:leading-relaxed">
-        <FadeIn display="inline-block">コレミナは</FadeIn>
+        <FadeIn display="inline-block" margin="100px">コレミナは</FadeIn>
         <br />
-        <FadeIn display="inline-block" delay={0.4}><span className="text-[#2A4B71] font-bold">にじさんじ</span>の</FadeIn><br className="md:hidden" />
-        <FadeIn display="inline-block" delay={0.4}>おすすめ動画を</FadeIn>
+        <FadeIn display="inline-block" margin="100px" delay={0.4}><span className="text-[#2A4B71] font-bold">にじさんじ</span>の</FadeIn><br className="md:hidden" />
+        <FadeIn display="inline-block" margin="100px" delay={0.4}>おすすめ動画を</FadeIn>
         <br />
-        <FadeIn display="inline-block" delay={0.8}>共有できる</FadeIn><br className="md:hidden" /><FadeIn display="inline-block" delay={0.8}>サービスです！</FadeIn>
+        <FadeIn display="inline-block" margin="100px" delay={0.8}>共有できる</FadeIn><br className="md:hidden" /><FadeIn display="inline-block" margin="100px" delay={0.8}>サービスです！</FadeIn>
       </h2>
 
 
@@ -98,7 +98,7 @@ const Page = () => {
             </FadeIn>
           </div>
           <div className="text-center">
-            <FadeIn>
+            <FadeIn margin="0px">
               <p className="mb-2">↓おすすめの動画を教えてね！</p>
               <Button asChild size="lg">
                 <Link href="/post">投稿する</Link>
