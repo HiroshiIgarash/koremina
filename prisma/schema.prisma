@@ -126,10 +126,12 @@ model Comment {
 
 model Liver {
   id               String  @id @default(cuid())
-  index            Int @default(0)
+  index            Int     @default(autoincrement())
   isRetire         Boolean @default(false)
   isOverseas       Boolean @default(false)
   name             String
+  aliasFirst           String?
+  aliasSecond          String?
   channelHandle    String
   mostFavoriteUser User[]  @relation("mostFavoriteLiver")
   favoriteUser     User[]  @relation("favoriteLivers")

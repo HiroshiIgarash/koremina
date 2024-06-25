@@ -7,15 +7,16 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSepa
 import { Liver } from "@prisma/client"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
+import ChannelIcon from "../setting/ChannelIcon"
 
 interface PostFilterProps {
   filterLiversId: string | undefined
-  livers:Liver[]
-  user:Awaited<ReturnType<typeof getCurrentUser>> | null
-  isPending?:boolean
+  livers: Liver[]
+  user: Awaited<ReturnType<typeof getCurrentUser>> | null
+  isPending?: boolean
 }
 
-const PostFilter = ({ filterLiversId,livers,user,isPending=false }: PostFilterProps) => {
+const PostFilter = ({ filterLiversId, livers, user, isPending = false }: PostFilterProps) => {
   const [isRoutingPending, startRoutingTransition] = useTransition()
   const router = useRouter()
 
@@ -33,7 +34,7 @@ const PostFilter = ({ filterLiversId,livers,user,isPending=false }: PostFilterPr
   const handleRandomClick = () => {
     const rand = Math.floor(Math.random() * livers.length)
     const randomLiverId = livers[rand]?.id
-    if(!randomLiverId) return
+    if (!randomLiverId) return
     startRoutingTransition(() => {
       router.push(`/page/?liver=${randomLiverId}`)
     })
@@ -111,6 +112,7 @@ const PostFilter = ({ filterLiversId,livers,user,isPending=false }: PostFilterPr
                       livers.map(liver => {
                         if (mostFavoriteLiver?.id === liver.id) return
                         if (favoriteLiversWithoutMostFavoriteLiver.some(l => l.id === liver.id)) return
+                        if (liver.isRetire || liver.isOverseas) return
 
                         return (
                           <SelectItem
@@ -123,6 +125,47 @@ const PostFilter = ({ filterLiversId,livers,user,isPending=false }: PostFilterPr
                       })
                     }
                   </SelectGroup>
+                  <SelectSeparator />
+                  <SelectGroup>
+                    <SelectLabel>にじさんじEN</SelectLabel>
+                    {
+                      livers.map(liver => {
+                        if (mostFavoriteLiver?.id === liver.id) return
+                        if (favoriteLiversWithoutMostFavoriteLiver.some(l => l.id === liver.id)) return
+                        if (liver.isRetire || !liver.isOverseas) return
+
+                        return (
+                          <SelectItem
+                            key={liver.id}
+                            value={liver.id}
+                          >
+                            {liver.name}
+                          </SelectItem>
+                        )
+                      })
+                    }
+                  </SelectGroup>
+                  <SelectSeparator />
+                  <SelectGroup>
+                    <SelectLabel>卒業ライバー（JPのみ）</SelectLabel>
+                    {
+                      livers.map(liver => {
+                        if (mostFavoriteLiver?.id === liver.id) return
+                        if (favoriteLiversWithoutMostFavoriteLiver.some(l => l.id === liver.id)) return
+                        if (!liver.isRetire || liver.isOverseas) return
+
+                        return (
+                          <SelectItem
+                            key={liver.id}
+                            value={liver.id}
+                          >
+                            {liver.name}
+                          </SelectItem>
+                        )
+                      })
+                    }
+                  </SelectGroup>
+
                 </>
               )
             }

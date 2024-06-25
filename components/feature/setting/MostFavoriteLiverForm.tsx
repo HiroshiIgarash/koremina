@@ -30,6 +30,8 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import updateMostFavoriteLiver from "@/app/action/updateMostFavoriteLiver";
+import { Loader2 } from "lucide-react";
+import getLivers from "@/app/action/getLivers";
 
 interface MostFavoriteLiverFormProps {
   user: User | null;
@@ -49,8 +51,9 @@ const MostFavoriteLiverForm = ({
 
   useEffect(() => {
     const fetchAndSetLivers = async () => {
-      const livers = await axios.get("/api/liver");
-      setLivers(livers.data);
+      const livers = await getLivers();
+      const invalidLivers = livers.filter(liver => !liver.isRetire || (liver.isRetire && !liver.isOverseas))
+      setLivers(invalidLivers);
     };
 
     fetchAndSetLivers();
@@ -120,6 +123,7 @@ const MostFavoriteLiverForm = ({
           disabled={form.formState.isSubmitting || form.formState.isSubmitted}
         >
           送信
+          {isPending && <Loader2 className="animate-spin" />}
         </Button>
       </form>
     </Form>

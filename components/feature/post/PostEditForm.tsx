@@ -31,6 +31,7 @@ import { Command as CommandPrimitive } from "cmdk";
 import { Liver } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
+import getLivers from "@/app/action/getLivers";
 
 const formSchema = z.object({
   videoId: z
@@ -46,8 +47,8 @@ const formSchema = z.object({
     .min(1, {
       message: "投稿者コメントは必須項目です。",
     })
-    .max(60, {
-      message: "60文字を超えています。",
+    .max(40, {
+      message: "40文字を超えています。",
     }),
   detailComment: z.string().optional(),
   liver: z.string().array(),
@@ -180,8 +181,9 @@ const PostEditForm = ({
 
   useEffect(() => {
     const fetchAndSetLivers = async () => {
-      const livers = (await axios.get("/api/liver")) as { data: Liver[] };
-      setLivers(livers.data);
+      const livers = await getLivers();
+      const invalidLivers = livers.filter(liver => !liver.isRetire || (liver.isRetire && !liver.isOverseas))
+      setLivers(invalidLivers);
     };
 
     fetchAndSetLivers();
@@ -257,6 +259,7 @@ const PostEditForm = ({
                                 setSelected((prev) => [...prev, liver]);
                               }}
                               className={"cursor-pointer"}
+                              keywords={[liver.aliasFirst,liver.aliasSecond].filter((a) => a) as string[]}
                             >
                               {liver.name}
                             </CommandItem>
@@ -315,15 +318,15 @@ const PostEditForm = ({
                   />
                 </FormControl>
                 <FormDescription>
-                  この動画に対するコメントを60文字以内で記入してください。（
+                  この動画に対するコメントを40文字以内で記入してください。（
                   <span
                     className={cn(
-                      watchComment.length > 60 && "text-destructive"
+                      watchComment.length > 40 && "text-destructive"
                     )}
                   >
                     {watchComment.length}
                   </span>{" "}
-                  / 60）
+                  / 40）
                 </FormDescription>
                 <FormMessage />
               </FormItem>
