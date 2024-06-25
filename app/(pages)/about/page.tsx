@@ -51,7 +51,7 @@ const Page = () => {
         <p>設定ページから最推し、推しを設定できるよ！推しを設定すると動画を探しやすくなるよ！</p>
       </section>
       <section>
-        <p>ここまで読んでくれてありがとう！みんなのおすすめの動画をたくさん教えてね！</p>
+        <p>ここまで読んでくれてありがとう！みんなのおすすめ動画をたくさん教えてね！</p>
         <div className="text-center">
           <p>↓ログインはすぐおわるよ！</p>
           <SignInButton variant="outline" size="lg">
@@ -59,7 +59,7 @@ const Page = () => {
           </SignInButton>
         </div>
         <div className="text-center">
-          <p>↓おすすめ動画の動画を教えてね！</p>
+          <p>↓おすすめの動画を教えてね！</p>
           <Button asChild size="lg">
             <Link href="/post">投稿する</Link>
           </Button>
