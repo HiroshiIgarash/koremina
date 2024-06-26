@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   verification: {
     google: "C8fA6926hL1V7MBI58KzRrYf0Gj1fT-uR7rW_sSKWUA",
   },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
