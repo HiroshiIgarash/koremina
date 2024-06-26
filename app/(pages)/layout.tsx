@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://koremina.vercel.app'),
   title: {
     template: "%s | コレミナ",
     default: "コレミナ -にじさんじおすすめ動画共有サービス-",
