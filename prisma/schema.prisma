@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  nickname      String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  uploadedImage String?
+  accounts      Account[]
+  sessions      Session[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Video     Video[]
+  Comment   Comment[]
+
+  mostFavoriteLiver   Liver?  @relation("mostFavoriteLiver", fields: [mostFavoriteLiverId], references: [id])
+  mostFavoriteLiverId String?
+  favoriteLivers      Liver[] @relation("favoriteLivers")
+
+  goodVideo  Video[]    @relation("good")
+  badVideo   Video[]    @relation("bad")
+  loveVideo  Video[]    @relation("love")
+  funnyVideo Video[]    @relation("funny")
+  cryVideo   Video[]    @relation("cry")
+  angelVideo Video[]    @relation("angel")
+  Bookmark   Bookmark[]
+}
+
+model Bookmark {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId String
+  post   Video  @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Video {
+  id            String    @id @default(cuid())
+  videoId       String
+  comment       String
+  detailComment String?
+  postedUser    User      @relation(fields: [postedUserId], references: [id], onDelete: Cascade)
+  postedUserId  String
+  postedAt      DateTime  @default(now())
+  comments      Comment[]
+  liver         Liver[]
+
+  good     User[]     @relation("good")
+  bad      User[]     @relation("bad")
+  love     User[]     @relation("love")
+  funny    User[]     @relation("funny")
+  cry      User[]     @relation("cry")
+  angel    User[]     @relation("angel")
+  Bookmark Bookmark[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  videoId   String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String // コメントの作者
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Liver {
+  id               String  @id @default(cuid())
+  index            Int     @default(autoincrement())
+  isRetire         Boolean @default(false)
+  isOverseas       Boolean @default(false)
+  name             String
+  aliasFirst           String?
+  aliasSecond          String?
+  channelHandle    String
+  mostFavoriteUser User[]  @relation("mostFavoriteLiver")
+  favoriteUser     User[]  @relation("favoriteLivers")
+  video            Video[]
+}

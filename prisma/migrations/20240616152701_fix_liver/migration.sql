@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Liver" ADD COLUMN     "index" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "isOverseas" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isRetire" BOOLEAN NOT NULL DEFAULT false;
