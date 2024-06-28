@@ -75,7 +75,7 @@ const Page = () => {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-xl mb-2">投稿者コメントってなにを書けばいい？</h3>
+              <h3 className="font-semibold text-xl mb-2">投稿タイトルってなにを書けばいい？</h3>
               <p className="text-muted-foreground">
                 その動画に対する感想や、それがあなたにとってどういう動画か、などを書くと良いかと思います。
               </p>

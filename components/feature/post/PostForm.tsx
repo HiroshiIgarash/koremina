@@ -45,7 +45,7 @@ const formSchema = z.object({
   comment: z
     .string()
     .min(1, {
-      message: "投稿者コメントは必須項目です。",
+      message: "投稿タイトルは必須項目です。",
     })
     .max(40, {
       message: "40文字を超えています。",
@@ -255,7 +255,7 @@ const PostForm = () => {
                                 setSelected((prev) => [...prev, liver]);
                               }}
                               className={"cursor-pointer"}
-                              keywords={[liver.aliasFirst,liver.aliasSecond].filter((a) => a) as string[]}
+                              keywords={[liver.aliasFirst, liver.aliasSecond].filter((a) => a) as string[]}
                             >
                               {liver.name}
                             </CommandItem>
@@ -304,7 +304,7 @@ const PostForm = () => {
             name="comment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>投稿者コメント（必須）</FormLabel>
+                <FormLabel>投稿タイトル（必須）</FormLabel>
                 <FormControl>
                   <Input
                     className="text-base md:text-sm"
@@ -313,7 +313,7 @@ const PostForm = () => {
                   />
                 </FormControl>
                 <FormDescription>
-                  この動画に対するコメントを40文字以内で記入してください。（
+                  動画の感想や一言コメントなど、40文字以内で記入してください。（
                   <span
                     className={cn(
                       watchComment.length > 40 && "text-destructive"
@@ -332,7 +332,7 @@ const PostForm = () => {
             name="detailComment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>投稿者コメント（詳細）</FormLabel>
+                <FormLabel>詳細文</FormLabel>
                 <FormControl>
                   <Textarea
                     className="resize-none text-base md:text-sm"
