@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://koremina.vercel.app'),
   title: {
     template: "%s | コレミナ",
-    default: "コレミナ -にじさんじおすすめ動画共有サービス-",
+    default: "コレミナ -にじさんじおすすめ動画共有サービス（非公式）-",
   },
   description:
-    "コレミナはにじさんじのおすすめ動画を共有するためのWebサービスです。友人におすすめした動画、自分がライバーを推すきっかけになった動画などを共有し、にじさんじを広めていきましょう！",
+    "コレミナはにじさんじのおすすめ動画を共有するためのWebサービスです（非公式）。友人におすすめした動画、自分がライバーを推すきっかけになった動画などを共有し、にじさんじを広めていきましょう！",
   verification: {
     google: "C8fA6926hL1V7MBI58KzRrYf0Gj1fT-uR7rW_sSKWUA",
   },
