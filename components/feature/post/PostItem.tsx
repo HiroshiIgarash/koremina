@@ -115,6 +115,7 @@ const PostItem = async ({
               width={1600}
               height={900}
               className="aspect-video object-cover"
+              unoptimized
             />
             <p className={cn("text-xs",title.error && "text-muted-foreground")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
           </CardContent>

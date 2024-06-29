@@ -18,6 +18,7 @@ const Avatar = ({ user, size = 48 }: AvatarProps) => {
       height={size}
       alt=""
       className="rounded-full border-2"
+      unoptimized
     />
   );
 };

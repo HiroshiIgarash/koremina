@@ -31,6 +31,7 @@ const ChannelIcon = async ({
           width={size}
           height={size}
           className="rounded-full border-2"
+          unoptimized
         />
       )}
     </>
