@@ -32,6 +32,7 @@ import { Liver } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
 import getLivers from "@/app/action/getLivers";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const formSchema = z.object({
   videoId: z
@@ -284,7 +285,22 @@ const PostForm = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                    動画IDもしくはURLを記入してください。
+                    動画IDもしくはURLを記入してください。（サムネイルが表示されます）<br />
+                    <Dialog>
+                      <DialogTrigger><span className="underline">サムネイルが表示されない場合</span></DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>サムネイルが表示されない場合</DialogTitle>
+                          <DialogDescription className="text-foreground">
+                            URLを入力後、<span className="text-destructive">任意の場所をクリック / タップ</span>すると動画IDに変換されるようになっています。<br />
+                            例）https://www.youtube.com/watch?v=8tTKwtgzJwA → 8tTKwtgzJwA
+                          </DialogDescription>
+                          <DialogDescription className="text-foreground">
+                            任意の場所をクリック / タップしても変換されない場合、手動で動画ID(11文字)を入力してください
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -360,6 +376,12 @@ const PostForm = () => {
             投稿
             {isPending && <Loader2 className="animate-spin" />}
           </Button>
+          <p className="text-sm">
+            ※投稿ボタンが押せない場合、以下を確認してください。<br />
+            ・「このライバーを推すときにおすすめしたい！」→ライバーのラベルが表示されていますか？<br />
+            ・youtube ID（URLでも可）→サムネが表示されていますか？<br />
+            
+          </p>
         </form>
       </Form>
     </>

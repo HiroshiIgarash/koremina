@@ -11,6 +11,13 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-4">
           <div>
+            <time dateTime="2024-06-30" className="font-bold">2024/06/30</time><br /> 
+            <p>
+              一定のアクセス数でサムネやユーザーアイコンの画像が表示されなくなる不具合を修正<br />
+              投稿フォームに注釈を追加しました
+            </p>
+          </div>
+          <div>
             <time dateTime="2024-06-29" className="font-bold">2024/06/29</time><br /> 
             <p>コレミナ -にじさんじおすすめ動画共有サービス（非公式）- を正式にリリースしました！</p>
           </div>
