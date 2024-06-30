@@ -16,7 +16,7 @@ const FavoriteLiversDialog = ({ children, user }: { children: React.ReactNode, u
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="space-y-4 items-start">
-          <DialogTitle>ニックネームを編集</DialogTitle>
+          <DialogTitle>推しライバーを編集</DialogTitle>
             <FavoriteLiversForm user={user} setOpen={setOpen} />
         </DialogHeader>
       </DialogContent>

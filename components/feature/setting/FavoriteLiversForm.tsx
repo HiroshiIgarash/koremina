@@ -12,7 +12,6 @@ import {
   useTransition,
 } from "react";
 import { toast } from "@/components/ui/use-toast";
-import axios from "axios";
 
 import { Loader2, X } from "lucide-react";
 
@@ -26,6 +25,7 @@ import {
 import { Command as CommandPrimitive } from "cmdk";
 import updateFavoriteLivers from "@/app/action/updateFavoriteLivers";
 import getLivers from "@/app/action/getLivers";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface FavoriteLiversFormProps {
   user: (User & { favoriteLivers: Liver[] }) | null;
@@ -120,6 +120,7 @@ const FavoriteLiversForm = ({
           className="overflow-visible bg-transparent"
         >
           <div className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+          <ScrollArea>
             <div className="flex gap-1 flex-wrap">
               {selected.map((liver) => {
                 return (
@@ -154,7 +155,8 @@ const FavoriteLiversForm = ({
                 className="text-base md:text-sm ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1"
               />
             </div>
-          </div>
+          </ScrollArea>
+            </div>
           <div className="relative mt-2">
             {open && selectables.length > 0 ? (
               <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
