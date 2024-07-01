@@ -9,10 +9,12 @@ interface FavoriteLiversAreaProps {
       id: string;
       name: string;
       channelHandle: string;
+      index: number;
     } | null;
     favoriteLivers: {
       id: string;
       name: string;
+      index: number;
       channelHandle: string;
     }[];
   };
@@ -54,7 +56,7 @@ const FavoriteLiversArea = async ({ user }: FavoriteLiversAreaProps) => {
           <div className="flex flex-col items-center justify-center">
             {user.favoriteLivers.length > 0 ? (
               <div className="grid grid-cols-[repeat(5,auto)] justify-center gap-2">
-                {user.favoriteLivers.map((liver) => (
+                {user.favoriteLivers.toSorted((a, b) => a.index - b.index).map((liver) => (
                   <Link
                     key={liver.id}
                     href={`/page?liver=${liver.id}`}

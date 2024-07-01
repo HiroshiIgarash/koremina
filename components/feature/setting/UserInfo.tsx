@@ -3,11 +3,11 @@ import SignOutButton from "@/components/SignOutButton";
 import { SquarePen } from "lucide-react";
 import React from "react";
 import ChangeNicknameDialog from "./ChangeNicknameDialog";
-import getCurrentUser from "@/app/action/getCurrentUser";
 import ChangeAvatarDialog from "./ChangeAvatarDialog";
+import getCurrentUserWithTag from "@/app/action/getCurrentUserWithTag";
 
 const UserInfo = async () => {
-  const currentUser = await getCurrentUser();
+  const currentUser = await getCurrentUserWithTag();
 
   return (
     <div className="space-y-2">

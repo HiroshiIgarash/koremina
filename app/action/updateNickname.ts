@@ -4,7 +4,7 @@ import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { NicknameSchema, nicknameSchema } from "@/schema";
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 const updateNickname = async (name: NicknameSchema) => {
   try {
@@ -30,7 +30,7 @@ const updateNickname = async (name: NicknameSchema) => {
       },
     });
 
-    revalidatePath("/setting");
+    revalidateTag("get-current-user");
   } catch (error) {
     console.log(error);
     if (error instanceof z.ZodError) {
