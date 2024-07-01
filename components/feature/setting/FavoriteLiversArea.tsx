@@ -2,12 +2,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import ChannelIcon from "./ChannelIcon";
 import MostFavoriteLiverDialog from "./MostFavoriteLiverDialog";
 import { Button } from "@/components/ui/button";
-import getCurrentUser from "@/app/action/getCurrentUser";
 import FavoriteLiversDialog from "./FavoriteLiversDialog";
 import Link from "next/link";
+import getCurrentUserWithTag from "@/app/action/getCurrentUserWithTag";
 
 const FavoriteLiversArea = async () => {
-  const currentUser = await getCurrentUser();
+  const currentUser = await getCurrentUserWithTag();
 
   if (!currentUser) return;
 
@@ -51,7 +51,7 @@ const FavoriteLiversArea = async () => {
           <div className="flex flex-col items-center justify-center">
             {currentUser.favoriteLivers.length > 0 ? (
               <div className="grid grid-cols-[repeat(5,auto)] justify-center gap-2">
-                {currentUser.favoriteLivers.toSorted((a,b)=>a.index-b.index).map((liver) => (
+                {currentUser.favoriteLivers.toSorted((a, b) => a.index - b.index).map((liver) => (
                   <Link
                     key={liver.id}
                     href={`/page?liver=${liver.id}`}

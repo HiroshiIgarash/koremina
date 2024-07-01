@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/db";
 import { del } from "@vercel/blob";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 const updateAvatar = async (url?: string) => {
   const session = await auth();
@@ -23,7 +23,7 @@ const updateAvatar = async (url?: string) => {
 
   if (prevAvatar) await del(prevAvatar);
 
-  revalidatePath("/", "layout");
+  revalidateTag('get-post')
 
   return user;
 };

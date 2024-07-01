@@ -1,7 +1,6 @@
 import getCurrentUser from "@/app/action/getCurrentUser";
 import prisma from "@/lib/db";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import {  revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
@@ -38,7 +37,7 @@ export const POST = async (req: Request) => {
     }
   })
 
-  revalidatePath('/')
+  revalidateTag('get-post')
 
   return NextResponse.json(newPost)
 }
@@ -83,7 +82,7 @@ export const PUT = async (req: Request) => {
     }
   })
 
-  revalidatePath('/')
+  revalidateTag('get-post')
 
   return NextResponse.json(newPost)
 }

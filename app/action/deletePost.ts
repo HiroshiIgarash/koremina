@@ -3,6 +3,7 @@
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
 import getPostById from "./getPostById";
+import { revalidateTag } from "next/cache";
 
 interface deletePostProps {
   postId: string;
@@ -22,6 +23,8 @@ const deletePost = async ({ postId }: deletePostProps) => {
       id: postId,
     },
   });
+
+  revalidateTag("get-post");
 };
 
 export default deletePost;

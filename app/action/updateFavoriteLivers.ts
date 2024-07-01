@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { auth } from "@/auth";
 
 const updateFavoriteLivers = async (liversId: string[]) => {
@@ -31,7 +31,7 @@ const updateFavoriteLivers = async (liversId: string[]) => {
     };
   }
 
-  revalidatePath("/setting");
+  revalidateTag("get-current-user");
 };
 
 export default updateFavoriteLivers;
