@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 const updateBookmark = async (postId: string, active: boolean) => {
   const currentUser = await getCurrentUser();
@@ -34,7 +34,7 @@ const updateBookmark = async (postId: string, active: boolean) => {
         update: {},
       });
 
-  revalidatePath("/");
+  revalidateTag('get-post')
   return bookmark;
 };
 
