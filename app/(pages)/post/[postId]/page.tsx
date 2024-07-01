@@ -11,26 +11,36 @@ import { cn } from "@/lib/utils";
 import { FilePenLine, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, cache } from "react";
 import { noto } from "../../layout";
 import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
 import { auth } from "@/auth";
 import ReportDialog from "@/components/feature/post/ReportDialog";
-import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 
 interface IParams {
   postId: string;
 }
 
-export const metadata: Metadata = {
-  title: "投稿ページ",
-};
+const getCachedPostById = cache(getPostById)
+
+export async function generateMetadata({ params }: { params: IParams }) {
+  const { postId } = params;
+  const post = await getCachedPostById(postId);
+
+  if (!post) return
+
+  return {
+    title: post.comment
+  }
+}
 
 const Page = async ({ params }: { params: IParams }) => {
   const { postId } = params;
 
-  const [session, post] = await Promise.all([auth(), getPostById(postId)]);
+  const session = await auth();
+
+  const post = await getCachedPostById(postId)
 
   const currentUser = session?.user;
 
@@ -124,17 +134,17 @@ const Page = async ({ params }: { params: IParams }) => {
           <CardContent>
             <div className="mt-2 flex flex-wrap gap-2">
 
-            {post.liver.map((l) => (
-              <Badge
-                key={l.name}
-                variant="outline"
-                className="whitespace-nowrap text-sm hover:border-sky-500 transition"
-              >
-                <Link href={`/page?liver=${l.id}`}>
-                  {l.name}
-                </Link>
-              </Badge>
-            ))}
+              {post.liver.map((l) => (
+                <Badge
+                  key={l.name}
+                  variant="outline"
+                  className="whitespace-nowrap text-sm hover:border-sky-500 transition"
+                >
+                  <Link href={`/page?liver=${l.id}`}>
+                    {l.name}
+                  </Link>
+                </Badge>
+              ))}
             </div>
             {post.detailComment && (
               <pre className={cn("mt-2 whitespace-pre-wrap", noto.className)}>
