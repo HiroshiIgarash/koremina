@@ -15,14 +15,15 @@ export default function Home() {
         <Image src="/kv_pc.png" className="hidden md:block w-[1000px] max-w-full" width={1280} height={420} alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-" />
       </div>
       <div className="w-full px-4 mb-8 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
-        {/* <div className="items-center w-full p-4 md:py-8 bg-red-100 dark:bg-red-400 rounded-lg text-center gap-2 border-2 border-red-500">
-          <p className="text-destructive font-bold">不具合報告</p>
-          <p className="text-lg">6/30(日)現在、動画タイトルおよびチャンネルアイコンが取得できない不具合が発生しています。<br />復旧までしばらくお待ちください。</p>
-        </div> */}
-        <div className=" items-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
-          <p className="text-destructive font-bold">おすすめ！</p>
-          <p className="text-lg">スマホの方は「ホーム画面に追加」<Upload className="shrink-0 inline" size="1em" />でURLバーをなくせます
-          </p>
+        <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-400 rounded-lg text-center gap-2 border-2 border-green-500">
+          <p className="text-destructive font-bold">お知らせ</p>
+          <p className="text-lg">Youtube Data APIの呼び出し回数を効率化しました。<br />挙動に不具合が見られましたらお問い合わせください。</p>
+        </div>
+        <div className="flex flex-col items-center justify-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
+          <div>
+            <p className="text-destructive font-bold">おすすめ！</p>
+            <p className="text-lg">スマホの方は「ホーム画面に追加」<Upload className="shrink-0 inline" size="1em" />でURLバーをなくせます</p>
+          </div>
         </div>
         <Link href="/about" className="relative flex items-center w-full p-4 md:py-8 border-2 border-[#2A4B71] rounded-lg text-center hover:bg-accent">
           <div className="flex-1">

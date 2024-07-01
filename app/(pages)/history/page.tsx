@@ -9,23 +9,50 @@ const Page = () => {
     <>
       <div className="px-4 w-full max-w-5xl mx-auto">
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
-        <div className="space-y-4">
+        <div className="space-y-8">
           <div>
-            <time dateTime="2024-06-30" className="font-bold">2024/06/30</time><br /> 
-            <p>
-              一定のアクセス数でサムネやユーザーアイコンの画像が表示されなくなる不具合を修正<br />
-              投稿フォームに注釈を追加しました<br />
-              推しライバーを多数選択しようとすると画面が覆われて選択できなくなる不具合を修正（推しライバーの欄がスクロールできるようにしました）<br />
-              ランダム表示で対象外のライバーが抽選される不具合を修正
-            </p>
+            <time dateTime="2024-07-01" className="font-bold">
+              2024/07/01
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                YouTube Data APIの呼び出し回数を効率化
+              </li>
+            </ul>
           </div>
           <div>
-            <time dateTime="2024-06-29" className="font-bold">2024/06/29</time><br /> 
-            <p>コレミナ -にじさんじおすすめ動画共有サービス（非公式）- を正式にリリースしました！</p>
+            <time dateTime="2024-06-30" className="font-bold">
+              2024/06/30
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                一定のアクセス数でサムネやユーザーアイコンの画像が表示されなくなる不具合を修正
+              </li>
+              <li>投稿フォームに注釈を追加しました</li>
+              <li>
+                推しライバーを多数選択しようとすると画面が覆われて選択できなくなる不具合を修正（推しライバーの欄がスクロールできるようにしました）
+              </li>
+              <li>ランダム表示で対象外のライバーが抽選される不具合を修正</li>
+            </ul>
           </div>
           <div>
-            <time dateTime="2024-06-12" className="font-bold">2024/06/12</time><br /> 
-            <p>Google Search Console に登録しました！</p>
+            <time dateTime="2024-06-29" className="font-bold">
+              2024/06/29
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                コレミナ -にじさんじおすすめ動画共有サービス（非公式）-
+                を正式にリリースしました！
+              </li>
+            </ul>
+          </div>
+          <div>
+            <time dateTime="2024-06-12" className="font-bold">
+              2024/06/12
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>Google Search Console に登録しました！</li>
+            </ul>
           </div>
         </div>
       </div>
