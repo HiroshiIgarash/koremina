@@ -43,7 +43,7 @@ const Footer = () => {
         </li>
         <li>
           <Button asChild variant="ghost">
-            <Link href="https://x.com/jappaann_2434" target="_blank">
+            <Link href="https://x.com/koremina_app" target="_blank">
               <FaXTwitter size={20} />
             </Link>
           </Button>
