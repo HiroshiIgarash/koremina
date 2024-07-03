@@ -40,6 +40,17 @@ const Hamburger = () => {
               variant="ghost"
               className="px-4 py-4 w-full justify-start"
             >
+              <Link onClick={() => setOpen(false)} href="/notification">
+                通知
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <Button
+              asChild
+              variant="ghost"
+              className="px-4 py-4 w-full justify-start"
+            >
               <Link onClick={() => setOpen(false)} href="/about">
                 コレミナについて
               </Link>

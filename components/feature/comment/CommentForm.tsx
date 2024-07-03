@@ -1,6 +1,7 @@
 "use client";
 
 import postComment from "@/app/action/postComment";
+import updateNotification from "@/app/action/updateNotification";
 import Avatar from "@/components/Avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,6 +36,7 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
             variant: "destructive",
           });
         } else {
+          updateNotification({ type: 'comment', postId })
           toast({
             description: "コメントを投稿しました",
           });

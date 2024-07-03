@@ -5,6 +5,7 @@ import { Reaction } from "@/types/type"
 import { User, Video } from "@prisma/client"
 import { cn } from "@/lib/utils";
 import { useCallback, useOptimistic } from "react"
+import updateNotification from "@/app/action/updateNotification";
 
 interface ReactionButtonProps {
   reaction: Reaction
@@ -32,6 +33,9 @@ const ReactionButton = ({ reaction, display, post, user }: ReactionButtonProps) 
     if(!user) return
     addOptimisticReactionUsers(register)
     updateReaction(reaction, post.id, register, user)
+    if (!register) {
+      updateNotification({type: 'reaction',postId: post.id })
+    }
   }, [addOptimisticReactionUsers, post.id, user])
 
 
