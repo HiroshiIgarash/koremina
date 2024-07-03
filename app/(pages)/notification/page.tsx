@@ -1,3 +1,4 @@
+
 import { auth } from "@/auth"
 import prisma from "@/lib/db"
 import { NotificationType } from "@/types/type"
@@ -80,7 +81,7 @@ const Page = async () => {
     <div className="px-4 w-full max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold mb-16">通知一覧</h1>
       <div className="space-y-4">
-        {
+        {notifications.length ?
           notifications.map(notification => {
             const createdAt = new Date(notification.createdAt);
             const year = createdAt.getFullYear();
@@ -101,8 +102,10 @@ const Page = async () => {
                 {generateMessage(notification.type as NotificationType, notification.post?.comment || '')}
               </Link>
             )
-          })
-        }
+          } 
+        ): (
+          <p>通知はありません。<br />投稿にリアクションやコメントがつくとこちらに表示されます。</p>
+        )}
       </div>
     </div>
   )
