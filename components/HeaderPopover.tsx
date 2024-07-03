@@ -1,10 +1,9 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Settings, BookmarkIcon, Popcorn } from "lucide-react";
+import { Settings, BookmarkIcon, BellIcon } from "lucide-react";
 import Avatar from "./Avatar";
-import SignOutButton from "./SignOutButton";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Liver, User } from "@prisma/client";
@@ -30,6 +29,14 @@ const HeaderPopover = ({ children, currentUser }: HeaderPopoverProps) => {
               <Link href="/setting/">
                 <Settings className="mr-2 w-4 h-4" />
                 設定
+              </Link>
+            </Button>
+          </PopoverClose>
+          <PopoverClose asChild>
+            <Button asChild variant="ghost" className="justify-start">
+              <Link href="/notification/">
+                <BellIcon className="mr-2 w-4 h-4" />
+                通知
               </Link>
             </Button>
           </PopoverClose>
