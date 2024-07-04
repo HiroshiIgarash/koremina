@@ -1,3 +1,4 @@
+import PickUpList from "@/components/feature/post/PickUpList";
 import PostFilter from "@/components/feature/post/PostFilter";
 import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
@@ -14,7 +15,7 @@ export default function Home() {
         <Image src="/kv_sp.png" className="md:hidden" width={800} height={420} alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-" />
         <Image src="/kv_pc.png" className="hidden md:block w-[1000px] max-w-full" width={1280} height={420} alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-" />
       </div>
-      <div className="w-full px-4 mb-8 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
+      <div className="w-full px-4 mb-8 md:mb-16 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
         <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-900 rounded-lg text-center gap-2 border-2 border-green-500">
           <p className="text-destructive font-bold">お知らせ</p>
           <p className="text-lg">通知ページを作成しました。<br />投稿にリアクションやコメントがあったかがわかります。<br />挙動に不具合が見られましたらお問い合わせください。</p>
@@ -32,6 +33,16 @@ export default function Home() {
           </div>
           <ChevronRight className="absolute top-0 right-4 md:right-2 flex items-center h-full" size="2em" />
         </Link>
+      </div>
+      <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
+        <p className="mb-4 px-4 w-full max-w-7xl mx-auto">12時間ごとに更新されます。<br />いい動画だったらリアクションしよう！</p>
+        <div>
+          <PickUpList />
+        </div>
+      </div>
+      <div className="w-full max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">新着投稿</h2>
       </div>
       <Suspense
         fallback={

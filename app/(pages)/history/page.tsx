@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2024-07-04" className="font-bold">
+              2024/07/04
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                TOPページにPickUpセクションを設けました。<br />午前・午後の12時に更新されます。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2024-07-03" className="font-bold">
               2024/07/03
             </time>
