@@ -10,6 +10,7 @@ import getPostById from "@/app/action/getPostById"
 // 次の12時までの秒数を計算
 const calcSecondsUntilNext12 = () => {
   const now = new Date();
+  now.setHours(now.getHours() + 9) //JP時刻
   const currentHour = now.getHours();
 
   const next12Hour = currentHour < 12 ? 12 : 24;
@@ -40,7 +41,7 @@ const getRandomPostsId = unstable_cache(async () => {
   const pickUpRandomPosts = uniqueRandomPosts.toSorted((a, b) => (b.detailComment?.length || 0) - (a.detailComment?.length || 0)).slice(0, 4)
 
   return pickUpRandomPosts.map(p => p.id)
-}, [], { revalidate: revalidateTime })
+}, ['pickup'], { revalidate: revalidateTime,tags:['post-pickup'] })
 
 
 
