@@ -1,8 +1,10 @@
+import NotificationField from "@/components/NotificationField";
 import PickUpList from "@/components/feature/post/PickUpList";
 import PostFilter from "@/components/feature/post/PostFilter";
 import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
+import SkeltonPickUpList from "@/components/feature/post/SkeltonPickUpList";
 import { ChevronRight, Upload } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,11 +36,16 @@ export default function Home() {
           <ChevronRight className="absolute top-0 right-4 md:right-2 flex items-center h-full" size="2em" />
         </Link>
       </div>
+      <div className="w-full px-4 mb-8 md:mb-16 max-w-7xl mx-auto text-center md:text-left">
+        <NotificationField />
+      </div>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">12時間ごとに更新されます。<br />いい動画だったらリアクションしよう！</p>
         <div>
-          <PickUpList />
+          <Suspense fallback={<SkeltonPickUpList />}>
+            <PickUpList />
+          </Suspense>
         </div>
       </div>
       <div className="w-full max-w-7xl mx-auto">

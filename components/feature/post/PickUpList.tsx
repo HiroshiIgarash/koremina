@@ -25,15 +25,16 @@ const revalidateTime = calcSecondsUntilNext12()
 
 // 投稿IDをランダムに取得（個数10未満）
 const getRandomPostsId = unstable_cache(async () => {
-  const posts: Awaited<ReturnType<typeof getPosts>> = []
+  console.log(`getRandomPosts cached ${revalidateTime / 3600} h`)
   const totalPosts = await getTotalPosts()
 
   // posts に 重複を含む10件を取得
-  for (let i = 0; i < 10; i++) {
+  const promises = Array.from({ length: 10 }, () => {
     const index = Math.floor(Math.random() * totalPosts)
-    const p = await getPosts({ skip: index, take: 1 })
-    posts.push(...p)
-  }
+    return getPosts({ skip: index, take: 1 })
+  })
+  const postsArray = await Promise.all(promises)
+  const posts = postsArray.flat()
 
   // 重複を排除
   const uniqueRandomPosts = posts.filter((post, index, self) => self.findIndex(p => p.id === post.id) === index);
@@ -41,7 +42,7 @@ const getRandomPostsId = unstable_cache(async () => {
   const pickUpRandomPosts = uniqueRandomPosts.toSorted((a, b) => (b.detailComment?.length || 0) - (a.detailComment?.length || 0)).slice(0, 4)
 
   return pickUpRandomPosts.map(p => p.id)
-}, ['pickup'], { revalidate: revalidateTime,tags:['post-pickup'] })
+}, [], { revalidate: revalidateTime })
 
 
 
