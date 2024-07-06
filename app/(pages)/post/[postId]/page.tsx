@@ -17,6 +17,7 @@ import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
 import { auth } from "@/auth";
 import ReportDialog from "@/components/feature/post/ReportDialog";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 interface IParams {
   postId: string;
@@ -64,14 +65,32 @@ const Page = async ({ params }: { params: IParams }) => {
             allowFullScreen
           ></iframe>
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
-            <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)] text-white">
-              <Link
-                href={`https://www.youtube.com/watch?v=${post.videoId}`}
-                target="_blank"
-              >
-                Youtubeで視聴する
-              </Link>
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)] text-white">
+                <Link
+                  href={`https://www.youtube.com/watch?v=${post.videoId}`}
+                  target="_blank"
+                >
+                  Youtubeで視聴する
+                </Link>
+              </Button>
+              <Button className="bg-black hover:bg-black/75 text-white">
+                <Link
+                  href={`https://x.com/intent/post?text=${encodeURIComponent(
+                    `
+
+#コレミナ から動画をシェアしました。
+https://youtu.be/${post.videoId}`
+                  )
+                    }`}
+                  target="_blank"
+                  className="flex items-center gap-4"
+                >
+                  <Image src="/x-logo-white.png" width="20" height="20" alt="" />
+                  Xでシェアする
+                </Link>
+              </Button>
+            </div>
             <Suspense fallback={<SkeletonReactionButtonList />}>
               <div className="text-right">
                 <ReactionButtonList postId={postId} />

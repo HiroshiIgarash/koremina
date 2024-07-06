@@ -32,7 +32,7 @@ const PostFilter = ({ filterLiversId, livers, user, isPending = false }: PostFil
   }
 
   const handleRandomClick = () => {
-    const invalidLivers = livers.filter(liver => !liver.isRetire || (liver.isRetire && !liver.isOverseas))
+    const invalidLivers = livers
     const rand = Math.floor(Math.random() * invalidLivers.length)
     const randomLiverId = invalidLivers[rand]?.id
     if (!randomLiverId) return
@@ -148,12 +148,12 @@ const PostFilter = ({ filterLiversId, livers, user, isPending = false }: PostFil
                   </SelectGroup>
                   <SelectSeparator />
                   <SelectGroup>
-                    <SelectLabel>卒業ライバー（JPのみ）</SelectLabel>
+                    <SelectLabel>卒業ライバー</SelectLabel>
                     {
                       livers.map(liver => {
                         if (mostFavoriteLiver?.id === liver.id) return
                         if (favoriteLiversWithoutMostFavoriteLiver.some(l => l.id === liver.id)) return
-                        if (!liver.isRetire || liver.isOverseas) return
+                        if (!liver.isRetire) return
 
                         return (
                           <SelectItem
