@@ -74,7 +74,7 @@ const Page = async ({ params }: { params: IParams }) => {
                   Youtubeで視聴する
                 </Link>
               </Button>
-              <Button className="bg-black hover:bg-black/75 text-white">
+              <Button className="bg-black hover:bg-black/75 dark:border text-white">
                 <Link
                   href={`https://x.com/intent/post?text=${encodeURIComponent(
                     `
