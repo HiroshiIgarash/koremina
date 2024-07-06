@@ -11,6 +11,19 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2024-07-06" className="font-bold">
+              2024/07/06
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                卒業ライバーに関して、JP以外も追加しました。
+              </li>
+              <li>
+                投稿詳細ページに「Xでシェアする」ボタンを追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2024-07-05" className="font-bold">
               2024/07/05
             </time>

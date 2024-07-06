@@ -179,7 +179,7 @@ const PostForm = () => {
   useEffect(() => {
     const fetchAndSetLivers = async () => {
       const livers = await getLivers();
-      const invalidLivers = livers.filter(liver => !liver.isRetire || (liver.isRetire && !liver.isOverseas))
+      const invalidLivers = livers
       setLivers(invalidLivers);
     };
 
