@@ -79,7 +79,7 @@ const Page = async ({ params }: { params: IParams }) => {
                   href={`https://x.com/intent/post?text=${encodeURIComponent(
                     `
 
-#コレミナ から動画をシェアしました。
+#コレミナ から動画をシェアしました！
 https://youtu.be/${post.videoId}`
                   )
                     }`}
