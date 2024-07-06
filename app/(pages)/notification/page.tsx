@@ -49,22 +49,6 @@ const Page = async () => {
     revalidateTag(`get-notifications-${session.user.id}`)
   }
   
-  await prisma.notification.updateMany({
-    where: {
-      userId: session.user.id
-    },
-    data: {
-      isRead: true
-    }
-  })
-  await prisma.notification.updateMany({
-    where: {
-      userId: session.user.id
-    },
-    data: {
-      isRead: true
-    }
-  })
 
   const generateMessage = (type: NotificationType, arg?: string) => {
     switch (type) {
