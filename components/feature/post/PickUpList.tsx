@@ -29,7 +29,7 @@ const getRandomPostsId = unstable_cache(async () => {
   const totalPosts = await getTotalPosts()
 
   // posts に 重複を含む10件を取得
-  const promises = Array.from({ length: 10 }, () => {
+  const promises = Array.from({ length: 9 }, () => {
     const index = Math.floor(Math.random() * totalPosts)
     return getPosts({ skip: index, take: 1 })
   })
