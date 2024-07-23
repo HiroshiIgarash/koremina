@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { Button } from "./ui/button";
 
 const Footer = () => {
@@ -41,12 +41,15 @@ const Footer = () => {
             />
           </Link>
         </li>
-        <li>
+        <li className="flex items-center gap-4">
           <Button asChild variant="ghost">
             <Link href="https://x.com/koremina_app" target="_blank">
               <FaXTwitter size={20} />
             </Link>
           </Button>
+          <Link href="https://github.com/HiroshiIgarash/koremina" target="_blank" className="">
+            <FaGithub size={32} />
+          </Link>
         </li>
       </ul>
       <div className="text-center">
