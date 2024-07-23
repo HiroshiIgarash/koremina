@@ -5,12 +5,16 @@ import HeaderPopover from "./HeaderPopover";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./ModeToggle";
+import { FaGithub } from "react-icons/fa6";
 
 const HeaderRight = async () => {
   const currentUser = await getCurrentUser();
 
   return (
     <div className="flex items-center gap-2">
+      <Link href="/" className="mr-4">
+        <FaGithub size={32} />
+      </Link>
       <ModeToggle />
       {currentUser ? (
         <HeaderPopover currentUser={currentUser}>
