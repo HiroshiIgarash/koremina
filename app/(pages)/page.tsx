@@ -5,6 +5,7 @@ import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import SkeltonPickUpList from "@/components/feature/post/SkeltonPickUpList";
+import SpecialList from "@/components/feature/post/SpecialList";
 import { ChevronRight, Upload } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,6 +39,15 @@ export default function Home() {
       </div>
       <div className="w-full px-4 mb-8 md:mb-16 max-w-7xl mx-auto text-center md:text-left">
         <NotificationField />
+      </div>
+      <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">特集【鈴谷アキ】</h2>
+        <p className="mb-4 px-4 w-full max-w-7xl mx-auto">にじさんじ一期生の鈴谷アキが8月31日をもって卒業します。<br />まだ見ていない動画があったら視聴してみてはいかがでしょうか。</p>
+        <div>
+          <Suspense fallback={<SkeltonPickUpList />}>
+            <SpecialList />
+          </Suspense>
+        </div>
       </div>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
