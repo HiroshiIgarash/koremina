@@ -3,10 +3,13 @@ import PickUpList from "@/components/feature/post/PickUpList";
 import PostFilter from "@/components/feature/post/PostFilter";
 import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
+import SearchForm from "@/components/feature/post/SearchForm";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import SkeltonPickUpList from "@/components/feature/post/SkeltonPickUpList";
 import SpecialList from "@/components/feature/post/SpecialList";
-import { ChevronRight, Upload } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ChevronRight, Search, Upload } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -21,7 +24,7 @@ export default function Home() {
       <div className="w-full px-4 mb-8 md:mb-16 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
         <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-900 rounded-lg text-center gap-2 border-2 border-green-500">
           <p className="text-destructive font-bold">お知らせ</p>
-          <p className="text-lg">登録者数が1200人を突破しました！！🙌<br />引き続きよろしくお願いします！</p>
+          <p className="text-lg">ワード検索機能を実験的に追加しました。<br />不具合がありましたらお問い合わせよりご報告ください。</p>
         </div>
         <div className="flex flex-col items-center justify-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
           <div>
@@ -37,8 +40,12 @@ export default function Home() {
           <ChevronRight className="absolute top-0 right-4 md:right-2 flex items-center h-full" size="2em" />
         </Link>
       </div>
-      <div className="w-full px-4 mb-8 md:mb-16 max-w-7xl mx-auto text-center md:text-left">
+      <div className="w-full px-4 mb-8 md:mb-16 max-w-7xl mx-auto text-center md:text-left empty:m-0">
         <NotificationField />
+      </div>
+      <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
+        <h2 className="font-bold mb-4 px-4 w-full max-w-7xl mx-auto">ワードで検索</h2>
+        <SearchForm />
       </div>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">特集【鈴谷アキ】</h2>

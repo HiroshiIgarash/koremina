@@ -34,6 +34,9 @@ const SpecialList = async () => {
           comments: true,
         },
       },
+    },
+    orderBy: {
+      postedAt: 'desc'
     }
   })
 

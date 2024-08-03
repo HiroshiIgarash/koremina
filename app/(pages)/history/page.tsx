@@ -12,6 +12,16 @@ const Page = () => {
         <div className="space-y-8">
           <div>
             <time dateTime="2024-07-25" className="font-bold">
+              2024/08/03
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                ワードで検索機能を追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
+            <time dateTime="2024-07-25" className="font-bold">
               2024/07/25
             </time>
             <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
