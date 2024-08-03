@@ -166,7 +166,7 @@ https://youtu.be/${post.videoId}`
               ))}
             </div>
             {post.detailComment && (
-              <pre className={cn("mt-2 whitespace-pre-wrap", noto.className)}>
+              <pre className={cn("mt-2 whitespace-pre-wrap break-all", noto.className)}>
                 {post.detailComment}
               </pre>
             )}
