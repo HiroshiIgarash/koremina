@@ -18,6 +18,7 @@ import { auth } from "@/auth";
 import ReportDialog from "@/components/feature/post/ReportDialog";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import getYoutubeTitleById from "@/utils";
 
 interface IParams {
   postId: string;
@@ -48,6 +49,9 @@ const Page = async ({ params }: { params: IParams }) => {
   if (!post) {
     notFound();
   }
+
+  const title = await getYoutubeTitleById(post.videoId)
+
 
   return (
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
@@ -80,6 +84,8 @@ const Page = async ({ params }: { params: IParams }) => {
                     `
 
 #コレミナ から動画をシェアしました！
+
+${title}
 https://youtu.be/${post.videoId}`
                   )
                     }`}
