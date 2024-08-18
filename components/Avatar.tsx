@@ -1,3 +1,5 @@
+"use client"
+
 import { User } from "@prisma/client";
 import Image from "next/image";
 
@@ -17,6 +19,11 @@ const Avatar = ({ user, size = 48 }: AvatarProps) => {
       width={size}
       height={size}
       alt=""
+      onError={
+        e => {
+          e.currentTarget.src = "/user.png"
+        }
+      }
       className="rounded-full border-2"
       unoptimized
     />

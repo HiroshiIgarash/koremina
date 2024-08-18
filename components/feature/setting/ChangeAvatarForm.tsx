@@ -46,6 +46,11 @@ const ChangeAvatarForm = ({ user, setOpen }: ChangeAvatarFormProps) => {
               width={48}
               height={48}
               alt=""
+              onError={
+                e => {
+                  e.currentTarget.src = "/user.png"
+                }
+              }
               className="rounded-full border-2"
             />
             <Button
