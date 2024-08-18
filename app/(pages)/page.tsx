@@ -44,8 +44,25 @@ export default function Home() {
         <NotificationField />
       </div>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
-        <h2 className="font-bold mb-4 px-4 w-full max-w-7xl mx-auto">ワードで検索</h2>
-        <SearchForm />
+        <h2 className="text-3xl font-bold mb-4 md:mb-8 px-4 w-full max-w-7xl mx-auto">おすすめ動画を探す</h2>
+        <div className="w-full mb-4 md:mb-16 max-w-7xl mx-auto">
+          <Suspense
+            fallback={
+              <PostFilter
+                filterLiversId={undefined}
+                livers={[]}
+                user={null}
+                isPending
+              />
+            }
+          >
+            <PostFilterContainer />
+          </Suspense>
+        </div>
+        <div className="w-full mb-8 max-w-7xl mx-auto">
+          <h3 className="font-bold mb-4 px-4 w-full max-w-7xl mx-auto">ワードで検索</h3>
+          <SearchForm />
+        </div>
       </div>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">特集【鈴谷アキ】</h2>
@@ -68,18 +85,6 @@ export default function Home() {
       <div className="w-full max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">新着投稿</h2>
       </div>
-      <Suspense
-        fallback={
-          <PostFilter
-            filterLiversId={undefined}
-            livers={[]}
-            user={null}
-            isPending
-          />
-        }
-      >
-        <PostFilterContainer />
-      </Suspense>
       <Suspense fallback={<SkeletonPostList />}>
         <PostList currentPage={1} postsPerPage={16} filterLiver={undefined} />
       </Suspense>
