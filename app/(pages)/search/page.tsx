@@ -4,6 +4,7 @@ import SearchPagination from "@/components/feature/post/SearchPagination"
 import SkeltonPostItem from "@/components/feature/post/SkeltonPostItem"
 import prisma from "@/lib/db"
 import { redirect } from "next/navigation"
+import { comment } from "postcss"
 import { Suspense } from "react"
 
 interface ISearchParams {
@@ -23,35 +24,51 @@ const Page = async ({ searchParams }: { searchParams?: ISearchParams }) => {
 
   const count = await prisma.video.count({
     where: {
-      OR: [
-        {
-          OR: searchList.map(word => ({
-            comment: { contains: word }
-          }))
-        },
-        {
-          OR: searchList.map(word => ({
-            detailComment: { contains: word }
-          }))
-        },
-      ]
-    }
+      AND: searchList.map(word => {
+        return {
+          OR: [
+            { comment: { contains: word } },
+            { detailComment: { contains: word } },
+            {
+              liver: {
+                some: {
+                  OR: [
+                    { name: { contains: word } },
+                    { aliasFirst: { contains: word } },
+                    { aliasSecond: { contains: word } },
+                  ]
+                }
+              }
+            }
+          ]
+
+        }
+      })
+    },
   })
 
   const posts = await prisma.video.findMany({
     where: {
-      OR: [
-        {
-          OR: searchList.map(word => ({
-            comment: { contains: word }
-          }))
-        },
-        {
-          OR: searchList.map(word => ({
-            detailComment: { contains: word }
-          }))
-        },
-      ]
+      AND: searchList.map(word => {
+        return {
+          OR: [
+            { comment: { contains: word } },
+            { detailComment: { contains: word } },
+            {
+              liver: {
+                some: {
+                  OR: [
+                    { name: { contains: word } },
+                    { aliasFirst: { contains: word } },
+                    { aliasSecond: { contains: word } },
+                  ]
+                }
+              }
+            }
+          ]
+
+        }
+      })
     },
     include: {
       postedUser: true,

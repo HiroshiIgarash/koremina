@@ -50,10 +50,10 @@ const PostFilter = ({ filterLiversId, livers, user, isPending = false }: PostFil
 
   return (
     <div className="self-start mb-8 px-4 w-full max-w-7xl mx-auto">
-      <Label>ライバーで絞り込む</Label>
+      <Label className="font-bold text-base">ライバーで絞り込む</Label>
       <div className="flex items-center gap-2 md:gap-8 mt-2">
         <Select onValueChange={handleChange} value={(!isPending && filterLiver) ? filterLiver?.id : 'all'}>
-          <SelectTrigger className="w-48 md:w-52">
+          <SelectTrigger className="w-48 md:w-64">
             <SelectValue placeholder="ライバー絞り込み" />
           </SelectTrigger>
           <SelectContent ref={(ref) => ref?.addEventListener('touchend', (e) => { e.preventDefault(); })}>
