@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/Footer";
+import MobileFixedFooter from "@/components/MobileFixedFooter";
 
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <MobileFixedFooter />
           </div>
           <Toaster />
         </ThemeProvider>
