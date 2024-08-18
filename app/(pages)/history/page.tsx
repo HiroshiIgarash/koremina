@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2024-08-18" className="font-bold">
+              2024/08/18
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                「七瀬すず菜」「早乙女ベリー」「雲母たまこ」「酒寄颯馬」「渚トラウト」の5名を追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2024-07-25" className="font-bold">
               2024/08/03
             </time>
