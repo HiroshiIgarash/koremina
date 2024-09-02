@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Award from "@/components/feature/setting/Award";
 import FavoriteLiversArea from "@/components/feature/setting/FavoriteLiversArea";
 import RecentPostArea from "@/components/feature/setting/RecentPostArea";
 import SkeletonUserInfo from "@/components/feature/setting/SkeletonUserInfo";
@@ -21,7 +22,10 @@ const Page = async () => {
 
       <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 items-start">
         <FavoriteLiversArea />
-        <RecentPostArea />
+        <div className="flex flex-col gap-y-4">
+          <Award />
+          <RecentPostArea />
+        </div>
       </div>
     </div>
   );
