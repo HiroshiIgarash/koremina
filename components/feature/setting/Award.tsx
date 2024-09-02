@@ -105,8 +105,6 @@ const Award = async () => {
   const commentCount = currentUser._count.Comment;
   const reactionCount = currentUser._count.angelVideo + currentUser._count.cryVideo + currentUser._count.goodVideo + currentUser._count.loveVideo + currentUser._count.funnyVideo;
 
-  console.log('fav:::',favoriteLiverCount)
-
   const level = (awardType: typeof AWARD_TYPE[number]) => {
     let target: number | undefined;
     switch (awardType) {
@@ -127,7 +125,7 @@ const Award = async () => {
         break;
     }
 
-    if (target) {
+    if (target !== undefined) {
       if (target >= award[awardType].gold.count) {
         return 'gold'
       } else if (target >= award[awardType].silver.count) {
@@ -171,7 +169,7 @@ const Award = async () => {
 const AwardBudge = ({ children, variant, userId }: { children: ReactNode, variant: 'gold' | 'silver' | 'bronze' | 'none', userId: string }) => {
   return (
     <Link
-    href={variant === 'none' ? 'javascript:void(0)' :`https://x.com/intent/post?text=${encodeURIComponent(
+    href={`https://x.com/intent/post?text=${encodeURIComponent(
       `
 #コレミナ で称号「${children}」を獲得しました！
 
@@ -180,7 +178,7 @@ https://koremina.vercel.app/user/${userId}
 `
     )
       }`}
-      className="text-center"
+      className={cn("text-center",variant === 'none' && "cursor-none pointer-events-none")}
     >
       <div
         className={cn("w-80 max-w-full p-2 rounded-full bg-gradient-to-br text-black",
