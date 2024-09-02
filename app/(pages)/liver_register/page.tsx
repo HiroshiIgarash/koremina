@@ -29,8 +29,8 @@ const Page = async () => {
             <input className={cn("border p-2")} name="index" defaultValue={liverData.findIndex(l=>l.name===liver.name)} />
             <input className={cn("border p-2")} name="id" defaultValue={livers.find(l => l.name === liver.name)?.id} disabled />
             <input className={cn("border p-2",liver_db?.name !== liver.name && "bg-red-100")} name="name" defaultValue={liver.name} />
-            <input className={cn("border p-2",liver_db?.aliasFirst !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
-            <input className={cn("border p-2",liver_db?.aliasSecond !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
+            <input className={cn("border p-2",liver_db?.aliasFirst || '' !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
+            <input className={cn("border p-2",liver_db?.aliasSecond || '' !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
             <input className={cn("border p-2",liver_db?.channelHandle !== liver.channelHandle && "bg-red-100")} name="channelHandle" defaultValue={liver.channelHandle} />
             <input className={cn("border p-2",liver_db?.isRetire !== Boolean(liver.isRetire) && "bg-red-100")} name="isRetire" defaultValue={liver.isRetire} />
             <input className={cn("border p-2",liver_db?.isOverseas !== Boolean(liver.isOverseas) && "bg-red-100")} name="isOverseas" defaultValue={liver.isOverseas} />
@@ -50,8 +50,8 @@ const Page = async () => {
             <input className={cn("border p-2")} name="index" defaultValue={liverData.findIndex(l=>l.name===liver.name)} />
             <input className={cn("border p-2")} name="id" defaultValue={livers.find(l => l.name === liver.name)?.id} disabled />
             <input className={cn("border p-2",liver_db?.name !== liver.name && "bg-red-100")} name="name" defaultValue={liver.name} />
-            <input className={cn("border p-2",liver_db?.aliasFirst !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
-            <input className={cn("border p-2",liver_db?.aliasSecond !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
+            <input className={cn("border p-2",liver_db?.aliasFirst || '' !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
+            <input className={cn("border p-2",liver_db?.aliasSecond || '' !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
             <input className={cn("border p-2",liver_db?.channelHandle !== liver.channelHandle && "bg-red-100")} name="channelHandle" defaultValue={liver.channelHandle} />
             <input className={cn("border p-2",liver_db?.isRetire !== Boolean(liver.isRetire) && "bg-red-100")} name="isRetire" defaultValue={liver.isRetire} />
             <input className={cn("border p-2",liver_db?.isOverseas !== Boolean(liver.isOverseas) && "bg-red-100")} name="isOverseas" defaultValue={liver.isOverseas} />
@@ -71,8 +71,8 @@ const Page = async () => {
             <input className={cn("border p-2")} name="index" defaultValue={liverData.findIndex(l=>l.name===liver.name)} />
             <input className={cn("border p-2")} name="id" defaultValue={livers.find(l => l.name === liver.name)?.id} disabled />
             <input className={cn("border p-2",liver_db?.name !== liver.name && "bg-red-100")} name="name" defaultValue={liver.name} />
-            <input className={cn("border p-2",liver_db?.aliasFirst !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
-            <input className={cn("border p-2",liver_db?.aliasSecond !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
+            <input className={cn("border p-2",liver_db?.aliasFirst || '' !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
+            <input className={cn("border p-2",liver_db?.aliasSecond || '' !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
             <input className={cn("border p-2",liver_db?.channelHandle !== liver.channelHandle && "bg-red-100")} name="channelHandle" defaultValue={liver.channelHandle} />
             <input className={cn("border p-2",liver_db?.isRetire !== Boolean(liver.isRetire) && "bg-red-100")} name="isRetire" defaultValue={liver.isRetire} />
             <input className={cn("border p-2",liver_db?.isOverseas !== Boolean(liver.isOverseas) && "bg-red-100")} name="isOverseas" defaultValue={liver.isOverseas} />
@@ -92,8 +92,8 @@ const Page = async () => {
             <input className={cn("border p-2")} name="index" defaultValue={liverData.findIndex(l=>l.name===liver.name)} />
             <input className={cn("border p-2")} name="id" defaultValue={livers.find(l => l.name === liver.name)?.id} disabled />
             <input className={cn("border p-2",liver_db?.name !== liver.name && "bg-red-100")} name="name" defaultValue={liver.name} />
-            <input className={cn("border p-2",liver_db?.aliasFirst !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
-            <input className={cn("border p-2",liver_db?.aliasSecond !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
+            <input className={cn("border p-2",liver_db?.aliasFirst || '' !== liver.aliasFirst && "bg-red-100")} name="aliasFirst" defaultValue={liver.aliasFirst} />
+            <input className={cn("border p-2",liver_db?.aliasSecond || '' !== liver.aliasSecond && "bg-red-100")} name="aliasSecond" defaultValue={liver.aliasSecond} />
             <input className={cn("border p-2",liver_db?.channelHandle !== liver.channelHandle && "bg-red-100")} name="channelHandle" defaultValue={liver.channelHandle} />
             <input className={cn("border p-2",liver_db?.isRetire !== Boolean(liver.isRetire) && "bg-red-100")} name="isRetire" defaultValue={liver.isRetire} />
             <input className={cn("border p-2",liver_db?.isOverseas !== Boolean(liver.isOverseas) && "bg-red-100")} name="isOverseas" defaultValue={liver.isOverseas} />

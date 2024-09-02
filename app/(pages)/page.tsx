@@ -9,10 +9,18 @@ import SkeltonPickUpList from "@/components/feature/post/SkeltonPickUpList";
 import SpecialList from "@/components/feature/post/SpecialList";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import prisma from "@/lib/db";
 import { ChevronRight, Search, Upload } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+
+const CountPosts = async () => {
+  const count = prisma.video.count();
+  return (
+    <span className="text-destructive">{ count }件</span>
+  )
+}
 
 export default function Home() {
   return (
@@ -21,11 +29,14 @@ export default function Home() {
         <Image src="/kv_sp.png" className="md:hidden" width={800} height={420} alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-" />
         <Image src="/kv_pc.png" className="hidden md:block w-[1000px] max-w-full" width={1280} height={420} alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-" />
       </div>
+      <div className="mb-10">
+        <p className="text-xl font-bold text-center"><CountPosts />のおすすめ動画が<br className="md:hidden" />投稿されています!</p>
+      </div>
       <div className="w-full px-4 mb-8 md:mb-16 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
-        <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-900 rounded-lg text-center gap-2 border-2 border-green-500">
+        {/* <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-900 rounded-lg text-center gap-2 border-2 border-green-500">
           <p className="text-destructive font-bold">お知らせ</p>
           <p className="text-lg">ワード検索機能を実験的に追加しました。<br />不具合がありましたらお問い合わせよりご報告ください。</p>
-        </div>
+        </div> */}
         <div className="flex flex-col items-center justify-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
           <div>
             <p className="text-destructive font-bold">おすすめ！</p>
@@ -64,7 +75,7 @@ export default function Home() {
           <SearchForm />
         </div>
       </div>
-      <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
+      {/* <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">特集【鈴谷アキ】</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">にじさんじ一期生の鈴谷アキが8月31日をもって卒業します。<br />まだ見ていない動画があったら視聴してみてはいかがでしょうか。</p>
         <div>
@@ -72,7 +83,7 @@ export default function Home() {
             <SpecialList />
           </Suspense>
         </div>
-      </div>
+      </div> */}
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">12時間ごとに更新されます。<br />いい動画だったらリアクションしよう！</p>

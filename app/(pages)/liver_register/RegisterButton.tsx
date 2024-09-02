@@ -20,6 +20,7 @@ const RegisterButton = ({listId}:RegisterButtonProps) => {
     liverItems.forEach(liverItem => {
       const pairs = [] as [string,any][]
       const inputs = liverItem.querySelectorAll('input');
+      if(!Array.from(inputs).some(input => input.classList.contains("bg-red-100"))) return
       inputs.forEach(input => {
         const key = input.name;
         let value = input.value as any;
