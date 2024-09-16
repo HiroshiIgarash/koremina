@@ -2,6 +2,8 @@ import { Suspense } from "react"
 import PostItem from "./PostItem"
 import SkeltonPostItem from "./SkeltonPostItem"
 import prisma from "@/lib/db"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 
 const SpecialList = async () => {
@@ -11,7 +13,7 @@ const SpecialList = async () => {
     where: {
       liver: {
         some: {
-          name: "鈴谷アキ" 
+          name: "不破湊"
         }
       }
     },
@@ -43,27 +45,30 @@ const SpecialList = async () => {
   return (
     <>
       <div className="overflow-x-auto w-[100vw] md:w-auto">
-      <div className="flex [&>*]:w-[calc(100vw_-_4rem)] [&>*]:shrink-0 md:[&>*]:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
-        {posts.map((post) => {
-          if (!post) return
-          return (
-            <Suspense key={post.id} fallback={<SkeltonPostItem />}>
-              <PostItem
-                id={post.id}
-                comment={post.comment}
-                videoId={post.videoId}
-                postedUserName={
-                  post.postedUser.nickname || post.postedUser.name
-                }
-                postedUser={post.postedUser}
-                livers={post.liver}
-                bookmark={post.Bookmark}
-                reactionsCount={post._count}
-              />
-            </Suspense>
-          )
-        })}
+        <div className="flex [&>*]:w-[calc(100vw_-_4rem)] [&>*]:shrink-0 md:[&>*]:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
+          {posts.map((post) => {
+            if (!post) return
+            return (
+              <Suspense key={post.id} fallback={<SkeltonPostItem />}>
+                <PostItem
+                  id={post.id}
+                  comment={post.comment}
+                  videoId={post.videoId}
+                  postedUserName={
+                    post.postedUser.nickname || post.postedUser.name
+                  }
+                  postedUser={post.postedUser}
+                  livers={post.liver}
+                  bookmark={post.Bookmark}
+                  reactionsCount={post._count}
+                />
+              </Suspense>
+            )
+          })}
+        </div>
       </div>
+      <div className="px-4 w-full max-w-7xl mx-auto mt-4">
+        <Button asChild><Link href="/page?liver=clvkcl4c90026mp9w2ow7z1lv">不破湊のおすすめ動画を見る</Link></Button>
       </div>
     </>
   )
