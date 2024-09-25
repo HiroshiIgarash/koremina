@@ -33,10 +33,10 @@ export default function Home() {
         <p className="text-xl font-bold text-center"><CountPosts />のおすすめ動画が<br className="md:hidden" />投稿されています!</p>
       </div>
       <div className="w-full px-4 mb-8 md:mb-16 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
-        {/* <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-900 rounded-lg text-center gap-2 border-2 border-green-500">
+        <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-900 rounded-lg text-center gap-2 border-2 border-green-500">
           <p className="text-destructive font-bold">お知らせ</p>
-          <p className="text-lg">ワード検索機能を実験的に追加しました。<br />不具合がありましたらお問い合わせよりご報告ください。</p>
-        </div> */}
+          <p className="text-lg">現在ログインするとエラー画面が表示される不具合が確認されております。しばらくお待ちください。</p>
+        </div>
         <div className="flex flex-col items-center justify-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
           <div>
             <p className="text-destructive font-bold">おすすめ！</p>
@@ -75,7 +75,7 @@ export default function Home() {
           <SearchForm />
         </div>
       </div>
-      <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
+      {/* <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">特集【不破湊】</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">先日、不破湊のYoutubeチャンネル登録者数が100万人を突破しました！！<br />まだ見ていない動画があったら視聴してみてはいかがでしょうか。</p>
         <div>
@@ -83,7 +83,7 @@ export default function Home() {
             <SpecialList />
           </Suspense>
         </div>
-      </div>
+      </div> */}
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">12時間ごとに更新されます。<br />いい動画だったらリアクションしよう！</p>
