@@ -1,4 +1,6 @@
 import NotificationField from "@/components/NotificationField";
+import BookmarkList from "@/components/feature/bookmark/BookmarkList";
+import TopBookMarkList from "@/components/feature/bookmark/TopBookMarkList";
 import PickUpList from "@/components/feature/post/PickUpList";
 import PostFilter from "@/components/feature/post/PostFilter";
 import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
@@ -75,15 +77,15 @@ export default function Home() {
           <SearchForm />
         </div>
       </div>
-      {/* <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">特集【不破湊】</h2>
-        <p className="mb-4 px-4 w-full max-w-7xl mx-auto">先日、不破湊のYoutubeチャンネル登録者数が100万人を突破しました！！<br />まだ見ていない動画があったら視聴してみてはいかがでしょうか。</p>
+      <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">あなたのブックマーク</h2>
+        <p className="mb-4 px-4 w-full max-w-7xl mx-auto">あなたがブックマークをした動画です。<br/>見逃したものはありませんか。</p>
         <div>
           <Suspense fallback={<SkeltonPickUpList />}>
-            <SpecialList />
+            <TopBookMarkList />
           </Suspense>
         </div>
-      </div> */}
+      </div>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">12時間ごとに更新されます。<br />いい動画だったらリアクションしよう！</p>
