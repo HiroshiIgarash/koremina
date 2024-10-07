@@ -1,6 +1,5 @@
 import NotificationField from "@/components/NotificationField";
-import BookmarkList from "@/components/feature/bookmark/BookmarkList";
-import TopBookMarkList from "@/components/feature/bookmark/TopBookMarkList";
+import TopBookmarkList from "@/components/feature/bookmark/TopBookMarkList";
 import PickUpList from "@/components/feature/post/PickUpList";
 import PostFilter from "@/components/feature/post/PostFilter";
 import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
@@ -8,11 +7,8 @@ import PostList from "@/components/feature/post/PostList";
 import SearchForm from "@/components/feature/post/SearchForm";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import SkeltonPickUpList from "@/components/feature/post/SkeltonPickUpList";
-import SpecialList from "@/components/feature/post/SpecialList";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import prisma from "@/lib/db";
-import { ChevronRight, Search, Upload } from "lucide-react";
+import { ChevronRight, Upload } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -20,7 +16,7 @@ import { Suspense } from "react";
 const CountPosts = async () => {
   const count = prisma.video.count();
   return (
-    <span className="text-destructive">{ count }件</span>
+    <span className="text-destructive">{count}件</span>
   )
 }
 
@@ -77,15 +73,7 @@ export default function Home() {
           <SearchForm />
         </div>
       </div>
-      <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">あなたのブックマーク</h2>
-        <p className="mb-4 px-4 w-full max-w-7xl mx-auto">あなたがブックマークをした動画です。<br/>見逃したものはありませんか。</p>
-        <div>
-          <Suspense fallback={<SkeltonPickUpList />}>
-            <TopBookMarkList />
-          </Suspense>
-        </div>
-      </div>
+      <TopBookmarkList />
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">12時間ごとに更新されます。<br />いい動画だったらリアクションしよう！</p>
