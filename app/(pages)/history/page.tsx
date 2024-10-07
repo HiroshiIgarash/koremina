@@ -12,6 +12,16 @@ const Page = () => {
         <div className="space-y-8">
           <div>
             <time dateTime="2024-09-02" className="font-bold">
+              2024/10/08
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                TOPにブックマークセクションを追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
+            <time dateTime="2024-09-02" className="font-bold">
               2024/09/02
             </time>
             <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
