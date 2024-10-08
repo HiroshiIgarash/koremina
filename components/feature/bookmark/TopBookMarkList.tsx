@@ -50,7 +50,7 @@ const TopBookmarkList = async () => {
     <>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">あなたのブックマーク</h2>
-        <p className="mb-4 px-4 w-full max-w-7xl mx-auto">あなたがブックマークをした動画です。<br />見逃したものはありませんか。</p>
+        <p className="mb-4 px-4 w-full max-w-7xl mx-auto">あなたがブックマークをした動画です。<br />見逃したものはありませんか？</p>
         <div>
           <ScrollArea className="max-w-[100vw]">
             <div className="flex [&>*]:w-[calc(100vw_-_4rem)] [&>*]:shrink-0 md:[&>*]:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full md:max-w-7xl mx-auto">
