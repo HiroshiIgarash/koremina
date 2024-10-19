@@ -40,21 +40,21 @@ const TopBookmarkList = async () => {
   const userId = session?.user?.id;
   if (!userId) return;
 
-  const bookmarks = (await getBookmarksById({ userId }))
+  const unSeenBookmarks = (await getBookmarksById({ userId })).filter(bookmark => bookmark.post.seenUsers.every(user => user.id !== user.id))
 
-  const filteredBookmarks = extractRandomElementsFromArray(bookmarks, 4)
+  const filteredUnseenBookmarks = extractRandomElementsFromArray(unSeenBookmarks, 4)
 
-  if (!filteredBookmarks.length) return;
+  if (!filteredUnseenBookmarks.length) return;
 
   return (
     <>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">あなたのブックマーク</h2>
+        <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">未視聴のブックマーク</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">あなたがブックマークをした動画です。<br />見逃したものはありませんか？</p>
         <div>
           <ScrollArea className="max-w-[100vw]">
             <div className="flex [&>*]:w-[calc(100vw_-_4rem)] [&>*]:shrink-0 md:[&>*]:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full md:max-w-7xl mx-auto">
-              {filteredBookmarks.map((bookmark) => {
+              {filteredUnseenBookmarks.map((bookmark) => {
                 const { post } = bookmark
                 if (!post) return
                 return (
