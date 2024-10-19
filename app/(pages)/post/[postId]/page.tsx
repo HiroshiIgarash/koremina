@@ -131,6 +131,7 @@ https://youtu.be/${post.videoId}`
                   postId={postId}
                   userId={currentUser.id}
                   bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
+                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </button>
             </div>

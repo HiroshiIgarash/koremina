@@ -29,7 +29,8 @@ interface PostItemProps {
   postedUserName: string | null;
   postedUser: User;
   livers: { name: string }[];
-  bookmark:Bookmark[];
+  bookmark: Bookmark[];
+  seenUsersId: string[]
   reactionsCount: { [k in Reaction]: Number } & { comments: Number };
 }
 
@@ -42,6 +43,7 @@ const PostItem = async ({
   livers,
   bookmark,
   reactionsCount,
+  seenUsersId,
 }: PostItemProps) => {
 
   //動画タイトルの取得
@@ -59,7 +61,8 @@ const PostItem = async ({
           <BookmarkButton
             postId={id}
             bookmarkedUsersId = {bookmark.map(b=>b.userId)}
-            userId = {session.user.id}
+            userId={session.user.id}
+            seenUsersId={seenUsersId}
           />
         </button>
       )}

@@ -31,6 +31,7 @@ const getBookmarksById = async ({take,skip,userId }: IParam) => {
               comments: true
             }
           },
+          seenUsers: true
         }
       },
     },

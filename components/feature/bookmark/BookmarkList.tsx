@@ -29,6 +29,7 @@ const BookmarkList = ({ bookmarks }: BookmarkListProps) => {
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
+                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </Suspense>
             );

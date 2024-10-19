@@ -4,35 +4,35 @@ import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
 import { revalidateTag } from "next/cache";
 
-const updateBookmark = async (postId: string, active: boolean) => {
+const updateBookmark = async (postId: string, type: "CONNECT" | "DISCONNECT") => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
     return "Unauthorized";
   }
 
-  const bookmark = active
+  const bookmark = type === "DISCONNECT"
     ? await prisma.bookmark.delete({
-        where: {
-          userId_postId: {
-            postId,
-            userId: currentUser.id,
-          },
+      where: {
+        userId_postId: {
+          postId,
+          userId: currentUser.id,
         },
-      })
+      },
+    })
     : await prisma.bookmark.upsert({
-        where: {
-          userId_postId: {
-            userId: currentUser.id,
-            postId,
-          },
-        },
-        create: {
+      where: {
+        userId_postId: {
           userId: currentUser.id,
           postId,
         },
-        update: {},
-      });
+      },
+      create: {
+        userId: currentUser.id,
+        postId,
+      },
+      update: {},
+    });
 
   revalidateTag('get-post')
   return bookmark;

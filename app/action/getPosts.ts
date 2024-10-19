@@ -30,6 +30,7 @@ const getPosts = unstable_cache(
           },
         },
         Bookmark: true,
+        seenUsers: true,
         _count: {
           select: {
             good: true,
