@@ -76,6 +76,7 @@ const PickUpList = async () => {
           comments: true,
         },
       },
+      seenUsers: true,
     }
   })
 
@@ -97,6 +98,7 @@ const PickUpList = async () => {
                 livers={post.liver}
                 bookmark={post.Bookmark}
                 reactionsCount={post._count}
+                seenUsersId={post.seenUsers.map(u => u.id)}
               />
             </Suspense>
           )

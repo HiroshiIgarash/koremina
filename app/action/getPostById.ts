@@ -9,7 +9,8 @@ const getPostById = async (id: string) => {
     include: {
       postedUser: true,
       Bookmark: true,
-      liver: true
+      liver: true,
+      seenUsers: true
     },
   })
 

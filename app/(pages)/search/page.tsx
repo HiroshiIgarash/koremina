@@ -89,6 +89,7 @@ const Page = async ({ searchParams }: { searchParams?: ISearchParams }) => {
           comments: true,
         },
       },
+      seenUsers: true
     },
     skip: (currentPage - 1) * postsPerPage,
     take: postsPerPage,
@@ -117,6 +118,7 @@ const Page = async ({ searchParams }: { searchParams?: ISearchParams }) => {
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
+                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </Suspense>
             ))}

@@ -36,6 +36,7 @@ const SpecialList = async () => {
           comments: true,
         },
       },
+      seenUsers: true
     },
     orderBy: {
       postedAt: 'desc'
@@ -61,6 +62,7 @@ const SpecialList = async () => {
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
+                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </Suspense>
             )

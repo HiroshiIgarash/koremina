@@ -11,7 +11,18 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
-            <time dateTime="2024-09-02" className="font-bold">
+            <time dateTime="2024-10-19" className="font-bold">
+              2024/10/19
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                ブックマークに「視聴済み」状態を追加しました。<br />
+                ブックマーク済みの状態でもう一度タップするとチェックマークのついたブックマークになります。
+              </li>
+            </ul>
+          </div>
+          <div>
+            <time dateTime="2024-10-08" className="font-bold">
               2024/10/08
             </time>
             <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
