@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header";
-import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/Footer";
 import MobileFixedFooter from "@/components/MobileFixedFooter";
+import { Toaster } from "@/components/ui/sonner";
 
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
@@ -43,7 +43,7 @@ export default function RootLayout({
             <Footer />
             <MobileFixedFooter />
           </div>
-          <Toaster />
+          <Toaster richColors />
         </ThemeProvider>
         <Analytics />
       </body>
