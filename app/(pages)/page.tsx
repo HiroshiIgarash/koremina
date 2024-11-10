@@ -33,7 +33,9 @@ export default function Home() {
       <div className="w-full px-4 mb-8 md:mb-16 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
         <div className="items-center w-full p-4 md:py-8 bg-green-100 dark:bg-green-900 rounded-lg text-center gap-2 border-2 border-green-500">
           <p className="text-destructive font-bold">お知らせ</p>
-          <p className="text-lg">ブックマークに「視聴済み」状態を追加しました！<br />ブックマーク後、さらにタップすると「視聴済み」状態になります。</p>
+          <p className="text-lg">
+            登録者数が1300人を超えました！<br />引き続きおすすめの動画をたくさん見つけていってください！
+          </p>
         </div>
         <div className="flex flex-col items-center justify-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
           <div>
