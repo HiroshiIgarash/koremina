@@ -12,6 +12,19 @@ const Page = () => {
         <div className="space-y-8">
           <div>
             <time dateTime="2024-10-19" className="font-bold">
+              2024/11/16
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                ブックマークされた数を表示させるようにしました。
+              </li>
+              <li>
+                初回訪問時にはじめましてのモーダルを表示するようにしました。
+              </li>
+            </ul>
+          </div>
+          <div>
+            <time dateTime="2024-10-19" className="font-bold">
               2024/10/19
             </time>
             <ul className="my-2 ml-6 list-disc [&>li]:mt-2">

@@ -21,6 +21,7 @@ import BookmarkButton from "./BookMarkButton";
 import { auth } from "@/auth";
 import { cn } from "@/lib/utils";
 import getYoutubeTitleById from "@/utils";
+import { BookmarkIcon } from "lucide-react";
 
 interface PostItemProps {
   id: string;
@@ -52,7 +53,7 @@ const PostItem = async ({
     auth(),
     getYoutubeTitleById(videoId)
   ])
-  
+
 
   return (
     <div className="relative">
@@ -60,7 +61,7 @@ const PostItem = async ({
         <button className="absolute top-4 right-4">
           <BookmarkButton
             postId={id}
-            bookmarkedUsersId = {bookmark.map(b=>b.userId)}
+            bookmarkedUsersId={bookmark.map(b => b.userId)}
             userId={session.user.id}
             seenUsersId={seenUsersId}
           />
@@ -69,7 +70,7 @@ const PostItem = async ({
       <Link href={`/post/${id}`}>
         <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-accent transition">
           <CardHeader className="pb-2">
-            <CardTitle className={cn("text-lg md:h-[4em] leading-tight",session?.user?.id && "pr-6")}>
+            <CardTitle className={cn("text-lg md:h-[4em] leading-tight", session?.user?.id && "pr-6")}>
               {comment}
             </CardTitle>
             <div className="flex justify-end items-center gap-2">
@@ -120,28 +121,31 @@ const PostItem = async ({
               className="aspect-video object-cover"
               unoptimized
             />
-            <p className={cn("text-xs",title.error && "text-muted-foreground")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
+            <p className={cn("text-xs", title.error && "text-muted-foreground")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
           </CardContent>
           <CardFooter className="flex items-end flex-col space-y-2 text-sm">
             <div className="flex gap-2 justify-self-end">
-              <span className=" rounded-full px-2">
+              <span className="rounded-full px-2">
+                <BookmarkIcon size="1.4em" className="inline-block align-bottom" /> {`${bookmark.length}`}
+              </span>
+              <span className="rounded-full px-2">
                 💬 {`${reactionsCount.comments}`}
               </span>
-              <span className=" rounded-full px-2">
+              <span className="rounded-full px-2">
                 👍 {`${reactionsCount.good}`}
               </span>
             </div>
             <div className="flex gap-2">
-              <span className=" rounded-full px-2">
+              <span className="rounded-full px-2">
                 😍 {`${reactionsCount.love}`}
               </span>
-              <span className=" rounded-full px-2">
+              <span className="rounded-full px-2">
                 🤣 {`${reactionsCount.funny}`}
               </span>
-              <span className=" rounded-full px-2">
+              <span className="rounded-full px-2">
                 😭 {`${reactionsCount.cry}`}
               </span>
-              <span className=" rounded-full px-2">
+              <span className="rounded-full px-2">
                 😇 {`${reactionsCount.angel}`}
               </span>
             </div>
