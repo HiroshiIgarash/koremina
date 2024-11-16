@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import FirstVisitDialog from "@/components/FirstVisitDialog";
 import NotificationField from "@/components/NotificationField";
 import TopBookmarkList from "@/components/feature/bookmark/TopBookMarkList";
 import PickUpList from "@/components/feature/post/PickUpList";
@@ -20,9 +22,18 @@ const CountPosts = async () => {
   )
 }
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth()
+
+  const isDisplayDialog = !session
+
   return (
     <>
+      {
+        isDisplayDialog && (
+          <FirstVisitDialog />
+        )
+      }
       <div className="mb-10 text-center">
         <Image src="/kv_sp.png" className="md:hidden" width={800} height={420} alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-" />
         <Image src="/kv_pc.png" className="hidden md:block w-[1000px] max-w-full" width={1280} height={420} alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-" />

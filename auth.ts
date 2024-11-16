@@ -11,7 +11,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     clientSecret: process.env.AUTH_TWITTER_SECRET
   })],
   session: {
-    strategy:'jwt'
+    strategy: 'jwt'
   },
   callbacks: {
     jwt({ token, user }) {
@@ -26,6 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   pages: {
-    signIn: '/login'
+    signIn: '/login',
+    error: "/auth_error"
   }
 })
