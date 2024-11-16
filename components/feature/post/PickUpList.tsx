@@ -2,59 +2,34 @@ import { Suspense } from "react"
 import PostItem from "./PostItem"
 import SkeltonPostItem from "./SkeltonPostItem"
 import prisma from "@/lib/db"
-import getPosts from "@/app/action/getPosts"
-import getTotalPosts from "@/app/action/getTotalPosts"
-import { unstable_cache } from "next/cache"
-import getPostById from "@/app/action/getPostById"
+import { getRandomPostIds as getRandomPostIdsSQL } from '@prisma/client/sql'
 
-// 次の12時までの秒数を計算
-const calcSecondsUntilNext12 = () => {
-  const now = new Date();
-  now.setHours(now.getHours() + 9) //JP時刻
-  const currentHour = now.getHours();
+const getRandomPostIds = async ({ seed = Date.now(), limit = 10 }) => {
 
-  const next12Hour = currentHour < 12 ? 12 : 24;
+  // ランダムに投稿を取得（id, detailComment）
+  const randomPosts = await prisma.$queryRawTyped(getRandomPostIdsSQL(seed, limit))
 
-  const target = new Date(now);
-  target.setHours(next12Hour, 0, 0, 0);
+  // detailComment が多い順に4つ取得
+  const pickUpRandomPosts = randomPosts.toSorted((a, b) =>
+    (b.detailComment?.length || 0) - (a.detailComment?.length || 0) ||
+    (b.rand || 0) - (a.rand || 0)
+  ).slice(0, 4)
 
-  return Math.floor((target.getTime() - now.getTime()) / 1000);
+  return pickUpRandomPosts.map(post => post.id)
 }
-
-const revalidateTime = calcSecondsUntilNext12()
-
-// 投稿IDをランダムに取得（個数10未満）
-const getRandomPostsId = unstable_cache(async () => {
-  console.log(`getRandomPosts cached ${revalidateTime / 3600} h`)
-  const totalPosts = await getTotalPosts()
-
-  // posts に 重複を含む10件を取得
-  const promises = Array.from({ length: 9 }, () => {
-    const index = Math.floor(Math.random() * totalPosts)
-    return getPosts({ skip: index, take: 1 })
-  })
-  const postsArray = await Promise.all(promises)
-  const posts = postsArray.flat()
-
-  // 重複を排除
-  const uniqueRandomPosts = posts.filter((post, index, self) => self.findIndex(p => p.id === post.id) === index);
-
-  const pickUpRandomPosts = uniqueRandomPosts.toSorted((a, b) => (b.detailComment?.length || 0) - (a.detailComment?.length || 0)).slice(0, 4)
-
-  return pickUpRandomPosts.map(p => p.id)
-}, [], { revalidate: revalidateTime })
-
-
-
 
 const PickUpList = async () => {
 
-  const randomPostsId = await getRandomPostsId()
+  // 1000 * 60 * 60 * 12 ミリ秒 = 12時間ごとにseedが変わる
+  // -1 ~ 1 におさめるため、sinを用いる
+  const seed = Math.sin(Math.floor(Date.now() / (1000 * 60 * 60 * 12)))
+
+  const randomPostIds = await getRandomPostIds({ seed })
 
   const posts = await prisma.video.findMany({
     where: {
       id: {
-        in: randomPostsId
+        in: randomPostIds
       },
     },
     include: {
