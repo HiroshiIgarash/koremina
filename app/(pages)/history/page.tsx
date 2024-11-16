@@ -11,6 +11,20 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2024-11-16" className="font-bold">
+
+              2024/11/16
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                ブックマークされた数を表示させるようにしました。
+              </li>
+              <li>
+                初回訪問時にはじめましてのモーダルを表示するようにしました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2024-10-19" className="font-bold">
               2024/10/19
             </time>

@@ -28,7 +28,8 @@ const getRecentPostsByUserId = async ({
           funny: true,
           cry: true,
           angel: true,
-          comments: true
+          comments: true,
+          Bookmark: true
         }
       },
     },

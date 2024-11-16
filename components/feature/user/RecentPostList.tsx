@@ -20,6 +20,7 @@ const RecentPostList = async ({ user }: RecentPostListProps) => {
             comment={post.comment}
             livers={post.liver}
             reactionsCount={post._count}
+            bookmarkCount={post._count.Bookmark}
           />
         ))
       ) : (
