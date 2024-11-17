@@ -10,7 +10,8 @@ interface IParam {
   userId: string;
 }
 
-const Page = async ({ params }: { params: IParam }) => {
+const Page = async (props: { params: Promise<IParam> }) => {
+  const params = await props.params;
   const { userId } = params;
 
   const user = await getUserById(userId)

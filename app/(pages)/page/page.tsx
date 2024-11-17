@@ -9,7 +9,8 @@ interface ISearchParams {
   page: string;
 }
 
-const Page = ({ searchParams }: { searchParams?: ISearchParams }) => {
+const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+  const searchParams = await props.searchParams;
   const filterLiver = searchParams?.liver;
 
   const currentPage = parseInt(searchParams?.page || "1");

@@ -26,7 +26,8 @@ interface IParams {
 
 const getCachedPostById = cache(getPostById)
 
-export async function generateMetadata({ params }: { params: IParams }) {
+export async function generateMetadata(props: { params: Promise<IParams> }) {
+  const params = await props.params;
   const { postId } = params;
   const post = await getCachedPostById(postId);
 
@@ -37,7 +38,8 @@ export async function generateMetadata({ params }: { params: IParams }) {
   }
 }
 
-const Page = async ({ params }: { params: IParams }) => {
+const Page = async (props: { params: Promise<IParams> }) => {
+  const params = await props.params;
   const { postId } = params;
 
   const session = await auth();

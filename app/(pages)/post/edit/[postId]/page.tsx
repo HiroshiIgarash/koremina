@@ -7,7 +7,8 @@ interface IParam {
   postId: string;
 }
 
-const Page = async ({ params }: { params: IParam }) => {
+const Page = async (props: { params: Promise<IParam> }) => {
+  const params = await props.params;
   const session = await auth();
   const { postId } = params;
   const post = await getPostById(postId);
