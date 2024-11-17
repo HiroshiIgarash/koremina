@@ -14,7 +14,7 @@ import { Crop, ReactCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import AvatarPreview from "./AvatarPreview";
 import updateAvatar from "@/app/action/updateAvatar";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 interface AvatarCrop {
   file: File & { preview: string };
@@ -26,7 +26,7 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
   const [crop, setCrop] = useState<Crop>();
   const imageRef = useRef<HTMLImageElement>(null);
   const [isPending, startTransition] = useTransition();
-  const { toast } = useToast();
+
 
   const handleResetFile = () => {
     setFile(undefined);
@@ -53,9 +53,7 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
         // DB更新、前のBlobを削除
         await updateAvatar(url);
       });
-      toast({
-        description: "アバターを変更しました",
-      });
+      toast.success("アバターを変更しました");
       setOpen(false);
     });
   };
@@ -102,8 +100,8 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
         {isUncropped
           ? "範囲を選択してください"
           : isPending
-          ? "アップロード中..."
-          : "アップロード"}
+            ? "アップロード中..."
+            : "アップロード"}
       </Button>
     </>
   );

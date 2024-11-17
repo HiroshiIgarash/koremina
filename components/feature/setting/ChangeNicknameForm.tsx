@@ -8,7 +8,7 @@ import updateNickname from "@/app/action/updateNickname";
 import { useForm } from "react-hook-form";
 import { NicknameSchema, nicknameSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
 interface ChangeNicknameFormProps {
@@ -18,7 +18,7 @@ interface ChangeNicknameFormProps {
 
 const ChangeNicknameForm = ({ user, setOpen }: ChangeNicknameFormProps) => {
   const [isPending, startTransition] = useTransition();
-  const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
@@ -35,15 +35,10 @@ const ChangeNicknameForm = ({ user, setOpen }: ChangeNicknameFormProps) => {
     startTransition(async () => {
       const res = await updateNickname(data);
       if (res?.error) {
-        toast({
-          description: "ユーザーネームの変更に失敗しました。",
-          variant: "destructive",
-        });
+        toast.error("ユーザーネームの変更に失敗しました。");
         return;
       }
-      toast({
-        description: "ユーザーネームを変更しました。",
-      });
+      toast.success("ユーザーネームを変更しました。");
       setOpen(false);
     });
   };
