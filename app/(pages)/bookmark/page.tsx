@@ -7,7 +7,8 @@ interface ISearchParams {
   page: string;
 }
 
-const Page = ({ searchParams }: { searchParams?: ISearchParams }) => {
+const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+  const searchParams = await props.searchParams;
   const currentPage = parseInt(searchParams?.page || "1");
   const postsPerPage = 16;
 

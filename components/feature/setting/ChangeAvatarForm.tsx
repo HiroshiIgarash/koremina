@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import updateAvatar from "@/app/action/updateAvatar";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 interface ChangeAvatarFormProps {
   user: User | null;
@@ -18,14 +18,12 @@ interface ChangeAvatarFormProps {
 const ChangeAvatarForm = ({ user, setOpen }: ChangeAvatarFormProps) => {
   const [file, setFile] = useState<File & { preview: string }>();
   const [isPending, startTransition] = useTransition();
-  const { toast } = useToast();
+
 
   const handleDefaultAvatarClick = () => {
     startTransition(async () => {
       await updateAvatar();
-      toast({
-        description: "アバターを変更しました",
-      });
+      toast.success("アバターを変更しました");
       setOpen(false);
     });
   };

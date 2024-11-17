@@ -3,7 +3,6 @@
 import deletePost from "@/app/action/deletePost";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -13,7 +12,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState, useTransition } from "react";
@@ -25,16 +24,14 @@ interface PostDeleteDialogProps {
 
 const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
   const router = useRouter();
-  const { toast } = useToast();
+
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false)
 
   const handleDelete = async () => {
     startTransition(async () => {
       await deletePost({ postId });
-      toast({
-        description: "投稿を削除しました。",
-      });
+      toast.success("投稿を削除しました。");
       setOpen(false)
       router.push("/");
       router.refresh();

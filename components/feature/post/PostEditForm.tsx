@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { cn } from "@/lib/utils";
@@ -70,7 +70,7 @@ const PostEditForm = ({
   liver,
 }: PostEditFormProps) => {
   const router = useRouter();
-  const { toast } = useToast();
+
   const [isValidVideoId, setIsValidVideoId] = useState(false);
 
   const [livers, setLivers] = useState<Liver[]>([]);
@@ -103,9 +103,7 @@ const PostEditForm = ({
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       await axios.put("/api/post", { ...values, postId }).then(() => {
-        toast({
-          description: "投稿の更新が完了しました",
-        });
+        toast.success("投稿の更新が完了しました");
         router.push(`/post/${postId}`);
         router.refresh();
       });

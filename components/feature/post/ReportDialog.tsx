@@ -12,7 +12,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { ReactNode, useState, useTransition } from "react";
 
@@ -23,15 +23,13 @@ interface ReportDialogProps {
 
 const ReportDialog = ({ children, postId }: ReportDialogProps) => {
   const [open, setOpen] = useState(false)
-  const { toast } = useToast();
+
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = async () => {
     startTransition(async () => {
       await sendReportMail(postId);
-      toast({
-        description: "投稿を通報しました。",
-      });
+      toast.success("投稿を通報しました。");
       setOpen(false)
     });
   };

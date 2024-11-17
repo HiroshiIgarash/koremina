@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { cn } from "@/lib/utils";
@@ -57,7 +57,7 @@ const formSchema = z.object({
 
 const PostForm = () => {
   const router = useRouter();
-  const { toast } = useToast();
+
   const [isValidVideoId, setIsValidVideoId] = useState(false);
 
   const [livers, setLivers] = useState<Liver[]>([]);
@@ -90,9 +90,7 @@ const PostForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       await axios.post("/api/post", values).then(() => {
-        toast({
-          description: "投稿が完了しました。",
-        });
+        toast.success("投稿が完了しました。");
         router.push("/");
         router.refresh();
       });
@@ -380,7 +378,7 @@ const PostForm = () => {
             ※投稿ボタンが押せない場合、以下を確認してください。<br />
             ・「このライバーを推すときにおすすめしたい！」→ライバーのラベルが表示されていますか？<br />
             ・youtube ID（URLでも可）→サムネが表示されていますか？<br />
-            
+
           </p>
         </form>
       </Form>

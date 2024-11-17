@@ -2,7 +2,7 @@
 
 import deleteComment from "@/app/action/deleteComment";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useTransition } from "react";
 
@@ -16,24 +16,15 @@ const DeleteCommentButton = ({
   postId,
 }: DeleteCommentButtonProps) => {
   const [isPending, startTransition] = useTransition();
-  const { toast } = useToast();
+
 
   const handleClick = () => {
     startTransition(async () => {
       const result = await deleteComment({ commentId, postId });
       if (result?.error) {
-        toast({
-          description: (
-            <>
-              削除に失敗しました。
-              <br />
-              何度も失敗する場合は、お問い合わせよりご連絡ください。
-            </>
-          ),
-          variant: "destructive",
-        });
+        toast.error("削除に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
       } else {
-        toast({ description: "コメントを削除しました。" });
+        toast.success("コメントを削除しました。");
       }
     });
   };

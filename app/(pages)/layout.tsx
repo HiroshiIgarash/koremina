@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body className={noto.className}>
-        <ThemeProvider attribute="class" defaultTheme="system">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <NextTopLoader showSpinner={false} height={2} />
           <div className="min-h-dvh grid grid-rows-[auto,1fr,auto]">
             <Header />

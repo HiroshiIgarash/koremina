@@ -4,7 +4,7 @@ import SkeltonPostItem from "./SkeltonPostItem"
 import prisma from "@/lib/db"
 import { getRandomPostIds as getRandomPostIdsSQL } from '@prisma/client/sql'
 
-const getRandomPostIds = async ({ seed = Date.now(), limit = 10 }) => {
+const getRandomPostIds = async ({ seed = Math.sin(Date.now()), limit = 10 }) => {
 
   // ランダムに投稿を取得（id, detailComment）
   const randomPosts = await prisma.$queryRawTyped(getRandomPostIdsSQL(seed, limit))

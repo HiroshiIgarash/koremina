@@ -5,7 +5,7 @@ import updateNotification from "@/app/action/updateNotification";
 import Avatar from "@/components/Avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { User } from "@prisma/client";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ interface CommentFormProps {
 }
 
 const CommentForm = ({ user, postId }: CommentFormProps) => {
-  const { toast } = useToast();
+
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -25,21 +25,10 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
         const result = await postComment(postId, formData);
         if (result?.error) {
           console.log(result.error);
-          toast({
-            description: (
-              <>
-                登録に失敗しました。
-                <br />
-                何度も失敗する場合は、お問い合わせよりご連絡ください。
-              </>
-            ),
-            variant: "destructive",
-          });
+          toast.error("登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
         } else {
           updateNotification({ type: 'comment', postId })
-          toast({
-            description: "コメントを投稿しました",
-          });
+          toast.success("コメントを投稿しました。");
           setComment("");
         }
         setIsSubmitting(false);
