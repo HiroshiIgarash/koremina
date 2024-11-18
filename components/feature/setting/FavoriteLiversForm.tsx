@@ -11,7 +11,7 @@ import {
   useState,
   useTransition,
 } from "react";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 import { Loader2, X } from "lucide-react";
 
@@ -92,20 +92,9 @@ const FavoriteLiversForm = ({
 
       if (result?.error) {
         console.log(result.error);
-        toast({
-          description: (
-            <>
-              登録に失敗しました。
-              <br />
-              何度も失敗する場合は、お問い合わせよりご連絡ください。
-            </>
-          ),
-          variant: "destructive",
-        });
+        toast.error("登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
       } else {
-        toast({
-          description: `推しライバーを登録しました。`,
-        });
+        toast.success("推しライバーを登録しました。");
         setOpenDialog(false);
       }
     });
@@ -120,43 +109,43 @@ const FavoriteLiversForm = ({
           className="overflow-visible bg-transparent"
         >
           <div className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
-          <ScrollArea>
-            <div className="flex gap-1 flex-wrap">
-              {selected.map((liver) => {
-                return (
-                  <Badge key={liver.id} variant="secondary">
-                    {liver.name}
-                    <button
-                      className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          handleUnselect(liver);
-                        }
-                      }}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                      }}
-                      onClick={() => handleUnselect(liver)}
-                    >
-                      <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
-                    </button>
-                  </Badge>
-                );
-              })}
-              {/* Avoid having the "Search" Icon */}
-              <CommandPrimitive.Input
-                ref={inputRef}
-                value={inputValue}
-                onValueChange={setInputValue}
-                onBlur={() => setOpen(false)}
-                onFocus={() => setOpen(true)}
-                placeholder="推しのライバーを選択"
-                className="text-base md:text-sm ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1"
-              />
-            </div>
-          </ScrollArea>
-            </div>
+            <ScrollArea>
+              <div className="flex gap-1 flex-wrap">
+                {selected.map((liver) => {
+                  return (
+                    <Badge key={liver.id} variant="secondary">
+                      {liver.name}
+                      <button
+                        className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            handleUnselect(liver);
+                          }
+                        }}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        onClick={() => handleUnselect(liver)}
+                      >
+                        <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
+                      </button>
+                    </Badge>
+                  );
+                })}
+                {/* Avoid having the "Search" Icon */}
+                <CommandPrimitive.Input
+                  ref={inputRef}
+                  value={inputValue}
+                  onValueChange={setInputValue}
+                  onBlur={() => setOpen(false)}
+                  onFocus={() => setOpen(true)}
+                  placeholder="推しのライバーを選択"
+                  className="text-base md:text-sm ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1"
+                />
+              </div>
+            </ScrollArea>
+          </div>
           <div className="relative mt-2">
             {open && selectables.length > 0 ? (
               <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
@@ -175,7 +164,7 @@ const FavoriteLiversForm = ({
                             setSelected((prev) => [...prev, liver]);
                           }}
                           className={"cursor-pointer"}
-                          keywords={[liver.aliasFirst,liver.aliasSecond].filter((a) => a) as string[]}
+                          keywords={[liver.aliasFirst, liver.aliasSecond].filter((a) => a) as string[]}
                         >
                           {liver.name}
                         </CommandItem>

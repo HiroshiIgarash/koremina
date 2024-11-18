@@ -17,7 +17,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -69,20 +69,9 @@ const MostFavoriteLiverForm = ({
 
       if (result?.error) {
         console.log(result.error);
-        toast({
-          description: (
-            <>
-              登録に失敗しました。
-              <br />
-              何度も失敗する場合は、お問い合わせよりご連絡ください。
-            </>
-          ),
-          variant: "destructive",
-        });
+        toast.error("登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
       } else {
-        toast({
-          description: `最推しライバーを登録しました。`,
-        });
+        toast.success("最推しライバーを登録しました。");
         setOpen(false);
       }
     });

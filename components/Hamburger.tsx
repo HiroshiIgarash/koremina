@@ -2,7 +2,7 @@
 
 import { Menu, ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
-import { SheetTrigger, SheetContent, Sheet } from "./ui/sheet";
+import { SheetTrigger, SheetContent, Sheet, SheetTitle } from "./ui/sheet";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
@@ -30,7 +30,7 @@ const Hamburger = () => {
               width={32}
               height={32}
             />
-            コレミナ
+            <SheetTitle>コレミナ</SheetTitle>
           </Link>
         </div>
         <ul className="mt-8">
