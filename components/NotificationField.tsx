@@ -11,6 +11,7 @@ const NotificationField = async () => {
 
   const getCachedNotReadNotification = unstable_cache(
     async (userId) => {
+      console.log("get new notification!!")
       return await prisma.notification.findFirst({
         where: {
           userId,
