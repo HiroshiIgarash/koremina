@@ -43,7 +43,7 @@ export default function RootLayout({
             <Footer />
             <MobileFixedFooter />
           </div>
-          <Toaster richColors />
+          <Toaster position="top-center" richColors />
         </ThemeProvider>
         <Analytics />
       </body>
