@@ -19,6 +19,7 @@ import ReportDialog from "@/components/feature/post/ReportDialog";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import getYoutubeTitleById from "@/utils";
+import Video from "./Video";
 
 interface IParams {
   postId: string;
@@ -59,17 +60,8 @@ const Page = async (props: { params: Promise<IParams> }) => {
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
       <div>
         <div className="sticky top-28 space-y-4">
-          <iframe
-            width="560"
-            height="315"
-            className="w-full h-auto aspect-video"
-            src={`https://www.youtube.com/embed/${post.videoId}`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe>
+
+          <Video videoId={post.videoId} />
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
             <div className="flex flex-col gap-2">
               <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)] text-white" asChild>
