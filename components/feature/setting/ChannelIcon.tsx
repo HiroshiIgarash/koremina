@@ -18,12 +18,11 @@ const ChannelIcon = async ({
     <>
       {iconSrc.error ? (
         <div
-          className="bg-secondary rounded-full border-2"
+          className="bg-secondary rounded-full border-2 max-w-full aspect-square grid place-content-center"
           style={{
             width: size,
-            height: size,
           }}
-        />
+        ><span className="text-xs">No Image</span></div>
       ) : (
         <Image
           src={iconSrc}
