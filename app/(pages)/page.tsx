@@ -9,6 +9,7 @@ import PostList from "@/components/feature/post/PostList";
 import SearchForm from "@/components/feature/post/SearchForm";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import SkeltonPickUpList from "@/components/feature/post/SkeltonPickUpList";
+import SkeltonTopBookmarkList from "@/components/feature/post/SkeltonTopBookmarkList";
 import prisma from "@/lib/db";
 import { ChevronRight, Upload } from "lucide-react";
 import Image from "next/image";
@@ -26,6 +27,15 @@ export default async function Home() {
   const session = await auth()
 
   const isDisplayDialog = !session
+
+  const hasBookmark = session?.user && await prisma.bookmark.findFirst({
+    where: {
+      userId: session.user.id,
+    },
+    select: {
+      id: true,
+    }
+  })
 
   return (
     <>
@@ -86,7 +96,13 @@ export default async function Home() {
           <SearchForm />
         </div>
       </div>
-      <TopBookmarkList />
+      {
+        hasBookmark && (
+          <Suspense fallback={<SkeltonTopBookmarkList />}>
+            <TopBookmarkList />
+          </Suspense>
+        )
+      }
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">Pick Up!</h2>
         <p className="mb-4 px-4 w-full max-w-7xl mx-auto">12時間ごとに更新されます。<br />いい動画だったらリアクションしよう！</p>
