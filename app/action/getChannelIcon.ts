@@ -20,7 +20,7 @@ const getChannelIcon = async ({
   try {
     const res = await fetch(
       `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
-      { cache: "force-cache" }
+      { cache: "force-cache", next: { revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */ } }
     );
     if (res.status === 200) {
       const data = await res.json();
