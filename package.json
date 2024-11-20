@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "export POSTGRES_PRISMA_URL=$(dotenv -- bash -c 'echo $POSTGRES_LOCAL_URL') && next dev",
+    "prisma:studio:dev": "export POSTGRES_PRISMA_URL=$(dotenv -- bash -c 'echo $POSTGRES_LOCAL_URL') && prisma studio",
+    "dev:dbprod": "next dev",
     "dev:host": "next dev -H 192.168.11.31",
     "build": "prisma generate --sql && next build",
     "start": "next start",
