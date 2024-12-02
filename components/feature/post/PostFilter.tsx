@@ -56,7 +56,7 @@ const PostFilter = ({ filterLiversId, livers, user, isPending = false }: PostFil
           <SelectTrigger className="w-48 md:w-64">
             <SelectValue placeholder="ライバー絞り込み" />
           </SelectTrigger>
-          <SelectContent ref={(ref) => ref?.addEventListener('touchend', (e) => { e.preventDefault(); })}>
+          <SelectContent>
             <SelectItem value="all">
               全て表示
             </SelectItem>

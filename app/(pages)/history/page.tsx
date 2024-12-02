@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2024-12-02" className="font-bold">
+              2024/12/02
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                ライバー絞り込みが反応しない不具合を修正しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2024-11-19" className="font-bold">
               2024/11/19
             </time>
