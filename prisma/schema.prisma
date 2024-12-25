@@ -8,9 +8,9 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  // url      = "postgresql://admin:password@localhost:5432/postgres"
+  // url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url      = "postgresql://admin:password@localhost:5432/postgres"
 }
 
 model User {
@@ -139,6 +139,8 @@ model Liver {
   aliasFirst       String?
   aliasSecond      String?
   channelHandle    String
+  birthMonth       Int?
+  birthDay         Int?
   mostFavoriteUser User[]  @relation("mostFavoriteLiver")
   favoriteUser     User[]  @relation("favoriteLivers")
   video            Video[]

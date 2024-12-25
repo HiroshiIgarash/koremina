@@ -5,7 +5,9 @@
     "aliasSecond": "",
     "channelHandle": "@nijisanji",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "月ノ美兎",
@@ -13,7 +15,9 @@
     "aliasSecond": "",
     "channelHandle": "@TsukinoMito",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 24
   },
   {
     "name": "勇気ちひろ",
@@ -21,7 +25,9 @@
     "aliasSecond": "",
     "channelHandle": "@YukiChihiro",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 16
   },
   {
     "name": "える",
@@ -29,7 +35,9 @@
     "aliasSecond": "",
     "channelHandle": "@Elu",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 24
   },
   {
     "name": "樋口楓",
@@ -37,7 +45,9 @@
     "aliasSecond": "",
     "channelHandle": "@HiguchiKaede",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "静凛",
@@ -45,7 +55,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShizukaRin",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 28
   },
   {
     "name": "渋谷ハジメ",
@@ -53,7 +65,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShibuyaHajime",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 5
   },
   {
     "name": "鈴谷アキ",
@@ -61,7 +75,9 @@
     "aliasSecond": "",
     "channelHandle": "@Suzuya_Aki",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 28
   },
   {
     "name": "モイラ",
@@ -69,7 +85,9 @@
     "aliasSecond": "",
     "channelHandle": "@Moira",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 10
   },
   {
     "name": "鈴鹿詩子",
@@ -77,7 +95,9 @@
     "aliasSecond": "",
     "channelHandle": "@SuzukaUtako",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 24
   },
   {
     "name": "宇志海いちご",
@@ -85,7 +105,9 @@
     "aliasSecond": "",
     "channelHandle": "@UshimiIchigo",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 15
   },
   {
     "name": "家長むぎ",
@@ -93,7 +115,9 @@
     "aliasSecond": "",
     "channelHandle": "@IenagaMugi",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 7
   },
   {
     "name": "夕陽リリ",
@@ -101,7 +125,9 @@
     "aliasSecond": "",
     "channelHandle": "@YuhiRiri",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 21
   },
   {
     "name": "物述有栖",
@@ -109,7 +135,9 @@
     "aliasSecond": "",
     "channelHandle": "@MononobeAlice",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 16
   },
   {
     "name": "文野環",
@@ -117,7 +145,9 @@
     "aliasSecond": "",
     "channelHandle": "@FuminoTamaki",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "伏見ガク",
@@ -125,7 +155,9 @@
     "aliasSecond": "",
     "channelHandle": "@FushimiGaku",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 5
   },
   {
     "name": "ギルザレンIII世",
@@ -133,7 +165,9 @@
     "aliasSecond": "",
     "channelHandle": "@GilzarenIII",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 6
   },
   {
     "name": "剣持刀也",
@@ -141,7 +175,9 @@
     "aliasSecond": "",
     "channelHandle": "@KenmochiToya",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 22
   },
   {
     "name": "森中花咲",
@@ -149,7 +185,9 @@
     "aliasSecond": "",
     "channelHandle": "@MorinakaKazaki",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 23
   },
   {
     "name": "叶",
@@ -157,7 +195,9 @@
     "aliasSecond": "",
     "channelHandle": "@Kanae",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 7
   },
   {
     "name": "赤羽葉子",
@@ -165,7 +205,9 @@
     "aliasSecond": "",
     "channelHandle": "@AkabaneYouko",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 5
   },
   {
     "name": "笹木咲",
@@ -173,7 +215,9 @@
     "aliasSecond": "",
     "channelHandle": "@SasakiSaku",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 11
   },
   {
     "name": "闇夜乃モルル",
@@ -181,7 +225,9 @@
     "aliasSecond": "",
     "channelHandle": "UCNUgrFCo2Hr_VXc9bEwjcHQ",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 11
   },
   {
     "name": "本間ひまわり",
@@ -189,7 +235,9 @@
     "aliasSecond": "",
     "channelHandle": "@HonmaHimawari",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 10
   },
   {
     "name": "魔界ノりりむ",
@@ -197,7 +245,9 @@
     "aliasSecond": "",
     "channelHandle": "@MakainoRirimu",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 15
   },
   {
     "name": "葛葉",
@@ -205,7 +255,9 @@
     "aliasSecond": "",
     "channelHandle": "@Kuzuha",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 10
   },
   {
     "name": "雪汝",
@@ -213,7 +265,9 @@
     "aliasSecond": "",
     "channelHandle": "UCfM_A7lE6LkGrzx6_mOtI4g",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 23
   },
   {
     "name": "椎名唯華",
@@ -221,7 +275,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShiinaYuika",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 17
   },
   {
     "name": "ドーラ",
@@ -229,7 +285,9 @@
     "aliasSecond": "",
     "channelHandle": "@Dola",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 19
   },
   {
     "name": "海夜叉神",
@@ -237,7 +295,9 @@
     "aliasSecond": "",
     "channelHandle": "UCqEp6RdtsMbUNrCdCswr6pA",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 4
   },
   {
     "name": "名伽尾アズマ",
@@ -245,7 +305,9 @@
     "aliasSecond": "",
     "channelHandle": "UCks41vQN-hN-1KHmpZyPY3A",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 22
   },
   {
     "name": "出雲霞",
@@ -253,7 +315,9 @@
     "aliasSecond": "",
     "channelHandle": "@IzumoKasumi",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 13
   },
   {
     "name": "轟京子",
@@ -261,7 +325,9 @@
     "aliasSecond": "",
     "channelHandle": "@TodorokiKyoko",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 22
   },
   {
     "name": "シスター・クレア",
@@ -269,7 +335,9 @@
     "aliasSecond": "",
     "channelHandle": "@Sister_Claire",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 4
   },
   {
     "name": "花畑チャイカ",
@@ -277,7 +345,9 @@
     "aliasSecond": "",
     "channelHandle": "@HanabatakeChaika",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 27
   },
   {
     "name": "社築",
@@ -285,7 +355,9 @@
     "aliasSecond": "",
     "channelHandle": "@YashiroKizuku",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 23
   },
   {
     "name": "安土桃",
@@ -293,7 +365,9 @@
     "aliasSecond": "",
     "channelHandle": "@AzuchiMomo",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 3
   },
   {
     "name": "鈴木勝",
@@ -301,7 +375,9 @@
     "aliasSecond": "",
     "channelHandle": "@SuzukiMasaru",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 9
   },
   {
     "name": "緑仙",
@@ -309,7 +385,9 @@
     "aliasSecond": "",
     "channelHandle": "@Ryushen",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 16
   },
   {
     "name": "卯月コウ",
@@ -317,7 +395,9 @@
     "aliasSecond": "",
     "channelHandle": "@UzukiKou",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 2
   },
   {
     "name": "八朔ゆず",
@@ -325,7 +405,9 @@
     "aliasSecond": "",
     "channelHandle": "UCFaDvgez8USXHiKidt0NtZg",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 4
   },
   {
     "name": "神田笑一",
@@ -333,7 +415,9 @@
     "aliasSecond": "",
     "channelHandle": "@KandaShoichi",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 5
   },
   {
     "name": "鳴門こがね",
@@ -341,7 +425,9 @@
     "aliasSecond": "",
     "channelHandle": "UCF1JdALrXgub24weQpqDy9Q",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "飛鳥ひな",
@@ -349,7 +435,9 @@
     "aliasSecond": "",
     "channelHandle": "@AsukaHina",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 3
   },
   {
     "name": "春崎エアル",
@@ -357,7 +445,9 @@
     "aliasSecond": "",
     "channelHandle": "@HarusakiAir",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 3
   },
   {
     "name": "雨森小夜",
@@ -365,7 +455,9 @@
     "aliasSecond": "",
     "channelHandle": "@AmemoriSayo",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 11
   },
   {
     "name": "鷹宮リオン",
@@ -373,7 +465,9 @@
     "aliasSecond": "",
     "channelHandle": "@TakamiyaRion",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 7
   },
   {
     "name": "舞元啓介",
@@ -381,7 +475,9 @@
     "aliasSecond": "",
     "channelHandle": "@MaimotoKeisuke",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 9
   },
   {
     "name": "竜胆尊",
@@ -389,7 +485,9 @@
     "aliasSecond": "",
     "channelHandle": "@RindouMikoto",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 20
   },
   {
     "name": "でびでび・でびる",
@@ -397,7 +495,9 @@
     "aliasSecond": "",
     "channelHandle": "@DebidebiDebiru",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 18
   },
   {
     "name": "桜凛月",
@@ -405,7 +505,9 @@
     "aliasSecond": "",
     "channelHandle": "@SakuraRitsuki",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 1
   },
   {
     "name": "町田ちま",
@@ -413,7 +515,9 @@
     "aliasSecond": "",
     "channelHandle": "@MachitaChima",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 5
   },
   {
     "name": "月見しずく",
@@ -421,7 +525,9 @@
     "aliasSecond": "",
     "channelHandle": "UCqQV8xEBWd5SVZBLlYrS_5Q",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 15
   },
   {
     "name": "ジョー・力一",
@@ -429,7 +535,9 @@
     "aliasSecond": "",
     "channelHandle": "@JoeRikiichi",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 1
   },
   {
     "name": "遠北千南",
@@ -437,7 +545,9 @@
     "aliasSecond": "",
     "channelHandle": "@AchikitaChinami",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 30
   },
   {
     "name": "成瀬鳴",
@@ -445,7 +555,9 @@
     "aliasSecond": "",
     "channelHandle": "@NaruseNaru",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 8
   },
   {
     "name": "ベルモンド・バンデラス",
@@ -453,7 +565,9 @@
     "aliasSecond": "",
     "channelHandle": "@BelmondBanderas",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 3
   },
   {
     "name": "矢車りね",
@@ -461,7 +575,9 @@
     "aliasSecond": "",
     "channelHandle": "@YagurumaRine",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 2
   },
   {
     "name": "夢追翔",
@@ -469,7 +585,9 @@
     "aliasSecond": "",
     "channelHandle": "@YumeoiKakeru",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 28
   },
   {
     "name": "黒井しば",
@@ -477,7 +595,9 @@
     "aliasSecond": "",
     "channelHandle": "@KuroiShiba",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 11
   },
   {
     "name": "童田明治",
@@ -485,7 +605,9 @@
     "aliasSecond": "",
     "channelHandle": "@WarabedaMeiji",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 4
   },
   {
     "name": "久遠千歳",
@@ -493,7 +615,9 @@
     "aliasSecond": "",
     "channelHandle": "@KudouChitose",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 4
   },
   {
     "name": "郡道美玲",
@@ -501,7 +625,9 @@
     "aliasSecond": "",
     "channelHandle": "@GundoMirei",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 14
   },
   {
     "name": "夢月ロア",
@@ -509,7 +635,9 @@
     "aliasSecond": "",
     "channelHandle": "@YuzukiRoa",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 4
   },
   {
     "name": "小野町春香",
@@ -517,7 +645,9 @@
     "aliasSecond": "",
     "channelHandle": "@OnomachiHaruka",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 8
   },
   {
     "name": "語部紡",
@@ -525,7 +655,9 @@
     "aliasSecond": "",
     "channelHandle": "UCufQu4q65z63IgE4cfKs1BQ",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 15
   },
   {
     "name": "瀬戸美夜子",
@@ -533,7 +665,9 @@
     "aliasSecond": "",
     "channelHandle": "@SetoMiyako",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 3
   },
   {
     "name": "御伽原江良",
@@ -541,7 +675,9 @@
     "aliasSecond": "",
     "channelHandle": "",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 28
   },
   {
     "name": "戌亥とこ",
@@ -549,7 +685,9 @@
     "aliasSecond": "",
     "channelHandle": "@InuiToko",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 9
   },
   {
     "name": "アンジュ・カトリーナ",
@@ -557,7 +695,9 @@
     "aliasSecond": "",
     "channelHandle": "@AngeKatrina",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 30
   },
   {
     "name": "リゼ・ヘルエスタ",
@@ -565,7 +705,9 @@
     "aliasSecond": "",
     "channelHandle": "@LizeHelesta",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 25
   },
   {
     "name": "三枝明那",
@@ -573,7 +715,9 @@
     "aliasSecond": "",
     "channelHandle": "@SaegusaAkina",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 1
   },
   {
     "name": "愛園愛美",
@@ -581,7 +725,9 @@
     "aliasSecond": "",
     "channelHandle": "@AizonoManami",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 8
   },
   {
     "name": "鈴原るる",
@@ -589,7 +735,9 @@
     "aliasSecond": "",
     "channelHandle": "@LuluSuzuhara",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 24
   },
   {
     "name": "雪城眞尋",
@@ -597,7 +745,9 @@
     "aliasSecond": "",
     "channelHandle": "@YukishiroMahiro",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 26
   },
   {
     "name": "エクス・アルビオ",
@@ -605,7 +755,9 @@
     "aliasSecond": "",
     "channelHandle": "@ExAlbio",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 1
   },
   {
     "name": "レヴィ・エリファ",
@@ -613,7 +765,9 @@
     "aliasSecond": "",
     "channelHandle": "@LeviElipha",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 18
   },
   {
     "name": "葉山舞鈴",
@@ -621,7 +775,9 @@
     "aliasSecond": "",
     "channelHandle": "@HayamaMarin",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 24
   },
   {
     "name": "ニュイ・ソシエール",
@@ -629,7 +785,9 @@
     "aliasSecond": "",
     "channelHandle": "@NuiSociere",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 31
   },
   {
     "name": "葉加瀬冬雪",
@@ -637,7 +795,9 @@
     "aliasSecond": "",
     "channelHandle": "@HakaseFuyuki",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 19
   },
   {
     "name": "加賀美ハヤト",
@@ -645,7 +805,9 @@
     "aliasSecond": "",
     "channelHandle": "@KagamiHayato",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 2
   },
   {
     "name": "夜見れな",
@@ -653,7 +815,9 @@
     "aliasSecond": "",
     "channelHandle": "@YorumiRena",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 27
   },
   {
     "name": "黛灰",
@@ -661,7 +825,9 @@
     "aliasSecond": "",
     "channelHandle": "@MayuzumiKai",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 28
   },
   {
     "name": "アルス・アルマル",
@@ -669,7 +835,9 @@
     "aliasSecond": "",
     "channelHandle": "@ArsAlmal",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 21
   },
   {
     "name": "相羽ういは",
@@ -677,7 +845,9 @@
     "aliasSecond": "",
     "channelHandle": "@AibaUiha",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 22
   },
   {
     "name": "天宮こころ",
@@ -685,7 +855,9 @@
     "aliasSecond": "",
     "channelHandle": "@AmamiyaKokoro",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 1
   },
   {
     "name": "エリー・コニファー",
@@ -693,7 +865,9 @@
     "aliasSecond": "",
     "channelHandle": "@EliConifer",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 27
   },
   {
     "name": "ラトナ・プティ",
@@ -701,7 +875,9 @@
     "aliasSecond": "",
     "channelHandle": "@RatnaPetit",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 14
   },
   {
     "name": "早瀬走",
@@ -709,7 +885,9 @@
     "aliasSecond": "",
     "channelHandle": "@HayaseSou",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 20
   },
   {
     "name": "健屋花那",
@@ -717,7 +895,9 @@
     "aliasSecond": "",
     "channelHandle": "@SukoyaKana",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 14
   },
   {
     "name": "シェリン・バーガンディ",
@@ -725,7 +905,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShellinBurgundy",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 6
   },
   {
     "name": "フミ",
@@ -733,7 +915,9 @@
     "aliasSecond": "",
     "channelHandle": "@Fumi",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 10
   },
   {
     "name": "星川サラ",
@@ -741,7 +925,9 @@
     "aliasSecond": "",
     "channelHandle": "@HoshikawaSara",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 7
   },
   {
     "name": "山神カルタ",
@@ -749,7 +935,9 @@
     "aliasSecond": "",
     "channelHandle": "@YamagamiKaruta",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 11
   },
   {
     "name": "えま★おうがすと",
@@ -757,7 +945,9 @@
     "aliasSecond": "",
     "channelHandle": "@EmmaAugust",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 8
   },
   {
     "name": "ルイス・キャミー",
@@ -765,7 +955,9 @@
     "aliasSecond": "",
     "channelHandle": "@LuisCammy",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 22
   },
   {
     "name": "魔使マオ",
@@ -773,7 +965,9 @@
     "aliasSecond": "",
     "channelHandle": "@MatsukaiMao",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 31
   },
   {
     "name": "不破湊",
@@ -781,7 +975,9 @@
     "aliasSecond": "",
     "channelHandle": "@FuwaMinato",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 18
   },
   {
     "name": "白雪巴",
@@ -789,7 +985,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShirayukiTomoe",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 8
   },
   {
     "name": "グウェル・オス・ガール",
@@ -797,7 +995,9 @@
     "aliasSecond": "",
     "channelHandle": "@GweluOsGar",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 22
   },
   {
     "name": "ましろ爻",
@@ -805,7 +1005,9 @@
     "aliasSecond": "",
     "channelHandle": "@MashiroMeme",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 27
   },
   {
     "name": "奈羅花",
@@ -813,7 +1015,9 @@
     "aliasSecond": "",
     "channelHandle": "@Naraka_nijisanji",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 10
   },
   {
     "name": "来栖夏芽",
@@ -821,7 +1025,9 @@
     "aliasSecond": "",
     "channelHandle": "@KurusuNatsume",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 7
   },
   {
     "name": "フレン・E・ルスタリオ",
@@ -829,7 +1035,9 @@
     "aliasSecond": "",
     "channelHandle": "@FurenELustario",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 10
   },
   {
     "name": "メリッサ・キンレンカ",
@@ -837,7 +1045,9 @@
     "aliasSecond": "",
     "channelHandle": "@MelissaKinrenka",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 11
   },
   {
     "name": "イブラヒム",
@@ -845,7 +1055,9 @@
     "aliasSecond": "",
     "channelHandle": "@Ibrahim",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 25
   },
   {
     "name": "長尾景",
@@ -853,7 +1065,9 @@
     "aliasSecond": "",
     "channelHandle": "@NagaoKei",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 24
   },
   {
     "name": "弦月藤士郎",
@@ -861,7 +1075,9 @@
     "aliasSecond": "",
     "channelHandle": "@GenzukiTojiro",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 30
   },
   {
     "name": "甲斐田晴",
@@ -869,7 +1085,9 @@
     "aliasSecond": "",
     "channelHandle": "@KaidaHaru",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 25
   },
   {
     "name": "空星きらめ",
@@ -877,7 +1095,9 @@
     "aliasSecond": "",
     "channelHandle": "@SorahoshiKirame",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 30
   },
   {
     "name": "朝日南アカネ",
@@ -885,7 +1105,9 @@
     "aliasSecond": "",
     "channelHandle": "@AsahinaAkane",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 15
   },
   {
     "name": "周央サンゴ",
@@ -893,7 +1115,9 @@
     "aliasSecond": "",
     "channelHandle": "@SuoSango",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 6
   },
   {
     "name": "東堂コハク",
@@ -901,7 +1125,9 @@
     "aliasSecond": "",
     "channelHandle": "@TodoKohaku",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 29
   },
   {
     "name": "北小路ヒスイ",
@@ -909,7 +1135,9 @@
     "aliasSecond": "",
     "channelHandle": "@KitakojiHisui",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 13
   },
   {
     "name": "西園チグサ",
@@ -917,7 +1145,9 @@
     "aliasSecond": "",
     "channelHandle": "@NishizonoChigusa",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 20
   },
   {
     "name": "アクシア・クローネ",
@@ -925,7 +1155,9 @@
     "aliasSecond": "",
     "channelHandle": "@AxiaKrone",
     "isRetire": 1,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 27
   },
   {
     "name": "ローレン・イロアス",
@@ -933,7 +1165,9 @@
     "aliasSecond": "",
     "channelHandle": "@LaurenIroas",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 6
   },
   {
     "name": "レオス・ヴィンセント",
@@ -941,7 +1175,9 @@
     "aliasSecond": "",
     "channelHandle": "@LeosVincent",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 8
   },
   {
     "name": "オリバー・エバンス",
@@ -949,7 +1185,9 @@
     "aliasSecond": "",
     "channelHandle": "@OliverEvans",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 21
   },
   {
     "name": "レイン・パターソン",
@@ -957,7 +1195,9 @@
     "aliasSecond": "",
     "channelHandle": "@LainPaterson",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 13
   },
   {
     "name": "天ヶ瀬むゆ",
@@ -965,7 +1205,9 @@
     "aliasSecond": "",
     "channelHandle": "@AmagaseMuyu",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 11
   },
   {
     "name": "先斗寧",
@@ -973,7 +1215,9 @@
     "aliasSecond": "",
     "channelHandle": "@PontoNei",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 21
   },
   {
     "name": "海妹四葉",
@@ -981,7 +1225,9 @@
     "aliasSecond": "",
     "channelHandle": "@UmiseYotsuha",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 17
   },
   {
     "name": "壱百満天原サロメ",
@@ -989,7 +1235,9 @@
     "aliasSecond": "",
     "channelHandle": "@HyakumantenbaraSalome",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "風楽奏斗",
@@ -997,7 +1245,9 @@
     "aliasSecond": "",
     "channelHandle": "@FuraKanato",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 25
   },
   {
     "name": "渡会雲雀",
@@ -1005,7 +1255,9 @@
     "aliasSecond": "",
     "channelHandle": "@WataraiHibari",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 23
   },
   {
     "name": "四季凪アキラ",
@@ -1013,7 +1265,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShikinagiAkira",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 12
   },
   {
     "name": "セラフ・ダズルガーデン",
@@ -1021,7 +1275,9 @@
     "aliasSecond": "",
     "channelHandle": "@SeraphDazzlegarden",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 12
   },
   {
     "name": "タカ ラジマン",
@@ -1029,7 +1285,9 @@
     "aliasSecond": "",
     "channelHandle": "@TakaRadjiman",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 3,
+    "birthDay": 14
   },
   {
     "name": "ゼア コルネリア",
@@ -1037,7 +1295,9 @@
     "aliasSecond": "",
     "channelHandle": "@ZEACornelia",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 8,
+    "birthDay": 29
   },
   {
     "name": "ハナ マキア",
@@ -1045,7 +1305,9 @@
     "aliasSecond": "",
     "channelHandle": "@HanaMacchia",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 11
   },
   {
     "name": "ライ ガリレイ",
@@ -1053,7 +1315,9 @@
     "aliasSecond": "",
     "channelHandle": "@RaiGalilei",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 21
   },
   {
     "name": "アミシア ミシェラ",
@@ -1061,7 +1325,9 @@
     "aliasSecond": "",
     "channelHandle": "@AmiciaMichella",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 12,
+    "birthDay": 27
   },
   {
     "name": "ミユ オッタフィア",
@@ -1069,7 +1335,9 @@
     "aliasSecond": "",
     "channelHandle": "@MiyuOttavia",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 5,
+    "birthDay": 8
   },
   {
     "name": "リクサ ディレンドラ",
@@ -1077,7 +1345,9 @@
     "aliasSecond": "",
     "channelHandle": "@RiksaDhirendra",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 5,
+    "birthDay": 1
   },
   {
     "name": "アズラ セシリア",
@@ -1085,7 +1355,9 @@
     "aliasSecond": "",
     "channelHandle": "@AzuraCecillia",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 7,
+    "birthDay": 20
   },
   {
     "name": "ナラ ハラマウン",
@@ -1093,7 +1365,9 @@
     "aliasSecond": "",
     "channelHandle": "@NaraHaramaung",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 7,
+    "birthDay": 29
   },
   {
     "name": "ライラ アルストロエメリア",
@@ -1101,7 +1375,9 @@
     "aliasSecond": "",
     "channelHandle": "@LaylaAlstroemeria",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 26
   },
   {
     "name": "エトナ クリムソン",
@@ -1109,7 +1385,9 @@
     "aliasSecond": "",
     "channelHandle": "@EtnaCrimson",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 10
   },
   {
     "name": "ボンニフィエール プラナジャ",
@@ -1117,7 +1395,9 @@
     "aliasSecond": "",
     "channelHandle": "@BonnivierPranaja",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 9,
+    "birthDay": 19
   },
   {
     "name": "シスカ レオンタイン",
@@ -1125,7 +1405,9 @@
     "aliasSecond": "",
     "channelHandle": "@SiskaLeontyne",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 2,
+    "birthDay": 14
   },
   {
     "name": "ナギサ アルシニア",
@@ -1133,7 +1415,9 @@
     "aliasSecond": "",
     "channelHandle": "@NagisaArcinia",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 23
   },
   {
     "name": "デレム カド",
@@ -1141,7 +1425,9 @@
     "aliasSecond": "",
     "channelHandle": "@DeremKado",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 14
   },
   {
     "name": "レザ アファンルナ",
@@ -1149,7 +1435,9 @@
     "aliasSecond": "",
     "channelHandle": "@RezaAvanluna",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 2,
+    "birthDay": 29
   },
   {
     "name": "ヒョナ エラティオラ",
@@ -1157,7 +1445,9 @@
     "aliasSecond": "",
     "channelHandle": "@HyonaElatiora",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 10,
+    "birthDay": 24
   },
   {
     "name": "シア エカフィラ",
@@ -1165,7 +1455,9 @@
     "aliasSecond": "",
     "channelHandle": "@XiaEkavira",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 5,
+    "birthDay": 27
   },
   {
     "name": "ミカ メラティカ",
@@ -1173,7 +1465,9 @@
     "aliasSecond": "",
     "channelHandle": "@MikaMelatika",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 4,
+    "birthDay": 1
   },
   {
     "name": "ウィフィ",
@@ -1181,7 +1475,9 @@
     "aliasSecond": "",
     "channelHandle": "",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 11,
+    "birthDay": 11
   },
   {
     "name": "ユ ルリ",
@@ -1189,7 +1485,9 @@
     "aliasSecond": "",
     "channelHandle": "",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 8,
+    "birthDay": 27
   },
   {
     "name": "シン ユヤ",
@@ -1197,7 +1495,9 @@
     "aliasSecond": "",
     "channelHandle": "@yuya_shin",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ミン スゥーハ",
@@ -1205,7 +1505,9 @@
     "aliasSecond": "",
     "channelHandle": "@MinSuha",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 3
   },
   {
     "name": "ガオン",
@@ -1213,7 +1515,9 @@
     "aliasSecond": "",
     "channelHandle": "@Gaon",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 22
   },
   {
     "name": "カエン",
@@ -1221,7 +1525,9 @@
     "aliasSecond": "",
     "channelHandle": "",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 9,
+    "birthDay": 2
   },
   {
     "name": "ローロー",
@@ -1229,7 +1535,9 @@
     "aliasSecond": "",
     "channelHandle": "",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 12,
+    "birthDay": 6
   },
   {
     "name": "ハン チホ",
@@ -1237,7 +1545,9 @@
     "aliasSecond": "",
     "channelHandle": "@HanChiho",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 2,
+    "birthDay": 19
   },
   {
     "name": "ハクレン",
@@ -1245,7 +1555,9 @@
     "aliasSecond": "",
     "channelHandle": "",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 7,
+    "birthDay": 16
   },
   {
     "name": "ソ ナギ",
@@ -1253,7 +1565,9 @@
     "aliasSecond": "",
     "channelHandle": "@SoNagi",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 13
   },
   {
     "name": "チェ アラ",
@@ -1261,7 +1575,9 @@
     "aliasSecond": "",
     "channelHandle": "",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 9,
+    "birthDay": 9
   },
   {
     "name": "イ シウ",
@@ -1269,7 +1585,9 @@
     "aliasSecond": "",
     "channelHandle": "@siulee",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 12,
+    "birthDay": 26
   },
   {
     "name": "ヌン ボラ",
@@ -1277,7 +1595,9 @@
     "aliasSecond": "",
     "channelHandle": "@Nun_Bora",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 1,
+    "birthDay": 5
   },
   {
     "name": "明楽レイ",
@@ -1285,7 +1605,9 @@
     "aliasSecond": "",
     "channelHandle": "@AkiraRay",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 8
   },
   {
     "name": "イ ロハ",
@@ -1293,7 +1615,9 @@
     "aliasSecond": "",
     "channelHandle": "@LeeRoha",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 12
   },
   {
     "name": "ヤン ナリ",
@@ -1301,7 +1625,9 @@
     "aliasSecond": "",
     "channelHandle": "@YangNari",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 27
   },
   {
     "name": "リュ ハリ",
@@ -1309,7 +1635,9 @@
     "aliasSecond": "",
     "channelHandle": "@RyuHari",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 26
   },
   {
     "name": "シン ギル",
@@ -1317,7 +1645,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShinKiru",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 5,
+    "birthDay": 30
   },
   {
     "name": "オ ジユ",
@@ -1325,7 +1655,9 @@
     "aliasSecond": "",
     "channelHandle": "@OhJiyu",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 12
   },
   {
     "name": "セフィナ",
@@ -1333,7 +1665,9 @@
     "aliasSecond": "",
     "channelHandle": "@Seffyna",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 2
   },
   {
     "name": "ソン ミア",
@@ -1341,7 +1675,9 @@
     "aliasSecond": "",
     "channelHandle": "@SongMia",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 11,
+    "birthDay": 23
   },
   {
     "name": "バン ハダ",
@@ -1349,7 +1685,9 @@
     "aliasSecond": "",
     "channelHandle": "@BanHada",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 30
   },
   {
     "name": "コ ヤミ",
@@ -1357,7 +1695,9 @@
     "aliasSecond": "",
     "channelHandle": "@Ko_Yami",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 3,
+    "birthDay": 3
   },
   {
     "name": "ハ ユン",
@@ -1365,7 +1705,9 @@
     "aliasSecond": "",
     "channelHandle": "@HaYun",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 12
   },
   {
     "name": "ナ セラ",
@@ -1373,7 +1715,9 @@
     "aliasSecond": "",
     "channelHandle": "@NaSera",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 3
   },
   {
     "name": "イ オン",
@@ -1381,7 +1725,9 @@
     "aliasSecond": "",
     "channelHandle": "@LeeOn",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": 11,
+    "birthDay": 14
   },
   {
     "name": "小清水透",
@@ -1389,7 +1735,9 @@
     "aliasSecond": "",
     "channelHandle": "@KoshimizuToru",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 3
   },
   {
     "name": "獅子堂あかり",
@@ -1397,7 +1745,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShishidoAkari",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 31
   },
   {
     "name": "鏑木ろこ",
@@ -1405,7 +1755,9 @@
     "aliasSecond": "",
     "channelHandle": "@KaburakiRoco",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 18
   },
   {
     "name": "五十嵐梨花",
@@ -1413,7 +1765,9 @@
     "aliasSecond": "",
     "channelHandle": "@IgarashiRika",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 14
   },
   {
     "name": "石神のぞみ",
@@ -1421,7 +1775,9 @@
     "aliasSecond": "",
     "channelHandle": "@IshigamiNozomi",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 29
   },
   {
     "name": "ソフィア・ヴァレンタイン",
@@ -1429,7 +1785,9 @@
     "aliasSecond": "",
     "channelHandle": "@Sophia_Valentine",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 14
   },
   {
     "name": "倉持めると",
@@ -1437,7 +1795,9 @@
     "aliasSecond": "",
     "channelHandle": "@KuramochiMeruto",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 19
   },
   {
     "name": "佐伯イッテツ",
@@ -1445,7 +1805,9 @@
     "aliasSecond": "",
     "channelHandle": "@SaikiIttetsu",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 1
   },
   {
     "name": "赤城ウェン",
@@ -1453,7 +1815,9 @@
     "aliasSecond": "",
     "channelHandle": "@AkagiWen",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 6
   },
   {
     "name": "宇佐美リト",
@@ -1461,7 +1825,9 @@
     "aliasSecond": "",
     "channelHandle": "@UsamiRito",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 17
   },
   {
     "name": "緋八マナ",
@@ -1469,7 +1835,9 @@
     "aliasSecond": "",
     "channelHandle": "@HibachiMana",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 29
   },
   {
     "name": "星導ショウ",
@@ -1477,7 +1845,9 @@
     "aliasSecond": "",
     "channelHandle": "@HoshirubeSho",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 10
   },
   {
     "name": "叢雲カゲツ",
@@ -1485,7 +1855,9 @@
     "aliasSecond": "",
     "channelHandle": "@MurakumoKagetsu",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDay": 26
   },
   {
     "name": "小柳ロウ",
@@ -1493,7 +1865,9 @@
     "aliasSecond": "",
     "channelHandle": "@KoyanagiRou",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 25
   },
   {
     "name": "伊波ライ",
@@ -1501,7 +1875,9 @@
     "aliasSecond": "",
     "channelHandle": "@InamiRai",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 23
   },
   {
     "name": "立伝都々",
@@ -1509,7 +1885,9 @@
     "aliasSecond": "",
     "channelHandle": "@TachitsuteToto",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 20
   },
   {
     "name": "栞葉るり",
@@ -1517,7 +1895,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShiorihaRuri",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDay": 20
   },
   {
     "name": "ミラン・ケストレル",
@@ -1525,7 +1905,9 @@
     "aliasSecond": "",
     "channelHandle": "@MilanKestrel",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 13
   },
   {
     "name": "北見遊征",
@@ -1533,7 +1915,9 @@
     "aliasSecond": "",
     "channelHandle": "@KitamiYusei",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDay": 4
   },
   {
     "name": "魁星",
@@ -1541,7 +1925,9 @@
     "aliasSecond": "",
     "channelHandle": "@Kaisei_nijisanji",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDay": 9
   },
   {
     "name": "榊ネス",
@@ -1549,7 +1935,9 @@
     "aliasSecond": "",
     "channelHandle": "@SakakiNess",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDay": 1
   },
   {
     "name": "司賀りこ",
@@ -1557,7 +1945,9 @@
     "aliasSecond": "",
     "channelHandle": "@ShigaRiko",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 19
   },
   {
     "name": "珠乃井ナナ",
@@ -1565,7 +1955,9 @@
     "aliasSecond": "",
     "channelHandle": "@TamanoiNana",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDay": 24
   },
   {
     "name": "綺沙良",
@@ -1573,7 +1965,9 @@
     "aliasSecond": "",
     "channelHandle": "@Kisara_nijisanji",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 29
   },
   {
     "name": "梢桃音",
@@ -1581,7 +1975,9 @@
     "aliasSecond": "",
     "channelHandle": "@KozueMone",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 28
   },
   {
     "name": "ルンルン",
@@ -1589,7 +1985,9 @@
     "aliasSecond": "",
     "channelHandle": "@Lunlun_nijisanji",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDay": 8
   },
   {
     "name": "七瀬すず菜",
@@ -1597,7 +1995,9 @@
     "aliasSecond": "",
     "channelHandle": "@NanaseSuzuna",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDay": 8
   },
   {
     "name": "早乙女ベリー",
@@ -1605,7 +2005,9 @@
     "aliasSecond": "",
     "channelHandle": "@Saotomeberry",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDay": 29
   },
   {
     "name": "雲母たまこ",
@@ -1613,7 +2015,9 @@
     "aliasSecond": "",
     "channelHandle": "@KiraraTamako",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDay": 22
   },
   {
     "name": "酒寄颯馬",
@@ -1621,7 +2025,9 @@
     "aliasSecond": "",
     "channelHandle": "@SakayoriSoma",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDay": 21
   },
   {
     "name": "渚トラウト",
@@ -1629,7 +2035,9 @@
     "aliasSecond": "",
     "channelHandle": "@NagisaTrout",
     "isRetire": 0,
-    "isOverseas": 0
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDay": 15
   },
   {
     "name": "エリーラ・ペンドラ",
@@ -1637,7 +2045,9 @@
     "aliasSecond": "Elira Pendora",
     "channelHandle": "UCIeSUTOTkF9Hs7q3SGcO-Ow",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ぽむ・れいんぱふ",
@@ -1645,7 +2055,9 @@
     "aliasSecond": "Pomu Rainpuff",
     "channelHandle": "UCP4nMSTdwU1KqYWu3UH5DHQ",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "フィナーナ・竜宮",
@@ -1653,7 +2065,9 @@
     "aliasSecond": "Finana Ryugu",
     "channelHandle": "UCu-J8uIXuLZh16gG-cT1naw",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ロゼミ・ラブロック",
@@ -1661,7 +2075,9 @@
     "aliasSecond": "Rosemi Lovelock",
     "channelHandle": "UC4WvIIAo89_AzGUh1AZ6Dkg",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ペトラ・グリン",
@@ -1669,7 +2085,9 @@
     "aliasSecond": "Petra Gurin",
     "channelHandle": "UCgA2jKRkqpY_8eysPUs8sjw",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "エナー・アールウェット",
@@ -1677,7 +2095,9 @@
     "aliasSecond": "Enna Alouette",
     "channelHandle": "UCR6qhsLpn62WVxCBK1dkLow",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "狐坂ニナ",
@@ -1685,7 +2105,9 @@
     "aliasSecond": "Nina Kosaka",
     "channelHandle": "UCkieJGn3pgJikVW8gmMXE2w",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "遠藤霊夢",
@@ -1693,7 +2115,9 @@
     "aliasSecond": "Reimu Endou",
     "channelHandle": "UCBURM8S4LH7cRZ0Clea9RDA",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ミリー・パフェ",
@@ -1701,7 +2125,9 @@
     "aliasSecond": "Millie Parfait",
     "channelHandle": "UC47rNmkDcNgbOcM-2BwzJTQ",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "アイク・イーヴランド",
@@ -1709,7 +2135,9 @@
     "aliasSecond": "Ike Eveland",
     "channelHandle": "UC4yNIKGvy-YUrwYupVdLDXA",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ミスタ・リアス",
@@ -1717,7 +2145,9 @@
     "aliasSecond": "Mysta Rias",
     "channelHandle": "UCIM92Ok_spNKLVB5TsgwseQ",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ヴォックス・アクマ",
@@ -1725,7 +2155,9 @@
     "aliasSecond": "Vox Akuma",
     "channelHandle": "UCckdfYDGrjojJM28n5SHYrA",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ルカ・カネシロ",
@@ -1733,7 +2165,9 @@
     "aliasSecond": "Luca Kaneshiro",
     "channelHandle": "UC7Gb7Uawe20QyFibhLl1lzA",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "闇ノシュウ",
@@ -1741,7 +2175,9 @@
     "aliasSecond": "Shu Yamino",
     "channelHandle": "UCG0rzBZV_QMP4MtWg6IjhEA",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "アルバーン・ノックス",
@@ -1749,7 +2185,9 @@
     "aliasSecond": "Alban Knox",
     "channelHandle": "UCQ1zGxHrfEmmW4CPpBx9-qw",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "遊間ユーゴ",
@@ -1757,7 +2195,9 @@
     "aliasSecond": "Yugo Asuma",
     "channelHandle": "UCSc_KzY_9WYAx9LghggjVRA",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ファルガー・オーヴィド",
@@ -1765,7 +2205,9 @@
     "aliasSecond": "Fulgur Ovid",
     "channelHandle": "UCGhqxhovNfaPBpxfCruy9EA",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "サニー・ブリスコー",
@@ -1773,7 +2215,9 @@
     "aliasSecond": "Sonny Brisko",
     "channelHandle": "UCuuAb_72QzK0M1USPMEl1yw",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "浮奇・ヴィオレタ",
@@ -1781,7 +2225,9 @@
     "aliasSecond": "Uki Violeta",
     "channelHandle": "UChJ5FTsHOu72_5OVx0rvsvQ",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "金子 鏡",
@@ -1789,7 +2235,9 @@
     "aliasSecond": "Kyo Kaneko",
     "channelHandle": "UCsb-1aJgiJXJH2feV-zlZRw",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "マリア マリオネット",
@@ -1797,7 +2245,9 @@
     "aliasSecond": "Maria Marionette",
     "channelHandle": "UCwaS8_S7kMiKA3izlTWHbQg",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "アスター アルカディア",
@@ -1805,7 +2255,9 @@
     "aliasSecond": "Aster Arcadia",
     "channelHandle": "UCN68LoM3khS4gdBMiWJO8WA",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "アイア アマレ",
@@ -1813,7 +2265,9 @@
     "aliasSecond": "Aia Amare",
     "channelHandle": "UCpzxZW5kghGnO5TmAFJQAVw",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "レン ゾット",
@@ -1821,7 +2275,9 @@
     "aliasSecond": "Ren Zotto",
     "channelHandle": "UCFgXWZOUZA2oYHNr6qDmsTQ",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "スカーレ ヨナグニ",
@@ -1829,7 +2285,9 @@
     "aliasSecond": "Scarle Yonaguni",
     "channelHandle": "UCKu59gTZ_rdEmerdx5rV4Yg",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ドッピオ ドロップサイト",
@@ -1837,7 +2295,9 @@
     "aliasSecond": "Doppio Dropscythe",
     "channelHandle": "UCy91xBlY_Brh3bnHxKtjrrg",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ヘックス へイワイヤー",
@@ -1845,7 +2305,9 @@
     "aliasSecond": "Hex Haywire",
     "channelHandle": "UCz_ZRw6ak4Foy8zZy0kEprQ",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "狂蘭 メロコ",
@@ -1853,7 +2315,9 @@
     "aliasSecond": "Meloco Kyoran",
     "channelHandle": "UChKXd7oqD18qiIYBoRIHTlw",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ヴェール ヴァーミリオン",
@@ -1861,7 +2325,9 @@
     "aliasSecond": "Ver Vermillion",
     "channelHandle": "UCO8WcDsF5znr-qsXlzZNpqg",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "虎姫 コトカ",
@@ -1869,7 +2335,9 @@
     "aliasSecond": "Kotoka Torahime",
     "channelHandle": "UCggO2c1unS-oLwTLT0ICywg",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ユウ Q ウィルソン",
@@ -1877,7 +2345,9 @@
     "aliasSecond": "Yu Q. Wilson",
     "channelHandle": "@YuQ.Wilson",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ベンタクロウ ブリンガー",
@@ -1885,7 +2355,9 @@
     "aliasSecond": "Vantacrow Bringer",
     "channelHandle": "@VantacrowBringer",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ヴェザリウス バンデージ",
@@ -1893,7 +2365,9 @@
     "aliasSecond": "Vezalius Bandage",
     "channelHandle": "@VezaliusBandage",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "クロード クローマーク",
@@ -1901,7 +2375,9 @@
     "aliasSecond": "Claude Clawmark",
     "channelHandle": "@ClaudeClawmark",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "ヴィクトリア ブライトシールド",
@@ -1909,7 +2385,9 @@
     "aliasSecond": "Victoria Brightshield",
     "channelHandle": "@VictoriaBrightshield",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "中里 苦無",
@@ -1917,7 +2395,9 @@
     "aliasSecond": "Kunai Nakasato",
     "channelHandle": "@KunaiNakasato",
     "isRetire": 1,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "凉舞 バレンウォート",
@@ -1925,15 +2405,19 @@
     "aliasSecond": "Ryoma Barrenwort",
     "channelHandle": "@RyomaBarrenwort",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
-    "name": "トゥイスティー アマノザコ",
+    "name": "トゥイスティー アマノザコ",
     "aliasFirst": "とぅいすてぃー あまのざこ",
     "aliasSecond": "Twisty Amanozako",
     "channelHandle": "@TwistyAmanozako",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   },
   {
     "name": "クララ チャームウッド",
@@ -1941,6 +2425,8 @@
     "aliasSecond": "Klara Charmwood",
     "channelHandle": "@KlaraCharmwood",
     "isRetire": 0,
-    "isOverseas": 1
+    "isOverseas": 1,
+    "birthMonth": null,
+    "birthDay": null
   }
 ]
