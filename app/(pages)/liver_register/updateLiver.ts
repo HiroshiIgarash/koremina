@@ -17,7 +17,7 @@ const updateLiverSchema = z.object({
     if (!input) return null;
     return z.coerce.number().parse(input);
   }),
-  birthDay: z.union([z.string(), z.undefined()]).transform((input) => {
+  birthDate: z.union([z.string(), z.undefined()]).transform((input) => {
     if (!input) return null;
     return z.coerce.number().parse(input);
   }),
@@ -34,7 +34,7 @@ const updateLiver = async (formData: FormData) => {
     isRetire: formData.get("isRetire"),
     isOverseas: formData.get("isOverseas"),
     birthMonth: formData.get("birthMonth"),
-    birthDay: formData.get("birthDay"),
+    birthDate: formData.get("birthDate"),
   };
   const validFormData = updateLiverSchema.parse(rawData);
 
@@ -51,7 +51,7 @@ const updateLiver = async (formData: FormData) => {
       isRetire: validFormData.isRetire,
       isOverseas: validFormData.isOverseas,
       birthMonth: validFormData.birthMonth,
-      birthDay: validFormData.birthDay,
+      birthDate: validFormData.birthDate,
     },
     update: {
       index: validFormData.index,
@@ -62,7 +62,7 @@ const updateLiver = async (formData: FormData) => {
       isRetire: validFormData.isRetire,
       isOverseas: validFormData.isOverseas,
       birthMonth: validFormData.birthMonth,
-      birthDay: validFormData.birthDay,
+      birthDate: validFormData.birthDate,
     },
   });
 

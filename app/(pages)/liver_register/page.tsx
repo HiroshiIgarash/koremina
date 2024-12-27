@@ -148,7 +148,7 @@ const LiverFormItem = ({
         </div>
         <div>
           <LiverFormInput
-            name="birthDay"
+            name="birthDate"
             liverJSON={liver}
             liverDB={liver_db}
             className="max-w-9"
@@ -175,7 +175,7 @@ const dbLiverSchemaMapping = {
     .union([z.literal(0), z.literal(1)])
     .transform((input) => input === 1),
   birthMonth: z.union([z.null(), z.number()]),
-  birthDay: z.union([z.null(), z.number()]),
+  birthDate: z.union([z.null(), z.number()]),
 };
 
 type LiverFormInputProps = ComponentPropsWithoutRef<"input"> & {
