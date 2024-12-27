@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "export POSTGRES_PRISMA_URL=$(dotenv -- bash -c 'echo $POSTGRES_LOCAL_URL') && next dev",
+    "dev": "next dev",
     "prisma:studio:dev": "export POSTGRES_PRISMA_URL=$(dotenv -- bash -c 'echo $POSTGRES_LOCAL_URL') && prisma studio",
     "dev:dbprod": "next dev",
     "dev:host": "next dev -H 192.168.11.31",
@@ -37,6 +37,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
+    "dayjs": "^1.11.13",
     "framer-motion": "^12.0.0-alpha.0",
     "lucide-react": "^0.460.0",
     "next": "15.0.3",

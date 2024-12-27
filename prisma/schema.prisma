@@ -139,6 +139,8 @@ model Liver {
   aliasFirst       String?
   aliasSecond      String?
   channelHandle    String
+  birthMonth       Int?
+  birthDate         Int?
   mostFavoriteUser User[]  @relation("mostFavoriteLiver")
   favoriteUser     User[]  @relation("favoriteLivers")
   video            Video[]
