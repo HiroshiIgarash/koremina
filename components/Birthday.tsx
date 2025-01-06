@@ -11,7 +11,7 @@ const Birthday = async ({ className }: { className?: string }) => {
       {livers && livers.length > 0 ? (
         <ul className="mt-4 flex gap-4 justify-center">
           {livers.map((liver) => (
-            <li key={liver.id}>
+            <li key={liver.id} className="flex flex-col items-center">
               <Link
                 key={liver.id}
                 href={`/page?liver=${liver.id}`}
