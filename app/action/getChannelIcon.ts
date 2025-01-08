@@ -1,3 +1,7 @@
+"use server";
+
+import { revalidateTag } from "next/cache";
+
 interface getChannelIconProps {
   channelId: string;
   quality?: "default" | "medium" | "high";
@@ -18,19 +22,64 @@ const getChannelIcon = async ({
   }
 
   try {
-    const res = await fetch(
+    let res = await fetch(
       `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
-      { cache: "force-cache", next: { revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */ } }
+      {
+        cache: "force-cache",
+        next: {
+          revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
+          tags: [`channel-icon-${channelId}`],
+        },
+      }
     );
     if (res.status === 200) {
       const data = await res.json();
-      return data.items[0].snippet.thumbnails[quality].url;
+      const imageURL = data.items[0].snippet.thumbnails[quality].url;
+
+      // サムネイルURLが有効かどうかチェック
+      if (await isURLAccessible(imageURL)) {
+        return imageURL;
+      } else {
+        // キャッシュされたURLが無効の場合、キャッシュを破棄して再フェッチ
+        revalidateTag(`channel-icon-${channelId}`);
+      }
+
+      // 再フェッチ
+      res = await fetch(
+        `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
+        {
+          cache: "force-cache",
+          next: {
+            revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
+            tags: [`channel-icon-${channelId}`],
+          },
+        }
+      );
+      if (res.status === 200) {
+        const data = await res.json();
+        const imageURL = data.items[0].snippet.thumbnails[quality].url;
+
+        // 最悪404になるようにここでは有効性を確認しない
+        return imageURL;
+      }
+
+      return imageURL;
     } else {
       throw new Error();
     }
   } catch (error) {
     console.log(error);
     return { error: "Failed to get channel icon" };
+  }
+};
+
+// URLの有効性を確認するヘルパー関数
+const isURLAccessible = async (url: string) => {
+  try {
+    const res = await fetch(url, { method: "HEAD" });
+    return res.ok; // ステータスが200系ならtrue
+  } catch {
+    return false;
   }
 };
 
