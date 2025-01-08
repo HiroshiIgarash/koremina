@@ -1,7 +1,4 @@
 "use server";
-
-import { revalidateTag } from "next/cache";
-
 interface getChannelIconProps {
   channelId: string;
   quality?: "default" | "medium" | "high";
@@ -28,7 +25,6 @@ const getChannelIcon = async ({
         cache: "force-cache",
         next: {
           revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
-          tags: [`channel-icon-${channelId}`],
         },
       }
     );
@@ -39,19 +35,15 @@ const getChannelIcon = async ({
       // サムネイルURLが有効かどうかチェック
       if (await isURLAccessible(imageURL)) {
         return imageURL;
-      } else {
-        // キャッシュされたURLが無効の場合、キャッシュを破棄して再フェッチ
-        revalidateTag(`channel-icon-${channelId}`);
       }
 
       // 再フェッチ
       res = await fetch(
         `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
         {
-          cache: "force-cache",
+          cache: "reload",
           next: {
             revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
-            tags: [`channel-icon-${channelId}`],
           },
         }
       );
