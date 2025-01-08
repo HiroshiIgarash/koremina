@@ -22,7 +22,9 @@ const ChannelIcon = async ({
           style={{
             width: size,
           }}
-        ><span className="text-xs">No Image</span></div>
+        >
+          <span className="text-xs">No Image</span>
+        </div>
       ) : (
         <Image
           src={iconSrc}
