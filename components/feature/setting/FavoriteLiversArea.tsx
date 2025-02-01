@@ -50,7 +50,7 @@ const FavoriteLiversArea = async () => {
           <p className="font-semibold text-xl text-center my-4">推しライバー</p>
           <div className="flex flex-col items-center justify-center">
             {currentUser.favoriteLivers.length > 0 ? (
-              <div className="grid grid-cols-[repeat(auto-fit,64px)] max-w-full w-96 justify-center gap-2">
+              <div className="grid grid-cols-[repeat(auto-fit,64px)] max-w-full md:w-96 justify-center gap-2">
                 {currentUser.favoriteLivers
                   .toSorted((a, b) => a.index - b.index)
                   .map((liver) => (
