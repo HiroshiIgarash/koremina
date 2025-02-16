@@ -2,11 +2,13 @@
 interface getChannelIconProps {
   channelId: string;
   quality?: "default" | "medium" | "high";
+  ignoreCache?: boolean;
 }
 
 const getChannelIcon = async ({
   channelId,
   quality = "default",
+  ignoreCache = false,
 }: getChannelIconProps) => {
   const searchParams = new URLSearchParams();
 
@@ -19,41 +21,15 @@ const getChannelIcon = async ({
   }
 
   try {
-    let res = await fetch(
+    const res = await fetch(
       `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
       {
-        cache: "force-cache",
-        next: {
-          revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
-        },
+        cache: ignoreCache ? "reload" : "force-cache",
       }
     );
     if (res.status === 200) {
       const data = await res.json();
       const imageURL = data.items[0].snippet.thumbnails[quality].url;
-
-      // サムネイルURLが有効かどうかチェック
-      if (await isURLAccessible(imageURL)) {
-        return imageURL;
-      }
-
-      // 再フェッチ
-      res = await fetch(
-        `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
-        {
-          cache: "reload",
-          next: {
-            revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
-          },
-        }
-      );
-      if (res.status === 200) {
-        const data = await res.json();
-        const imageURL = data.items[0].snippet.thumbnails[quality].url;
-
-        // 最悪404になるようにここでは有効性を確認しない
-        return imageURL;
-      }
 
       return imageURL;
     } else {
@@ -62,16 +38,6 @@ const getChannelIcon = async ({
   } catch (error) {
     console.log(error);
     return { error: "Failed to get channel icon" };
-  }
-};
-
-// URLの有効性を確認するヘルパー関数
-const isURLAccessible = async (url: string) => {
-  try {
-    const res = await fetch(url, { method: "HEAD" });
-    return res.ok; // ステータスが200系ならtrue
-  } catch {
-    return false;
   }
 };
 

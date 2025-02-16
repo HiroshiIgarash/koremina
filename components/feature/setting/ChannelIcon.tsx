@@ -1,5 +1,5 @@
 import getChannelIcon from "@/app/action/getChannelIcon";
-import Image from "next/image";
+import ChannelIconImage from "./ChannelIconImage";
 
 interface ChannelIconProps {
   channelId: string;
@@ -26,13 +26,11 @@ const ChannelIcon = async ({
           <span className="text-xs">No Image</span>
         </div>
       ) : (
-        <Image
+        <ChannelIconImage
           src={iconSrc}
-          alt=""
-          width={size}
-          height={size}
-          className="rounded-full border-2"
-          unoptimized
+          size={size}
+          channelId={channelId}
+          quality={quality}
         />
       )}
     </>
