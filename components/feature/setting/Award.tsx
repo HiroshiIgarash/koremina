@@ -1,8 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import ChannelIcon from "./ChannelIcon";
-import FavoriteLiversDialog from "./FavoriteLiversDialog";
-import getCurrentUser from "@/app/action/getCurrentUser";
 import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { ReactNode } from "react";
@@ -13,184 +9,212 @@ const Award = async () => {
   const session = await auth();
   const currentUser = await prisma.user.findUnique({
     where: {
-      id: session?.user?.id
+      id: session?.user?.id,
     },
     include: {
       _count: true,
-    }
-  })
+    },
+  });
   if (!currentUser) return;
 
   // 称号種類
-  const AWARD_TYPE = ['favoriteLiver','post', 'comment', 'reaction'] as const
+  const AWARD_TYPE = ["favoriteLiver", "post", "comment", "reaction"] as const;
 
   // 称号一覧
-  const award: { [key in typeof AWARD_TYPE[number]]: { [level in 'bronze' | 'silver' | 'gold' | 'none']: { count: number, text: string } } } = {
+  const award: {
+    [key in (typeof AWARD_TYPE)[number]]: {
+      [level in "bronze" | "silver" | "gold" | "none"]: {
+        count: number;
+        text: string;
+      };
+    };
+  } = {
     favoriteLiver: {
       none: {
         count: 0,
-        text: '推しライバーを設定しよう'
+        text: "推しライバーを設定しよう",
       },
       bronze: {
         count: 1,
-        text: ''
+        text: "",
       },
       silver: {
         count: 1,
-        text: ''
+        text: "",
       },
       gold: {
         count: 1,
-        text: '推しライバー設定済み'
-      }
+        text: "推しライバー設定済み",
+      },
     },
     post: {
       none: {
         count: 0,
-        text: 'おすすめ動画を投稿しよう！'
+        text: "おすすめ動画を投稿しよう！",
       },
       bronze: {
         count: 1,
-        text: 'おすすめ初心者'
+        text: "おすすめ初心者",
       },
       silver: {
         count: 5,
-        text: 'おすすめ大好き！'
+        text: "おすすめ大好き！",
       },
       gold: {
         count: 10,
-        text: '推しを見てくれ！！！！！'
-      }
+        text: "推しを見てくれ！！！！！",
+      },
     },
     comment: {
       none: {
         count: 0,
-        text: 'コメントをしてみよう！'
+        text: "コメントをしてみよう！",
       },
       bronze: {
         count: 1,
-        text: 'はじめてのコメント'
+        text: "はじめてのコメント",
       },
       silver: {
         count: 3,
-        text: 'コメントマスター'
+        text: "コメントマスター",
       },
       gold: {
         count: 7,
-        text: 'コメントプロフェッショナル'
-      }
+        text: "コメントプロフェッショナル",
+      },
     },
     reaction: {
       none: {
         count: 0,
-        text: 'リアクションをたくさんしよう！'
+        text: "リアクションをたくさんしよう！",
       },
       bronze: {
         count: 10,
-        text: 'ナイス！リアクション'
+        text: "ナイス！リアクション",
       },
       silver: {
         count: 50,
-        text: 'ナイス！ナイス！リアクション'
+        text: "ナイス！ナイス！リアクション",
       },
       gold: {
         count: 100,
-        text: 'にじさんじのもりあげマスター'
-      }
-    }
-  }
+        text: "にじさんじのもりあげマスター",
+      },
+    },
+  };
 
-  const favoriteLiverCount = (currentUser.mostFavoriteLiverId ? 1 : 0) + currentUser._count.favoriteLivers
+  const favoriteLiverCount =
+    (currentUser.mostFavoriteLiverId ? 1 : 0) +
+    currentUser._count.favoriteLivers;
   const postCount = currentUser._count.Video;
   const commentCount = currentUser._count.Comment;
-  const reactionCount = currentUser._count.angelVideo + currentUser._count.cryVideo + currentUser._count.goodVideo + currentUser._count.loveVideo + currentUser._count.funnyVideo;
+  const reactionCount =
+    currentUser._count.angelVideo +
+    currentUser._count.cryVideo +
+    currentUser._count.goodVideo +
+    currentUser._count.loveVideo +
+    currentUser._count.funnyVideo;
 
-  const level = (awardType: typeof AWARD_TYPE[number]) => {
+  const level = (awardType: (typeof AWARD_TYPE)[number]) => {
     let target: number | undefined;
     switch (awardType) {
-      case 'post':
+      case "post":
         target = postCount;
         break;
-      case 'comment':
+      case "comment":
         target = commentCount;
         break;
-      case 'reaction':
+      case "reaction":
         target = reactionCount;
         break;
-      case 'favoriteLiver':
+      case "favoriteLiver":
         target = favoriteLiverCount;
         break;
       default:
-        const unreachable: never = awardType; 
+        const unreachable: never = awardType;
         break;
     }
 
     if (target !== undefined) {
       if (target >= award[awardType].gold.count) {
-        return 'gold'
+        return "gold";
       } else if (target >= award[awardType].silver.count) {
-        return 'silver'
+        return "silver";
       } else if (target >= award[awardType].bronze.count) {
-        return 'bronze'
+        return "bronze";
       } else {
-        return 'none'
+        return "none";
       }
     }
-  }
+  };
 
   return (
     <Card>
       <CardContent className="p-4 md:p-8 space-y-12">
         <div>
           <p className="font-semibold text-xl text-center my-4">
-            獲得した称号<br />
-            <span className="text-sm font-medium">クリックでXのページに飛んで共有できます。</span>
+            獲得した称号
+            <br />
+            <span className="text-sm font-medium">
+              クリックでXのページに飛んで共有できます。
+            </span>
           </p>
           <div className="flex flex-col items-center gap-4">
-            {
-              AWARD_TYPE.map(type => {
-                const lv = level(type)
-                if (lv) {
-                  return (
-                    <AwardBudge key={type} variant={lv} userId={currentUser.id}>{ award[type][lv].text }</AwardBudge>
-                  )
-                }
-              })
-            }
+            {AWARD_TYPE.map((type) => {
+              const lv = level(type);
+              if (lv) {
+                return (
+                  <AwardBudge key={type} variant={lv} userId={currentUser.id}>
+                    {award[type][lv].text}
+                  </AwardBudge>
+                );
+              }
+            })}
           </div>
-
         </div>
-
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-const AwardBudge = ({ children, variant, userId }: { children: ReactNode, variant: 'gold' | 'silver' | 'bronze' | 'none', userId: string }) => {
+const AwardBudge = ({
+  children,
+  variant,
+  userId,
+}: {
+  children: ReactNode;
+  variant: "gold" | "silver" | "bronze" | "none";
+  userId: string;
+}) => {
   return (
     <Link
-    href={`https://x.com/intent/post?text=${encodeURIComponent(
-      `
+      href={`https://x.com/intent/post?text=${encodeURIComponent(
+        `
 #コレミナ で称号「${children}」を獲得しました！
 
 マイページ
 https://koremina.vercel.app/user/${userId}
 `
-    )
-      }`}
-      className={cn("text-center",variant === 'none' && "cursor-none pointer-events-none")}
+      )}`}
+      className={cn(
+        "text-center max-w-80 w-full",
+        variant === "none" && "cursor-none pointer-events-none"
+      )}
     >
       <div
-        className={cn("w-80 max-w-full p-2 rounded-full bg-gradient-to-br text-black",
-          variant === 'none' && "bg-gray-50 dark:bg-gray-900 border border-current  text-gray-300 dark:text-gray-700",
-          variant === 'gold' && "from-[#B39855] via-[#FFF9E6] to-[#B39855]",
-          variant === 'silver' && "from-[#BDC3C9] via-[#FFFFFF] to-[#BDC3C9]",
-          variant === 'bronze' && "from-[#A86F4E] via-[#F9C7A2] to-[#A86F4E]",
+        className={cn(
+          "p-2 rounded-full bg-gradient-to-br text-black",
+          variant === "none" &&
+            "bg-gray-50 dark:bg-gray-900 border border-current  text-gray-300 dark:text-gray-700",
+          variant === "gold" && "from-[#B39855] via-[#FFF9E6] to-[#B39855]",
+          variant === "silver" && "from-[#BDC3C9] via-[#FFFFFF] to-[#BDC3C9]",
+          variant === "bronze" && "from-[#A86F4E] via-[#F9C7A2] to-[#A86F4E]"
         )}
-      >{children}</div>
+      >
+        {children}
+      </div>
     </Link>
-  )
-}
-
+  );
+};
 
 export default Award;
