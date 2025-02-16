@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-02-16" className="font-bold">
+              2025/02/16
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                推しライバー一覧のレイアウトが崩れる不具合を修正しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-01-09" className="font-bold">
               2025/01/09
             </time>
