@@ -31,7 +31,7 @@ interface PostItemProps {
   postedUser: User;
   livers: { name: string }[];
   bookmark: Bookmark[];
-  seenUsersId: string[]
+  seenUsersId: string[];
   reactionsCount: { [k in Reaction]: Number } & { comments: Number };
 }
 
@@ -46,14 +46,12 @@ const PostItem = async ({
   reactionsCount,
   seenUsersId,
 }: PostItemProps) => {
-
   //動画タイトルの取得
 
   const [session, title] = await Promise.all([
     auth(),
-    getYoutubeTitleById(videoId)
-  ])
-
+    getYoutubeTitleById(videoId),
+  ]);
 
   return (
     <div className="relative">
@@ -61,7 +59,7 @@ const PostItem = async ({
         <button className="absolute top-4 right-4">
           <BookmarkButton
             postId={id}
-            bookmarkedUsersId={bookmark.map(b => b.userId)}
+            bookmarkedUsersId={bookmark.map((b) => b.userId)}
             userId={session.user.id}
             seenUsersId={seenUsersId}
           />
@@ -70,12 +68,19 @@ const PostItem = async ({
       <Link href={`/post/${id}`}>
         <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-accent transition">
           <CardHeader className="pb-2">
-            <CardTitle className={cn("text-lg md:h-[4em] leading-tight", session?.user?.id && "pr-6")}>
+            <CardTitle
+              className={cn(
+                "text-lg md:h-[4em] leading-tight",
+                session?.user?.id && "pr-6"
+              )}
+            >
               {comment}
             </CardTitle>
             <div className="flex justify-end items-center gap-2">
               <Avatar user={postedUser} size={32} />
-              <span className="text-sm truncate max-w-40">{postedUserName}</span>
+              <span className="text-sm truncate max-w-40">
+                {postedUserName}
+              </span>
             </div>
           </CardHeader>
           <CardContent className="grow space-y-2 pb-2">
@@ -113,20 +118,30 @@ const PostItem = async ({
                 </div>
               </div>
             </div>
-            <Image
-              src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-              alt=""
-              width={1600}
-              height={900}
-              className="aspect-video object-cover"
-              unoptimized
-            />
-            <p className={cn("text-xs", title.error && "text-muted-foreground")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
+            <div className="-mx-6">
+              <Image
+                src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                alt=""
+                width={1600}
+                height={900}
+                className="aspect-video object-cover"
+                unoptimized
+              />
+            </div>
+            <p
+              className={cn("text-xs", title.error && "text-muted-foreground")}
+            >
+              {title.error ? "動画タイトルを取得できませんでした" : title}
+            </p>
           </CardContent>
           <CardFooter className="flex items-end flex-col space-y-2 text-sm">
             <div className="flex gap-2 justify-self-end">
               <span className="rounded-full px-2">
-                <BookmarkIcon size="1.4em" className="inline-block align-bottom" /> {`${bookmark.length}`}
+                <BookmarkIcon
+                  size="1.4em"
+                  className="inline-block align-bottom"
+                />{" "}
+                {`${bookmark.length}`}
               </span>
               <span className="rounded-full px-2">
                 💬 {`${reactionsCount.comments}`}
