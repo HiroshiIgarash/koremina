@@ -19,23 +19,24 @@ import ReportDialog from "@/components/feature/post/ReportDialog";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import getYoutubeTitleById from "@/utils";
+import { YouTubeEmbed } from "@next/third-parties/google";
 
 interface IParams {
   postId: string;
 }
 
-const getCachedPostById = cache(getPostById)
+const getCachedPostById = cache(getPostById);
 
 export async function generateMetadata(props: { params: Promise<IParams> }) {
   const params = await props.params;
   const { postId } = params;
   const post = await getCachedPostById(postId);
 
-  if (!post) return
+  if (!post) return;
 
   return {
-    title: post.comment
-  }
+    title: post.comment,
+  };
 }
 
 const Page = async (props: { params: Promise<IParams> }) => {
@@ -44,7 +45,7 @@ const Page = async (props: { params: Promise<IParams> }) => {
 
   const session = await auth();
 
-  const post = await getCachedPostById(postId)
+  const post = await getCachedPostById(postId);
 
   const currentUser = session?.user;
 
@@ -52,27 +53,19 @@ const Page = async (props: { params: Promise<IParams> }) => {
     notFound();
   }
 
-  const title = await getYoutubeTitleById(post.videoId)
-
+  const title = await getYoutubeTitleById(post.videoId);
 
   return (
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
       <div>
         <div className="sticky top-28 space-y-4">
-          <iframe
-            width="560"
-            height="315"
-            className="w-full h-auto aspect-video"
-            src={`https://www.youtube.com/embed/${post.videoId}`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe>
+          <YouTubeEmbed videoid={post.videoId} height={400} />
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
             <div className="flex flex-col gap-2">
-              <Button className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)] text-white" asChild>
+              <Button
+                className="bg-[rgba(204,0,0,0.9)] hover:bg-[rgba(204,0,0,0.8)] text-white"
+                asChild
+              >
                 <Link
                   href={`https://www.youtube.com/watch?v=${post.videoId}`}
                   target="_blank"
@@ -80,7 +73,10 @@ const Page = async (props: { params: Promise<IParams> }) => {
                   Youtubeで視聴する
                 </Link>
               </Button>
-              <Button className="bg-black hover:bg-black/75 dark:border text-white" asChild>
+              <Button
+                className="bg-black hover:bg-black/75 dark:border text-white"
+                asChild
+              >
                 <Link
                   href={`https://x.com/intent/post?text=${encodeURIComponent(
                     `
@@ -89,12 +85,16 @@ const Page = async (props: { params: Promise<IParams> }) => {
 
 ${title}
 https://youtu.be/${post.videoId}`
-                  )
-                    }`}
+                  )}`}
                   target="_blank"
                   className="flex items-center gap-4"
                 >
-                  <Image src="/x-logo-white.png" width="20" height="20" alt="" />
+                  <Image
+                    src="/x-logo-white.png"
+                    width="20"
+                    height="20"
+                    alt=""
+                  />
                   Xでシェアする
                 </Link>
               </Button>
@@ -133,7 +133,7 @@ https://youtu.be/${post.videoId}`
                   postId={postId}
                   userId={currentUser.id}
                   bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
-                  seenUsersId={post.seenUsers.map(u => u.id)}
+                  seenUsersId={post.seenUsers.map((u) => u.id)}
                 />
               </button>
             </div>
@@ -161,21 +161,23 @@ https://youtu.be/${post.videoId}`
           </CardHeader>
           <CardContent>
             <div className="mt-2 flex flex-wrap gap-2">
-
               {post.liver.map((l) => (
                 <Badge
                   key={l.name}
                   variant="outline"
                   className="whitespace-nowrap text-sm hover:border-sky-500 transition"
                 >
-                  <Link href={`/page?liver=${l.id}`}>
-                    {l.name}
-                  </Link>
+                  <Link href={`/page?liver=${l.id}`}>{l.name}</Link>
                 </Badge>
               ))}
             </div>
             {post.detailComment && (
-              <pre className={cn("mt-2 whitespace-pre-wrap break-all", noto.className)}>
+              <pre
+                className={cn(
+                  "mt-2 whitespace-pre-wrap break-all",
+                  noto.className
+                )}
+              >
                 {post.detailComment}
               </pre>
             )}
