@@ -118,14 +118,16 @@ const PostItem = async ({
                 </div>
               </div>
             </div>
-            <Image
-              src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-              alt=""
-              width={1600}
-              height={900}
-              className="aspect-video object-cover"
-              unoptimized
-            />
+            <div className="-mx-6">
+              <Image
+                src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                alt=""
+                width={1600}
+                height={900}
+                className="aspect-video object-cover"
+                unoptimized
+              />
+            </div>
             <p
               className={cn("text-xs", title.error && "text-muted-foreground")}
             >
