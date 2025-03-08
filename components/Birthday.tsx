@@ -6,7 +6,9 @@ import { cn } from "@/lib/utils";
 const Birthday = async ({ className }: { className?: string }) => {
   const livers = await getBirthdayLivers();
   return (
-    <div className={cn("w-full py-8 bg-slate-100", className)}>
+    <div
+      className={cn("w-full py-8 bg-slate-100 dark:bg-slate-600", className)}
+    >
       <p className="text-center font-bold text-lg">今日が誕生日のライバー</p>
       {livers && livers.length > 0 ? (
         <ul className="mt-4 flex gap-4 justify-center">
