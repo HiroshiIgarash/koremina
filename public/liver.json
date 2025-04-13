@@ -2040,6 +2040,26 @@
     "birthDate": 15
   },
   {
+    "name": "一橋綾人",
+    "aliasFirst": "ひとつばしあやと",
+    "aliasSecond": "",
+    "channelHandle": "@HitotsubashiAyato",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDate": 8
+  },
+  {
+    "name": "五木左京",
+    "aliasFirst": "いつきさきょう",
+    "aliasSecond": "",
+    "channelHandle": "@ItsukiSakyo",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDate": 25
+  },
+  {
     "name": "エリーラ・ペンドラ",
     "aliasFirst": "えりーら・ぺんどら",
     "aliasSecond": "Elira Pendora",
@@ -2428,5 +2448,45 @@
     "isOverseas": 1,
     "birthMonth": null,
     "birthDate": null
+  },
+  {
+    "name": "ジール・ギンジョウカ",
+    "aliasFirst": "Zeal Ginjoka",
+    "aliasSecond": "じーる・ぎんじょうか",
+    "channelHandle": "@ZealGinjoka",
+    "isRetire": 0,
+    "isOverseas": 1,
+    "birthMonth": 7,
+    "birthDate": 27
+  },
+  {
+    "name": "フリオドール",
+    "aliasFirst": "Freodore",
+    "aliasSecond": "ふりおどーる",
+    "channelHandle": "@Freodore_nijisanji",
+    "isRetire": 0,
+    "isOverseas": 1,
+    "birthMonth": 2,
+    "birthDate": 11
+  },
+  {
+    "name": "セイブル",
+    "aliasFirst": "Seible",
+    "aliasSecond": "せいぶる",
+    "channelHandle": "@Seible_nijisanji",
+    "isRetire": 0,
+    "isOverseas": 1,
+    "birthMonth": 10,
+    "birthDate": 3
+  },
+  {
+    "name": "ケイリクス・デボネア",
+    "aliasFirst": "Kaelix Debonair",
+    "aliasSecond": "けいりくす・でぼねあ",
+    "channelHandle": "@KaelixDebonair",
+    "isRetire": 0,
+    "isOverseas": 1,
+    "birthMonth": 11,
+    "birthDate": 5
   }
 ]

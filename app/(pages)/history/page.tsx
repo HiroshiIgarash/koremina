@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-04-13" className="font-bold">
+              2025/04/13
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                「一橋綾人」「五木左京」「ジール・ギンジョウカ」「フリオドール」「セイブル」「ケイリクス・デボネア」の6名を追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-03-08" className="font-bold">
               2025/03/08
             </time>
