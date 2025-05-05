@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/Footer";
 import MobileFixedFooter from "@/components/MobileFixedFooter";
 import { Toaster } from "@/components/ui/sonner";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
@@ -46,6 +47,7 @@ export default function RootLayout({
           <Toaster position="top-center" richColors />
         </ThemeProvider>
         <Analytics />
+        <GoogleAnalytics gaId="G-GPKLE3NYLG" />
       </body>
     </html>
   );
