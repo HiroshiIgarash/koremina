@@ -17,9 +17,9 @@ import PostDeleteDialog from "@/components/feature/post/PostDeleteDialog";
 import { auth } from "@/auth";
 import ReportDialog from "@/components/feature/post/ReportDialog";
 import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
-import getYoutubeTitleById from "@/utils";
 import { YouTubeEmbed } from "@next/third-parties/google";
+import XShareButton from "@/components/feature/post/XShareButton";
+import SkeltonButton from "@/components/feature/post/SkeltonButton";
 
 interface IParams {
   postId: string;
@@ -53,13 +53,13 @@ const Page = async (props: { params: Promise<IParams> }) => {
     notFound();
   }
 
-  const title = await getYoutubeTitleById(post.videoId);
-
   return (
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
       <div>
         <div className="sticky top-28 space-y-4">
-          <YouTubeEmbed videoid={post.videoId} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <YouTubeEmbed videoid={post.videoId} />
+          </Suspense>
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
             <div className="flex flex-col gap-2">
               <Button
@@ -73,31 +73,9 @@ const Page = async (props: { params: Promise<IParams> }) => {
                   Youtubeで視聴する
                 </Link>
               </Button>
-              <Button
-                className="bg-black hover:bg-black/75 dark:border text-white"
-                asChild
-              >
-                <Link
-                  href={`https://x.com/intent/post?text=${encodeURIComponent(
-                    `
-
-#コレミナ から動画をシェアしました！
-
-${title}
-https://youtu.be/${post.videoId}`
-                  )}`}
-                  target="_blank"
-                  className="flex items-center gap-4"
-                >
-                  <Image
-                    src="/x-logo-white.png"
-                    width="20"
-                    height="20"
-                    alt=""
-                  />
-                  Xでシェアする
-                </Link>
-              </Button>
+              <Suspense fallback={<SkeltonButton />}>
+                <XShareButton videoId={post.videoId} />
+              </Suspense>
             </div>
             <Suspense fallback={<SkeletonReactionButtonList />}>
               <div className="text-right">
