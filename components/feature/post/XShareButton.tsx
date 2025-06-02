@@ -2,12 +2,19 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import getYoutubeTitleById from "@/utils";
+import { getCachedPostById } from "@/app/(pages)/post/[postId]/_utils/functions";
 
 interface IParams {
-  videoId: string;
+  postId: string;
 }
 
-export default async function XShareButton({ videoId }: IParams) {
+export default async function XShareButton({ postId }: IParams) {
+  const post = await getCachedPostById(postId);
+
+  if (!post) return;
+
+  const videoId = post.videoId;
+
   const title = await getYoutubeTitleById(videoId);
 
   return (
