@@ -2,7 +2,7 @@ import { Bookmark, Video } from "@prisma/client";
 import { Suspense } from "react";
 import PostItem from "../post/PostItem";
 import PostPagination from "../post/PostPagination";
-import SkeltonPostItem from "../post/SkeltonPostItem";
+import SkeletonPostItem from "../post/SkeletonPostItem";
 import getBookmarksById from "@/app/action/getBookmarksById";
 
 interface BookmarkListProps {
@@ -17,7 +17,7 @@ const BookmarkList = ({ bookmarks }: BookmarkListProps) => {
           {bookmarks.map((bookmark) => {
             const { post } = bookmark;
             return (
-              <Suspense key={post.id} fallback={<SkeltonPostItem />}>
+              <Suspense key={post.id} fallback={<SkeletonPostItem />}>
                 <PostItem
                   id={post.id}
                   comment={post.comment}
@@ -29,7 +29,7 @@ const BookmarkList = ({ bookmarks }: BookmarkListProps) => {
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
-                  seenUsersId={post.seenUsers.map(u => u.id)}
+                  seenUsersId={post.seenUsers.map((u) => u.id)}
                 />
               </Suspense>
             );

@@ -1,7 +1,7 @@
 import getPosts from "@/app/action/getPosts";
 import { Suspense } from "react";
 import PostItem from "./PostItem";
-import SkeltonPostItem from "./SkeltonPostItem";
+import SkeletonPostItem from "./SkeletonPostItem";
 import PostPagination from "./PostPagination";
 import getTotalPosts from "@/app/action/getTotalPosts";
 
@@ -31,7 +31,7 @@ const PostList = async ({
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
             {posts.map((post) => (
-              <Suspense key={post.id} fallback={<SkeltonPostItem />}>
+              <Suspense key={post.id} fallback={<SkeletonPostItem />}>
                 <PostItem
                   id={post.id}
                   comment={post.comment}
@@ -43,7 +43,7 @@ const PostList = async ({
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
-                  seenUsersId={post.seenUsers.map(u => u.id)}
+                  seenUsersId={post.seenUsers.map((u) => u.id)}
                 />
               </Suspense>
             ))}

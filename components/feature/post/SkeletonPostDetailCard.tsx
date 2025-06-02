@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function SkeltonPostDetailCard() {
+export default function SkeletonPostDetailCard() {
   return (
     <Card className="relative">
       <CardHeader className="space-y-4 pb-0">

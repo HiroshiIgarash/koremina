@@ -9,8 +9,8 @@ import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
 import SearchForm from "@/components/feature/post/SearchForm";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
-import SkeltonPickUpList from "@/components/feature/post/SkeltonPickUpList";
-import SkeltonTopBookmarkList from "@/components/feature/post/SkeltonTopBookmarkList";
+import SkeletonPickUpList from "@/components/feature/post/SkeletonPickUpList";
+import SkeletonTopBookmarkList from "@/components/feature/post/SkeletonTopBookmarkList";
 import prisma from "@/lib/db";
 import { ChevronRight, Upload } from "lucide-react";
 import Image from "next/image";
@@ -128,7 +128,7 @@ export default async function Home() {
         </div>
       </div>
       {hasBookmark && (
-        <Suspense fallback={<SkeltonTopBookmarkList />}>
+        <Suspense fallback={<SkeletonTopBookmarkList />}>
           <TopBookmarkList />
         </Suspense>
       )}
@@ -142,7 +142,7 @@ export default async function Home() {
           いい動画だったらリアクションしよう！
         </p>
         <div>
-          <Suspense fallback={<SkeltonPickUpList />}>
+          <Suspense fallback={<SkeletonPickUpList />}>
             <PickUpList />
           </Suspense>
         </div>

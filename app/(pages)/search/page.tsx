@@ -1,15 +1,15 @@
-import PostItem from "@/components/feature/post/PostItem"
-import SearchForm from "@/components/feature/post/SearchForm"
-import SearchPagination from "@/components/feature/post/SearchPagination"
-import SkeltonPostItem from "@/components/feature/post/SkeltonPostItem"
-import prisma from "@/lib/db"
-import { redirect } from "next/navigation"
-import { comment } from "postcss"
-import { Suspense } from "react"
+import PostItem from "@/components/feature/post/PostItem";
+import SearchForm from "@/components/feature/post/SearchForm";
+import SearchPagination from "@/components/feature/post/SearchPagination";
+import SkeletonPostItem from "@/components/feature/post/SkeletonPostItem";
+import prisma from "@/lib/db";
+import { redirect } from "next/navigation";
+import { comment } from "postcss";
+import { Suspense } from "react";
 
 interface ISearchParams {
-  q: string
-  page: string
+  q: string;
+  page: string;
 }
 
 const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
@@ -18,14 +18,14 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
   const postsPerPage = 16;
 
   if (!searchParams) {
-    redirect('/')
+    redirect("/");
   }
 
-  const searchList = searchParams.q.split(' ').filter(s => s !== '')
+  const searchList = searchParams.q.split(" ").filter((s) => s !== "");
 
   const count = await prisma.video.count({
     where: {
-      AND: searchList.map(word => {
+      AND: searchList.map((word) => {
         return {
           OR: [
             { comment: { contains: word } },
@@ -37,20 +37,19 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
                     { name: { contains: word } },
                     { aliasFirst: { contains: word } },
                     { aliasSecond: { contains: word } },
-                  ]
-                }
-              }
-            }
-          ]
-
-        }
-      })
+                  ],
+                },
+              },
+            },
+          ],
+        };
+      }),
     },
-  })
+  });
 
   const posts = await prisma.video.findMany({
     where: {
-      AND: searchList.map(word => {
+      AND: searchList.map((word) => {
         return {
           OR: [
             { comment: { contains: word } },
@@ -62,14 +61,13 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
                     { name: { contains: word } },
                     { aliasFirst: { contains: word } },
                     { aliasSecond: { contains: word } },
-                  ]
-                }
-              }
-            }
-          ]
-
-        }
-      })
+                  ],
+                },
+              },
+            },
+          ],
+        };
+      }),
     },
     include: {
       postedUser: true,
@@ -90,24 +88,25 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
           comments: true,
         },
       },
-      seenUsers: true
+      seenUsers: true,
     },
     skip: (currentPage - 1) * postsPerPage,
     take: postsPerPage,
-  })
-
+  });
 
   return (
     <>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
-        <h2 className="font-bold mb-4 px-4 w-full max-w-7xl mx-auto">ワードで検索</h2>
+        <h2 className="font-bold mb-4 px-4 w-full max-w-7xl mx-auto">
+          ワードで検索
+        </h2>
         <SearchForm defaultValue={searchParams.q.toString()} />
       </div>
       {posts.length > 0 ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
             {posts.map((post) => (
-              <Suspense key={post.id} fallback={<SkeltonPostItem />}>
+              <Suspense key={post.id} fallback={<SkeletonPostItem />}>
                 <PostItem
                   id={post.id}
                   comment={post.comment}
@@ -119,7 +118,7 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
-                  seenUsersId={post.seenUsers.map(u => u.id)}
+                  seenUsersId={post.seenUsers.map((u) => u.id)}
                 />
               </Suspense>
             ))}
@@ -138,7 +137,7 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
         <p>「{searchParams.q.toString()}」の検索結果はありません。</p>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

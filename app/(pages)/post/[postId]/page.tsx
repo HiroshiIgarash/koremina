@@ -4,13 +4,13 @@ import { Suspense } from "react";
 import { auth } from "@/auth";
 import ReportDialog from "@/components/feature/post/ReportDialog";
 import XShareButton from "@/components/feature/post/XShareButton";
-import SkeltonButton from "@/components/feature/post/SkeltonButton";
+import SkeletonButton from "@/components/feature/post/SkeletonButton";
 import PostDetailCard from "@/components/feature/post/PostDetailCard";
 import PostVideo from "@/components/feature/post/PostVideo";
 import YoutubeLinkButton from "@/components/feature/post/YoutubeLinkButton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCachedPostById } from "./_utils/functions";
-import SkeltonPostDetailCard from "@/components/feature/post/SkeltonPostDetailCard";
+import SkeletonPostDetailCard from "@/components/feature/post/SkeletonPostDetailCard";
 
 interface IParams {
   postId: string;
@@ -43,10 +43,10 @@ const Page = async (props: { params: Promise<IParams> }) => {
           </Suspense>
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row justify-between">
             <div className="flex flex-col gap-2">
-              <Suspense fallback={<SkeltonButton />}>
+              <Suspense fallback={<SkeletonButton />}>
                 <YoutubeLinkButton postId={postId} />
               </Suspense>
-              <Suspense fallback={<SkeltonButton />}>
+              <Suspense fallback={<SkeletonButton />}>
                 <XShareButton postId={postId} />
               </Suspense>
             </div>
@@ -66,7 +66,7 @@ const Page = async (props: { params: Promise<IParams> }) => {
         </div>
       </div>
       <div className="min-w-0">
-        <Suspense fallback={<SkeltonPostDetailCard />}>
+        <Suspense fallback={<SkeletonPostDetailCard />}>
           <PostDetailCard postId={postId} />
         </Suspense>
       </div>
