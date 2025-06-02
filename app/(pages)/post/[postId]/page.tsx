@@ -10,6 +10,7 @@ import PostVideo from "@/components/feature/post/PostVideo";
 import YoutubeLinkButton from "@/components/feature/post/YoutubeLinkButton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCachedPostById } from "./_utils/functions";
+import SkeltonPostDetailCard from "@/components/feature/post/SkeltonPostDetailCard";
 
 interface IParams {
   postId: string;
@@ -65,7 +66,7 @@ const Page = async (props: { params: Promise<IParams> }) => {
         </div>
       </div>
       <div className="min-w-0">
-        <Suspense>
+        <Suspense fallback={<SkeltonPostDetailCard />}>
           <PostDetailCard postId={postId} />
         </Suspense>
       </div>
