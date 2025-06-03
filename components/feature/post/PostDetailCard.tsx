@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { getCachedPostById } from "@/app/(pages)/post/[postId]/_utils/functions";
+import PostBookmarkButton from "./PostBookmarkButton";
 
 interface PostDetailCardProps {
   postId: string;
@@ -39,14 +40,7 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
               </PostDeleteDialog>
             </>
           )}
-          <button>
-            <BookmarkButton
-              postId={postId}
-              userId={currentUser.id}
-              bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
-              seenUsersId={post.seenUsers.map((u) => u.id)}
-            />
-          </button>
+          <PostBookmarkButton postId={postId} />
         </div>
       )}
       <CardHeader className="space-y-4 pb-0">
