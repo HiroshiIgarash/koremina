@@ -25,6 +25,7 @@ const deletePost = async ({ postId }: deletePostProps) => {
   });
 
   revalidateTag("get-post");
+  revalidateTag(`get-post-by-id:${postId}`);
 };
 
 export default deletePost;

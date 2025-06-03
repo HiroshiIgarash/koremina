@@ -1,20 +1,23 @@
-import prisma from "@/lib/db"
+import prisma from "@/lib/db";
+import { unstable_cacheTag as cacheTag } from "next/cache";
+import { unstable_cacheLife as cacheLife } from "next/cache";
 
 const getPostById = async (id: string) => {
+  "use cache";
+  cacheTag(`get-post-by-id:${id}`);
+  cacheLife("max");
 
   const post = await prisma.video.findUnique({
     where: {
-      id
+      id,
     },
     include: {
       postedUser: true,
-      Bookmark: true,
       liver: true,
-      seenUsers: true
     },
-  })
+  });
 
-  return post
-}
+  return post;
+};
 
-export default getPostById
+export default getPostById;
