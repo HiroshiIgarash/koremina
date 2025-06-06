@@ -23,7 +23,7 @@ const ChangeNicknameForm = ({ user, setOpen }: ChangeNicknameFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NicknameSchema>({
+  } = useForm({
     resolver: zodResolver(nicknameSchema),
     defaultValues: {
       newNickname: user?.nickname || user?.name || "",

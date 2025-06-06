@@ -52,14 +52,14 @@ const MostFavoriteLiverForm = ({
   useEffect(() => {
     const fetchAndSetLivers = async () => {
       const livers = await getLivers();
-      const invalidLivers = livers
+      const invalidLivers = livers;
       setLivers(invalidLivers);
     };
 
     fetchAndSetLivers();
   }, []);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm({
     resolver: zodResolver(FormSchema),
   });
 
@@ -69,7 +69,9 @@ const MostFavoriteLiverForm = ({
 
       if (result?.error) {
         console.log(result.error);
-        toast.error("登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
+        toast.error(
+          "登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。"
+        );
       } else {
         toast.success("最推しライバーを登録しました。");
         setOpen(false);

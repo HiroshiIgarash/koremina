@@ -32,7 +32,14 @@ import { Liver } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
 import getLivers from "@/app/action/getLivers";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const formSchema = z.object({
   videoId: z
@@ -68,7 +75,7 @@ const PostForm = () => {
 
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       videoId: "",
@@ -177,7 +184,7 @@ const PostForm = () => {
   useEffect(() => {
     const fetchAndSetLivers = async () => {
       const livers = await getLivers();
-      const invalidLivers = livers
+      const invalidLivers = livers;
       setLivers(invalidLivers);
     };
 
@@ -254,7 +261,11 @@ const PostForm = () => {
                                 setSelected((prev) => [...prev, liver]);
                               }}
                               className={"cursor-pointer"}
-                              keywords={[liver.aliasFirst, liver.aliasSecond].filter((a) => a) as string[]}
+                              keywords={
+                                [liver.aliasFirst, liver.aliasSecond].filter(
+                                  (a) => a
+                                ) as string[]
+                              }
                             >
                               {liver.name}
                             </CommandItem>
@@ -283,18 +294,32 @@ const PostForm = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                    動画IDもしくはURLを記入してください。（サムネイルが表示されます）<br />
+                    動画IDもしくはURLを記入してください。（サムネイルが表示されます）
+                    <br />
                     <Dialog>
-                      <DialogTrigger><span className="underline">サムネイルが表示されない場合</span></DialogTrigger>
+                      <DialogTrigger>
+                        <span className="underline">
+                          サムネイルが表示されない場合
+                        </span>
+                      </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
-                          <DialogTitle>サムネイルが表示されない場合</DialogTitle>
+                          <DialogTitle>
+                            サムネイルが表示されない場合
+                          </DialogTitle>
                           <DialogDescription className="text-foreground">
-                            URLを入力後、<span className="text-destructive">任意の場所をクリック / タップ</span>すると動画IDに変換されるようになっています。<br />
-                            例）https://www.youtube.com/watch?v=8tTKwtgzJwA → 8tTKwtgzJwA
+                            URLを入力後、
+                            <span className="text-destructive">
+                              任意の場所をクリック / タップ
+                            </span>
+                            すると動画IDに変換されるようになっています。
+                            <br />
+                            例）https://www.youtube.com/watch?v=8tTKwtgzJwA →
+                            8tTKwtgzJwA
                           </DialogDescription>
                           <DialogDescription className="text-foreground">
-                            任意の場所をクリック / タップしても変換されない場合、手動で動画ID(11文字)を入力してください
+                            任意の場所をクリック /
+                            タップしても変換されない場合、手動で動画ID(11文字)を入力してください
                           </DialogDescription>
                         </DialogHeader>
                       </DialogContent>
@@ -375,10 +400,12 @@ const PostForm = () => {
             {isPending && <Loader2 className="animate-spin" />}
           </Button>
           <p className="text-sm">
-            ※投稿ボタンが押せない場合、以下を確認してください。<br />
-            ・「このライバーを推すときにおすすめしたい！」→ライバーのラベルが表示されていますか？<br />
-            ・youtube ID（URLでも可）→サムネが表示されていますか？<br />
-
+            ※投稿ボタンが押せない場合、以下を確認してください。
+            <br />
+            ・「このライバーを推すときにおすすめしたい！」→ライバーのラベルが表示されていますか？
+            <br />
+            ・youtube ID（URLでも可）→サムネが表示されていますか？
+            <br />
           </p>
         </form>
       </Form>
