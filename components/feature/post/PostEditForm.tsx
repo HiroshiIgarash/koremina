@@ -79,9 +79,9 @@ const PostEditForm = ({
   const [selected, setSelected] = useState<Liver[]>(liver);
   const [inputValue, setInputValue] = useState("");
 
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       videoId,
@@ -107,7 +107,7 @@ const PostEditForm = ({
         router.push(`/post/${postId}`);
         router.refresh();
       });
-    })
+    });
   }
 
   const handleBlur = (value: string) => {
@@ -180,7 +180,7 @@ const PostEditForm = ({
   useEffect(() => {
     const fetchAndSetLivers = async () => {
       const livers = await getLivers();
-      const invalidLivers = livers
+      const invalidLivers = livers;
       setLivers(invalidLivers);
     };
 
@@ -257,7 +257,11 @@ const PostEditForm = ({
                                 setSelected((prev) => [...prev, liver]);
                               }}
                               className={"cursor-pointer"}
-                              keywords={[liver.aliasFirst, liver.aliasSecond].filter((a) => a) as string[]}
+                              keywords={
+                                [liver.aliasFirst, liver.aliasSecond].filter(
+                                  (a) => a
+                                ) as string[]
+                              }
                             >
                               {liver.name}
                             </CommandItem>
@@ -361,11 +365,7 @@ const PostEditForm = ({
             }
           >
             更新
-            {
-              isPending && (
-                <Loader2 className="animate-spin" />
-              )
-            }
+            {isPending && <Loader2 className="animate-spin" />}
           </Button>
         </form>
       </Form>
