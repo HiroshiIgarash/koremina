@@ -42,8 +42,8 @@ const SpecialList = async () => {
 
   return (
     <>
-      <div className="overflow-x-auto w-[100vw] md:w-auto">
-        <div className="flex [&>*]:w-[calc(100vw_-_4rem)] [&>*]:shrink-0 md:[&>*]:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
+      <div className="overflow-x-auto w-screen md:w-auto">
+        <div className="flex *:w-[calc(100vw-4rem)] *:shrink-0 md:*:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
           {posts.map((post) => {
             if (!post) return;
             return (

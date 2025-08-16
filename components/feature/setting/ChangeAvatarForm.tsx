@@ -19,7 +19,6 @@ const ChangeAvatarForm = ({ user, setOpen }: ChangeAvatarFormProps) => {
   const [file, setFile] = useState<File & { preview: string }>();
   const [isPending, startTransition] = useTransition();
 
-
   const handleDefaultAvatarClick = () => {
     startTransition(async () => {
       await updateAvatar();
@@ -44,11 +43,9 @@ const ChangeAvatarForm = ({ user, setOpen }: ChangeAvatarFormProps) => {
               width={48}
               height={48}
               alt=""
-              onError={
-                e => {
-                  e.currentTarget.src = "/user.png"
-                }
-              }
+              onError={(e) => {
+                e.currentTarget.src = "/user.png";
+              }}
               className="rounded-full border-2"
             />
             <Button

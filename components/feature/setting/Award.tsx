@@ -203,7 +203,7 @@ https://koremina.vercel.app/user/${userId}
     >
       <div
         className={cn(
-          "p-2 rounded-full bg-gradient-to-br text-black",
+          "p-2 rounded-full bg-linear-to-br text-black",
           variant === "none" &&
             "bg-gray-50 dark:bg-gray-900 border border-current  text-gray-300 dark:text-gray-700",
           variant === "gold" && "from-[#B39855] via-[#FFF9E6] to-[#B39855]",
