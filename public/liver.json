@@ -1684,7 +1684,7 @@
     "aliasFirst": "ばん はだ",
     "aliasSecond": "",
     "channelHandle": "@BanHada",
-    "isRetire": 0,
+    "isRetire": 1,
     "isOverseas": 0,
     "birthMonth": 8,
     "birthDate": 30
@@ -2354,7 +2354,7 @@
     "aliasFirst": "とらひめ ことか",
     "aliasSecond": "Kotoka Torahime",
     "channelHandle": "UCggO2c1unS-oLwTLT0ICywg",
-    "isRetire": 0,
+    "isRetire": 1,
     "isOverseas": 1,
     "birthMonth": null,
     "birthDate": null
