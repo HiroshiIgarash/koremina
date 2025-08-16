@@ -211,7 +211,7 @@ const PostForm = () => {
                       <Badge key={liver.id} variant="secondary">
                         {liver.name}
                         <button
-                          className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                          className="ml-1 ring-offset-background rounded-full outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2"
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               handleUnselect(liver);
@@ -239,13 +239,13 @@ const PostForm = () => {
                     onBlur={() => setOpen(false)}
                     onFocus={() => setOpen(true)}
                     placeholder="ライバーを選択"
-                    className="text-base md:text-sm ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1"
+                    className="text-base md:text-sm ml-2 bg-transparent outline-hidden placeholder:text-muted-foreground flex-1"
                   />
                 </div>
               </div>
               <div className="relative mt-2">
                 {open && selectables.length > 0 ? (
-                  <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
+                  <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-hidden animate-in">
                     <CommandList>
                       <CommandGroup className="max-h-[20vh] md:max-h-none h-full overflow-auto">
                         {selectables.map((liver) => {

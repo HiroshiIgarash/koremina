@@ -36,7 +36,7 @@ export default function RootLayout({
       <body className={noto.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <NextTopLoader showSpinner={false} height={2} />
-          <div className="min-h-dvh grid grid-rows-[auto,1fr,auto]">
+          <div className="min-h-dvh grid grid-rows-[auto_1fr_auto]">
             <Header />
             <main className="flex flex-col items-center pt-12 pb-20">
               {children}

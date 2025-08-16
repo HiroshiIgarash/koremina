@@ -7,7 +7,7 @@ import Hamburger from "./Hamburger";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 w-full py-4 px-4 md:px-12 border-b shadow z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 w-full py-4 px-4 md:px-12 border-b shadow-sm z-50 bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Hamburger />

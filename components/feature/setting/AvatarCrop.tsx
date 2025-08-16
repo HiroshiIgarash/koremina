@@ -69,10 +69,10 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
           onChange={(c) => setCrop(c)}
           circularCrop
           minWidth={48}
-          className="md:!max-w-[min(200px,100%)]"
+          className="md:max-w-[min(200px,100%)]!"
         >
           <Image
-            className="pointer-events-none w-auto !max-h-[50dvh]"
+            className="pointer-events-none w-auto max-h-[50dvh]!"
             ref={imageRef}
             src={file.preview}
             alt=""
