@@ -54,7 +54,7 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
         </CardTitle>
         <Link
           href={`/user/${post.postedUser.id}`}
-          className="my-8 w-fit hover:opacity-70 transition-opacity ml-auto"
+          className="w-fit hover:opacity-70 transition-opacity ml-auto"
         >
           <div className="flex justify-end items-center gap-2">
             <Avatar user={post.postedUser} size={32} />
