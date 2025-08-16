@@ -12,7 +12,7 @@ const RecentPostList = async ({ user }: RecentPostListProps) => {
   return (
     <>
       {recentPosts.length > 0 ? (
-        recentPosts.map((post) => (
+        recentPosts.map(post => (
           <RecentPostItem
             key={post.id}
             postId={post.id}

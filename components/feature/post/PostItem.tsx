@@ -59,7 +59,7 @@ const PostItem = async ({
         <button className="absolute top-4 right-4">
           <BookmarkButton
             postId={id}
-            bookmarkedUsersId={bookmark.map((b) => b.userId)}
+            bookmarkedUsersId={bookmark.map(b => b.userId)}
             userId={session.user.id}
             seenUsersId={seenUsersId}
           />
@@ -94,7 +94,7 @@ const PostItem = async ({
                   </TooltipTrigger>
                   <TooltipContent>
                     <ul>
-                      {livers.map((liver) => (
+                      {livers.map(liver => (
                         <li key={liver.name}>{liver.name}</li>
                       ))}
                     </ul>
@@ -106,7 +106,7 @@ const PostItem = async ({
                   className="flex flex-wrap md:flex-nowrap gap-2"
                   style={{ animationDuration: `${livers.length - 1}s` }}
                 >
-                  {livers.map((liver) => (
+                  {livers.map(liver => (
                     <Badge
                       key={liver.name}
                       variant="outline"

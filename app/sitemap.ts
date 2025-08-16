@@ -6,7 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
   const allPosts = await getPosts();
 
-  const postPaths = allPosts.map((post) => {
+  const postPaths = allPosts.map(post => {
     return {
       url: `${baseURL}/post/${post.id}`,
       lastModified: post.postedAt,
@@ -36,5 +36,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...staticPaths,...postPaths];
+  return [...staticPaths, ...postPaths];
 }

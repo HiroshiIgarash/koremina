@@ -47,7 +47,11 @@ const Footer = () => {
               <FaXTwitter size={20} />
             </Link>
           </Button>
-          <Link href="https://github.com/HiroshiIgarash/koremina" target="_blank" className="">
+          <Link
+            href="https://github.com/HiroshiIgarash/koremina"
+            target="_blank"
+            className=""
+          >
             <FaGithub size={32} />
           </Link>
         </li>

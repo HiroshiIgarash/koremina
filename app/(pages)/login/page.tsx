@@ -8,8 +8,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Page = () => {
-  const [isMounted, setIsMounted] = useState(false)
-  const {resolvedTheme} = useTheme()
+  const [isMounted, setIsMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
   const searchParams = useSearchParams();
 
   const callbackUrl = searchParams.get("callbackUrl") || undefined;
@@ -19,10 +19,10 @@ const Page = () => {
   };
 
   useEffect(() => {
-    setIsMounted(true)
-  },[])
+    setIsMounted(true);
+  }, []);
 
-  if(!isMounted) return null;
+  if (!isMounted) return null;
 
   return (
     <>
@@ -32,7 +32,7 @@ const Page = () => {
           <li>
             <Button
               variant="outline"
-              onClick={()=>handleLogin("google")}
+              onClick={() => handleLogin("google")}
               className="rounded-full w-full"
             >
               <Image
@@ -48,11 +48,15 @@ const Page = () => {
           <li>
             <Button
               variant="outline"
-              onClick={()=>handleLogin("twitter")}
+              onClick={() => handleLogin("twitter")}
               className="rounded-full w-full"
             >
               <Image
-                src={resolvedTheme === "dark" ? "/x-logo-white.png" : "/x-logo-black.png"}
+                src={
+                  resolvedTheme === "dark"
+                    ? "/x-logo-white.png"
+                    : "/x-logo-black.png"
+                }
                 alt=""
                 width={16}
                 height={16}
@@ -62,14 +66,19 @@ const Page = () => {
             </Button>
           </li>
         </ul>
-        <h2 className="font-bold text-lg mt-8">コレミナにログインすると<br />次の機能が使えるようになります。</h2>
+        <h2 className="font-bold text-lg mt-8">
+          コレミナにログインすると
+          <br />
+          次の機能が使えるようになります。
+        </h2>
         <ul className="list-disc list-inside mt-6">
           <li>おすすめ動画の投稿</li>
           <li>投稿へのコメント</li>
           <li>投稿のブックマーク</li>
           <li>投稿へのリアクション</li>
-          <li>推しライバー、最推しライバーの登録（ライバー絞り込みがしやすくなります。）</li>
-          
+          <li>
+            推しライバー、最推しライバーの登録（ライバー絞り込みがしやすくなります。）
+          </li>
         </ul>
       </div>
     </>

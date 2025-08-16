@@ -160,7 +160,7 @@ const Award = async () => {
             </span>
           </p>
           <div className="flex flex-col items-center gap-4">
-            {AWARD_TYPE.map((type) => {
+            {AWARD_TYPE.map(type => {
               const lv = level(type);
               if (lv) {
                 return (

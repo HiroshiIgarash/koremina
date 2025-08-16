@@ -7,7 +7,6 @@ import { auth } from "@/auth";
 const updateMostFavoriteLiver = async (data: {
   liverId?: string | undefined;
 }) => {
-
   try {
     const session = await auth();
 
@@ -31,7 +30,7 @@ const updateMostFavoriteLiver = async (data: {
           mostFavoriteLiverId: null,
         };
 
-  await prisma.user.update({
+    await prisma.user.update({
       where: {
         id: session.user.id,
       },

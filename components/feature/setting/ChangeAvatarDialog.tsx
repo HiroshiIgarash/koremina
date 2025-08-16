@@ -1,27 +1,37 @@
-"use client"
+"use client";
 
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
-import ChangeAvatarForm from "./ChangeAvatarForm"
-import { useState } from "react"
-import { User } from "@prisma/client"
+import ChangeAvatarForm from "./ChangeAvatarForm";
+import { useState } from "react";
+import { User } from "@prisma/client";
 
-const ChangeAvatarDialog = ({ children,user }: { children: React.ReactNode,user:User|null }) => {
-  const [open, setOpen] = useState(false)
+const ChangeAvatarDialog = ({
+  children,
+  user,
+}: {
+  children: React.ReactNode;
+  user: User | null;
+}) => {
+  const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="shrink-0">
-        {children}
-      </DialogTrigger>
+      <DialogTrigger className="shrink-0">{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader className="space-y-4">
           <DialogTitle>アバター画像の編集</DialogTitle>
-            <ChangeAvatarForm user={user} setOpen={setOpen} />
+          <ChangeAvatarForm user={user} setOpen={setOpen} />
         </DialogHeader>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default ChangeAvatarDialog
+export default ChangeAvatarDialog;

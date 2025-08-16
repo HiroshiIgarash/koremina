@@ -23,7 +23,7 @@ const updateAvatar = async (url?: string) => {
 
   if (prevAvatar) await del(prevAvatar);
 
-  revalidateTag('get-post')
+  revalidateTag("get-post");
 
   return user;
 };

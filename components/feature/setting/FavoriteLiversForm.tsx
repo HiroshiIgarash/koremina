@@ -47,7 +47,7 @@ const FavoriteLiversForm = ({
   const [inputValue, setInputValue] = useState("");
 
   const handleUnselect = useCallback((liver: Liver) => {
-    setSelected((prev) => prev.filter((s) => s.id !== liver.id));
+    setSelected(prev => prev.filter(s => s.id !== liver.id));
   }, []);
 
   const handleKeyDown = useCallback(
@@ -56,7 +56,7 @@ const FavoriteLiversForm = ({
       if (input) {
         if (e.key === "Delete" || e.key === "Backspace") {
           if (input.value === "") {
-            setSelected((prev) => {
+            setSelected(prev => {
               const newSelected = [...prev];
               newSelected.pop();
               return newSelected;
@@ -73,13 +73,13 @@ const FavoriteLiversForm = ({
   );
 
   const selectables = livers.filter(
-    (liver) => !selected.some((s) => s.id === liver.id)
+    liver => !selected.some(s => s.id === liver.id)
   );
 
   useEffect(() => {
     const fetchAndSetLivers = async () => {
       const livers = await getLivers();
-      const invalidLivers = livers
+      const invalidLivers = livers;
       setLivers(invalidLivers);
     };
 
@@ -92,7 +92,9 @@ const FavoriteLiversForm = ({
 
       if (result?.error) {
         console.log(result.error);
-        toast.error("登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
+        toast.error(
+          "登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。"
+        );
       } else {
         toast.success("推しライバーを登録しました。");
         setOpenDialog(false);
@@ -111,18 +113,18 @@ const FavoriteLiversForm = ({
           <div className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
             <ScrollArea>
               <div className="flex gap-1 flex-wrap">
-                {selected.map((liver) => {
+                {selected.map(liver => {
                   return (
                     <Badge key={liver.id} variant="secondary">
                       {liver.name}
                       <button
                         className="ml-1 ring-offset-background rounded-full outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                        onKeyDown={(e) => {
+                        onKeyDown={e => {
                           if (e.key === "Enter") {
                             handleUnselect(liver);
                           }
                         }}
-                        onMouseDown={(e) => {
+                        onMouseDown={e => {
                           e.preventDefault();
                           e.stopPropagation();
                         }}
@@ -151,20 +153,24 @@ const FavoriteLiversForm = ({
               <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-hidden animate-in">
                 <CommandList>
                   <CommandGroup className="max-h-[20vh] md:max-h-none h-full overflow-auto">
-                    {selectables.map((liver) => {
+                    {selectables.map(liver => {
                       return (
                         <CommandItem
                           key={liver.id}
-                          onMouseDown={(e) => {
+                          onMouseDown={e => {
                             e.preventDefault();
                             e.stopPropagation();
                           }}
-                          onSelect={(value) => {
+                          onSelect={value => {
                             setInputValue("");
-                            setSelected((prev) => [...prev, liver]);
+                            setSelected(prev => [...prev, liver]);
                           }}
                           className={"cursor-pointer"}
-                          keywords={[liver.aliasFirst, liver.aliasSecond].filter((a) => a) as string[]}
+                          keywords={
+                            [liver.aliasFirst, liver.aliasSecond].filter(
+                              a => a
+                            ) as string[]
+                          }
                         >
                           {liver.name}
                         </CommandItem>
@@ -179,7 +185,7 @@ const FavoriteLiversForm = ({
       </div>
 
       <Button
-        onClick={() => handleSubmit(selected.map((liver) => liver.id))}
+        onClick={() => handleSubmit(selected.map(liver => liver.id))}
         disabled={isPending}
       >
         送信

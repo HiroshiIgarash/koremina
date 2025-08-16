@@ -13,17 +13,15 @@ const LiverContainer = async () => {
   const user = await getCurrentUserWithTag();
 
   // ライバー（JP）
-  const liversJp = livers.filter(
-    (liver) => !liver.isOverseas && !liver.isRetire
-  );
+  const liversJp = livers.filter(liver => !liver.isOverseas && !liver.isRetire);
 
   // ライバー（海外）
   const liversOverseas = livers.filter(
-    (liver) => liver.isOverseas && !liver.isRetire
+    liver => liver.isOverseas && !liver.isRetire
   );
 
   // 卒業ライバー
-  const liversRetired = livers.filter((liver) => liver.isRetire);
+  const liversRetired = livers.filter(liver => liver.isRetire);
 
   return (
     <>
@@ -91,7 +89,7 @@ const LiverList = ({
         {heading}
       </h2>
       <div className="pt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-x-4 gap-y-8">
-        {livers.map((liver) => (
+        {livers.map(liver => (
           <div key={liver.id} className="relative flex flex-col items-center">
             {user?.mostFavoriteLiverId === liver.id && (
               <Heart
@@ -102,8 +100,7 @@ const LiverList = ({
               />
             )}
             {user?.favoriteLivers.some(
-              (fav) =>
-                fav.id === liver.id && fav.id !== user.mostFavoriteLiverId
+              fav => fav.id === liver.id && fav.id !== user.mostFavoriteLiverId
             ) && (
               <Star
                 fill="yellow"

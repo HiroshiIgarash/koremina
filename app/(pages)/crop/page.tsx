@@ -41,7 +41,7 @@ const Page = () => {
     AvatarPreview({
       imageRef: imageRef.current,
       crop,
-    }).then(async (blob) => {
+    }).then(async blob => {
       if (blob) {
         const res = await fetch(`/api/upload?filename=${file.name}`, {
           method: "POST",
@@ -62,12 +62,7 @@ const Page = () => {
         <p>ここにファイルをドラッグ&ドロップしてください。</p>
       </div>
 
-      <ReactCrop
-        aspect={1}
-        crop={crop}
-        onChange={(c) => setCrop(c)}
-        circularCrop
-      >
+      <ReactCrop aspect={1} crop={crop} onChange={c => setCrop(c)} circularCrop>
         {file && (
           <Image
             ref={imageRef}

@@ -40,7 +40,7 @@ const TopBookmarkList = async () => {
   if (!userId) return;
 
   const unSeenBookmarks = (await getBookmarksById({ userId })).filter(
-    (bookmark) => bookmark.post.seenUsers.every((user) => user.id !== user.id)
+    bookmark => bookmark.post.seenUsers.every(user => user.id !== user.id)
   );
 
   const filteredUnseenBookmarks = extractRandomElementsFromArray(
@@ -64,7 +64,7 @@ const TopBookmarkList = async () => {
         <div>
           <ScrollArea className="max-w-screen">
             <div className="flex *:w-[calc(100vw-4rem)] *:shrink-0 md:*:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full md:max-w-7xl mx-auto">
-              {filteredUnseenBookmarks.map((bookmark) => {
+              {filteredUnseenBookmarks.map(bookmark => {
                 const { post } = bookmark;
                 if (!post) return;
                 return (
@@ -80,7 +80,7 @@ const TopBookmarkList = async () => {
                       livers={post.liver}
                       bookmark={post.Bookmark}
                       reactionsCount={post._count}
-                      seenUsersId={post.seenUsers.map((u) => u.id)}
+                      seenUsersId={post.seenUsers.map(u => u.id)}
                     />
                   </Suspense>
                 );

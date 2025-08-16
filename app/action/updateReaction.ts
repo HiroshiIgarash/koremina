@@ -27,11 +27,11 @@ const updateReaction = async (
   }
 
   const newReactionVideoIds = active
-    ? [...user[reactionVideo].filter((v) => v.id !== postId).map((v) => v.id)]
-    : [...user[reactionVideo].map((v) => v.id), postId];
+    ? [...user[reactionVideo].filter(v => v.id !== postId).map(v => v.id)]
+    : [...user[reactionVideo].map(v => v.id), postId];
 
   const updateData = Object.fromEntries([
-    [reactionVideo, { set: newReactionVideoIds.map((i) => ({ id: i })) }],
+    [reactionVideo, { set: newReactionVideoIds.map(i => ({ id: i })) }],
   ]);
 
   await prisma.user.update({

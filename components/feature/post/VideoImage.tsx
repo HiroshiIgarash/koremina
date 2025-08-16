@@ -3,30 +3,36 @@
 import getVideoImage from "@/app/action/getVideoImage";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useState, useTransition } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 
 interface VideoImageProps {
   id: string;
-  setIsValidVideoId: Dispatch<SetStateAction<boolean>>
+  setIsValidVideoId: Dispatch<SetStateAction<boolean>>;
 }
 
 const VideoImage = ({ id, setIsValidVideoId }: VideoImageProps) => {
-  const [isPending, startTransition] = useTransition()
-  const [imageSrc, setImageSrc] = useState<string | null>('')
+  const [isPending, startTransition] = useTransition();
+  const [imageSrc, setImageSrc] = useState<string | null>("");
 
   useEffect(() => {
-    let ignore = false
+    let ignore = false;
     startTransition(async () => {
-      const src = await getVideoImage(id)
+      const src = await getVideoImage(id);
       if (!ignore) {
-        setImageSrc(src)
-        setIsValidVideoId(!!src)
+        setImageSrc(src);
+        setIsValidVideoId(!!src);
       }
-    })
-    return () => { ignore = false }
-  }, [id, setIsValidVideoId])
-
-
+    });
+    return () => {
+      ignore = false;
+    };
+  }, [id, setIsValidVideoId]);
 
   return (
     <div>
@@ -40,10 +46,12 @@ const VideoImage = ({ id, setIsValidVideoId }: VideoImageProps) => {
           height={900}
           className="w-[50%] aspect-video object-cover"
         />
-      ) : imageSrc === null && (
-        <p className="text-sm font-medium text-destructive">
-          サムネイルを取得できませんでした。IDが正しいか確認してください。
-        </p>
+      ) : (
+        imageSrc === null && (
+          <p className="text-sm font-medium text-destructive">
+            サムネイルを取得できませんでした。IDが正しいか確認してください。
+          </p>
+        )
       )}
     </div>
   );

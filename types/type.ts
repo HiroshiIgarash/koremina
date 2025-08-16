@@ -1,3 +1,3 @@
-export type Reaction = "good" | "bad" | "love" | "funny" | "cry" | "angel"
+export type Reaction = "good" | "bad" | "love" | "funny" | "cry" | "angel";
 
-export type NotificationType = "reaction" | "comment"
+export type NotificationType = "reaction" | "comment";

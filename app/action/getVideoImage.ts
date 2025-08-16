@@ -1,9 +1,8 @@
-'use server'
+"use server";
 
 import axios from "axios";
 
 const getVideoImage = async (id: string) => {
-
   const res = await axios
     .get(`https://i.ytimg.com/vi/${id}/hqdefault.jpg`)
     .catch(() => {
@@ -11,10 +10,10 @@ const getVideoImage = async (id: string) => {
     });
 
   if (!res) {
-    return null
+    return null;
   }
 
-  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-}
+  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+};
 
-export default getVideoImage
+export default getVideoImage;

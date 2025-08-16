@@ -12,7 +12,11 @@ const HeaderRight = async () => {
 
   return (
     <div className="flex items-center gap-2">
-      <Link href="https://github.com/HiroshiIgarash/koremina" target="_blank" className="mr-4 hidden md:block">
+      <Link
+        href="https://github.com/HiroshiIgarash/koremina"
+        target="_blank"
+        className="mr-4 hidden md:block"
+      >
         <FaGithub size={32} />
       </Link>
       <ModeToggle />

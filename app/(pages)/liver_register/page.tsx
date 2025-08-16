@@ -31,8 +31,8 @@ const Page = async () => {
       <GroupRegisterButton listId="nijisanji" />
       <ul id="nijisanji" className="space-y-2">
         {liverData
-          .filter((liver) => !liver.isOverseas && !liver.isRetire)
-          .map((liver) => (
+          .filter(liver => !liver.isOverseas && !liver.isRetire)
+          .map(liver => (
             <LiverFormItem key={liver.name} liver={liver} dbLivers={livers} />
           ))}
       </ul>
@@ -40,8 +40,8 @@ const Page = async () => {
       <GroupRegisterButton listId="nijisanji_en" />
       <ul id="nijisanji_en" className="space-y-2">
         {liverData
-          .filter((liver) => liver.isOverseas && !liver.isRetire)
-          .map((liver) => (
+          .filter(liver => liver.isOverseas && !liver.isRetire)
+          .map(liver => (
             <LiverFormItem key={liver.name} liver={liver} dbLivers={livers} />
           ))}
       </ul>
@@ -49,8 +49,8 @@ const Page = async () => {
       <GroupRegisterButton listId="nijisanji_retire" />
       <ul id="nijisanji_retire" className="space-y-2">
         {liverData
-          .filter((liver) => !liver.isOverseas && liver.isRetire)
-          .map((liver) => (
+          .filter(liver => !liver.isOverseas && liver.isRetire)
+          .map(liver => (
             <LiverFormItem key={liver.name} liver={liver} dbLivers={livers} />
           ))}
       </ul>
@@ -58,8 +58,8 @@ const Page = async () => {
       <GroupRegisterButton listId="nijisanji_retire_overseas" />
       <ul id="nijisanji_retire_overseas" className="space-y-2">
         {liverData
-          .filter((liver) => liver.isOverseas && liver.isRetire)
-          .map((liver) => (
+          .filter(liver => liver.isOverseas && liver.isRetire)
+          .map(liver => (
             <LiverFormItem key={liver.name} liver={liver} dbLivers={livers} />
           ))}
       </ul>
@@ -77,9 +77,8 @@ const LiverFormItem = ({
   liver: (typeof liverData)[0];
   dbLivers: Awaited<ReturnType<typeof getLivers>>;
 }) => {
-  const liver_db = livers.find((l) => l.name === liver.name);
-  const isLiverDuplicate =
-    livers.filter((l) => l.name === liver.name).length > 1;
+  const liver_db = livers.find(l => l.name === liver.name);
+  const isLiverDuplicate = livers.filter(l => l.name === liver.name).length > 1;
   return (
     <li
       key={liver.name}
@@ -96,11 +95,11 @@ const LiverFormItem = ({
         <LiverFormInput
           name="index"
           className="w-12"
-          defaultValue={liverData.findIndex((l) => l.name === liver.name)}
+          defaultValue={liverData.findIndex(l => l.name === liver.name)}
         />
         <LiverFormInput
           name="id"
-          defaultValue={livers.find((l) => l.name === liver.name)?.id}
+          defaultValue={livers.find(l => l.name === liver.name)?.id}
           readOnly
         />
         <LiverFormInput name="name" liverDB={liver_db} liverJSON={liver} />
@@ -165,15 +164,15 @@ const dbLiverSchemaMapping = {
   id: z.string(),
   index: z.coerce.number(),
   name: z.string(),
-  aliasFirst: z.string().transform((input) => input || null),
-  aliasSecond: z.string().transform((input) => input || null),
+  aliasFirst: z.string().transform(input => input || null),
+  aliasSecond: z.string().transform(input => input || null),
   channelHandle: z.string(),
   isRetire: z
     .union([z.literal(0), z.literal(1)])
-    .transform((input) => input === 1),
+    .transform(input => input === 1),
   isOverseas: z
     .union([z.literal(0), z.literal(1)])
-    .transform((input) => input === 1),
+    .transform(input => input === 1),
   birthMonth: z.union([z.null(), z.number()]),
   birthDate: z.union([z.null(), z.number()]),
 };

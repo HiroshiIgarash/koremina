@@ -22,7 +22,7 @@ const getRandomPostIds = async ({
     )
     .slice(0, 4);
 
-  return pickUpRandomPosts.map((post) => post.id);
+  return pickUpRandomPosts.map(post => post.id);
 };
 
 const PickUpList = async () => {
@@ -64,7 +64,7 @@ const PickUpList = async () => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
-        {posts.map((post) => {
+        {posts.map(post => {
           if (!post) return;
           return (
             <Suspense key={post.id} fallback={<SkeletonPostItem />}>
@@ -79,7 +79,7 @@ const PickUpList = async () => {
                 livers={post.liver}
                 bookmark={post.Bookmark}
                 reactionsCount={post._count}
-                seenUsersId={post.seenUsers.map((u) => u.id)}
+                seenUsersId={post.seenUsers.map(u => u.id)}
               />
             </Suspense>
           );

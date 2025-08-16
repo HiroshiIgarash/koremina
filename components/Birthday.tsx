@@ -12,7 +12,7 @@ const Birthday = async ({ className }: { className?: string }) => {
       <p className="text-center font-bold text-lg">今日が誕生日のライバー</p>
       {livers && livers.length > 0 ? (
         <ul className="mt-4 flex gap-4 justify-center">
-          {livers.map((liver) => (
+          {livers.map(liver => (
             <li key={liver.id} className="flex flex-col items-center">
               <Link
                 key={liver.id}

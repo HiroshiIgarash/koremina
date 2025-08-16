@@ -22,7 +22,7 @@ interface ReportDialogProps {
 }
 
 const ReportDialog = ({ children, postId }: ReportDialogProps) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const [isPending, startTransition] = useTransition();
 
@@ -30,7 +30,7 @@ const ReportDialog = ({ children, postId }: ReportDialogProps) => {
     startTransition(async () => {
       await sendReportMail(postId);
       toast.success("投稿を通報しました。");
-      setOpen(false)
+      setOpen(false);
     });
   };
   return (

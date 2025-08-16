@@ -14,7 +14,7 @@ const BookmarkList = ({ bookmarks }: BookmarkListProps) => {
     <>
       {bookmarks.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
-          {bookmarks.map((bookmark) => {
+          {bookmarks.map(bookmark => {
             const { post } = bookmark;
             return (
               <Suspense key={post.id} fallback={<SkeletonPostItem />}>
@@ -29,7 +29,7 @@ const BookmarkList = ({ bookmarks }: BookmarkListProps) => {
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
-                  seenUsersId={post.seenUsers.map((u) => u.id)}
+                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </Suspense>
             );

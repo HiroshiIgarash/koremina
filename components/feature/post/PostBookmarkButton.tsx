@@ -21,8 +21,8 @@ export default async function PostBookmarkButton({
       <BookmarkButton
         postId={postId}
         userId={currentUser.id}
-        bookmarkedUsersId={post.Bookmark.map((b) => b.userId)}
-        seenUsersId={post.seenUsers.map((u) => u.id)}
+        bookmarkedUsersId={post.Bookmark.map(b => b.userId)}
+        seenUsersId={post.seenUsers.map(u => u.id)}
       />
     </button>
   );

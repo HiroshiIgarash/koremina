@@ -44,7 +44,7 @@ const SpecialList = async () => {
     <>
       <div className="overflow-x-auto w-screen md:w-auto">
         <div className="flex *:w-[calc(100vw-4rem)] *:shrink-0 md:*:w-auto md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl mx-auto">
-          {posts.map((post) => {
+          {posts.map(post => {
             if (!post) return;
             return (
               <Suspense key={post.id} fallback={<SkeletonPostItem />}>
@@ -59,7 +59,7 @@ const SpecialList = async () => {
                   livers={post.liver}
                   bookmark={post.Bookmark}
                   reactionsCount={post._count}
-                  seenUsersId={post.seenUsers.map((u) => u.id)}
+                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </Suspense>
             );

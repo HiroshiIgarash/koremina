@@ -53,7 +53,7 @@ const FavoriteLiversArea = async () => {
               <div className="grid grid-cols-[repeat(auto-fit,64px)] justify-center gap-2 w-full">
                 {currentUser.favoriteLivers
                   .toSorted((a, b) => a.index - b.index)
-                  .map((liver) => (
+                  .map(liver => (
                     <Link
                       key={liver.id}
                       href={`/page?liver=${liver.id}`}
