@@ -79,7 +79,7 @@ const FavoriteLiversForm = ({
   useEffect(() => {
     const fetchAndSetLivers = async () => {
       const livers = await getLivers();
-      const invalidLivers = livers
+      const invalidLivers = livers;
       setLivers(invalidLivers);
     };
 
@@ -92,7 +92,9 @@ const FavoriteLiversForm = ({
 
       if (result?.error) {
         console.log(result.error);
-        toast.error("登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
+        toast.error(
+          "登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。"
+        );
       } else {
         toast.success("推しライバーを登録しました。");
         setOpenDialog(false);
@@ -113,7 +115,11 @@ const FavoriteLiversForm = ({
               <div className="flex gap-1 flex-wrap">
                 {selected.map((liver) => {
                   return (
-                    <Badge key={liver.id} variant="secondary">
+                    <Badge
+                      key={liver.id}
+                      variant="secondary"
+                      className="rounded-full"
+                    >
                       {liver.name}
                       <button
                         className="ml-1 ring-offset-background rounded-full outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2"
@@ -164,7 +170,11 @@ const FavoriteLiversForm = ({
                             setSelected((prev) => [...prev, liver]);
                           }}
                           className={"cursor-pointer"}
-                          keywords={[liver.aliasFirst, liver.aliasSecond].filter((a) => a) as string[]}
+                          keywords={
+                            [liver.aliasFirst, liver.aliasSecond].filter(
+                              (a) => a
+                            ) as string[]
+                          }
                         >
                           {liver.name}
                         </CommandItem>

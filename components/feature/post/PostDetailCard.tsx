@@ -70,7 +70,7 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
             <Badge
               key={l.name}
               variant="outline"
-              className="whitespace-nowrap text-sm hover:border-sky-500 transition"
+              className="whitespace-nowrap text-sm hover:border-sky-500 transition rounded-full"
             >
               <Link href={`/page?liver=${l.id}`}>{l.name}</Link>
             </Badge>

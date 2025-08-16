@@ -14,7 +14,7 @@ interface RecentPostItemProps {
   comment: string;
   livers: Liver[];
   reactionsCount: { [k in Reaction]: Number } & { comments: Number };
-  bookmarkCount: number
+  bookmarkCount: number;
 }
 
 const RecentPostItem = async ({
@@ -23,20 +23,19 @@ const RecentPostItem = async ({
   comment,
   livers,
   reactionsCount,
-  bookmarkCount
+  bookmarkCount,
 }: RecentPostItemProps) => {
   // 動画タイトルの取得
-  const title = await getYoutubeTitleById(videoId)
+  const title = await getYoutubeTitleById(videoId);
 
   return (
     <Link href={`/post/${postId}`}>
       <Card className="grid lg:grid-cols-[49%_auto] h-full gap-4 hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-accent transition p-4">
-
         <div className="space-y-2 lg:col-start-2">
           <CardTitle className="text-lg leading-tight">{comment}</CardTitle>
           <div className="flex flex-wrap gap-2 mb-4">
             {livers.map((liver) => (
-              <Badge key={liver.id} variant="outline">
+              <Badge key={liver.id} variant="outline" className="rounded-full">
                 {liver.name}
               </Badge>
             ))}
@@ -52,13 +51,24 @@ const RecentPostItem = async ({
             className="aspect-video object-cover"
             unoptimized
           />
-          <p className={cn("text-xs mt-2", title.error && "text-muted-foreground")}>{title.error ? "動画タイトルを取得できませんでした" : title}</p>
+          <p
+            className={cn(
+              "text-xs mt-2",
+              title.error && "text-muted-foreground"
+            )}
+          >
+            {title.error ? "動画タイトルを取得できませんでした" : title}
+          </p>
         </div>
 
         <div className="lg:self-end flex items-end flex-col space-y-2 text-sm">
           <div className="flex gap-2 justify-self-end">
             <span className="rounded-full py-1 px-2">
-              <BookmarkIcon size="1.4em" className="inline-block align-bottom" /> {`${bookmarkCount}`}
+              <BookmarkIcon
+                size="1.4em"
+                className="inline-block align-bottom"
+              />{" "}
+              {`${bookmarkCount}`}
             </span>
             <span className=" rounded-full py-1 px-2">
               💬 {`${reactionsCount.comments}`}
@@ -82,7 +92,6 @@ const RecentPostItem = async ({
             </span>
           </div>
         </div>
-
       </Card>
     </Link>
   );

@@ -110,7 +110,7 @@ const PostItem = async ({
                     <Badge
                       key={liver.name}
                       variant="outline"
-                      className="whitespace-nowrap"
+                      className="whitespace-nowrap rounded-full"
                     >
                       {liver.name}
                     </Badge>
