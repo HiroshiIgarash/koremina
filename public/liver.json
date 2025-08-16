@@ -1684,7 +1684,7 @@
     "aliasFirst": "ばん はだ",
     "aliasSecond": "",
     "channelHandle": "@BanHada",
-    "isRetire": 0,
+    "isRetire": 1,
     "isOverseas": 0,
     "birthMonth": 8,
     "birthDate": 30
@@ -2354,7 +2354,7 @@
     "aliasFirst": "とらひめ ことか",
     "aliasSecond": "Kotoka Torahime",
     "channelHandle": "UCggO2c1unS-oLwTLT0ICywg",
-    "isRetire": 0,
+    "isRetire": 1,
     "isOverseas": 1,
     "birthMonth": null,
     "birthDate": null
@@ -2488,5 +2488,45 @@
     "isOverseas": 1,
     "birthMonth": 11,
     "birthDate": 5
+  },
+  {
+    "name": "十河ののは",
+    "aliasFirst": "とがわののは",
+    "aliasSecond": "",
+    "channelHandle": "@TogawaNonoha",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDate": 10
+  },
+  {
+    "name": "夜牛詩乃",
+    "aliasFirst": "やぎゅうしの",
+    "aliasSecond": "",
+    "channelHandle": "@YagyuShino",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDate": 29
+  },
+  {
+    "name": "蝸堂みかる",
+    "aliasFirst": "かどうみかる",
+    "aliasSecond": "",
+    "channelHandle": "@KadouMikaru",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 6,
+    "birthDate": 1
+  },
+  {
+    "name": "猫屋敷美紅",
+    "aliasFirst": "ねこやしきみく",
+    "aliasSecond": "",
+    "channelHandle": "@NekoyashikiMiku",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDate": 27
   }
 ]
