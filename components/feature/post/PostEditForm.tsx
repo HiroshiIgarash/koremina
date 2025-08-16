@@ -204,11 +204,7 @@ const PostEditForm = ({
                 <div className="flex gap-1 flex-wrap">
                   {selected.map((liver) => {
                     return (
-                      <Badge
-                        key={liver.id}
-                        variant="secondary"
-                        className="rounded-full"
-                      >
+                      <Badge key={liver.id} variant="secondary">
                         {liver.name}
                         <button
                           className="ml-1 ring-offset-background rounded-full outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2"
