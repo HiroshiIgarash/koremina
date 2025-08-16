@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-08-16" className="font-bold">
+              2025/08/16
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                「十河ののは」「夜牛詩乃」「蝸堂みかる」「猫屋敷美紅」の4名を追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-06-02" className="font-bold">
               2025/06/02
             </time>
