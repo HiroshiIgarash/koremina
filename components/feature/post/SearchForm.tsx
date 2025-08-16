@@ -32,7 +32,7 @@ const SearchForm = ({ defaultValue }: SearchFormProps) => {
       <form className="px-4" onSubmit={handleSearch}>
         <div className="flex items-center gap-4">
           <Input
-            className="w-7xl text-base"
+            className="text-base"
             onChange={handleInput}
             value={input}
             defaultValue={defaultValue}
