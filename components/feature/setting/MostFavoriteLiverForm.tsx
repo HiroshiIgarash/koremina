@@ -93,7 +93,7 @@ const MostFavoriteLiverForm = ({
               <FormLabel>ライバー選択</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="ライバーを選択" />
                   </SelectTrigger>
                 </FormControl>
