@@ -94,7 +94,7 @@ const PostEditForm = ({
 
   form.setValue(
     "liver",
-    selected.map((s) => s.id)
+    selected.map(s => s.id)
   );
 
   const watchVideoId = form.watch("videoId");
@@ -148,7 +148,7 @@ const PostEditForm = ({
   };
 
   const handleUnselect = useCallback((liver: Liver) => {
-    setSelected((prev) => prev.filter((s) => s.id !== liver.id));
+    setSelected(prev => prev.filter(s => s.id !== liver.id));
   }, []);
 
   const handleKeyDown = useCallback(
@@ -157,7 +157,7 @@ const PostEditForm = ({
       if (input) {
         if (e.key === "Delete" || e.key === "Backspace") {
           if (input.value === "") {
-            setSelected((prev) => {
+            setSelected(prev => {
               const newSelected = [...prev];
               newSelected.pop();
               return newSelected;
@@ -174,7 +174,7 @@ const PostEditForm = ({
   );
 
   const selectables = livers.filter(
-    (liver) => !selected.some((s) => s.id === liver.id)
+    liver => !selected.some(s => s.id === liver.id)
   );
 
   useEffect(() => {
@@ -202,18 +202,18 @@ const PostEditForm = ({
             >
               <div className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
                 <div className="flex gap-1 flex-wrap">
-                  {selected.map((liver) => {
+                  {selected.map(liver => {
                     return (
                       <Badge key={liver.id} variant="secondary">
                         {liver.name}
                         <button
                           className="ml-1 ring-offset-background rounded-full outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                          onKeyDown={(e) => {
+                          onKeyDown={e => {
                             if (e.key === "Enter") {
                               handleUnselect(liver);
                             }
                           }}
-                          onMouseDown={(e) => {
+                          onMouseDown={e => {
                             e.preventDefault();
                             e.stopPropagation();
                           }}
@@ -228,7 +228,7 @@ const PostEditForm = ({
                   <CommandPrimitive.Input
                     ref={inputRef}
                     value={inputValue}
-                    onValueChange={(e) => {
+                    onValueChange={e => {
                       if (!(livers.length > 0)) return;
                       setInputValue(e);
                     }}
@@ -244,22 +244,22 @@ const PostEditForm = ({
                   <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-hidden animate-in">
                     <CommandList>
                       <CommandGroup className="max-h-[20vh] md:max-h-none h-full overflow-auto">
-                        {selectables.map((liver) => {
+                        {selectables.map(liver => {
                           return (
                             <CommandItem
                               key={liver.id}
-                              onMouseDown={(e) => {
+                              onMouseDown={e => {
                                 e.preventDefault();
                                 e.stopPropagation();
                               }}
-                              onSelect={(value) => {
+                              onSelect={value => {
                                 setInputValue("");
-                                setSelected((prev) => [...prev, liver]);
+                                setSelected(prev => [...prev, liver]);
                               }}
                               className={"cursor-pointer"}
                               keywords={
                                 [liver.aliasFirst, liver.aliasSecond].filter(
-                                  (a) => a
+                                  a => a
                                 ) as string[]
                               }
                             >
@@ -286,7 +286,7 @@ const PostEditForm = ({
                     <Input
                       className="text-base"
                       {...field}
-                      onBlur={(e) => handleBlur(e.target.value)}
+                      onBlur={e => handleBlur(e.target.value)}
                       disabled
                     />
                   </FormControl>

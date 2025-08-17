@@ -37,7 +37,7 @@ const updateNickname = async (name: NicknameSchema) => {
       where: { postedUserId: currentUserId },
       select: { id: true },
     });
-    userPosts.forEach((post) => {
+    userPosts.forEach(post => {
       revalidateTag(`get-post-by-id:${post.id}`);
     });
   } catch (error) {

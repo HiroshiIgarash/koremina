@@ -26,13 +26,13 @@ const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const handleDelete = async () => {
     startTransition(async () => {
       await deletePost({ postId });
       toast.success("投稿を削除しました。");
-      setOpen(false)
+      setOpen(false);
       router.push("/");
       router.refresh();
     });

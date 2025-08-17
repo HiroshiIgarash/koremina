@@ -1,47 +1,46 @@
-import prisma from "@/lib/db"
+import prisma from "@/lib/db";
 
 const getReactionsByPostId = async (id: string) => {
-
   const post = await prisma.video.findUnique({
     where: {
-      id
+      id,
     },
     select: {
       id: true,
       good: {
         select: {
-          id: true
-        }
+          id: true,
+        },
       },
       bad: {
         select: {
-          id: true
-        }
+          id: true,
+        },
       },
       love: {
         select: {
-          id: true
-        }
+          id: true,
+        },
       },
       funny: {
         select: {
-          id: true
-        }
+          id: true,
+        },
       },
       cry: {
         select: {
-          id: true
-        }
+          id: true,
+        },
       },
       angel: {
         select: {
-          id: true
-        }
+          id: true,
+        },
       },
     },
-  })
+  });
 
-  return post
-}
+  return post;
+};
 
-export default getReactionsByPostId
+export default getReactionsByPostId;

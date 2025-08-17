@@ -17,12 +17,13 @@ const DeleteCommentButton = ({
 }: DeleteCommentButtonProps) => {
   const [isPending, startTransition] = useTransition();
 
-
   const handleClick = () => {
     startTransition(async () => {
       const result = await deleteComment({ commentId, postId });
       if (result?.error) {
-        toast.error("削除に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
+        toast.error(
+          "削除に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。"
+        );
       } else {
         toast.success("コメントを削除しました。");
       }
@@ -37,11 +38,7 @@ const DeleteCommentButton = ({
       disabled={isPending}
     >
       削除
-      {
-        isPending && (
-          <Loader2 className="animate-spin" />
-        )
-      }
+      {isPending && <Loader2 className="animate-spin" />}
     </Button>
   );
 };

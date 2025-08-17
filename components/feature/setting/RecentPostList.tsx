@@ -1,18 +1,18 @@
-import getCurrentUser from "@/app/action/getCurrentUser"
-import getRecentPostsByUserId from "@/app/action/getRecentPostsByUserId"
-import RecentPostItem from "./RecentPostItem"
+import getCurrentUser from "@/app/action/getCurrentUser";
+import getRecentPostsByUserId from "@/app/action/getRecentPostsByUserId";
+import RecentPostItem from "./RecentPostItem";
 
 const RecentPostList = async () => {
-  const currentUser = await getCurrentUser()
+  const currentUser = await getCurrentUser();
 
-  if (!currentUser) return
+  if (!currentUser) return;
 
-  const recentPosts = await getRecentPostsByUserId({ userId: currentUser.id })
+  const recentPosts = await getRecentPostsByUserId({ userId: currentUser.id });
 
   return (
     <>
-      {
-        recentPosts.length > 0 ? recentPosts.map(post => (
+      {recentPosts.length > 0 ? (
+        recentPosts.map(post => (
           <RecentPostItem
             key={post.id}
             postId={post.id}
@@ -22,13 +22,12 @@ const RecentPostList = async () => {
             reactionsCount={post._count}
             bookmarkCount={post._count.Bookmark}
           />
-        )) : (
-          <p>あなたの推しを布教するときにおすすめしたい動画を投稿しましょう！</p>
-        )
-      }
+        ))
+      ) : (
+        <p>あなたの推しを布教するときにおすすめしたい動画を投稿しましょう！</p>
+      )}
     </>
+  );
+};
 
-  )
-}
-
-export default RecentPostList
+export default RecentPostList;

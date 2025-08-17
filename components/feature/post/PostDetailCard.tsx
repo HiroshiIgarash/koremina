@@ -66,7 +66,7 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
       </CardHeader>
       <CardContent>
         <div className="mt-2 flex flex-wrap gap-2">
-          {post.liver.map((l) => (
+          {post.liver.map(l => (
             <Badge
               key={l.name}
               variant="outline"

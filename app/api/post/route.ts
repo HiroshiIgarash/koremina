@@ -27,7 +27,7 @@ export const POST = async (req: Request) => {
         },
       },
       liver: {
-        connect: (liversId as string[]).map((l) => ({ id: l })),
+        connect: (liversId as string[]).map(l => ({ id: l })),
       },
     },
   });
@@ -66,7 +66,7 @@ export const PUT = async (req: Request) => {
         },
       },
       liver: {
-        set: (liversId as string[]).map((l) => ({ id: l })),
+        set: (liversId as string[]).map(l => ({ id: l })),
       },
     },
   });

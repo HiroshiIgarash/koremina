@@ -1,13 +1,13 @@
-"use server"
+"use server";
 
-import prisma from "@/lib/db"
-import { Liver } from "@prisma/client"
+import prisma from "@/lib/db";
+import { Liver } from "@prisma/client";
 
 const updateLivers = async (liversJSON: Liver[]) => {
-  const query = liversJSON.map(l => (
+  const query = liversJSON.map(l =>
     prisma.liver.upsert({
       where: {
-        id: l.id
+        id: l.id,
       },
       update: {
         index: l.index,
@@ -16,7 +16,7 @@ const updateLivers = async (liversJSON: Liver[]) => {
         name: l.name,
         aliasFirst: l.aliasFirst,
         aliasSecond: l.aliasSecond,
-        channelHandle: l.channelHandle
+        channelHandle: l.channelHandle,
       },
       create: {
         index: l.index,
@@ -25,15 +25,14 @@ const updateLivers = async (liversJSON: Liver[]) => {
         name: l.name,
         aliasFirst: l.aliasFirst,
         aliasSecond: l.aliasSecond,
-        channelHandle: l.channelHandle
-      }
+        channelHandle: l.channelHandle,
+      },
     })
-  ))
+  );
 
-  const result = await prisma.$transaction([...query])
+  const result = await prisma.$transaction([...query]);
 
-  return { count: result.length }
+  return { count: result.length };
+};
 
-}
-
-export default updateLivers
+export default updateLivers;

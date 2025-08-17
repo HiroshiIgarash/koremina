@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const SkeletonCommentList = () => {
   return (
@@ -14,7 +14,7 @@ const SkeletonCommentList = () => {
         <Skeleton className="w-full h-4" />
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default SkeletonCommentList
+export default SkeletonCommentList;

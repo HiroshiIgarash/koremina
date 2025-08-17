@@ -1,6 +1,5 @@
-import { Card, CardTitle } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
-
+import { Card, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const SkeletonRecentPostItem = () => {
   return (
@@ -17,7 +16,7 @@ const SkeletonRecentPostItem = () => {
         </CardTitle>
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default SkeletonRecentPostItem
+export default SkeletonRecentPostItem;

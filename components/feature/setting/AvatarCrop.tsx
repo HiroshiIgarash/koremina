@@ -27,7 +27,6 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [isPending, startTransition] = useTransition();
 
-
   const handleResetFile = () => {
     setFile(undefined);
   };
@@ -38,7 +37,7 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
       await AvatarPreview({
         imageRef: imageRef.current,
         crop,
-      }).then(async (blob) => {
+      }).then(async blob => {
         if (!blob) throw new Error("invalid data");
 
         // vercel Blob にアップ
@@ -66,7 +65,7 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
         <ReactCrop
           aspect={1}
           crop={crop}
-          onChange={(c) => setCrop(c)}
+          onChange={c => setCrop(c)}
           circularCrop
           minWidth={48}
           className="md:max-w-[min(200px,100%)]!"
@@ -93,7 +92,8 @@ const AvatarCrop = ({ file, setFile, setOpen }: AvatarCrop) => {
         />
       </div>
       <p className="text-sm text-left">
-        スマホやタブレットの場合、一本指でスワイプして範囲を選択してください<br />
+        スマホやタブレットの場合、一本指でスワイプして範囲を選択してください
+        <br />
         複数の指で操作すると挙動が不安定になります。
       </p>
       <Button onClick={handleUpload} disabled={isUncropped || isPending}>

@@ -14,9 +14,9 @@ const Page = async (props: { params: Promise<IParam> }) => {
   const params = await props.params;
   const { userId } = params;
 
-  const user = await getUserById(userId)
+  const user = await getUserById(userId);
 
-  if(!user) notFound()
+  if (!user) notFound();
 
   return (
     <div className="max-w-7xl mx-auto w-full px-4 space-y-8">
@@ -26,11 +26,11 @@ const Page = async (props: { params: Promise<IParam> }) => {
       </Suspense>
 
       <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 items-start">
-        <FavoriteLiversArea user = {user} />
+        <FavoriteLiversArea user={user} />
         <RecentPostArea user={user} />
       </div>
-    </div >
-);
+    </div>
+  );
 };
 
 export default Page;

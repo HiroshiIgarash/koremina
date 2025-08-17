@@ -23,7 +23,9 @@ const UserInfo = async () => {
           <SignOutButton />
         </div>
       </div>
-      <p className="text-sm text-muted-foreground">ユーザーID: {currentUser?.id}</p>
+      <p className="text-sm text-muted-foreground">
+        ユーザーID: {currentUser?.id}
+      </p>
     </div>
   );
 };

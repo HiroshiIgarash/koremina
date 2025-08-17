@@ -8,16 +8,16 @@ const updateLiverSchema = z.object({
   id: z.string(),
   index: z.coerce.number(),
   name: z.string(),
-  aliasFirst: z.string().transform((input) => input || null),
-  aliasSecond: z.string().transform((input) => input || null),
+  aliasFirst: z.string().transform(input => input || null),
+  aliasSecond: z.string().transform(input => input || null),
   channelHandle: z.string(),
-  isRetire: z.enum(["0", "1"]).transform((input) => input === "1"),
-  isOverseas: z.enum(["0", "1"]).transform((input) => input === "1"),
-  birthMonth: z.union([z.string(), z.undefined()]).transform((input) => {
+  isRetire: z.enum(["0", "1"]).transform(input => input === "1"),
+  isOverseas: z.enum(["0", "1"]).transform(input => input === "1"),
+  birthMonth: z.union([z.string(), z.undefined()]).transform(input => {
     if (!input) return null;
     return z.coerce.number().parse(input);
   }),
-  birthDate: z.union([z.string(), z.undefined()]).transform((input) => {
+  birthDate: z.union([z.string(), z.undefined()]).transform(input => {
     if (!input) return null;
     return z.coerce.number().parse(input);
   }),

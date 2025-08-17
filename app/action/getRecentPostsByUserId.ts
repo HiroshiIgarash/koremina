@@ -29,8 +29,8 @@ const getRecentPostsByUserId = async ({
           cry: true,
           angel: true,
           comments: true,
-          Bookmark: true
-        }
+          Bookmark: true,
+        },
       },
     },
   });

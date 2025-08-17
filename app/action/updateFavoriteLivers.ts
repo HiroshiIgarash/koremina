@@ -12,7 +12,7 @@ const updateFavoriteLivers = async (liversId: string[]) => {
       return { error: "Unauthorized" };
     }
 
-    const updateData = liversId.map((liverId) => ({ id: liverId }));
+    const updateData = liversId.map(liverId => ({ id: liverId }));
 
     await prisma.user.update({
       where: {

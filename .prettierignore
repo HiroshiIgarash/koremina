@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Database
+postgres_dev/
+*.db
+
+# Generated files
+next-env.d.ts
+*.tsbuildinfo
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env*
+
+# Editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+
+# Prisma generated
+prisma/dev.db
+prisma/migrations/
+
+# Public assets (optional - keep formatting for SVG/config files)
+public/manifest.json
+public/robots.txt
+public/sitemap*.xml
+
+# Vercel
+.vercel/

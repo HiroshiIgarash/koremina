@@ -98,7 +98,7 @@ const MostFavoriteLiverForm = ({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="max-h-[30vh]">
-                  {livers?.map((liver) => (
+                  {livers?.map(liver => (
                     <SelectItem key={liver.id} value={liver.id}>
                       {liver.name}
                     </SelectItem>

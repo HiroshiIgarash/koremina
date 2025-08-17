@@ -5,11 +5,11 @@ const getUserById = async (id: string) => {
     where: { id },
     include: {
       mostFavoriteLiver: true,
-      favoriteLivers: true
-    }
+      favoriteLivers: true,
+    },
   });
 
-  return user
+  return user;
 };
 
 export default getUserById;

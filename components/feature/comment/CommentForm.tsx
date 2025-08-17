@@ -15,19 +15,20 @@ interface CommentFormProps {
 }
 
 const CommentForm = ({ user, postId }: CommentFormProps) => {
-
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <form
-      action={async (formData) => {
+      action={async formData => {
         const result = await postComment(postId, formData);
         if (result?.error) {
           console.log(result.error);
-          toast.error("登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。");
+          toast.error(
+            "登録に失敗しました。何度も失敗する場合は、お問い合わせよりご連絡ください。"
+          );
         } else {
-          updateNotification({ type: 'comment', postId })
+          updateNotification({ type: "comment", postId });
           toast.success("コメントを投稿しました。");
           setComment("");
         }
@@ -41,7 +42,7 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
         className="text-base md:text-sm"
         value={comment}
         name="comment"
-        onChange={(e) => setComment(e.target.value)}
+        onChange={e => setComment(e.target.value)}
         placeholder="コメントする"
         autoComplete="off"
       />

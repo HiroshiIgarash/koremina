@@ -1,20 +1,19 @@
-import SkeletonReactionButton from "./SkeletonReactionButton"
+import SkeletonReactionButton from "./SkeletonReactionButton";
 
 const SkeletonReactionButtonList = () => {
-
   return (
     <div className="flex flex-col items-end gap-2">
       <div className="flex gap-4 items-start">
         <SkeletonReactionButton />
       </div>
       <div className="flex gap-4 items-start">
-      <SkeletonReactionButton />
-      <SkeletonReactionButton />
-      <SkeletonReactionButton />
-      <SkeletonReactionButton />
+        <SkeletonReactionButton />
+        <SkeletonReactionButton />
+        <SkeletonReactionButton />
+        <SkeletonReactionButton />
       </div>
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export default SkeletonReactionButtonList
+export default SkeletonReactionButtonList;

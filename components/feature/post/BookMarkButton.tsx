@@ -1,102 +1,116 @@
-"use client"
+"use client";
 
-import updateBookmark from "@/app/action/updateBookmark"
-import updateSeenUsers from "@/app/action/updateSeenUsers"
-import { BookmarkIcon, BookmarkCheckIcon } from "lucide-react"
-import { useTheme } from "next-themes"
-import { useOptimistic, useTransition } from "react"
+import updateBookmark from "@/app/action/updateBookmark";
+import updateSeenUsers from "@/app/action/updateSeenUsers";
+import { BookmarkIcon, BookmarkCheckIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useOptimistic, useTransition } from "react";
 
 interface BookmarkButtonProps {
-  postId: string
-  bookmarkedUsersId: string[]
-  seenUsersId: string[]
-  userId: string
+  postId: string;
+  bookmarkedUsersId: string[];
+  seenUsersId: string[];
+  userId: string;
 }
 
-type BookMarkStatus = "NONE" | "UNSEEN" | "SEEN"
+type BookMarkStatus = "NONE" | "UNSEEN" | "SEEN";
 
-const BookmarkButton = ({ postId, bookmarkedUsersId, userId, seenUsersId }: BookmarkButtonProps) => {
-  const { resolvedTheme } = useTheme()
-  const [isPending, startTransition] = useTransition()
-  const [optimisticBookmarkedUsersId, switchOptimisticBookmarkedUsersId] = useOptimistic(
-    bookmarkedUsersId,
-    (currentBookmarkedUsersId) => {
+const BookmarkButton = ({
+  postId,
+  bookmarkedUsersId,
+  userId,
+  seenUsersId,
+}: BookmarkButtonProps) => {
+  const { resolvedTheme } = useTheme();
+  const [isPending, startTransition] = useTransition();
+  const [optimisticBookmarkedUsersId, switchOptimisticBookmarkedUsersId] =
+    useOptimistic(bookmarkedUsersId, currentBookmarkedUsersId => {
       if (currentBookmarkedUsersId.includes(userId)) {
-        return currentBookmarkedUsersId.filter(bookmarkedUserId => bookmarkedUserId !== userId)
+        return currentBookmarkedUsersId.filter(
+          bookmarkedUserId => bookmarkedUserId !== userId
+        );
       } else {
-        return [...currentBookmarkedUsersId, userId]
+        return [...currentBookmarkedUsersId, userId];
       }
-    }
-  )
+    });
   const [optimisticSeenUsersId, switchOptimisticSeenUsers] = useOptimistic(
     seenUsersId,
-    (currentSeenUsersId) => {
+    currentSeenUsersId => {
       if (seenUsersId.includes(userId)) {
-        return seenUsersId.filter(seenUserId => seenUserId !== userId)
+        return seenUsersId.filter(seenUserId => seenUserId !== userId);
       } else {
-        return [...currentSeenUsersId, userId]
+        return [...currentSeenUsersId, userId];
       }
     }
-  )
+  );
 
-  const isBookMarked = optimisticBookmarkedUsersId.includes(userId)
-  const isUserSeen = optimisticSeenUsersId.includes(userId)
+  const isBookMarked = optimisticBookmarkedUsersId.includes(userId);
+  const isUserSeen = optimisticSeenUsersId.includes(userId);
 
-  const bookMarkStatus: BookMarkStatus =
-    isBookMarked ?
-      isUserSeen ? "SEEN" : "UNSEEN"
-      : "NONE"
+  const bookMarkStatus: BookMarkStatus = isBookMarked
+    ? isUserSeen
+      ? "SEEN"
+      : "UNSEEN"
+    : "NONE";
 
-  const activeColor = resolvedTheme === "dark" ? "currentColor" : "orange"
+  const activeColor = resolvedTheme === "dark" ? "currentColor" : "orange";
 
   const handleClick = () => {
     switch (bookMarkStatus) {
       case "NONE":
         // NONE → UNSEEN
         startTransition(() => {
-          switchOptimisticBookmarkedUsersId(optimisticBookmarkedUsersId)
-          updateBookmark(postId, "CONNECT")
-        })
+          switchOptimisticBookmarkedUsersId(optimisticBookmarkedUsersId);
+          updateBookmark(postId, "CONNECT");
+        });
         break;
       case "UNSEEN":
         // UNSEEN → SEEN
         startTransition(() => {
-          switchOptimisticSeenUsers(optimisticSeenUsersId)
-          updateSeenUsers(postId, "CONNECT")
-        })
+          switchOptimisticSeenUsers(optimisticSeenUsersId);
+          updateSeenUsers(postId, "CONNECT");
+        });
         break;
       case "SEEN":
         // SEEN → NONE
         startTransition(() => {
-          switchOptimisticBookmarkedUsersId(optimisticBookmarkedUsersId)
-          updateBookmark(postId, "DISCONNECT")
-        })
+          switchOptimisticBookmarkedUsersId(optimisticBookmarkedUsersId);
+          updateBookmark(postId, "DISCONNECT");
+        });
         startTransition(() => {
-          switchOptimisticSeenUsers(optimisticSeenUsersId)
-          updateSeenUsers(postId, "DISCONNECT")
-        })
+          switchOptimisticSeenUsers(optimisticSeenUsersId);
+          updateSeenUsers(postId, "DISCONNECT");
+        });
         break;
       default:
-        const UNREACHABLE: never = bookMarkStatus
+        const UNREACHABLE: never = bookMarkStatus;
     }
-  }
+  };
 
   switch (bookMarkStatus) {
     case "SEEN":
       return (
-        <BookmarkCheckIcon onClick={handleClick} stroke={activeColor} fill={"none"} />
-      )
+        <BookmarkCheckIcon
+          onClick={handleClick}
+          stroke={activeColor}
+          fill={"none"}
+        />
+      );
     case "UNSEEN":
       return (
-        <BookmarkIcon onClick={handleClick} stroke={activeColor} fill={activeColor} />
-      )
+        <BookmarkIcon
+          onClick={handleClick}
+          stroke={activeColor}
+          fill={activeColor}
+        />
+      );
     case "NONE":
       return (
         <BookmarkIcon onClick={handleClick} stroke="currentColor" fill="none" />
-      )
+      );
     default:
-      const UNREACHABLE: never = bookMarkStatus
+      const UNREACHABLE: never = bookMarkStatus;
   }
-}
+};
 
-export default BookmarkButton
+export default BookmarkButton;

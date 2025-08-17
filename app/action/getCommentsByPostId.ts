@@ -1,23 +1,23 @@
-import prisma from "@/lib/db"
+import prisma from "@/lib/db";
 
 const getCommentsByPostId = async (postId: string) => {
   try {
     const comments = await prisma.comment.findMany({
       where: {
-        videoId: postId
+        videoId: postId,
       },
       include: {
-        author: true
+        author: true,
       },
       orderBy: {
-        createdAt: 'desc'
-      }
-    })
+        createdAt: "desc",
+      },
+    });
 
-    return comments
+    return comments;
   } catch (error) {
-    return null
+    return null;
   }
-}
+};
 
-export default getCommentsByPostId
+export default getCommentsByPostId;

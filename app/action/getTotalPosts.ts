@@ -1,20 +1,22 @@
-import prisma from "@/lib/db"
+import prisma from "@/lib/db";
 
 interface getTotalPostsProps {
-  filterLiver?: string
+  filterLiver?: string;
 }
 
 const getTotalPosts = async ({ filterLiver }: getTotalPostsProps = {}) => {
   const count = await prisma.video.count({
-    where: filterLiver ? {
-      liver: {
-        some: {
-          id: filterLiver
+    where: filterLiver
+      ? {
+          liver: {
+            some: {
+              id: filterLiver,
+            },
+          },
         }
-      }
-    } : {}
-  })
-  return count
-}
+      : {},
+  });
+  return count;
+};
 
-export default getTotalPosts
+export default getTotalPosts;

@@ -13,7 +13,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://koremina.vercel.app'),
+  metadataBase: new URL("https://koremina.vercel.app"),
   title: {
     template: "%s | コレミナ",
     default: "コレミナ -にじさんじおすすめ動画共有サービス（非公式）-",
@@ -34,7 +34,12 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning className="scroll-pt-[90px]">
       <body className={noto.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <NextTopLoader showSpinner={false} height={2} />
           <div className="min-h-dvh grid grid-rows-[auto_1fr_auto]">
             <Header />

@@ -4,14 +4,14 @@ interface IParam {
   userId: string;
 }
 
-const getTotalBookmarksById = async ({userId }: IParam) => {
+const getTotalBookmarksById = async ({ userId }: IParam) => {
   const count = await prisma.bookmark.count({
     where: {
-      userId: userId
+      userId: userId,
     },
-  })
+  });
 
-  return count
+  return count;
 };
 
 export default getTotalBookmarksById;

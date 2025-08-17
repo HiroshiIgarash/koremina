@@ -1,9 +1,7 @@
-import LiverContainer from "@/components/feature/livers/LiverContainer"
+import LiverContainer from "@/components/feature/livers/LiverContainer";
 
 const Page = () => {
-  return (
-    <LiverContainer />
-  )
-}
+  return <LiverContainer />;
+};
 
-export default Page
+export default Page;

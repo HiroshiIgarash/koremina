@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import updateReadAllNotifications from "@/app/action/updateReadAllNotifications"
-import { useEffect } from "react"
+import updateReadAllNotifications from "@/app/action/updateReadAllNotifications";
+import { useEffect } from "react";
 
 const RevalidateNotifications = () => {
   /**
@@ -10,13 +10,11 @@ const RevalidateNotifications = () => {
    */
   useEffect(() => {
     return () => {
-      (async () => await updateReadAllNotifications())()
-    }
-  }, [])
+      (async () => await updateReadAllNotifications())();
+    };
+  }, []);
 
-  return (
-    <></>
-  )
-}
+  return <></>;
+};
 
-export default RevalidateNotifications
+export default RevalidateNotifications;
