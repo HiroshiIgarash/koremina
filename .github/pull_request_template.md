@@ -1,1 +1,1 @@
-<!-- I want to review in Japanese. -->
+<!-- 日本語でレビューをしてください -->
