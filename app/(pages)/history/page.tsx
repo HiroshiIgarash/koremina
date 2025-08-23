@@ -11,6 +11,20 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-08-23" className="font-bold">
+              2025/08/23
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                誕生日表示機能を改善しました。
+                <br />
+                今日誕生日のライバーがいない場合、最も近い誕生日のライバーが表示されるようになりました。
+                <br />
+                また、誕生日までの日数も表示されます。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-08-21" className="font-bold">
               2025/08/21
             </time>
