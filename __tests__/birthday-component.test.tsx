@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-// Mock the Birthday component functionality
+// Birthdayコンポーネント機能のモック
 const mockBirthdayData = {
   todayBirthday: {
     livers: [
@@ -24,7 +24,7 @@ const mockBirthdayData = {
   }
 };
 
-// Mock Birthday component for testing
+// テスト用のBirthdayコンポーネントのモック
 const MockBirthday = ({ birthdayData }: any) => {
   const { livers, daysUntil, isToday } = birthdayData;
   
@@ -63,8 +63,8 @@ const MockBirthday = ({ birthdayData }: any) => {
   );
 };
 
-describe('Birthday Component Display', () => {
-  test('shows today birthday message correctly', () => {
+describe('Birthdayコンポーネントの表示', () => {
+  test('今日の誕生日メッセージを正しく表示すること', () => {
     render(<MockBirthday birthdayData={mockBirthdayData.todayBirthday} />);
     
     expect(screen.getByText('今日が誕生日のライバー')).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe('Birthday Component Display', () => {
     expect(screen.getByText('テストライバー1')).toBeInTheDocument();
   });
 
-  test('shows future birthday message correctly', () => {
+  test('未来の誕生日メッセージを正しく表示すること', () => {
     render(<MockBirthday birthdayData={mockBirthdayData.futureBirthday} />);
     
     expect(screen.getByText('直近の誕生日ライバー')).toBeInTheDocument();
@@ -80,13 +80,13 @@ describe('Birthday Component Display', () => {
     expect(screen.getByText('テストライバー2')).toBeInTheDocument();
   });
 
-  test('shows no birthday info when no data', () => {
+  test('データがない場合に誕生日情報なしを表示すること', () => {
     render(<MockBirthday birthdayData={mockBirthdayData.noBirthday} />);
     
     expect(screen.getByText('誕生日情報がありません')).toBeInTheDocument();
   });
 
-  test('handles tomorrow birthday correctly', () => {
+  test('明日の誕生日を正しく処理すること', () => {
     const tomorrowData = { ...mockBirthdayData.futureBirthday, daysUntil: 1 };
     render(<MockBirthday birthdayData={tomorrowData} />);
     
