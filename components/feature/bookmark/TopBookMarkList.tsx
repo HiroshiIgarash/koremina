@@ -40,7 +40,7 @@ const TopBookmarkList = async () => {
   if (!userId) return;
 
   const unSeenBookmarks = (await getBookmarksById({ userId })).filter(
-    bookmark => bookmark.post.seenUsers.every(user => user.id !== user.id)
+    bookmark => bookmark.post.seenUsers.every(user => user.id !== userId)
   );
 
   const filteredUnseenBookmarks = extractRandomElementsFromArray(
