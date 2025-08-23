@@ -13,15 +13,17 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
   const postsPerPage = 16;
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
-      <h1 className="text-3xl font-bold mb-8">ブックマーク</h1>
+    <>
+      <div className="w-full max-w-7xl mx-auto">
+        <h1 className="text-3xl font-bold mb-8 px-4 w-full max-w-7xl mx-auto">ブックマーク</h1>
+      </div>
       <Suspense fallback={<SkeletonPostList />}>
         <BookmarkContainer
           currentPage={currentPage}
           postsPerPage={postsPerPage}
         />
       </Suspense>
-    </div>
+    </>
   );
 };
 
