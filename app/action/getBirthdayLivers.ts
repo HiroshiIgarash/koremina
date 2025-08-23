@@ -85,7 +85,7 @@ export const getNearestBirthdayLivers = async () => {
       
       if (daysUntil < nearestDays) {
         nearestDays = daysUntil;
-        nearestLivers.length = 0; // Clear array
+        nearestLivers.length = 0; // 配列をクリア
         nearestLivers.push(liver);
       } else if (daysUntil === nearestDays) {
         nearestLivers.push(liver);

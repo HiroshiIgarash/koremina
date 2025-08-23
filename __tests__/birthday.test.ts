@@ -1,35 +1,35 @@
 import dayjs from '../utils/dayjs';
 
-describe('Birthday logic tests', () => {
-  test('should calculate days until birthday correctly', () => {
+describe('誕生日ロジックのテスト', () => {
+  test('誕生日までの日数を正しく計算できること', () => {
     const today = dayjs('2024-01-15').tz();
     
-    // Birthday is in the same year, after today (March 10)
+    // 同じ年で今日より後の誕生日（3月10日）
     const birthDateSameYear = dayjs('2024-03-10').tz();
     const daysUntilSameYear = birthDateSameYear.diff(today, 'day');
     
     expect(daysUntilSameYear).toBeGreaterThan(0);
-    expect(daysUntilSameYear).toBe(55); // Jan 15 to Mar 10
+    expect(daysUntilSameYear).toBe(55); // 1月15日から3月10日まで
   });
 
-  test('should handle year wraparound correctly', () => {
+  test('年末年始の境界を正しく処理できること', () => {
     const today = dayjs('2024-12-30').tz();
     
-    // Birthday is January 5 next year
+    // 来年1月5日の誕生日
     let nextBirthday = dayjs('2024-01-05').tz();
     
-    // If birthday is before today, add 1 year
+    // 誕生日が今日より前の場合は1年追加
     if (nextBirthday.isBefore(today, 'day') || nextBirthday.isSame(today, 'day')) {
       nextBirthday = nextBirthday.add(1, 'year');
     }
     
     const daysUntil = nextBirthday.diff(today, 'day');
     
-    // Should be 6 days (Dec 30 -> Jan 5 next year)
+    // 6日間であるべき（12月30日 → 翌年1月5日）
     expect(daysUntil).toBe(6);
   });
 
-  test('should handle today birthday correctly', () => {
+  test('今日の誕生日を正しく処理できること', () => {
     const today = dayjs('2024-01-15').tz();
     const todayBirthday = dayjs('2024-01-15').tz();
     
