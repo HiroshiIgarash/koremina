@@ -15,7 +15,9 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
   return (
     <>
       <div className="w-full max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 px-4 w-full max-w-7xl mx-auto">ブックマーク</h1>
+        <h1 className="text-3xl font-bold mb-8 px-4 w-full max-w-7xl mx-auto">
+          ブックマーク
+        </h1>
       </div>
       <Suspense fallback={<SkeletonPostList />}>
         <BookmarkContainer
