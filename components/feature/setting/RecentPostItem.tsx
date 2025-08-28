@@ -1,12 +1,7 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import { Reaction } from "@/types/type";
 import getYoutubeTitleById from "@/utils";
 import { Liver } from "@prisma/client";
-import { BookmarkIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import RecentPostItemPresentation from "./RecentPostItemPresentation";
 
 interface RecentPostItemProps {
   postId: string;
@@ -17,6 +12,10 @@ interface RecentPostItemProps {
   bookmarkCount: number;
 }
 
+/**
+ * 最近の投稿アイテムのコンテナ コンポーネント
+ * データ取得を担当し、RecentPostItemPresentationに渡す
+ */
 const RecentPostItem = async ({
   postId,
   videoId,
@@ -29,71 +28,16 @@ const RecentPostItem = async ({
   const title = await getYoutubeTitleById(videoId);
 
   return (
-    <Link href={`/post/${postId}`}>
-      <Card className="grid lg:grid-cols-[49%_auto] h-full gap-4 hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-accent transition p-4">
-        <div className="space-y-2 lg:col-start-2">
-          <CardTitle className="text-lg leading-tight">{comment}</CardTitle>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {livers.map(liver => (
-              <Badge key={liver.id} variant="outline">
-                {liver.name}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        <div className="lg:row-start-1 lg:row-span-2 w-full shrink-0">
-          <Image
-            src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-            alt=""
-            width={1600}
-            height={900}
-            className="aspect-video object-cover"
-            unoptimized
-          />
-          <p
-            className={cn(
-              "text-xs mt-2",
-              title.error && "text-muted-foreground"
-            )}
-          >
-            {title.error ? "動画タイトルを取得できませんでした" : title}
-          </p>
-        </div>
-
-        <div className="lg:self-end flex items-end flex-col space-y-2 text-sm">
-          <div className="flex gap-2 justify-self-end">
-            <span className="rounded-full py-1 px-2">
-              <BookmarkIcon
-                size="1.4em"
-                className="inline-block align-bottom"
-              />{" "}
-              {`${bookmarkCount}`}
-            </span>
-            <span className=" rounded-full py-1 px-2">
-              💬 {`${reactionsCount.comments}`}
-            </span>
-            <span className=" rounded-full py-1 px-2">
-              👍 {`${reactionsCount.good}`}
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <span className=" rounded-full py-1 px-2">
-              😍 {`${reactionsCount.love}`}
-            </span>
-            <span className=" rounded-full py-1 px-2">
-              🤣 {`${reactionsCount.funny}`}
-            </span>
-            <span className=" rounded-full py-1 px-2">
-              😭 {`${reactionsCount.cry}`}
-            </span>
-            <span className=" rounded-full py-1 px-2">
-              😇 {`${reactionsCount.angel}`}
-            </span>
-          </div>
-        </div>
-      </Card>
-    </Link>
+    <RecentPostItemPresentation
+      postId={postId}
+      videoId={videoId}
+      comment={comment}
+      livers={livers}
+      reactionsCount={reactionsCount}
+      bookmarkCount={bookmarkCount}
+      videoTitle={title.error ? null : title}
+      isError={!!title.error}
+    />
   );
 };
 
