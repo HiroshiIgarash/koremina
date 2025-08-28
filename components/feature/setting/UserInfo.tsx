@@ -4,6 +4,7 @@ import { SquarePen } from "lucide-react";
 import React from "react";
 import ChangeNicknameDialog from "./ChangeNicknameDialog";
 import ChangeAvatarDialog from "./ChangeAvatarDialog";
+import ChangeBioDialog from "./ChangeBioDialog";
 import getCurrentUserWithTag from "@/app/action/getCurrentUserWithTag";
 
 const UserInfo = async () => {
@@ -22,6 +23,18 @@ const UserInfo = async () => {
         <div className="ml-8">
           <SignOutButton />
         </div>
+      </div>
+      <div className="flex items-center gap-2">
+        {currentUser?.bio ? (
+          <p className="text-sm">{currentUser.bio}</p>
+        ) : (
+          <p className="text-sm text-muted-foreground">
+            自己紹介文が設定されていません。自己紹介文を設定しよう！
+          </p>
+        )}
+        <ChangeBioDialog user={currentUser}>
+          <SquarePen size="1em" className="cursor-pointer" />
+        </ChangeBioDialog>
       </div>
       <p className="text-sm text-muted-foreground">
         ユーザーID: {currentUser?.id}
