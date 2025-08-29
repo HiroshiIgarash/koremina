@@ -20,6 +20,35 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## パッケージアップデート
+
+このプロジェクトには、パッケージのアップデートを自動化するツールが含まれています。
+
+### 基本的な使用方法
+
+```bash
+# アップデート可能なパッケージをチェック（推奨）
+npm run package-update:check
+
+# インタラクティブアップデート
+npm run package-update:interactive
+
+# 従来のコマンド
+npm run ncu               # チェックのみ
+npm run ncu:i            # インタラクティブ
+npm run ncu:upgrade      # 一括更新
+```
+
+### 機能
+
+- アップデート可能なパッケージの自動検出
+- 各パッケージのChangelogリンクの収集
+- Breaking Changesの警告
+- アップデート時の注意点の表示
+- 詳細レポートの生成
+
+詳細については、[パッケージアップデートガイド](./docs/package-update.md)を参照してください。
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

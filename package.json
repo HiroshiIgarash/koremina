@@ -15,7 +15,11 @@
     "test": "jest",
     "ncu": "npx npm-check-updates",
     "ncu:i": "npx npm-check-updates -i",
-    "ncu:upgrade": "npx npm-check-updates -u && npm install"
+    "ncu:upgrade": "npx npm-check-updates -u && npm install",
+    "package-update": "node scripts/package-update.js",
+    "package-update:check": "node scripts/package-update.js --check --report",
+    "package-update:interactive": "node scripts/package-update.js --interactive",
+    "package-update:update": "node scripts/package-update.js --update --report"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
