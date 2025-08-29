@@ -1,3 +1,5 @@
+# コレミナ - にじさんじおすすめ動画共有サービス（非公式）
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -19,6 +21,49 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Testing
+
+### Unit Tests (Jest)
+
+```bash
+npm test
+```
+
+### Visual Regression Testing (VRT)
+
+このプロジェクトでは、Playwright Visual Testingを使用したVRT（ビジュアルリグレッションテスト）を実装しています。
+
+```bash
+# VRT実行
+npm run test:vrt
+
+# ベースライン画像更新
+npm run test:vrt:update
+
+# UIモードでのVRT実行
+npm run test:vrt:ui
+
+# デバッグモードでのVRT実行
+npm run test:vrt:debug
+```
+
+詳細については [VRT実装ガイド](./docs/VRT_GUIDE.md) を参照してください。
+
+## Project Structure
+
+```
+├── app/                     # Next.js App Router
+├── components/              # Reactコンポーネント
+├── __tests__/              # Jestユニットテスト
+├── tests/vrt/              # Playwrightビジュアルテスト
+│   ├── components/         # コンポーネント別VRT
+│   ├── desktop/           # デスクトップ表示VRT
+│   ├── mobile/            # モバイル表示VRT
+│   └── helpers/           # VRTヘルパー関数
+├── docs/                   # プロジェクトドキュメント
+└── .github/workflows/      # CI/CDワークフロー
+```
 
 ## Learn More
 
