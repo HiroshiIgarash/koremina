@@ -62,11 +62,37 @@ node scripts/package-update.js [options]
 
 このツールはClaude codeのカスタムスラッシュコマンドでの使用に最適化されています。
 
+### カスタムスラッシュコマンドのセットアップ
+
+#### 1. 設定ファイルの確認
+```bash
+# Claude設定ディレクトリの確認
+ls -la .claude/
+```
+
+#### 2. Claude code での設定
+1. Claude code でプロジェクトのワークスペースを開く
+2. 設定メニューから「カスタムスラッシュコマンド」を選択
+3. `.claude/commands.json` を読み込み
+4. コマンドが登録されたことを確認
+
+#### 3. 利用可能なカスタムスラッシュコマンド
+
+| コマンド | 機能 | 安全性 |
+|---------|------|--------|
+| `/package-check` | アップデート可能パッケージの一覧表示 | ✅ 安全 |
+| `/package-details [name]` | 特定パッケージの詳細情報 | ✅ 安全 |
+| `/package-update-interactive` | 対話的な選択的アップデート | ⭐ 推奨 |
+| `/package-report` | 詳細Markdownレポート生成 | ✅ 安全 |
+| `/package-update-all` | 全パッケージ自動更新 | ⚠️ 危険 |
+
 ### Claude code用の出力形式
 
 ```bash
 # 簡潔なJSON出力（Claude code推奨）
 npm run package-update:claude
+# または
+/package-check
 ```
 
 出力例:
@@ -96,10 +122,27 @@ npm run package-update:claude
 
 Claude codeで以下のようなワークフローが可能になります：
 
-1. **パッケージ更新チェック**: `/update-check` → `npm run package-update:claude`
-2. **詳細情報の取得**: 各パッケージのchangelogリンクと注意点を確認
-3. **段階的更新**: インタラクティブモードでの選択的更新
-4. **レポート生成**: Markdown形式での詳細レポート生成
+1. **パッケージ更新チェック**: `/package-check` → JSON形式で結果表示
+2. **詳細情報の取得**: `/package-details next` → 特定パッケージの詳細
+3. **段階的更新**: `/package-update-interactive` → 安全な対話的アップデート
+4. **レポート生成**: `/package-report` → Markdown形式での詳細レポート生成
+
+### 推奨ワークフロー（Claude code版）
+
+```bash
+# 1. 現在の状況を確認
+/package-check
+
+# 2. 詳細レポートを生成
+/package-report
+
+# 3. 気になるパッケージの詳細を確認  
+/package-details next
+/package-details prisma
+
+# 4. 安全にアップデート
+/package-update-interactive
+```
 
 ### JSON出力の構造
 

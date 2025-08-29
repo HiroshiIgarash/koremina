@@ -21,7 +21,8 @@
     "package-update:interactive": "node scripts/package-update.js --interactive",
     "package-update:update": "node scripts/package-update.js --update --report",
     "package-update:json": "node scripts/package-update.js --json",
-    "package-update:claude": "node scripts/claude-package-update.js"
+    "package-update:claude": "node scripts/claude-package-update.js",
+    "claude:setup-check": "node scripts/claude-setup-validator.js"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"

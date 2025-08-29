@@ -1,0 +1,88 @@
+{
+  "commands": [
+    {
+      "name": "package-check",
+      "description": "パッケージアップデートをチェックして一覧表示",
+      "usage": "/package-check",
+      "script": "npm run package-update:claude",
+      "category": "development",
+      "examples": [
+        {
+          "command": "/package-check",
+          "description": "アップデート可能なパッケージを確認"
+        }
+      ]
+    },
+    {
+      "name": "package-details",
+      "description": "特定パッケージの詳細情報を取得",
+      "usage": "/package-details [パッケージ名]",
+      "script": "node scripts/claude-package-update.js --package",
+      "category": "development",
+      "parameters": [
+        {
+          "name": "packageName",
+          "type": "string",
+          "required": true,
+          "description": "詳細を確認したいパッケージ名"
+        }
+      ],
+      "examples": [
+        {
+          "command": "/package-details next",
+          "description": "Next.jsパッケージの詳細情報を取得"
+        },
+        {
+          "command": "/package-details prisma",
+          "description": "Prismaパッケージの詳細情報を取得"
+        }
+      ]
+    },
+    {
+      "name": "package-update-interactive",
+      "description": "インタラクティブモードでパッケージを選択的にアップデート",
+      "usage": "/package-update-interactive",
+      "script": "npm run package-update:interactive",
+      "category": "development",
+      "examples": [
+        {
+          "command": "/package-update-interactive",
+          "description": "対話的にパッケージを選択してアップデート"
+        }
+      ]
+    },
+    {
+      "name": "package-report",
+      "description": "詳細なアップデートレポートを生成",
+      "usage": "/package-report",
+      "script": "npm run package-update:check",
+      "category": "development",
+      "examples": [
+        {
+          "command": "/package-report",
+          "description": "Markdownレポートを生成してアップデート情報を確認"
+        }
+      ]
+    },
+    {
+      "name": "package-update-all",
+      "description": "すべてのパッケージを自動アップデート（要注意）",
+      "usage": "/package-update-all",
+      "script": "npm run package-update:update",
+      "category": "development",
+      "warning": "⚠️ すべてのパッケージが自動更新されます。事前にテスト環境で検証してください。",
+      "examples": [
+        {
+          "command": "/package-update-all",
+          "description": "全パッケージを一括アップデート（本番環境では非推奨）"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "description": "パッケージアップデート自動化ツール用Claude カスタムスラッシュコマンド",
+    "author": "koremina project",
+    "category": "development-tools"
+  }
+}
