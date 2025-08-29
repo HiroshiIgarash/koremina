@@ -1,0 +1,133 @@
+name: VRT (Visual Regression Testing)
+
+on:
+  pull_request:
+    branches: [ develop, main ]
+  push:
+    branches: [ develop ]
+
+jobs:
+  visual-regression-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.16.0'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+      
+    - name: Setup database
+      run: |
+        # データベース関連の設定（必要に応じて）
+        npx prisma generate
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        
+    - name: Build application
+      run: npm run build
+      
+    - name: Run VRT tests
+      run: npx playwright test tests/vrt
+      env:
+        CI: true
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: vrt-test-results
+        path: |
+          test-results/
+          playwright-report/
+        retention-days: 7
+        
+    - name: Upload screenshots on failure
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: vrt-screenshots-diff
+        path: test-results/
+        retention-days: 7
+        
+    - name: Comment PR with VRT results
+      uses: actions/github-script@v7
+      if: failure() && github.event_name == 'pull_request'
+      with:
+        script: |
+          const { owner, repo, number } = github.context.issue;
+          await github.rest.issues.createComment({
+            owner,
+            repo,
+            issue_number: number,
+            body: `
+            ## 🖼️ Visual Regression Test Failed
+            
+            ビジュアルリグレッションテストで差分が検出されました。
+            
+            ### 確認方法
+            1. Actions タブから失敗したワークフローを確認
+            2. Artifacts から \`vrt-screenshots-diff\` をダウンロード
+            3. 差分画像を確認して変更が意図的なものか判断
+            
+            ### 意図的な変更の場合
+            以下のコマンドでベースライン画像を更新してください：
+            \`\`\`bash
+            npx playwright test --update-snapshots
+            \`\`\`
+            
+            ### 問題がある場合
+            UIの変更を見直して、意図しない変更を修正してください。
+            `
+          });
+
+  update-baseline:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.16.0'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+      
+    - name: Setup database
+      run: |
+        npx prisma generate
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        
+    - name: Build application
+      run: npm run build
+      
+    - name: Update baseline screenshots
+      run: npx playwright test tests/vrt --update-snapshots
+      
+    - name: Commit updated baselines
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add test-results/
+        if ! git diff --cached --quiet; then
+          git commit -m "chore: VRTベースライン画像の自動更新"
+          git push
+        fi

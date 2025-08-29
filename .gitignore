@@ -44,3 +44,13 @@ next-env.d.ts
 postgres_dev
 
 .vercel
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# VRT test artifacts
+/tests/vrt/test-results/
+*.png-actual
+*.png-diff
