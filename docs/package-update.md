@@ -17,7 +17,7 @@
 ### 基本的なコマンド
 
 ```bash
-# アップデート可能なパッケージをチェック（レポート生成）
+# 推奨: アップデート可能なパッケージをチェック（レポート生成）
 npm run package-update:check
 
 # 基本チェック（レポートなし）
@@ -28,6 +28,19 @@ npm run package-update:interactive
 
 # 自動アップデート（要注意）
 npm run package-update:update
+```
+
+### Claude code統合用コマンド
+
+```bash
+# Claude code用の最適化された出力
+npm run package-update:claude
+
+# JSON形式での詳細出力
+npm run package-update:json
+
+# 特定パッケージの詳細（Claude code用）
+node scripts/claude-package-update.js --package [パッケージ名]
 ```
 
 ### 詳細オプション
@@ -41,7 +54,61 @@ node scripts/package-update.js [options]
 # --update    : 実際にパッケージをアップデート
 # --report    : レポートファイルを生成
 # --interactive : インタラクティブモード
+# --json      : JSON形式で出力（Claude code統合用）
+# --format    : 出力形式（console|json|markdown）
 ```
+
+## Claude code統合
+
+このツールはClaude codeのカスタムスラッシュコマンドでの使用に最適化されています。
+
+### Claude code用の出力形式
+
+```bash
+# 簡潔なJSON出力（Claude code推奨）
+npm run package-update:claude
+```
+
+出力例:
+```json
+{
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "hasUpdates": true,
+  "message": "📦 5個のパッケージがアップデート可能",
+  "packages": [
+    {
+      "name": "next",
+      "from": "15.5.0",
+      "to": "15.5.2",
+      "status": "💡 確認推奨",
+      "changelog": "https://github.com/vercel/next.js/releases"
+    }
+  ],
+  "actions": {
+    "viewDetails": "npm run package-update:check",
+    "interactive": "npm run package-update:interactive",
+    "updateAll": "npm run package-update:update"
+  }
+}
+```
+
+### カスタムスラッシュコマンドでの活用
+
+Claude codeで以下のようなワークフローが可能になります：
+
+1. **パッケージ更新チェック**: `/update-check` → `npm run package-update:claude`
+2. **詳細情報の取得**: 各パッケージのchangelogリンクと注意点を確認
+3. **段階的更新**: インタラクティブモードでの選択的更新
+4. **レポート生成**: Markdown形式での詳細レポート生成
+
+### JSON出力の構造
+
+- `hasUpdates`: アップデートの有無
+- `packages[]`: アップデート可能パッケージ一覧
+  - `status`: パッケージの安全性レベル
+  - `breaking`: Breaking Changesの有無
+  - `cautions[]`: 注意点の配列
+- `actions`: 推奨アクション一覧
 
 ## 機能詳細
 
@@ -194,4 +261,8 @@ npm run package-update             # 基本チェック
 npm run package-update:check       # レポート付きチェック
 npm run package-update:interactive # インタラクティブ
 npm run package-update:update      # 自動更新（要注意）
+
+# Claude code統合用
+npm run package-update:claude      # Claude code用最適化出力
+npm run package-update:json        # 詳細JSON出力
 ```

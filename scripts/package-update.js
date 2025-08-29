@@ -17,6 +17,8 @@
  * --update    : 実際にパッケージをアップデート
  * --report    : レポートファイルを生成
  * --interactive : インタラクティブモード
+ * --json      : JSON形式で出力（Claude code統合用）
+ * --format    : 出力形式（console|json|markdown）
  */
 
 const { execSync, exec } = require('child_process');
@@ -27,6 +29,7 @@ class PackageUpdateManager {
   constructor() {
     this.packageUpdates = [];
     this.reportFile = 'package-update-report.md';
+    this.outputFormat = 'console'; // console, json, markdown
   }
 
   /**
@@ -37,41 +40,83 @@ class PackageUpdateManager {
     const isUpdateMode = args.includes('--update');
     const isReportMode = args.includes('--report');
     const isInteractiveMode = args.includes('--interactive');
+    const isJsonMode = args.includes('--json');
+    
+    // 出力形式を設定
+    if (isJsonMode) {
+      this.outputFormat = 'json';
+    } else if (args.includes('--format')) {
+      const formatIndex = args.indexOf('--format');
+      if (formatIndex !== -1 && args[formatIndex + 1]) {
+        this.outputFormat = args[formatIndex + 1];
+      }
+    }
 
-    console.log('🔍 パッケージアップデートチェックを開始します...\n');
+    if (this.outputFormat !== 'json') {
+      console.log('🔍 パッケージアップデートチェックを開始します...\n');
+    }
 
     try {
       // 1. アップデート可能なパッケージを取得
       await this.checkUpdates();
 
       if (this.packageUpdates.length === 0) {
-        console.log('✅ すべてのパッケージが最新版です！');
+        if (this.outputFormat === 'json') {
+          console.log(JSON.stringify({
+            status: 'success',
+            message: 'すべてのパッケージが最新版です',
+            packages: [],
+            summary: {
+              total: 0,
+              breaking: 0,
+              withCautions: 0
+            }
+          }, null, 2));
+        } else {
+          console.log('✅ すべてのパッケージが最新版です！');
+        }
         return;
       }
 
       // 2. 各パッケージの詳細情報を取得
       await this.gatherPackageInfo();
 
-      // 3. レポート生成
-      if (isReportMode) {
-        await this.generateReport();
+      // 3. 出力形式に応じて結果を表示
+      if (this.outputFormat === 'json') {
+        await this.outputJson();
+      } else {
+        // 3. レポート生成
+        if (isReportMode) {
+          await this.generateReport();
+        }
+
+        // 4. レポート表示
+        await this.displayReport();
       }
 
-      // 4. レポート表示
-      await this.displayReport();
-
-      // 5. インタラクティブモード
-      if (isInteractiveMode) {
-        await this.interactiveUpdate();
-      } else if (isUpdateMode) {
-        await this.updatePackages();
-      } else {
-        console.log('\n💡 パッケージをアップデートするには --update フラグを使用してください');
-        console.log('💡 インタラクティブモードを使用するには --interactive フラグを使用してください');
+      // 5. インタラクティブモード（JSONモードでは無効）
+      if (!isJsonMode) {
+        if (isInteractiveMode) {
+          await this.interactiveUpdate();
+        } else if (isUpdateMode) {
+          await this.updatePackages();
+        } else {
+          console.log('\n💡 パッケージをアップデートするには --update フラグを使用してください');
+          console.log('💡 インタラクティブモードを使用するには --interactive フラグを使用してください');
+          console.log('💡 Claude code統合用にはJSONモード --json を使用してください');
+        }
       }
 
     } catch (error) {
-      console.error('❌ エラーが発生しました:', error.message);
+      if (this.outputFormat === 'json') {
+        console.log(JSON.stringify({
+          status: 'error',
+          message: error.message,
+          packages: []
+        }, null, 2));
+      } else {
+        console.error('❌ エラーが発生しました:', error.message);
+      }
       process.exit(1);
     }
   }
@@ -100,7 +145,9 @@ class PackageUpdateManager {
         });
       }
 
-      console.log(`📦 ${this.packageUpdates.length}個のパッケージがアップデート可能です\n`);
+      if (this.outputFormat !== 'json') {
+        console.log(`📦 ${this.packageUpdates.length}個のパッケージがアップデート可能です\n`);
+      }
       
     } catch (error) {
       throw new Error(`パッケージ更新チェックに失敗しました: ${error.message}`);
@@ -127,7 +174,9 @@ class PackageUpdateManager {
    * 各パッケージの詳細情報を収集
    */
   async gatherPackageInfo() {
-    console.log('📋 パッケージ情報を収集中...\n');
+    if (this.outputFormat !== 'json') {
+      console.log('📋 パッケージ情報を収集中...\n');
+    }
 
     for (const packageUpdate of this.packageUpdates) {
       try {
@@ -143,13 +192,19 @@ class PackageUpdateManager {
         // Breaking change の可能性をチェック
         packageUpdate.breaking = this.checkBreakingChange(packageUpdate.currentVersion, packageUpdate.newVersion);
         
-        console.log(`✅ ${packageUpdate.name}: 情報収集完了`);
+        if (this.outputFormat !== 'json') {
+          console.log(`✅ ${packageUpdate.name}: 情報収集完了`);
+        }
         
       } catch (error) {
-        console.log(`⚠️  ${packageUpdate.name}: 情報収集に失敗 (${error.message})`);
+        if (this.outputFormat !== 'json') {
+          console.log(`⚠️  ${packageUpdate.name}: 情報収集に失敗 (${error.message})`);
+        }
       }
     }
-    console.log('');
+    if (this.outputFormat !== 'json') {
+      console.log('');
+    }
   }
 
   /**
@@ -313,8 +368,100 @@ class PackageUpdateManager {
   }
 
   /**
-   * レポートを表示
+   * JSON形式で出力（Claude code統合用）
    */
+  async outputJson() {
+    const summary = {
+      total: this.packageUpdates.length,
+      breaking: this.packageUpdates.filter(pkg => pkg.breaking).length,
+      withCautions: this.packageUpdates.filter(pkg => pkg.cautions.length > 0).length
+    };
+
+    const output = {
+      status: 'success',
+      message: `${this.packageUpdates.length}個のパッケージがアップデート可能です`,
+      timestamp: new Date().toISOString(),
+      summary: summary,
+      packages: this.packageUpdates.map(pkg => ({
+        name: pkg.name,
+        currentVersion: pkg.currentVersion,
+        newVersion: pkg.newVersion,
+        changelog: pkg.changelog,
+        breaking: pkg.breaking,
+        cautions: pkg.cautions,
+        updateCommand: this.getUpdateCommand(pkg.name),
+        priority: this.getUpdatePriority(pkg)
+      })),
+      recommendations: this.generateRecommendations(),
+      commands: {
+        check: 'npm run package-update:check',
+        interactive: 'npm run package-update:interactive',
+        update: 'npm run package-update:update',
+        updateSingle: (packageName) => `npm install ${packageName}@latest`
+      }
+    };
+
+    console.log(JSON.stringify(output, null, 2));
+  }
+
+  /**
+   * パッケージのアップデートコマンドを取得
+   */
+  getUpdateCommand(packageName) {
+    return `npm install ${packageName}@latest`;
+  }
+
+  /**
+   * アップデート優先度を判定
+   */
+  getUpdatePriority(pkg) {
+    if (pkg.breaking) {
+      return 'high'; // Breaking changes があるので慎重に
+    }
+    if (pkg.cautions.length > 0) {
+      return 'medium'; // 注意点があるので確認が必要
+    }
+    return 'low'; // 通常のアップデート
+  }
+
+  /**
+   * 推奨アクションを生成
+   */
+  generateRecommendations() {
+    const recommendations = [];
+    
+    const breakingPackages = this.packageUpdates.filter(pkg => pkg.breaking);
+    if (breakingPackages.length > 0) {
+      recommendations.push({
+        type: 'warning',
+        message: `${breakingPackages.length}個のパッケージでBreaking Changesの可能性があります`,
+        packages: breakingPackages.map(pkg => pkg.name),
+        action: '各パッケージのChangelogを確認してから段階的にアップデートしてください'
+      });
+    }
+
+    const cautionPackages = this.packageUpdates.filter(pkg => pkg.cautions.length > 0);
+    if (cautionPackages.length > 0) {
+      recommendations.push({
+        type: 'caution',
+        message: `${cautionPackages.length}個のパッケージで注意が必要です`,
+        packages: cautionPackages.map(pkg => pkg.name),
+        action: '各パッケージの注意点を確認してください'
+      });
+    }
+
+    const safePackages = this.packageUpdates.filter(pkg => !pkg.breaking && pkg.cautions.length === 0);
+    if (safePackages.length > 0) {
+      recommendations.push({
+        type: 'safe',
+        message: `${safePackages.length}個のパッケージは安全にアップデート可能です`,
+        packages: safePackages.map(pkg => pkg.name),
+        action: 'インタラクティブモードまたは個別にアップデートできます'
+      });
+    }
+
+    return recommendations;
+  }
   async displayReport() {
     console.log('📊 パッケージアップデートレポート\n');
     console.log('=' .repeat(80));
@@ -344,12 +491,23 @@ class PackageUpdateManager {
   }
 
   /**
-   * Markdownレポートを生成
+   * レポートを表示
    */
   async generateReport() {
     const reportContent = this.generateMarkdownReport();
     fs.writeFileSync(this.reportFile, reportContent);
     console.log(`📄 レポートファイルを生成しました: ${this.reportFile}\n`);
+  }
+
+  /**
+   * Markdownレポートを生成
+   */
+  async generateReport() {
+    const reportContent = this.generateMarkdownReport();
+    fs.writeFileSync(this.reportFile, reportContent);
+    if (this.outputFormat !== 'json') {
+      console.log(`📄 レポートファイルを生成しました: ${this.reportFile}\n`);
+    }
   }
 
   /**

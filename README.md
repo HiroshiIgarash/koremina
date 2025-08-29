@@ -33,6 +33,9 @@ npm run package-update:check
 # インタラクティブアップデート
 npm run package-update:interactive
 
+# Claude code統合用（カスタムスラッシュコマンド向け）
+npm run package-update:claude
+
 # 従来のコマンド
 npm run ncu               # チェックのみ
 npm run ncu:i            # インタラクティブ
@@ -46,6 +49,7 @@ npm run ncu:upgrade      # 一括更新
 - Breaking Changesの警告
 - アップデート時の注意点の表示
 - 詳細レポートの生成
+- **Claude code統合**: JSON形式の構造化出力でカスタムスラッシュコマンドに最適化
 
 詳細については、[パッケージアップデートガイド](./docs/package-update.md)を参照してください。
 
