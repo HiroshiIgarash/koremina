@@ -43,7 +43,7 @@ const FlexiblePagination = ({
       <PaginationContent>
         {currentPage > 1 && (
           <PaginationItem>
-            <PaginationPrevious href={generateHref(currentPage - 1)} />
+            <PaginationPrevious href={generateHref(currentPage - 1)} scroll={true} />
           </PaginationItem>
         )}
         {showPageStart > 1 && (
@@ -56,6 +56,7 @@ const FlexiblePagination = ({
             <PaginationLink
               href={generateHref(page)}
               isActive={page === currentPage}
+              scroll={true}
             >
               {page}
             </PaginationLink>
@@ -68,7 +69,7 @@ const FlexiblePagination = ({
         )}
         {currentPage < pageEnd && (
           <PaginationItem>
-            <PaginationNext href={generateHref(currentPage + 1)} />
+            <PaginationNext href={generateHref(currentPage + 1)} scroll={true} />
           </PaginationItem>
         )}
       </PaginationContent>
