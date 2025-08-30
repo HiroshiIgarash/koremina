@@ -40,13 +40,7 @@ class ClaudeSetupValidator {
       '.claude/README.md',
       '.claude/config.json',
       '.claude/commands.json',
-      '.claude/manifest.json',
-      '.claude/commands',
-      '.claude/commands/package-check.json',
-      '.claude/commands/package-details.json',
-      '.claude/commands/package-update-interactive.json',
-      '.claude/commands/package-report.json',
-      '.claude/commands/package-update-all.json'
+      '.claude/manifest.json'
     ];
 
     requiredFiles.forEach(file => {
@@ -195,11 +189,11 @@ class ClaudeSetupValidator {
     if (this.errors.length === 0) {
       console.log('🎉 セットアップが完了しました！');
       console.log('\n📋 Claude code で以下のコマンドが利用可能です:');
-      console.log('  /package-check - パッケージアップデートの確認');
-      console.log('  /package-details [name] - 特定パッケージの詳細');
-      console.log('  /package-update-interactive - 安全な対話的アップデート');
-      console.log('  /package-report - 詳細レポートの生成');
-      console.log('  /package-update-all - 全パッケージの自動更新 (⚠️危険)');
+      console.log('  /package-update - 統合パッケージアップデートツール');
+      console.log('    ├── ncuによるバージョンアップデートチェック');
+      console.log('    ├── changelogリンク自動収集');
+      console.log('    ├── アップデート情報要約');
+      console.log('    └── 注意点・補足の自動追記');
       console.log('\n🔗 詳細は .claude/README.md を参照してください');
     } else {
       console.log('❌ セットアップに問題があります。上記のエラーを修正してください。');

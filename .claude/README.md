@@ -8,13 +8,8 @@
 .claude/
 ├── README.md                                    # このファイル
 ├── config.json                                 # Claude ワークスペース設定
-├── commands.json                               # コマンド一覧定義
-└── commands/
-    ├── package-check.json                      # パッケージチェックコマンド
-    ├── package-details.json                    # パッケージ詳細コマンド  
-    ├── package-update-interactive.json         # インタラクティブアップデート
-    ├── package-report.json                     # レポート生成コマンド
-    └── package-update-all.json                 # 一括アップデート（危険）
+├── commands.json                               # 統合コマンド定義
+└── manifest.json                               # Claude拡張マニフェスト
 ```
 
 ## 🚀 セットアップ方法
@@ -40,53 +35,53 @@ npx npm-check-updates --version
 
 ```bash
 # Claude code で以下のコマンドを実行してテスト
-/package-check
+/package-update
 ```
 
-## 📋 利用可能なコマンド
+## 📋 統合コマンド
 
-### `/package-check`
-- **機能**: アップデート可能なパッケージの一覧を表示
-- **出力**: JSON形式の構造化データ
-- **用途**: 定期的なパッケージ状況の確認
+### `/package-update` - オールインワン パッケージ管理ツール
 
-### `/package-details [パッケージ名]`
-- **機能**: 特定パッケージの詳細情報を取得
-- **例**: `/package-details next`
-- **出力**: changelog、注意点、Breaking Changes情報
+**🎯 主な機能（一つのコマンドですべて実行）:**
 
-### `/package-update-interactive`
-- **機能**: 安全な対話的パッケージアップデート
-- **特徴**: 個別選択可能、Breaking Changes警告付き
-- **推奨度**: ⭐⭐⭐⭐⭐ (最も安全)
+1. **📊 ncuによるバージョンアップデートチェック**
+   - npm-check-updatesを使用してアップデート可能なパッケージを自動検出
 
-### `/package-report`
-- **機能**: 詳細なMarkdownレポートを生成
-- **出力**: `package-update-report.md` ファイル
-- **用途**: チーム共有、アップデート計画策定
+2. **🔗 changelogリンク自動収集**  
+   - 各パッケージのGitHubリポジトリから自動的にChangelogやリリースノートのリンクを収集
+   - Next.js、React、Prisma、Zodなど主要パッケージの直接リンクを内蔵
 
-### `/package-update-all` ⚠️
-- **機能**: 全パッケージを一括アップデート
-- **警告**: 非常に危険、本番環境使用禁止
-- **推奨度**: ⭐ (テスト環境のみ)
+3. **📝 アップデート情報要約**
+   - パッケージごとの変更内容とバージョン情報を構造化して表示
+   - Breaking Changes の自動検出と警告
+
+4. **⚠️ 注意点・補足の自動追記**
+   - **Next.js**: ビルドテストの必要性を警告
+   - **Prisma**: `npx prisma generate`の実行が必要であることを通知  
+   - **TypeScript**: 型チェックの厳格化について注意喚起
+   - メジャーバージョンアップデート時の Breaking Changes 警告
+
+**📤 出力形式:**
+- JSON形式の構造化データ
+- パッケージごとの安全性レベル（✅安全/💡確認推奨/⚠️要注意）
+- 推奨アクション付き
 
 ## 🔄 推奨ワークフロー
 
 ### 日常的なパッケージ管理
 
 ```bash
-# 1. 現在の状況を確認
-/package-check
+# 1. 統合チェック実行（全機能を一括実行）
+/package-update
+```
 
-# 2. 詳細レポートを生成
-/package-report
+### 詳細分析が必要な場合
 
-# 3. 気になるパッケージの詳細を確認
-/package-details next
-/package-details prisma
-
-# 4. 安全にアップデート
-/package-update-interactive
+```bash
+# npm スクリプトで詳細情報を取得
+npm run package-update:check      # Markdownレポート生成
+npm run package-update:interactive # 対話的アップデート
+npm run package-update:json       # 詳細JSON出力
 ```
 
 ### アップデート後の確認手順
@@ -110,15 +105,11 @@ npx prisma generate
 - ✅ テスト環境での事前検証
 - ✅ ロールバック手順の確認
 
-### 危険なコマンド
-- 🚨 `/package-update-all` - 本番環境では絶対使用禁止
-- ⚠️ メジャーバージョンアップ - 必ず事前に影響を確認
-
 ### 推奨手順
-1. **確認**: `/package-check` で状況把握
-2. **分析**: `/package-report` で詳細分析  
+1. **確認**: `/package-update` で全情報を一括取得
+2. **分析**: 出力されたchangelogリンクと注意点を確認
 3. **計画**: Breaking Changesの影響を評価
-4. **実行**: `/package-update-interactive` で段階的アップデート
+4. **実行**: `npm run package-update:interactive` で段階的アップデート
 5. **検証**: ビルドとテストで動作確認
 
 ## 🔧 トラブルシューティング
@@ -157,8 +148,7 @@ npm install
 
 カスタムスラッシュコマンドの改善提案は Issue またはPRでお願いします。
 
-- 新しいコマンドの追加
-- 既存コマンドの機能改善
+- 新機能の追加
 - 安全性の向上
 - ドキュメントの改善
 
