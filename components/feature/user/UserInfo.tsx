@@ -14,7 +14,7 @@ const UserInfo = async ({ user }: UserInfoProps) => {
         <span>{user?.nickname || user?.name}</span>
       </div>
       {user?.bio && (
-        <p className="text-sm">{user.bio}</p>
+        <p className="text-sm whitespace-pre-wrap">{user.bio}</p>
       )}
     </div>
   );

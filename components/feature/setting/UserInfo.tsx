@@ -26,7 +26,7 @@ const UserInfo = async () => {
       </div>
       <div className="flex items-center gap-2">
         {currentUser?.bio ? (
-          <p className="text-sm">{currentUser.bio}</p>
+          <p className="text-sm whitespace-pre-wrap">{currentUser.bio}</p>
         ) : (
           <p className="text-sm text-muted-foreground">
             自己紹介文が設定されていません。自己紹介文を設定しよう！
