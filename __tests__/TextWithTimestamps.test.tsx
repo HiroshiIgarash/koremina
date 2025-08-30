@@ -13,7 +13,7 @@ describe('TextWithTimestamps', () => {
     mockOpen.mockClear();
   });
 
-  it('should render plain text when no timestamps are found', () => {
+  it('タイムスタンプがない場合は通常のテキストを表示できること', () => {
     render(
       <TextWithTimestamps 
         text="タイムスタンプのないテキストです" 
@@ -24,7 +24,7 @@ describe('TextWithTimestamps', () => {
     expect(screen.getByText('タイムスタンプのないテキストです')).toBeInTheDocument();
   });
 
-  it('should render clickable timestamps', () => {
+  it('クリック可能なタイムスタンプを表示できること', () => {
     render(
       <TextWithTimestamps 
         text="1:23から始まる部分が面白いです" 
@@ -39,7 +39,7 @@ describe('TextWithTimestamps', () => {
     expect(timestampButton).toHaveAttribute('title', 'YouTubeで1:23から再生');
   });
 
-  it('should handle multiple timestamps', () => {
+  it('複数のタイムスタンプを正しく処理できること', () => {
     const { container } = render(
       <TextWithTimestamps 
         text="1:23から始まって12:34で盛り上がります" 
@@ -54,7 +54,7 @@ describe('TextWithTimestamps', () => {
     expect(container.textContent).toBe('1:23から始まって12:34で盛り上がります');
   });
 
-  it('should open YouTube URL when timestamp is clicked', () => {
+  it('タイムスタンプをクリックした時にYouTube URLを開けること', () => {
     render(
       <TextWithTimestamps 
         text="1:23の部分をチェック" 
@@ -71,7 +71,7 @@ describe('TextWithTimestamps', () => {
     );
   });
 
-  it('should handle hour:minute:second format', () => {
+  it('時:分:秒の形式を正しく処理できること', () => {
     render(
       <TextWithTimestamps 
         text="1:23:45の長いタイムスタンプ" 
@@ -88,7 +88,7 @@ describe('TextWithTimestamps', () => {
     );
   });
 
-  it('should apply custom className', () => {
+  it('カスタムクラス名を適用できること', () => {
     const { container } = render(
       <TextWithTimestamps 
         text="テストテキスト" 
