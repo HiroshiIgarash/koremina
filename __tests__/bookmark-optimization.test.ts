@@ -19,23 +19,46 @@ describe('未視聴ブックマークのランダム取得最適化', () => {
     expect(componentContent).toContain('最適化された');
   });
 
-  it('getRandomUnseenBookmarks関数が適切に実装されている', () => {
+  it('getRandomUnseenBookmarks関数でTyped SQLが適切に実装されている', () => {
     const fs = require('fs');
     const path = require('path');
     
     const actionPath = path.join(process.cwd(), 'app/action/getRandomUnseenBookmarks.ts');
     const actionContent = fs.readFileSync(actionPath, 'utf8');
     
-    // SQLクエリが最適化されているかチェック
-    expect(actionContent).toContain('$queryRaw');
-    expect(actionContent).toContain('_seenVideos');
-    expect(actionContent).toContain('NOT EXISTS');
+    // Typed SQLのインポートがあるかチェック
+    expect(actionContent).toContain('getRandomUnseenBookmarks as getRandomUnseenBookmarksSQL');
+    expect(actionContent).toContain('@prisma/client/sql');
+    
+    // Typed SQLクエリ実行があるかチェック
+    expect(actionContent).toContain('$queryRawTyped');
     
     // ランダムシード機能があるかチェック
-    expect(actionContent).toContain('setseed');
-    expect(actionContent).toContain('random()');
+    expect(actionContent).toContain('randomSeed');
     
-    // 日本語コメントがあるかチェック
-    expect(actionContent).toContain('未視聴ブックマークをランダムに取得する最適化された関数');
+    // 日本語コメントでTyped SQLについて言及しているかチェック
+    expect(actionContent).toContain('Prisma Typed SQLを使用');
+    expect(actionContent).toContain('タイプセーフなクエリを実行');
+  });
+
+  it('Typed SQL ファイルが存在し、適切なパラメータ定義がある', () => {
+    const fs = require('fs');
+    const path = require('path');
+    
+    const sqlPath = path.join(process.cwd(), 'prisma/sql/getRandomUnseenBookmarks.sql');
+    expect(fs.existsSync(sqlPath)).toBe(true);
+    
+    const sqlContent = fs.readFileSync(sqlPath, 'utf8');
+    
+    // パラメータ定義があるかチェック
+    expect(sqlContent).toContain('@param {String} $1:userId');
+    expect(sqlContent).toContain('@param {Float} $2:seed');
+    expect(sqlContent).toContain('@param {Int} $3:limit');
+    
+    // 最適化されたクエリ構造があるかチェック
+    expect(sqlContent).toContain('NOT EXISTS');
+    expect(sqlContent).toContain('setseed');
+    expect(sqlContent).toContain('random()');
+    expect(sqlContent).toContain('ORDER BY rand');
   });
 });
