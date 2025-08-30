@@ -4,7 +4,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import DeleteCommentButton from "./DeleteCommentButton";
 import { User } from "@prisma/client";
 import Link from "next/link";
-import TextWithTimestamps from "@/components/ui/TextWithTimestamps";
+import TextWithTimestamps from "@/components/TextWithTimestamps";
 
 interface CommentListProps {
   postId: string;

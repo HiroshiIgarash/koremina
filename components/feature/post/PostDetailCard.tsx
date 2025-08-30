@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { getCachedPostById } from "@/app/(pages)/post/[postId]/_utils/functions";
 import PostBookmarkButton from "./PostBookmarkButton";
-import TextWithTimestamps from "@/components/ui/TextWithTimestamps";
+import TextWithTimestamps from "@/components/TextWithTimestamps";
 
 interface PostDetailCardProps {
   postId: string;

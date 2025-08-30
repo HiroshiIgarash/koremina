@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import TextWithTimestamps from '../components/ui/TextWithTimestamps';
+import TextWithTimestamps from '../components/TextWithTimestamps';
 
 // window.openのモック
 const mockOpen = jest.fn();
