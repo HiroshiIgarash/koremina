@@ -11,6 +11,20 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-08-30" className="font-bold">
+              2025/08/30
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                設定ページで自己紹介文を設定できる機能を追加しました。
+                <br />
+                名前とユーザーIDの間に自己紹介文が表示され、ペンアイコンから編集できます。
+                <br />
+                100文字以内の制限があり、改行にも対応しています。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-08-23" className="font-bold">
               2025/08/23
             </time>
