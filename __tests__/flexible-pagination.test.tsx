@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FlexiblePagination from '@/components/ui/FlexiblePagination';
+import FlexiblePagination from '@/components/shared/FlexiblePagination';
 
 // URLごとのページネーション表示をテストするためのモックデータ
 const mockPaginationData = {

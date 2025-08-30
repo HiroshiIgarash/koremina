@@ -1,4 +1,4 @@
-import FlexiblePagination from "@/components/ui/FlexiblePagination";
+import FlexiblePagination from "@/components/shared/FlexiblePagination";
 
 interface UserPostPaginationProps {
   showPages?: number;
