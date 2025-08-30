@@ -4,13 +4,15 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import DeleteCommentButton from "./DeleteCommentButton";
 import { User } from "@prisma/client";
 import Link from "next/link";
+import TextWithTimestamps from "@/components/TextWithTimestamps";
 
 interface CommentListProps {
   postId: string;
   currentUser: User | null;
+  videoId: string;
 }
 
-const CommentList = async ({ postId, currentUser }: CommentListProps) => {
+const CommentList = async ({ postId, currentUser, videoId }: CommentListProps) => {
   const comments = await getCommentsByPostId(postId);
 
   return (
@@ -35,7 +37,12 @@ const CommentList = async ({ postId, currentUser }: CommentListProps) => {
               )}
             </CardHeader>
             <CardContent>
-              <p>{comment.content}</p>
+              <p>
+                <TextWithTimestamps 
+                  text={comment.content} 
+                  videoId={videoId}
+                />
+              </p>
             </CardContent>
           </Card>
         ))
