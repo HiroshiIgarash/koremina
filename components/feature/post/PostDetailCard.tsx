@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { getCachedPostById } from "@/app/(pages)/post/[postId]/_utils/functions";
 import PostBookmarkButton from "./PostBookmarkButton";
+import TextWithTimestamps from "@/components/ui/TextWithTimestamps";
 
 interface PostDetailCardProps {
   postId: string;
@@ -80,7 +81,10 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
           <pre
             className={cn("mt-2 whitespace-pre-wrap break-all", noto.className)}
           >
-            {post.detailComment}
+            <TextWithTimestamps 
+              text={post.detailComment} 
+              videoId={post.videoId}
+            />
           </pre>
         )}
         <Separator className="my-4" />
