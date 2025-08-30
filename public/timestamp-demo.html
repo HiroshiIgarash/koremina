@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムスタンプクリック機能デモ - Koremina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Header -->
+            <div class="bg-blue-600 text-white p-6">
+                <h1 class="text-2xl font-bold">📺 タイムスタンプクリック機能</h1>
+                <p class="mt-2 text-blue-100">コメントや詳細欄のタイムスタンプでYouTube再生位置を変更</p>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+                <!-- Video Simulation -->
+                <div class="bg-black rounded-lg aspect-video flex items-center justify-center mb-6">
+                    <div class="text-white text-center">
+                        <div class="text-6xl mb-4">📺</div>
+                        <div class="text-lg">YouTube動画プレイヤー</div>
+                        <div class="text-sm text-gray-300 mt-2">実装されたタイムスタンプをクリックすると<br>この動画の該当時間から再生されます</div>
+                    </div>
+                </div>
+
+                <!-- Post Details Card Simulation -->
+                <div class="border rounded-lg p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4">投稿詳細</h2>
+                    <div class="mb-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+                            <span class="text-sm text-gray-600">ユーザー名</span>
+                        </div>
+                        <h3 class="font-semibold">素晴らしい歌声の動画です！</h3>
+                    </div>
+
+                    <!-- Detail Comment with Timestamps -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-medium mb-2">詳細文:</h4>
+                        <div class="whitespace-pre-wrap">この動画の<button onclick="openYoutube(83)" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 font-medium transition-colors cursor-pointer" title="YouTubeで1:23から再生">1:23</button>から始まる部分が特に感動的です！
+
+<button onclick="openYoutube(754)" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 font-medium transition-colors cursor-pointer" title="YouTubeで12:34から再生">12:34</button>での表情の変化にも注目してください。
+
+最後の<button onclick="openYoutube(5025)" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 font-medium transition-colors cursor-pointer" title="YouTubeで1:23:45から再生">1:23:45</button>は圧巻の歌唱力です！</div>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="border rounded-lg p-6">
+                    <h3 class="font-bold mb-4">この投稿に対するコメント</h3>
+                    
+                    <!-- Comment 1 -->
+                    <div class="border rounded-lg p-4 mb-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 bg-blue-300 rounded-full"></div>
+                            <span class="text-sm text-gray-600">音楽ファン</span>
+                        </div>
+                        <p><button onclick="openYoutube(123)" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 font-medium transition-colors cursor-pointer" title="YouTubeで2:03から再生">2:03</button> ここの歌声が美しすぎる！何度も聞き返しています😊</p>
+                    </div>
+
+                    <!-- Comment 2 -->
+                    <div class="border rounded-lg p-4 mb-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 bg-green-300 rounded-full"></div>
+                            <span class="text-sm text-gray-600">リスナー123</span>
+                        </div>
+                        <p><button onclick="openYoutube(456)" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 font-medium transition-colors cursor-pointer" title="YouTubeで7:36から再生">7:36</button>の部分、何度見ても泣けます😭 感情がこもっていて素晴らしい</p>
+                    </div>
+
+                    <!-- Comment 3 -->
+                    <div class="border rounded-lg p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 bg-purple-300 rounded-full"></div>
+                            <span class="text-sm text-gray-600">ライブ好き</span>
+                        </div>
+                        <p><button onclick="openYoutube(2700)" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 font-medium transition-colors cursor-pointer" title="YouTubeで45:00から再生">45:00</button>から最後まで見入ってしまいました。ライブ配信最高でした！</p>
+                    </div>
+                </div>
+
+                <!-- Implementation Details -->
+                <div class="mt-8 bg-blue-50 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-4">🔧 実装内容</h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm text-blue-800">
+                        <div>
+                            <h4 class="font-semibold mb-2">作成したファイル:</h4>
+                            <ul class="space-y-1">
+                                <li>• <code>utils/timestamp.ts</code></li>
+                                <li>• <code>components/ui/TextWithTimestamps.tsx</code></li>
+                                <li>• テストファイル各種</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">更新したファイル:</h4>
+                            <ul class="space-y-1">
+                                <li>• <code>PostDetailCard.tsx</code></li>
+                                <li>• <code>CommentList.tsx</code></li>
+                                <li>• <code>CommentArea.tsx</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="mt-6 bg-green-50 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-4">✨ 機能特徴</h3>
+                    <div class="grid md:grid-cols-3 gap-4 text-sm text-green-800">
+                        <div>
+                            <h4 class="font-semibold mb-2">対応形式:</h4>
+                            <ul class="space-y-1">
+                                <li>• mm:ss (1:23)</li>
+                                <li>• h:mm:ss (1:23:45)</li>
+                                <li>• hh:mm:ss (12:34:56)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">動作:</h4>
+                            <ul class="space-y-1">
+                                <li>• 正規表現で自動検出</li>
+                                <li>• クリックでYouTube再生</li>
+                                <li>• 新しいタブで開く</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">品質:</h4>
+                            <ul class="space-y-1">
+                                <li>• TypeScript完全対応</li>
+                                <li>• 単体テスト完備</li>
+                                <li>• ESLint準拠</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openYoutube(seconds) {
+            // デモ用のビデオID（Rick Astley - Never Gonna Give You Up）
+            const videoId = 'dQw4w9WgXcQ';
+            const url = `https://www.youtube.com/watch?v=${videoId}&t=${seconds}s`;
+            
+            // アラートでURLを表示（実際の実装では新しいタブで開く）
+            alert(`YouTube動画を開きます:\n${url}\n\n実際の実装では新しいタブで開かれます。`);
+            
+            // 実際に開く場合（コメントアウト）
+            // window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
