@@ -8,18 +8,23 @@ export const TIMESTAMP_REGEX = /\b(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\b/g;
 /**
  * タイムスタンプ文字列を秒数に変換する
  * @param timestampStr - タイムスタンプ文字列（例: "1:23", "1:23:45"）
- * @returns 秒数
+ * @returns 秒数（無効な形式の場合は-1）
  */
 export function timestampToSeconds(timestampStr: string): number {
   const match = timestampStr.match(/^(?:(\d{1,2}):)?(\d{1,2}):(\d{2})$/);
   
   if (!match) {
-    return 0;
+    return -1;
   }
 
   const hours = match[1] ? parseInt(match[1], 10) : 0;
   const minutes = parseInt(match[2], 10);
   const seconds = parseInt(match[3], 10);
+
+  // 分と秒の範囲検証
+  if (minutes >= 60 || seconds >= 60) {
+    return -1;
+  }
 
   return hours * 3600 + minutes * 60 + seconds;
 }
@@ -44,12 +49,15 @@ export function extractTimestamps(text: string) {
     const timestamp = match[0];
     const seconds = timestampToSeconds(timestamp);
     
-    timestamps.push({
-      start: match.index,
-      end: match.index + timestamp.length,
-      timestamp,
-      seconds,
-    });
+    // 無効なタイムスタンプ（seconds = -1）は除外
+    if (seconds >= 0) {
+      timestamps.push({
+        start: match.index,
+        end: match.index + timestamp.length,
+        timestamp,
+        seconds,
+      });
+    }
   }
 
   return timestamps;
