@@ -20,6 +20,40 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Storybook
+
+このプロジェクトには、コンポーネントの開発と確認のためのStorybookが導入されています。
+
+### Storybookの実行
+
+```bash
+npm run storybook
+```
+
+Storybook は [http://localhost:6006](http://localhost:6006) で起動します。
+
+### 利用可能なコンポーネント
+
+- **UI コンポーネント**: Button, Badge, Card, Dialog等の基本的なUIコンポーネント
+- **Feature コンポーネント**: PostItemPresentation, RecentPostItemPresentation, BookmarkButton等のアプリケーション固有のコンポーネント
+
+### Container/Presentation パターン
+
+データ取得が必要なコンポーネントは Container/Presentation パターンで分離されています：
+
+- **Container コンポーネント**: 非同期データ取得やauth等の外部依存を処理
+- **Presentation コンポーネント**: プロパティとして渡されたデータのみを使用し、Storybookで表示可能
+
+例：
+- `PostItem` (Container) → `PostItemPresentation` (Presentation)
+- `RecentPostItem` (Container) → `RecentPostItemPresentation` (Presentation)
+
+### Storybookビルド
+
+```bash
+npm run build-storybook
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
