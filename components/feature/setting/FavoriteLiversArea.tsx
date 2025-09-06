@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import FavoriteLiversDialog from "./FavoriteLiversDialog";
 import Link from "next/link";
 import getCurrentUserWithTag from "@/app/action/getCurrentUserWithTag";
+import { Route } from "next";
 
 const FavoriteLiversArea = async () => {
   const currentUser = await getCurrentUserWithTag();
@@ -23,7 +24,9 @@ const FavoriteLiversArea = async () => {
               <>
                 <Link
                   key={currentUser.mostFavoriteLiver.id}
-                  href={`/page?liver=${currentUser.mostFavoriteLiver.id}`}
+                  href={
+                    `/page?liver=${currentUser.mostFavoriteLiver.id}` as Route
+                  }
                   className="rounded-full hover:opacity-70 transition-opacity"
                 >
                   <ChannelIcon
@@ -56,7 +59,7 @@ const FavoriteLiversArea = async () => {
                   .map(liver => (
                     <Link
                       key={liver.id}
-                      href={`/page?liver=${liver.id}`}
+                      href={`/page?liver=${liver.id}` as Route}
                       className="rounded-full hover:opacity-70 transition-opacity"
                     >
                       <ChannelIcon channelId={liver.channelHandle} size={64} />

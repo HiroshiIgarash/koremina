@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import { extractTimestamps } from '@/utils/timestamp';
+import React from "react";
+import { extractTimestamps } from "@/utils/timestamp";
 
 interface TextWithTimestampsProps {
   text: string;
@@ -12,7 +12,11 @@ interface TextWithTimestampsProps {
 /**
  * テキスト内のタイムスタンプを検出し、クリック可能なリンクとして表示するコンポーネント
  */
-export default function TextWithTimestamps({ text, videoId, className }: TextWithTimestampsProps) {
+export default function TextWithTimestamps({
+  text,
+  videoId,
+  className,
+}: TextWithTimestampsProps) {
   const timestamps = extractTimestamps(text);
 
   // タイムスタンプがない場合はそのままテキストを返す
@@ -23,7 +27,7 @@ export default function TextWithTimestamps({ text, videoId, className }: TextWit
   // タイムスタンプをクリックした時の処理
   const handleTimestampClick = (seconds: number) => {
     const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}&t=${seconds}s`;
-    window.open(youtubeUrl, '_blank');
+    window.open(youtubeUrl, "_blank");
   };
 
   // テキストをタイムスタンプとその他の部分に分割

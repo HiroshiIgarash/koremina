@@ -25,7 +25,11 @@ const CommentArea = async ({ postId }: CommentAreaProps) => {
       )}
       <div className="mt-4 space-y-4">
         <Suspense fallback={<SkeletonCommentList />}>
-          <CommentList postId={postId} currentUser={currentUser} videoId={post.videoId} />
+          <CommentList
+            postId={postId}
+            currentUser={currentUser}
+            videoId={post.videoId}
+          />
         </Suspense>
       </div>
     </>

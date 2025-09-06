@@ -10,11 +10,11 @@ interface RecentPostListProps {
 
 const RecentPostList = async ({ user }: RecentPostListProps) => {
   // 最新10件+1件取得して、11件目があるかチェック
-  const recentPosts = await getRecentPostsByUserId({ 
-    userId: user.id, 
-    count: 11 
+  const recentPosts = await getRecentPostsByUserId({
+    userId: user.id,
+    count: 11,
   });
-  
+
   const displayPosts = recentPosts.slice(0, 10);
   const hasMorePosts = recentPosts.length > 10;
 
@@ -36,9 +36,7 @@ const RecentPostList = async ({ user }: RecentPostListProps) => {
           {hasMorePosts && (
             <div className="flex justify-center pt-4">
               <Button variant="ghost" asChild>
-                <Link href={`/user/${user.id}/posts`}>
-                  もっと見る
-                </Link>
+                <Link href={`/user/${user.id}/posts`}>もっと見る</Link>
               </Button>
             </div>
           )}

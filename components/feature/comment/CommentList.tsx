@@ -12,7 +12,11 @@ interface CommentListProps {
   videoId: string;
 }
 
-const CommentList = async ({ postId, currentUser, videoId }: CommentListProps) => {
+const CommentList = async ({
+  postId,
+  currentUser,
+  videoId,
+}: CommentListProps) => {
   const comments = await getCommentsByPostId(postId);
 
   return (
@@ -38,10 +42,7 @@ const CommentList = async ({ postId, currentUser, videoId }: CommentListProps) =
             </CardHeader>
             <CardContent>
               <p>
-                <TextWithTimestamps 
-                  text={comment.content} 
-                  videoId={videoId}
-                />
+                <TextWithTimestamps text={comment.content} videoId={videoId} />
               </p>
             </CardContent>
           </Card>

@@ -26,7 +26,7 @@ const HeaderPopover = ({ children, currentUser }: HeaderPopoverProps) => {
         <PopoverContent className="w-fit flex flex-col">
           <PopoverClose asChild>
             <Button asChild variant="ghost" className="justify-start">
-              <Link href="/setting/">
+              <Link href="/setting">
                 <Settings className="mr-2 w-4 h-4" />
                 設定
               </Link>
@@ -34,7 +34,7 @@ const HeaderPopover = ({ children, currentUser }: HeaderPopoverProps) => {
           </PopoverClose>
           <PopoverClose asChild>
             <Button asChild variant="ghost" className="justify-start">
-              <Link href="/notification/">
+              <Link href="/notification">
                 <BellIcon className="mr-2 w-4 h-4" />
                 通知
               </Link>
@@ -42,7 +42,7 @@ const HeaderPopover = ({ children, currentUser }: HeaderPopoverProps) => {
           </PopoverClose>
           <PopoverClose asChild>
             <Button asChild variant="ghost" className="justify-start">
-              <Link href="/bookmark/">
+              <Link href="/bookmark">
                 <BookmarkIcon className="mr-2 w-4 h-4" />
                 ブックマーク
               </Link>
