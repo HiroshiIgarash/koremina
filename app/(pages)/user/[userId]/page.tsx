@@ -6,11 +6,7 @@ import UserInfo from "@/components/feature/user/UserInfo";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-interface IParam {
-  userId: string;
-}
-
-const Page = async (props: { params: Promise<IParam> }) => {
+const Page = async (props: PageProps<"/user/[userId]">) => {
   const params = await props.params;
   const { userId } = params;
 

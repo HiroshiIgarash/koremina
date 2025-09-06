@@ -7,18 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-interface IParam {
-  userId: string;
-}
-
-interface ISearchParams {
-  page: string;
-}
-
-const Page = async (props: {
-  params: Promise<IParam>;
-  searchParams?: Promise<ISearchParams>;
-}) => {
+const Page = async (props: PageProps<"/user/[userId]/posts">) => {
   const params = await props.params;
   const searchParams = await props.searchParams;
   const { userId } = params;
@@ -27,7 +16,11 @@ const Page = async (props: {
 
   if (!user) notFound();
 
-  const currentPage = parseInt(searchParams?.page || "1");
+  const currentPage = parseInt(
+    Array.isArray(searchParams?.page)
+      ? searchParams.page[0] || "1"
+      : searchParams?.page || "1"
+  );
   const postsPerPage = 16;
 
   return (
