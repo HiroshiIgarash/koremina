@@ -21,6 +21,7 @@ import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import VideoImage from "./VideoImage";
+import { Route } from "next";
 import {
   Command,
   CommandGroup,
@@ -104,7 +105,7 @@ const PostEditForm = ({
     startTransition(async () => {
       await axios.put("/api/post", { ...values, postId }).then(() => {
         toast.success("投稿の更新が完了しました");
-        router.push(`/post/${postId}`);
+        router.push(`/post/${postId}` as Route);
         router.refresh();
       });
     });

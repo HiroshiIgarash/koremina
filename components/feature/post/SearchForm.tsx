@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useState, useTransition } from "react";
+import { Route } from "next";
 
 interface SearchFormProps {
   defaultValue?: string;
@@ -23,7 +24,7 @@ const SearchForm = ({ defaultValue }: SearchFormProps) => {
     const params = new URLSearchParams();
     params.set("q", input.replaceAll("　", " "));
     startRoutingTransition(() => {
-      router.push(`/search?${params}`);
+      router.push(`/search?${params}` as Route);
     });
   };
 

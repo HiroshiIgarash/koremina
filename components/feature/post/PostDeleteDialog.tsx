@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState, useTransition } from "react";
+import { Route } from "next";
 
 interface PostDeleteDialogProps {
   children: ReactNode;
@@ -33,7 +34,7 @@ const PostDeleteDialog = ({ children, postId }: PostDeleteDialogProps) => {
       await deletePost({ postId });
       toast.success("投稿を削除しました。");
       setOpen(false);
-      router.push("/");
+      router.push("/" as Route);
       router.refresh();
     });
   };

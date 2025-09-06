@@ -17,6 +17,7 @@ import { Liver } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import ChannelIcon from "../setting/ChannelIcon";
+import { Route } from "next";
 
 interface PostFilterProps {
   filterLiversId: string | undefined;
@@ -38,7 +39,7 @@ const PostFilter = ({
 
   const handleChange = (value: string) => {
     if (value === filterLiversId) return;
-    const href = value === "all" ? "/page/" : `/page/?liver=${value}`;
+    const href = (value === "all" ? "/page/" : `/page/?liver=${value}`) as Route;
     startRoutingTransition(() => {
       router.push(href);
     });
@@ -50,7 +51,7 @@ const PostFilter = ({
     const randomLiverId = invalidLivers[rand]?.id;
     if (!randomLiverId) return;
     startRoutingTransition(() => {
-      router.push(`/page/?liver=${randomLiverId}`);
+      router.push(`/page/?liver=${randomLiverId}` as Route);
     });
   };
 

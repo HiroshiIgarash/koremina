@@ -21,6 +21,7 @@ import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import VideoImage from "./VideoImage";
+import { Route } from "next";
 import {
   Command,
   CommandGroup,
@@ -98,7 +99,7 @@ const PostForm = () => {
     startTransition(async () => {
       await axios.post("/api/post", values).then(() => {
         toast.success("投稿が完了しました。");
-        router.push("/");
+        router.push("/" as Route);
         router.refresh();
       });
     });
