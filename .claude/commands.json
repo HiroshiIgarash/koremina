@@ -1,0 +1,29 @@
+{
+  "commands": [
+    {
+      "name": "package-update",
+      "description": "パッケージアップデート統合ツール - ncuでバージョンチェック、changelogリンク収集、アップデート情報要約、注意点追記を一括実行",
+      "usage": "/package-update",
+      "script": "npm run package-update:claude",
+      "category": "development",
+      "features": [
+        "npm-check-updatesによるバージョンアップデートチェック",
+        "アップデート可能なライブラリのchangelogリンク自動収集",
+        "各ライブラリのアップデート情報要約",
+        "アップデートによる注意点や補足の自動追記"
+      ],
+      "examples": [
+        {
+          "command": "/package-update",
+          "description": "全機能を一括実行してパッケージアップデート情報を確認"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "2.0.0",
+    "description": "統合パッケージアップデート自動化ツール用Claude カスタムスラッシュコマンド",
+    "author": "koremina project",
+    "category": "development-tools"
+  }
+}

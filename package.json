@@ -15,7 +15,14 @@
     "test": "jest",
     "ncu": "npx npm-check-updates",
     "ncu:i": "npx npm-check-updates -i",
-    "ncu:upgrade": "npx npm-check-updates -u && npm install"
+    "ncu:upgrade": "npx npm-check-updates -u && npm install",
+    "package-update": "node scripts/package-update.js",
+    "package-update:check": "node scripts/package-update.js --check --report",
+    "package-update:interactive": "node scripts/package-update.js --interactive",
+    "package-update:update": "node scripts/package-update.js --update --report",
+    "package-update:json": "node scripts/package-update.js --json",
+    "package-update:claude": "node scripts/claude-package-update.js",
+    "claude:setup-check": "node scripts/claude-setup-validator.js"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",

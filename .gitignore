@@ -44,3 +44,6 @@ next-env.d.ts
 postgres_dev
 
 .vercel
+
+# Package update reports
+package-update-report.md

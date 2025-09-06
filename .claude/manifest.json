@@ -1,0 +1,46 @@
+{
+  "manifest_version": 1,
+  "name": "koremina-package-tools",
+  "version": "1.0.0",
+  "description": "パッケージアップデート自動化ツール for Claude code",
+  "author": "koremina project",
+  "type": "custom-commands",
+  "claude": {
+    "min_version": "3.0.0",
+    "workspace": true,
+    "command_prefix": "/",
+    "commands_file": "commands.json",
+    "config_file": "config.json"
+  },
+  "permissions": [
+    "file_read",
+    "file_write", 
+    "command_execution",
+    "network_access"
+  ],
+  "files": [
+    "commands.json",
+    "config.json", 
+    "commands/*.json",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "npm run package-update:claude",
+    "details": "node scripts/claude-package-update.js --package",
+    "interactive": "npm run package-update:interactive",
+    "report": "npm run package-update:check",
+    "update": "npm run package-update:update"
+  },
+  "categories": [
+    "development",
+    "package-management", 
+    "automation"
+  ],
+  "tags": [
+    "npm",
+    "package-update",
+    "automation",
+    "claude-code",
+    "nodejs"
+  ]
+}

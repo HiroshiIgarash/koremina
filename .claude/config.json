@@ -1,0 +1,73 @@
+{
+  "name": "koremina-package-tools",
+  "version": "1.0.0",
+  "description": "Claude カスタムスラッシュコマンド設定 - パッケージアップデート自動化ツール",
+  "workspace": {
+    "root": ".",
+    "name": "koremina",
+    "type": "nodejs"
+  },
+  "commands": {
+    "prefix": "/",
+    "categories": {
+      "package-management": {
+        "name": "パッケージ管理",
+        "description": "npm パッケージのアップデート管理ツール"
+      }
+    }
+  },
+  "environment": {
+    "node": {
+      "version": ">=18.0.0"
+    },
+    "npm": {
+      "required": true
+    },
+    "dependencies": [
+      "npm-check-updates"
+    ]
+  },
+  "setup": {
+    "description": "Claude カスタムスラッシュコマンドのセットアップ手順",
+    "steps": [
+      "1. Claude code のワークスペースでこのプロジェクトを開く",
+      "2. .claude/commands.json の設定を Claude に読み込ませる",
+      "3. npm install でプロジェクトの依存関係をインストール",
+      "4. /package-check コマンドでセットアップを確認"
+    ]
+  },
+  "usage": {
+    "quickStart": [
+      "/package-check - アップデート可能パッケージの一覧表示",
+      "/package-details [name] - 特定パッケージの詳細情報",
+      "/package-update-interactive - 安全な対話的アップデート",
+      "/package-report - 詳細レポートの生成"
+    ],
+    "workflow": [
+      "1. 定期的に /package-check でアップデート状況を確認",
+      "2. /package-report で詳細分析レポートを生成",
+      "3. Breaking Changesがある場合は各パッケージの /package-details で詳細確認",
+      "4. /package-update-interactive で安全に段階的アップデート",
+      "5. アップデート後は必ずビルドとテストを実行"
+    ]
+  },
+  "integration": {
+    "claude": {
+      "version": ">=3.0",
+      "features": [
+        "カスタムスラッシュコマンド",
+        "JSON構造化出力",
+        "対話的コマンド実行",
+        "ファイル生成と読み取り"
+      ]
+    }
+  },
+  "safety": {
+    "guidelines": [
+      "本番環境では /package-update-all は使用しない",
+      "アップデート前に必ずgitでコミット",
+      "Breaking Changes がある場合は段階的にアップデート",
+      "アップデート後は必ずビルドとテストを実行"
+    ]
+  }
+}
