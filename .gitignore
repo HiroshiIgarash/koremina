@@ -9,6 +9,11 @@
 # testing
 /coverage
 
+# E2E testing
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
 # next.js
 /.next/
 /out/
