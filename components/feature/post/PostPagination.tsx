@@ -1,4 +1,5 @@
 import FlexiblePagination from "@/components/shared/FlexiblePagination";
+import { Route } from "next";
 
 interface PaginationProps {
   showPages?: number;
@@ -15,8 +16,8 @@ const PostPagination = ({
   postsPerPage,
   filterLiver,
 }: PaginationProps) => {
-  const generateHref = (page: number) => {
-    return `/page?page=${page}${filterLiver ? `&liver=${filterLiver}` : ""}`;
+  const generateHref = (page: number): Route => {
+    return `/page?page=${page}${filterLiver ? `&liver=${filterLiver}` : ""}` as Route;
   };
 
   return (

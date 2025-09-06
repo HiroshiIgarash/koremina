@@ -7,13 +7,14 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Route } from "next";
 
 interface FlexiblePaginationProps {
   showPages?: number;
   currentPage: number;
   totalItems: number;
   itemsPerPage: number;
-  generateHref: (page: number) => string;
+  generateHref: (page: number) => Route;
 }
 
 const FlexiblePagination = ({

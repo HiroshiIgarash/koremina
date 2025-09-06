@@ -3,6 +3,7 @@ const nextConfig = {
   experimental: {
     useCache: true,
   },
+  typedRoutes: true,
   images: {
     remotePatterns: [
       {

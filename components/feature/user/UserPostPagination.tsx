@@ -1,4 +1,5 @@
 import FlexiblePagination from "@/components/shared/FlexiblePagination";
+import { Route } from "next";
 
 interface UserPostPaginationProps {
   showPages?: number;
@@ -15,8 +16,8 @@ const UserPostPagination = ({
   postsPerPage,
   userId,
 }: UserPostPaginationProps) => {
-  const generateHref = (page: number) => {
-    return `/user/${userId}/posts?page=${page}`;
+  const generateHref = (page: number): Route => {
+    return `/user/${userId}/posts?page=${page}` as Route;
   };
 
   return (

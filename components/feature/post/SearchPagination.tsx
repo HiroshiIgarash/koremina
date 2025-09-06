@@ -1,4 +1,5 @@
 import FlexiblePagination from "@/components/shared/FlexiblePagination";
+import { Route } from "next";
 
 interface PaginationProps {
   showPages?: number;
@@ -15,11 +16,11 @@ const SearchPagination = ({
   postsPerPage,
   q,
 }: PaginationProps) => {
-  const generateHref = (page: number) => {
+  const generateHref = (page: number): Route => {
     const params = new URLSearchParams();
     params.set("q", q);
     params.set("page", page.toString());
-    return `/search?${params.toString()}`;
+    return `/search?${params.toString()}` as Route;
   };
 
   return (
