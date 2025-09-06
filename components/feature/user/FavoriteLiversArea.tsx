@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import ChannelIcon from "../setting/ChannelIcon";
 import { User } from "@prisma/client";
 import Link from "next/link";
+import { Route } from "next";
 
 interface FavoriteLiversAreaProps {
   user: User & {
@@ -35,7 +36,7 @@ const FavoriteLiversArea = async ({ user }: FavoriteLiversAreaProps) => {
               <>
                 <Link
                   key={user.mostFavoriteLiver.id}
-                  href={`/page?liver=${user.mostFavoriteLiver.id}`}
+                  href={`/page?liver=${user.mostFavoriteLiver.id}` as Route}
                   className="rounded-full hover:opacity-70 transition-opacity"
                 >
                   <ChannelIcon
@@ -61,7 +62,7 @@ const FavoriteLiversArea = async ({ user }: FavoriteLiversAreaProps) => {
                   .map(liver => (
                     <Link
                       key={liver.id}
-                      href={`/page?liver=${liver.id}`}
+                      href={`/page?liver=${liver.id}` as Route}
                       className="rounded-full hover:opacity-70 transition-opacity"
                     >
                       <ChannelIcon

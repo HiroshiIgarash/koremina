@@ -1,12 +1,13 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  PaginationEllipsis,
 } from "@/components/ui/pagination";
+import { Route } from "next";
 
 interface PaginationProps {
   showPages?: number;
@@ -38,7 +39,9 @@ const BookmarkPagination = ({
       <PaginationContent>
         {currentPage > 1 && (
           <PaginationItem>
-            <PaginationPrevious href={`/bookmark?page=${currentPage - 1}`} />
+            <PaginationPrevious
+              href={`/bookmark?page=${currentPage - 1}` as Route}
+            />
           </PaginationItem>
         )}
         {showPageStart > 1 && (
@@ -49,7 +52,7 @@ const BookmarkPagination = ({
         {showPageArr.map(page => (
           <PaginationItem key={page}>
             <PaginationLink
-              href={`/bookmark?page=${page}`}
+              href={`/bookmark?page=${page}` as Route}
               isActive={page === currentPage}
             >
               {page}
@@ -63,7 +66,9 @@ const BookmarkPagination = ({
         )}
         {currentPage < pageEnd && (
           <PaginationItem>
-            <PaginationNext href={`/bookmark?page=${currentPage + 1}`} />
+            <PaginationNext
+              href={`/bookmark?page=${currentPage + 1}` as Route}
+            />
           </PaginationItem>
         )}
       </PaginationContent>

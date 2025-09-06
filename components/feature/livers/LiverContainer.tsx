@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Route } from "next";
 
 const LiverContainer = async () => {
   const livers = await getLivers();
@@ -110,7 +111,7 @@ const LiverList = ({
               />
             )}
             <Link
-              href={`/page?liver=${liver.id}`}
+              href={`/page?liver=${liver.id}` as Route}
               className="w-full hover:opacity-70 transition-opacity"
             >
               <Suspense

@@ -13,6 +13,7 @@ import Link from "next/link";
 import { getCachedPostById } from "@/app/(pages)/post/[postId]/_utils/functions";
 import PostBookmarkButton from "./PostBookmarkButton";
 import TextWithTimestamps from "@/components/TextWithTimestamps";
+import { Route } from "next";
 
 interface PostDetailCardProps {
   postId: string;
@@ -73,7 +74,7 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
               variant="outline"
               className="whitespace-nowrap text-sm hover:border-sky-500 transition"
             >
-              <Link href={`/page?liver=${l.id}`}>{l.name}</Link>
+              <Link href={`/page?liver=${l.id}` as Route}>{l.name}</Link>
             </Badge>
           ))}
         </div>
