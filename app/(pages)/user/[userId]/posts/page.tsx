@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { getParams, getSearchParams, RouteProps } from "@/lib/route-helpers";
 
 interface IParam {
   userId: string;
@@ -15,12 +16,9 @@ interface ISearchParams {
   page: string;
 }
 
-const Page = async (props: { 
-  params: Promise<IParam>;
-  searchParams?: Promise<ISearchParams>;
-}) => {
-  const params = await props.params;
-  const searchParams = await props.searchParams;
+const Page = async (props: RouteProps<IParam, ISearchParams>) => {
+  const params = await getParams(props.params);
+  const searchParams = await getSearchParams(props.searchParams || Promise.resolve({} as ISearchParams));
   const { userId } = params;
 
   const user = await getUserById(userId);

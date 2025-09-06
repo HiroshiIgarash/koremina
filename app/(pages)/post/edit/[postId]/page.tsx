@@ -2,13 +2,14 @@ import getPostById from "@/app/action/getPostById";
 import { auth } from "@/auth";
 import PostEditContainer from "@/components/feature/post/PostEditContainer";
 import { redirect } from "next/navigation";
+import { getParams, RouteProps } from "@/lib/route-helpers";
 
 interface IParam {
   postId: string;
 }
 
-const Page = async (props: { params: Promise<IParam> }) => {
-  const params = await props.params;
+const Page = async (props: RouteProps<IParam>) => {
+  const params = await getParams(props.params);
   const session = await auth();
   const { postId } = params;
   const post = await getPostById(postId);

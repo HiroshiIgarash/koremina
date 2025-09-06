@@ -2,13 +2,14 @@ import BookmarkContainer from "@/components/feature/bookmark/BookmarkContainer";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
+import { getSearchParams, RouteProps } from "@/lib/route-helpers";
 
 interface ISearchParams {
   page: string;
 }
 
-const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
-  const searchParams = await props.searchParams;
+const Page = async (props: RouteProps<{}, ISearchParams>) => {
+  const searchParams = await getSearchParams(props.searchParams || Promise.resolve({} as ISearchParams));
   const currentPage = parseInt(searchParams?.page || "1");
   const postsPerPage = 16;
 

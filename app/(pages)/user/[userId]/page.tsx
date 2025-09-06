@@ -5,13 +5,14 @@ import FavoriteLiversArea from "@/components/feature/user/FavoriteLiversArea";
 import UserInfo from "@/components/feature/user/UserInfo";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { getParams, RouteProps } from "@/lib/route-helpers";
 
 interface IParam {
   userId: string;
 }
 
-const Page = async (props: { params: Promise<IParam> }) => {
-  const params = await props.params;
+const Page = async (props: RouteProps<IParam>) => {
+  const params = await getParams(props.params);
   const { userId } = params;
 
   const user = await getUserById(userId);
