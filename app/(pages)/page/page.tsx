@@ -3,15 +3,14 @@ import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import { Suspense } from "react";
-import { getSearchParams, RouteProps } from "@/lib/route-helpers";
 
 interface ISearchParams {
   liver: string;
   page: string;
 }
 
-const Page = async (props: RouteProps<{}, ISearchParams>) => {
-  const searchParams = await getSearchParams(props.searchParams || Promise.resolve({} as ISearchParams));
+const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+  const searchParams = await props.searchParams;
   const filterLiver = searchParams?.liver;
 
   const currentPage = parseInt(searchParams?.page || "1");

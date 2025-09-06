@@ -81,8 +81,8 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
           <pre
             className={cn("mt-2 whitespace-pre-wrap break-all", noto.className)}
           >
-            <TextWithTimestamps 
-              text={post.detailComment} 
+            <TextWithTimestamps
+              text={post.detailComment}
               videoId={post.videoId}
             />
           </pre>

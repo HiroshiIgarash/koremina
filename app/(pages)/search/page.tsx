@@ -6,15 +6,14 @@ import prisma from "@/lib/db";
 import { redirect } from "next/navigation";
 import { comment } from "postcss";
 import { Suspense } from "react";
-import { getSearchParams, RouteProps } from "@/lib/route-helpers";
 
 interface ISearchParams {
   q: string;
   page: string;
 }
 
-const Page = async (props: RouteProps<{}, ISearchParams>) => {
-  const searchParams = await getSearchParams(props.searchParams || Promise.resolve({} as ISearchParams));
+const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+  const searchParams = await props.searchParams;
   const currentPage = parseInt(searchParams?.page || "1");
   const postsPerPage = 16;
 

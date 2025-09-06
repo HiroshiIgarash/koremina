@@ -2,6 +2,7 @@
   "name": "koremina",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "prisma:studio:dev": "export POSTGRES_PRISMA_URL=$(dotenv -- bash -c 'echo $POSTGRES_LOCAL_URL') && prisma studio",

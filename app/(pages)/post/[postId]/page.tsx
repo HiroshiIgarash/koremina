@@ -11,14 +11,13 @@ import YoutubeLinkButton from "@/components/feature/post/YoutubeLinkButton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCachedPostById } from "./_utils/functions";
 import SkeletonPostDetailCard from "@/components/feature/post/SkeletonPostDetailCard";
-import { getParams, RouteProps } from "@/lib/route-helpers";
 
 interface IParams {
   postId: string;
 }
 
-export async function generateMetadata(props: RouteProps<IParams>) {
-  const params = await getParams(props.params);
+export async function generateMetadata(props: { params: Promise<IParams> }) {
+  const params = await props.params;
   const { postId } = params;
   const post = await getCachedPostById(postId);
 
@@ -29,8 +28,8 @@ export async function generateMetadata(props: RouteProps<IParams>) {
   };
 }
 
-const Page = async (props: RouteProps<IParams>) => {
-  const params = await getParams(props.params);
+const Page = async (props: { params: Promise<IParams> }) => {
+  const params = await props.params;
   const { postId } = params;
 
   const session = await auth();

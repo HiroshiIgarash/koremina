@@ -6,7 +6,6 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import { getParams, getSearchParams, RouteProps } from "@/lib/route-helpers";
 
 interface IParam {
   userId: string;
@@ -16,9 +15,12 @@ interface ISearchParams {
   page: string;
 }
 
-const Page = async (props: RouteProps<IParam, ISearchParams>) => {
-  const params = await getParams(props.params);
-  const searchParams = await getSearchParams(props.searchParams || Promise.resolve({} as ISearchParams));
+const Page = async (props: {
+  params: Promise<IParam>;
+  searchParams?: Promise<ISearchParams>;
+}) => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const { userId } = params;
 
   const user = await getUserById(userId);
@@ -38,7 +40,7 @@ const Page = async (props: RouteProps<IParam, ISearchParams>) => {
           </Link>
         </Button>
       </div>
-      
+
       <div className="space-y-4">
         <h1 className="text-3xl font-bold">
           {user.nickname || user.name}さんの投稿一覧

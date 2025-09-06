@@ -13,9 +13,7 @@ const UserInfo = async ({ user }: UserInfoProps) => {
         <Avatar user={user} size={48} />
         <span>{user?.nickname || user?.name}</span>
       </div>
-      {user?.bio && (
-        <p className="text-sm whitespace-pre-wrap">{user.bio}</p>
-      )}
+      {user?.bio && <p className="text-sm whitespace-pre-wrap">{user.bio}</p>}
     </div>
   );
 };

@@ -4,8 +4,6 @@ const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
 });
 
-const config = [
-  ...compat.extends("next/core-web-vitals", "prettier"),
-];
+const config = [...compat.extends("next/core-web-vitals", "prettier")];
 
 export default config;

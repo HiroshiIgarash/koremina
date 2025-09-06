@@ -10,11 +10,11 @@ const RecentPostList = async () => {
   if (!currentUser) return;
 
   // 最新10件+1件取得して、11件目があるかチェック
-  const recentPosts = await getRecentPostsByUserId({ 
-    userId: currentUser.id, 
-    count: 11 
+  const recentPosts = await getRecentPostsByUserId({
+    userId: currentUser.id,
+    count: 11,
   });
-  
+
   const displayPosts = recentPosts.slice(0, 10);
   const hasMorePosts = recentPosts.length > 10;
 
@@ -36,9 +36,7 @@ const RecentPostList = async () => {
           {hasMorePosts && (
             <div className="flex justify-center pt-4">
               <Button variant="ghost" asChild>
-                <Link href={`/user/${currentUser.id}/posts`}>
-                  もっと見る
-                </Link>
+                <Link href={`/user/${currentUser.id}/posts`}>もっと見る</Link>
               </Button>
             </div>
           )}
