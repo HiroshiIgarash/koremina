@@ -51,12 +51,14 @@ const FavoriteLiversArea = async () => {
         </div>
         <div>
           <p className="font-semibold text-xl text-center my-4">推しライバー</p>
-          <Suspense fallback={<FavoriteLiversLoading />}>
-            <FavoriteLiversOnlyList />
-          </Suspense>
-          <FavoriteLiversDialog user={currentUser}>
-            <Button className="mt-8">推しライバーを選択</Button>
-          </FavoriteLiversDialog>
+          <div className="flex flex-col items-center justify-center max-w-96 mx-auto">
+            <Suspense fallback={<FavoriteLiversLoading />}>
+              <FavoriteLiversOnlyList />
+            </Suspense>
+            <FavoriteLiversDialog user={currentUser}>
+              <Button className="mt-8">推しライバーを選択</Button>
+            </FavoriteLiversDialog>
+          </div>
         </div>
       </CardContent>
     </Card>
