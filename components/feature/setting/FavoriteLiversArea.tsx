@@ -1,9 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
+import ChannelIcon from "./ChannelIcon";
 import MostFavoriteLiverDialog from "./MostFavoriteLiverDialog";
 import { Button } from "@/components/ui/button";
 import FavoriteLiversDialog from "./FavoriteLiversDialog";
-import FavoriteLiversList from "./FavoriteLiversList";
+import FavoriteLiversOnlyList from "./FavoriteLiversOnlyList";
 import FavoriteLiversLoading from "./FavoriteLiversLoading";
+import Link from "next/link";
 import getCurrentUserWithTag from "@/app/action/getCurrentUserWithTag";
 import { Suspense } from "react";
 
@@ -19,17 +21,42 @@ const FavoriteLiversArea = async () => {
           <p className="font-semibold text-xl text-center my-4">
             最推しライバー
           </p>
-          <Suspense fallback={<FavoriteLiversLoading />}>
-            <FavoriteLiversList />
-          </Suspense>
-          <div className="flex justify-center space-x-4 mt-8">
+          <div className="flex flex-col items-center justify-center">
+            {currentUser.mostFavoriteLiver ? (
+              <>
+                <Link
+                  key={currentUser.mostFavoriteLiver.id}
+                  href={`/page?liver=${currentUser.mostFavoriteLiver.id}`}
+                  className="rounded-full hover:opacity-70 transition-opacity"
+                >
+                  <ChannelIcon
+                    channelId={currentUser.mostFavoriteLiver.channelHandle}
+                    size={200}
+                    quality="medium"
+                  />
+                </Link>
+                <span>{currentUser.mostFavoriteLiver.name}</span>
+              </>
+            ) : (
+              <p className="text-center">
+                あなたの「最推し」ライバーを
+                <br className="md:hidden" />
+                設定しましょう！
+              </p>
+            )}
             <MostFavoriteLiverDialog user={currentUser}>
-              <Button>最推しライバーを選択</Button>
+              <Button className="mt-8">最推しライバーを選択</Button>
             </MostFavoriteLiverDialog>
-            <FavoriteLiversDialog user={currentUser}>
-              <Button variant="outline">推しライバーを選択</Button>
-            </FavoriteLiversDialog>
           </div>
+        </div>
+        <div>
+          <p className="font-semibold text-xl text-center my-4">推しライバー</p>
+          <Suspense fallback={<FavoriteLiversLoading />}>
+            <FavoriteLiversOnlyList />
+          </Suspense>
+          <FavoriteLiversDialog user={currentUser}>
+            <Button className="mt-8">推しライバーを選択</Button>
+          </FavoriteLiversDialog>
         </div>
       </CardContent>
     </Card>
