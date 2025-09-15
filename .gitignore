@@ -44,3 +44,5 @@ next-env.d.ts
 postgres_dev
 
 .vercel
+.serena
+.claude/settings.local.json
