@@ -4,16 +4,17 @@ import PostList from "@/components/feature/post/PostList";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import { Suspense } from "react";
 
-interface ISearchParams {
-  liver: string;
-  page: string;
-}
-
-const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+const Page = async (props: PageProps<"/page">) => {
   const searchParams = await props.searchParams;
-  const filterLiver = searchParams?.liver;
+  const filterLiver = Array.isArray(searchParams?.liver)
+    ? searchParams.liver[0]
+    : searchParams?.liver;
 
-  const currentPage = parseInt(searchParams?.page || "1");
+  const currentPage = parseInt(
+    Array.isArray(searchParams?.page)
+      ? searchParams.page[0] || "1"
+      : searchParams?.page || "1"
+  );
   const postsPerPage = 16;
 
   return (

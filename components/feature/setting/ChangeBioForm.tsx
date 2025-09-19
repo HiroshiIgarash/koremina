@@ -61,11 +61,7 @@ const ChangeBioForm = ({ user, setOpen }: ChangeBioFormProps) => {
             {errors.newBio?.message}
           </div>
           <div className="text-sm text-muted-foreground">
-            <span
-              className={cn(
-                watchBio.length > 100 && "text-destructive"
-              )}
-            >
+            <span className={cn(watchBio.length > 100 && "text-destructive")}>
               {watchBio.length}
             </span>{" "}
             / 100
@@ -73,11 +69,7 @@ const ChangeBioForm = ({ user, setOpen }: ChangeBioFormProps) => {
         </div>
       </div>
       <div className="flex justify-end gap-2">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => setOpen(false)}
-        >
+        <Button type="button" variant="outline" onClick={() => setOpen(false)}>
           キャンセル
         </Button>
         <Button disabled={!!errors.newBio || isPending}>

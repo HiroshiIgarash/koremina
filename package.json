@@ -2,6 +2,7 @@
   "name": "koremina",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "prisma:studio:dev": "export POSTGRES_PRISMA_URL=$(dotenv -- bash -c 'echo $POSTGRES_LOCAL_URL') && prisma studio",
@@ -9,7 +10,7 @@
     "dev:host": "next dev -H 192.168.11.31",
     "build": "prisma generate --sql && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "jest",
@@ -63,6 +64,7 @@
     "zod": "^4.1.8"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.13",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",

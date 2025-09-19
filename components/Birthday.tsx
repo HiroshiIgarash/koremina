@@ -2,6 +2,7 @@ import { getNearestBirthdayLivers } from "@/app/action/getBirthdayLivers";
 import Link from "next/link";
 import ChannelIcon from "./feature/setting/ChannelIcon";
 import { cn } from "@/lib/utils";
+import { Route } from "next";
 
 const Birthday = async ({ className }: { className?: string }) => {
   const birthdayData = await getNearestBirthdayLivers();
@@ -38,7 +39,7 @@ const Birthday = async ({ className }: { className?: string }) => {
               <li key={liver.id} className="flex flex-col items-center">
                 <Link
                   key={liver.id}
-                  href={`/page?liver=${liver.id}`}
+                  href={`/page?liver=${liver.id}` as Route}
                   className="rounded-full hover:opacity-70 transition-opacity"
                 >
                   <ChannelIcon

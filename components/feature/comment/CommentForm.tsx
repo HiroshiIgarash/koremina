@@ -46,7 +46,9 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
         placeholder="コメントする"
         autoComplete="off"
       />
-      <Button disabled={isSubmitting || comment.trim().length === 0}>送信</Button>
+      <Button disabled={isSubmitting || comment.trim().length === 0}>
+        送信
+      </Button>
     </form>
   );
 };

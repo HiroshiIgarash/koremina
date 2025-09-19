@@ -4,6 +4,7 @@ import SkeletonPostItem from "./SkeletonPostItem";
 import prisma from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Route } from "next";
 
 const SpecialList = async () => {
   const posts = await prisma.video.findMany({
@@ -68,7 +69,7 @@ const SpecialList = async () => {
       </div>
       <div className="px-4 w-full max-w-7xl mx-auto mt-4">
         <Button asChild>
-          <Link href="/page?liver=clvkcl4c90026mp9w2ow7z1lv">
+          <Link href="/page?liver=clvkcl4c90026mp9w2ow7z1lv" as Route>
             不破湊のおすすめ動画を見る
           </Link>
         </Button>

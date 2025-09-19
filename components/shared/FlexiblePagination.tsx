@@ -7,6 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Route } from "next";
 
 interface FlexiblePaginationProps {
   showPages?: number;
@@ -43,7 +44,10 @@ const FlexiblePagination = ({
       <PaginationContent>
         {currentPage > 1 && (
           <PaginationItem>
-            <PaginationPrevious href={generateHref(currentPage - 1)} scroll={true} />
+            <PaginationPrevious
+              href={generateHref(currentPage - 1) as Route}
+              scroll={true}
+            />
           </PaginationItem>
         )}
         {showPageStart > 1 && (
@@ -54,7 +58,7 @@ const FlexiblePagination = ({
         {showPageArr.map(page => (
           <PaginationItem key={page}>
             <PaginationLink
-              href={generateHref(page)}
+              href={generateHref(page) as Route}
               isActive={page === currentPage}
               scroll={true}
             >
@@ -69,7 +73,10 @@ const FlexiblePagination = ({
         )}
         {currentPage < pageEnd && (
           <PaginationItem>
-            <PaginationNext href={generateHref(currentPage + 1)} scroll={true} />
+            <PaginationNext
+              href={generateHref(currentPage + 1) as Route}
+              scroll={true}
+            />
           </PaginationItem>
         )}
       </PaginationContent>

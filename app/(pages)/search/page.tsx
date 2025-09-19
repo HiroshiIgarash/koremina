@@ -7,21 +7,23 @@ import { redirect } from "next/navigation";
 import { comment } from "postcss";
 import { Suspense } from "react";
 
-interface ISearchParams {
-  q: string;
-  page: string;
-}
-
-const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+const Page = async (props: PageProps<"/search">) => {
   const searchParams = await props.searchParams;
-  const currentPage = parseInt(searchParams?.page || "1");
+  const currentPage = parseInt(
+    Array.isArray(searchParams?.page)
+      ? searchParams.page[0] || "1"
+      : searchParams?.page || "1"
+  );
   const postsPerPage = 16;
 
-  if (!searchParams) {
+  if (!searchParams || !searchParams.q) {
     redirect("/");
   }
 
-  const searchList = searchParams.q.split(" ").filter(s => s !== "");
+  const queryString = Array.isArray(searchParams.q)
+    ? searchParams.q[0]
+    : searchParams.q;
+  const searchList = queryString.split(" ").filter(s => s !== "");
 
   const count = await prisma.video.count({
     where: {
@@ -100,7 +102,7 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
         <h2 className="font-bold mb-4 px-4 w-full max-w-7xl mx-auto">
           ワードで検索
         </h2>
-        <SearchForm defaultValue={searchParams.q.toString()} />
+        <SearchForm defaultValue={queryString} />
       </div>
       {posts.length > 0 ? (
         <>
@@ -129,12 +131,12 @@ const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
               currentPage={currentPage}
               totalPosts={count}
               postsPerPage={postsPerPage}
-              q={searchParams.q}
+              q={queryString}
             />
           </div>
         </>
       ) : (
-        <p>「{searchParams.q.toString()}」の検索結果はありません。</p>
+        <p>「{queryString}」の検索結果はありません。</p>
       )}
     </>
   );
