@@ -2,36 +2,11 @@ import { Suspense } from "react";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import getBookmarksById from "@/app/action/getBookmarksById";
+import getRandomUnseenBookmarks from "@/app/action/getRandomUnseenBookmarks";
 import { auth } from "@/auth";
 import PostItem from "../post/PostItem";
 import SkeletonPostItem from "../post/SkeletonPostItem";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-
-/**
- * 配列から要素を指定個数抽出する
- *
- * @param array 抽出する配列
- * @param count 抽出する要素の個数
- * @returns
- */
-function extractRandomElementsFromArray<T>(
-  array: T[],
-  count: number = array.length
-): T[] {
-  const arr = [...array];
-
-  const extractCount = Math.min(Math.max(count, 0), array.length);
-
-  for (let arr_i = 0; arr_i < extractCount; arr_i++) {
-    const swapElementIndex = Math.floor(Math.random() * array.length);
-    [arr[arr_i], arr[swapElementIndex]] = [arr[swapElementIndex], arr[arr_i]];
-  }
-
-  const extractedElements = arr.slice(0, extractCount);
-
-  return extractedElements;
-}
 
 const TopBookmarkList = async () => {
   const session = await auth();
@@ -39,14 +14,11 @@ const TopBookmarkList = async () => {
   const userId = session?.user?.id;
   if (!userId) return;
 
-  const unSeenBookmarks = (await getBookmarksById({ userId })).filter(
-    bookmark => bookmark.post.seenUsers.every(user => user.id !== userId)
-  );
-
-  const filteredUnseenBookmarks = extractRandomElementsFromArray(
-    unSeenBookmarks,
-    4
-  );
+  // 最適化されたランダム未視聴ブックマーク取得
+  const filteredUnseenBookmarks = await getRandomUnseenBookmarks({ 
+    userId,
+    limit: 4 
+  });
 
   if (!filteredUnseenBookmarks.length) return;
 
