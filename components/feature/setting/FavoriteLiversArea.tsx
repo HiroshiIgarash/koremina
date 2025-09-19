@@ -3,8 +3,11 @@ import ChannelIcon from "./ChannelIcon";
 import MostFavoriteLiverDialog from "./MostFavoriteLiverDialog";
 import { Button } from "@/components/ui/button";
 import FavoriteLiversDialog from "./FavoriteLiversDialog";
+import FavoriteLiversOnlyList from "./FavoriteLiversOnlyList";
+import FavoriteLiversLoading from "./FavoriteLiversLoading";
 import Link from "next/link";
 import getCurrentUserWithTag from "@/app/action/getCurrentUserWithTag";
+import { Suspense } from "react";
 
 const FavoriteLiversArea = async () => {
   const currentUser = await getCurrentUserWithTag();
@@ -49,29 +52,9 @@ const FavoriteLiversArea = async () => {
         <div>
           <p className="font-semibold text-xl text-center my-4">推しライバー</p>
           <div className="flex flex-col items-center justify-center max-w-96 mx-auto">
-            {currentUser.favoriteLivers.length > 0 ? (
-              <div className="grid grid-cols-[repeat(auto-fit,64px)] justify-center gap-2 w-full">
-                {currentUser.favoriteLivers
-                  .toSorted((a, b) => a.index - b.index)
-                  .map(liver => (
-                    <Link
-                      key={liver.id}
-                      href={`/page?liver=${liver.id}`}
-                      className="rounded-full hover:opacity-70 transition-opacity"
-                    >
-                      <ChannelIcon channelId={liver.channelHandle} size={64} />
-                    </Link>
-                  ))}
-              </div>
-            ) : (
-              <div className="text-center">
-                <p>
-                  あなたの推しのライバーを設定しましょう！
-                  <br />
-                  何人でもOK！
-                </p>
-              </div>
-            )}
+            <Suspense fallback={<FavoriteLiversLoading />}>
+              <FavoriteLiversOnlyList />
+            </Suspense>
             <FavoriteLiversDialog user={currentUser}>
               <Button className="mt-8">推しライバーを選択</Button>
             </FavoriteLiversDialog>
