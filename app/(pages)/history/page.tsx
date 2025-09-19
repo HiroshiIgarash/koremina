@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-09-20" className="font-bold">
+              2025/09/20
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                「皇れお」「篠宮ゆの」「城瀬いすみ」「花籠つばさ」の4名を追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-08-30" className="font-bold">
               2025/08/30
             </time>

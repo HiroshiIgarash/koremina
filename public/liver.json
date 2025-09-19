@@ -2528,5 +2528,45 @@
     "isOverseas": 0,
     "birthMonth": 3,
     "birthDate": 27
+  },
+  {
+    "name": "皇れお",
+    "aliasFirst": "すめらぎれお",
+    "aliasSecond": "",
+    "channelHandle": "@SumeragiReo",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDate": 2
+  },
+  {
+    "name": "篠宮ゆの",
+    "aliasFirst": "しのみやゆの",
+    "aliasSecond": "",
+    "channelHandle": "@ShinomiyaYuno",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDate": 9
+  },
+  {
+    "name": "城瀬いすみ",
+    "aliasFirst": "しろせいすみ",
+    "aliasSecond": "",
+    "channelHandle": "@ShiroseIsumi",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDate": 23
+  },
+  {
+    "name": "花籠つばさ",
+    "aliasFirst": "はなかごつばさ",
+    "aliasSecond": "",
+    "channelHandle": "@HanakagoTsubasa",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 5,
+    "birthDate": 28
   }
 ]
