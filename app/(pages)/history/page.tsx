@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-09-23" className="font-bold">
+              2025/09/23
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                過去に使用した画像をアバターとして再設定した際にエラーが発生する不具合を修正しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-09-20" className="font-bold">
               2025/09/20
             </time>
