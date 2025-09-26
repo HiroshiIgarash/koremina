@@ -15,7 +15,7 @@ const getCommentsByPostId = async (postId: string) => {
     });
 
     return comments;
-  } catch (error) {
+  } catch {
     return null;
   }
 };

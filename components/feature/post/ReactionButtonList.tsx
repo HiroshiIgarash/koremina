@@ -1,6 +1,4 @@
-import { User, Video } from "@prisma/client";
 import ReactionButton from "./ReactionButton";
-import { Reaction } from "@/types/type";
 import getCurrentUser from "@/app/action/getCurrentUser";
 import getReactionsByPostId from "@/app/action/getReactionsByPostId";
 

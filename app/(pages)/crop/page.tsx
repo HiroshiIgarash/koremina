@@ -32,7 +32,9 @@ const Page = () => {
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
     return () => {
-      file && URL.revokeObjectURL(file.preview);
+      if (file) {
+        URL.revokeObjectURL(file.preview);
+      }
     };
   }, [file]);
 

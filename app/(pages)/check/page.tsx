@@ -1,5 +1,4 @@
 import prisma from "@/lib/db";
-import { Video } from "@prisma/client";
 
 const Page = async () => {
   const posts = await prisma.video.findMany({

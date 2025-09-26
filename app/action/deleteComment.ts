@@ -15,7 +15,7 @@ const deleteComment = async ({ commentId, postId }: deleteCommentProps) => {
         id: commentId,
       },
     });
-  } catch (error) {
+  } catch {
     return {
       error: "Failed to delete comment",
     };

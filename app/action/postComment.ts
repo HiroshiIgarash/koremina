@@ -34,7 +34,7 @@ const postComment = async (postId: string, formData: FormData) => {
         },
       },
     });
-  } catch (error) {
+  } catch {
     return {
       error: "Failed to post comment",
     };

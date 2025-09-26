@@ -1,5 +1,4 @@
 import getBookmarksById from "@/app/action/getBookmarksById";
-import getCurrentUser from "@/app/action/getCurrentUser";
 import { notFound } from "next/navigation";
 import BookmarkList from "./BookmarkList";
 import getTotalBookmarksById from "@/app/action/getTotalBookmarksById";

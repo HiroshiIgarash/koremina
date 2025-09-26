@@ -1,5 +1,4 @@
 import { Crop } from "react-image-crop";
-import sharp from "sharp";
 
 interface AvatarPreviewProps {
   imageRef: HTMLImageElement | null;

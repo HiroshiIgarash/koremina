@@ -4,7 +4,6 @@ import SearchPagination from "@/components/feature/post/SearchPagination";
 import SkeletonPostItem from "@/components/feature/post/SkeletonPostItem";
 import prisma from "@/lib/db";
 import { redirect } from "next/navigation";
-import { comment } from "postcss";
 import { Suspense } from "react";
 
 interface ISearchParams {

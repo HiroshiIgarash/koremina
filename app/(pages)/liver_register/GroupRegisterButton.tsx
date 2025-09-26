@@ -19,7 +19,7 @@ const GroupRegisterButton = ({ listId }: RegisterButtonProps) => {
     );
 
     liverItems.forEach(liverItem => {
-      const pairs = [] as [string, any][];
+      const pairs = [] as [string, string | number | boolean | null][];
       const inputs = liverItem.querySelectorAll("input");
       if (
         !Array.from(inputs).some(input =>
@@ -29,7 +29,7 @@ const GroupRegisterButton = ({ listId }: RegisterButtonProps) => {
         return;
       inputs.forEach(input => {
         const key = input.name;
-        let value = input.value as any;
+        let value: string | number | boolean | null = input.value;
         switch (key) {
           case "index":
             value = Number(value);

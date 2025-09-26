@@ -131,8 +131,7 @@ const Award = async () => {
         target = favoriteLiverCount;
         break;
       default:
-        const unreachable: never = awardType;
-        break;
+        return awardType satisfies never;
     }
 
     if (target !== undefined) {

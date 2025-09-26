@@ -252,7 +252,7 @@ const PostEditForm = ({
                                 e.preventDefault();
                                 e.stopPropagation();
                               }}
-                              onSelect={value => {
+                              onSelect={() => {
                                 setInputValue("");
                                 setSelected(prev => [...prev, liver]);
                               }}

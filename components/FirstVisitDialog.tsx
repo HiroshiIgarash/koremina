@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
@@ -24,7 +18,9 @@ const FirstVisitDialog = () => {
     }
 
     return () => {
-      isMounted && setLocalStorage();
+      if (isMounted) {
+        setLocalStorage();
+      }
     };
   }, [isMounted]);
 

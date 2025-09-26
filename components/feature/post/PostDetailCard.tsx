@@ -5,7 +5,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { FilePenLine, Trash2 } from "lucide-react";
 import CommentArea from "../comment/CommentArea";
-import BookmarkButton from "./BookMarkButton";
 import PostDeleteDialog from "./PostDeleteDialog";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -81,8 +80,8 @@ export default async function PostDetailCard({ postId }: PostDetailCardProps) {
           <pre
             className={cn("mt-2 whitespace-pre-wrap break-all", noto.className)}
           >
-            <TextWithTimestamps 
-              text={post.detailComment} 
+            <TextWithTimestamps
+              text={post.detailComment}
               videoId={post.videoId}
             />
           </pre>
