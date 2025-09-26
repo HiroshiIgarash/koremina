@@ -37,7 +37,7 @@ const PostFilter = ({
 
   const handleChange = (value: string) => {
     if (value === filterLiversId) return;
-    const href = value === "all" ? "/page/" : `/page/?liver=${value}`;
+    const href = value === "all" ? "/page" : (`/page?liver=${value}` as const);
     startRoutingTransition(() => {
       router.push(href);
     });
@@ -49,7 +49,7 @@ const PostFilter = ({
     const randomLiverId = invalidLivers[rand]?.id;
     if (!randomLiverId) return;
     startRoutingTransition(() => {
-      router.push(`/page/?liver=${randomLiverId}`);
+      router.push(`/page?liver=${randomLiverId}`);
     });
   };
 
