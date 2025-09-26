@@ -15,7 +15,7 @@ interface ISearchParams {
   page: string;
 }
 
-const Page = async (props: { 
+const Page = async (props: {
   params: Promise<IParam>;
   searchParams?: Promise<ISearchParams>;
 }) => {
@@ -40,7 +40,7 @@ const Page = async (props: {
           </Link>
         </Button>
       </div>
-      
+
       <div className="space-y-4">
         <h1 className="text-3xl font-bold">
           {user.nickname || user.name}さんの投稿一覧
