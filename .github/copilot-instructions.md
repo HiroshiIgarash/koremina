@@ -5,14 +5,17 @@
 ## プルリクエストに関する指示
 
 ### 言語
+
 - **PRは日本語で作成してください**
 - PR のタイトル、説明、コメントは全て日本語で記載してください
 
 ### ブランチ戦略
+
 - **PRは develop ブランチに向けて作成してください**
 - メインブランチ（main）ではなく、develop ブランチをターゲットにしてください
 
 ### Issue自動クローズ機能
+
 - **関連するIssueがある場合は、PR説明の最後に自動クローズキーワードを追加してください**
 - PR説明の最後の行に `Fixes #issue番号.` を記載することで、PRマージ時に自動的にIssueがクローズされます
 - 使用可能なキーワード: `Fixes`、`Closes`、`Resolves`
@@ -20,31 +23,34 @@
 - 複数のIssueを閉じる場合: `Fixes #123, #456.`
 
 ### PRタイトルとコミットメッセージのPrefix
+
 - **PRタイトルとコミットメッセージには以下のprefixを必ず付けてください**
 - 例: `feat: 新機能の追加`、`fix: バグの修正`
 
-| Prefix | 説明 |
-|--------|------|
-| build | ビルド |
-| ci | CI |
-| chore | 雑事（カテゴライズする必要ないようなもの） |
-| docs | ドキュメント |
-| feat | 新機能 |
-| fix | バグフィックス |
-| perf | パフォーマンス |
-| refactor | リファクタリング |
-| revert | コミット取り消し（git revert） |
-| style | コードスタイル修正 |
-| test | テスト |
+| Prefix   | 説明                                       |
+| -------- | ------------------------------------------ |
+| build    | ビルド                                     |
+| ci       | CI                                         |
+| chore    | 雑事（カテゴライズする必要ないようなもの） |
+| docs     | ドキュメント                               |
+| feat     | 新機能                                     |
+| fix      | バグフィックス                             |
+| perf     | パフォーマンス                             |
+| refactor | リファクタリング                           |
+| revert   | コミット取り消し（git revert）             |
+| style    | コードスタイル修正                         |
+| test     | テスト                                     |
 
 ## コードに関する指示
 
 ### コメント
+
 - **コードのコメントは日本語で作成してください**
 - 関数、クラス、複雑なロジックには日本語でコメントを追加してください
 - TODO、FIXME、NOTE などのコメントも日本語で記載してください
 
 ### 例
+
 ```typescript
 /**
  * ユーザーの投稿を取得する関数
@@ -56,9 +62,9 @@ async function getUserPosts(userId: string) {
   const posts = await prisma.post.findMany({
     where: { userId },
     // 作成日順で並び替え
-    orderBy: { createdAt: 'desc' }
+    orderBy: { createdAt: "desc" },
   });
-  
+
   return posts;
 }
 ```

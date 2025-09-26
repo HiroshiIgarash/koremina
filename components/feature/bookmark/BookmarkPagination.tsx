@@ -27,7 +27,7 @@ const BookmarkPagination = ({
   const showPageEnd = currentPage + (showPages - 1) / 2; // 表示するページネーションの右端（MAXを超えた場合もカウント）
 
   //表示するページネーションを格納した配列の生成
-  let showPageArr: number[] = [];
+  const showPageArr: number[] = [];
   for (let page = showPageStart; page <= showPageEnd; page++) {
     if (page < 1 || page > pageEnd) continue;
     showPageArr.push(page);

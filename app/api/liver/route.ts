@@ -1,12 +1,12 @@
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
   try {
     const liver = await prisma.liver.findMany();
 
     return NextResponse.json(liver);
-  } catch (error) {
+  } catch {
     return new Response("Internal Server Error", { status: 500 });
   }
 };

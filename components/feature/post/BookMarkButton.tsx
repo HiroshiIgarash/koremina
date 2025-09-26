@@ -22,7 +22,7 @@ const BookmarkButton = ({
   seenUsersId,
 }: BookmarkButtonProps) => {
   const { resolvedTheme } = useTheme();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [optimisticBookmarkedUsersId, switchOptimisticBookmarkedUsersId] =
     useOptimistic(bookmarkedUsersId, currentBookmarkedUsersId => {
       if (currentBookmarkedUsersId.includes(userId)) {
@@ -83,7 +83,7 @@ const BookmarkButton = ({
         });
         break;
       default:
-        const UNREACHABLE: never = bookMarkStatus;
+        return bookMarkStatus satisfies never;
     }
   };
 
@@ -109,7 +109,7 @@ const BookmarkButton = ({
         <BookmarkIcon onClick={handleClick} stroke="currentColor" fill="none" />
       );
     default:
-      const UNREACHABLE: never = bookMarkStatus;
+      return bookMarkStatus satisfies never;
   }
 };
 

@@ -13,7 +13,7 @@ interface RecentPostItemProps {
   videoId: string;
   comment: string;
   livers: Liver[];
-  reactionsCount: { [k in Reaction]: Number } & { comments: Number };
+  reactionsCount: { [k in Reaction]: number } & { comments: number };
   bookmarkCount: number;
 }
 

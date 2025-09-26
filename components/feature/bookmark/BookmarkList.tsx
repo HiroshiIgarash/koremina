@@ -1,7 +1,5 @@
-import { Bookmark, Video } from "@prisma/client";
 import { Suspense } from "react";
 import PostItem from "../post/PostItem";
-import PostPagination from "../post/PostPagination";
 import SkeletonPostItem from "../post/SkeletonPostItem";
 import getBookmarksById from "@/app/action/getBookmarksById";
 

@@ -38,12 +38,14 @@ npm run prisma:studio:dev   # Open Prisma Studio with local DB
 ## Code Architecture
 
 ### Next.js App Router Structure
+
 - `app/(pages)/` - Main application pages with grouped routing
 - `app/api/` - API endpoints for database operations and auth
 - `components/` - Organized as `ui/`, `shared/`, and `feature/`
 - `prisma/schema.prisma` - Database models and relationships
 
 ### Key Models
+
 - **User**: Authentication + profile data, favorite livers
 - **Video**: Posts with reactions (good, bad, love, funny, cry, angel)
 - **Liver**: VTuber/content creator profiles
@@ -51,6 +53,7 @@ npm run prisma:studio:dev   # Open Prisma Studio with local DB
 - **Bookmark**: User bookmarks for videos
 
 ### Authentication Flow
+
 - NextAuth.js v5 with Google OAuth and Prisma adapter
 - Session management via database sessions
 - Protected routes handled in `middleware.ts`
@@ -58,17 +61,20 @@ npm run prisma:studio:dev   # Open Prisma Studio with local DB
 ## Code Conventions
 
 ### Language Standards
+
 - **Comments & Documentation**: Japanese language
 - **Commit Messages**: Japanese with conventional prefixes (feat:, fix:, etc.)
 - **Variable/Function Names**: English camelCase
 - **User Messages**: Japanese
 
 ### Formatting (Prettier)
+
 - Double quotes, semicolons required
 - 2-space indentation, 80-char line width
 - ES5 trailing commas, LF line endings
 
 ### TypeScript
+
 - Strict mode enabled, ES2017 target
 - Path alias: `@/*` maps to project root
 - Type definitions in `types/` directory
@@ -76,11 +82,13 @@ npm run prisma:studio:dev   # Open Prisma Studio with local DB
 ## Database Development
 
 ### Schema Changes
+
 1. Edit `prisma/schema.prisma`
 2. Run `npx prisma db push` (development)
 3. Run `npx prisma generate` to update client
 
 ### Environment Variables
+
 - `POSTGRES_PRISMA_URL` - Connection pooling (production)
 - `POSTGRES_URL_NON_POOLING` - Direct connection (migrations)
 

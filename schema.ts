@@ -10,9 +10,7 @@ export const nicknameSchema = z.object({
 export type NicknameSchema = z.infer<typeof nicknameSchema>;
 
 export const bioSchema = z.object({
-  newBio: z
-    .string()
-    .max(100, { message: "100文字を超えています。" }),
+  newBio: z.string().max(100, { message: "100文字を超えています。" }),
 });
 
 export type BioSchema = z.infer<typeof bioSchema>;

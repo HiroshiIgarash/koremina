@@ -12,7 +12,7 @@ export const TIMESTAMP_REGEX = /\b(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\b/g;
  */
 export function timestampToSeconds(timestampStr: string): number {
   const match = timestampStr.match(/^(?:(\d{1,2}):)?(\d{1,2}):(\d{2})$/);
-  
+
   if (!match) {
     return -1;
   }
@@ -48,7 +48,7 @@ export function extractTimestamps(text: string) {
   while ((match = regex.exec(text)) !== null) {
     const timestamp = match[0];
     const seconds = timestampToSeconds(timestamp);
-    
+
     // 無効なタイムスタンプ（seconds = -1）は除外
     if (seconds >= 0) {
       timestamps.push({

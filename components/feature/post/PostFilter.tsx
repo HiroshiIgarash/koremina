@@ -16,7 +16,6 @@ import {
 import { Liver } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import ChannelIcon from "../setting/ChannelIcon";
 
 interface PostFilterProps {
   filterLiversId: string | undefined;

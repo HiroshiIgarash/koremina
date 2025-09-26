@@ -14,7 +14,9 @@ const AvatarDropZone = ({ file, setFile, disabled }: AvatarDropZoneProps) => {
   const [isError, setIsError] = useState(false);
   useEffect(() => {
     return () => {
-      file && URL.revokeObjectURL(file.preview);
+      if (file) {
+        URL.revokeObjectURL(file.preview);
+      }
     };
   }, [file]);
 

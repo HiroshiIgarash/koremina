@@ -32,7 +32,7 @@ interface PostItemProps {
   livers: { name: string }[];
   bookmark: Bookmark[];
   seenUsersId: string[];
-  reactionsCount: { [k in Reaction]: Number } & { comments: Number };
+  reactionsCount: { [k in Reaction]: number } & { comments: number };
 }
 
 const PostItem = async ({

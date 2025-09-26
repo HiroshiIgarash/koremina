@@ -28,7 +28,6 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import axios from "axios";
 import updateMostFavoriteLiver from "@/app/action/updateMostFavoriteLiver";
 import { Loader2 } from "lucide-react";
 import getLivers from "@/app/action/getLivers";
@@ -42,10 +41,7 @@ const FormSchema = z.object({
   liverId: z.string().optional(),
 });
 
-const MostFavoriteLiverForm = ({
-  user,
-  setOpen,
-}: MostFavoriteLiverFormProps) => {
+const MostFavoriteLiverForm = ({ setOpen }: MostFavoriteLiverFormProps) => {
   const [isPending, startTransition] = useTransition();
   const [livers, setLivers] = useState<Liver[]>();
 
