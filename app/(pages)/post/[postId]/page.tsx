@@ -12,13 +12,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getCachedPostById } from "./_utils/functions";
 import SkeletonPostDetailCard from "@/components/feature/post/SkeletonPostDetailCard";
 
-interface IParams {
-  postId: string;
-}
-
-export async function generateMetadata(props: { params: Promise<IParams> }) {
-  const params = await props.params;
-  const { postId } = params;
+export async function generateMetadata(props: PageProps<"/post/[postId]">) {
+  const { postId } = await props.params;
   const post = await getCachedPostById(postId);
 
   if (!post) return;
@@ -28,9 +23,8 @@ export async function generateMetadata(props: { params: Promise<IParams> }) {
   };
 }
 
-const Page = async (props: { params: Promise<IParams> }) => {
-  const params = await props.params;
-  const { postId } = params;
+const Page = async (props: PageProps<"/post/[postId]">) => {
+  const { postId } = await props.params;
 
   const session = await auth();
 

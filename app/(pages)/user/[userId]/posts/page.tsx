@@ -7,21 +7,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-interface IParam {
-  userId: string;
-}
-
-interface ISearchParams {
-  page: string;
-}
-
-const Page = async (props: {
-  params: Promise<IParam>;
-  searchParams?: Promise<ISearchParams>;
-}) => {
-  const params = await props.params;
+const Page = async (props: PageProps<"/user/[userId]/posts">) => {
+  const { userId } = await props.params;
   const searchParams = await props.searchParams;
-  const { userId } = params;
+  if (Array.isArray(searchParams?.page)) notFound();
 
   const user = await getUserById(userId);
 
