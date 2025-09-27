@@ -1,2 +1,22 @@
 [tools]
 node = "22.20.0"
+
+[tasks.vc]
+run = '''
+  source .env.local
+  
+  LATEST_DEPLOY_INFO=$(vc ls | head -n1)
+  LATEST_DEPLOY=$(echo "$LATEST_DEPLOY_INFO" | awk '{print $2}')
+  
+  echo "最新のデプロイ:"
+  echo "$LATEST_DEPLOY_INFO"
+  echo ""
+  echo "このデプロイにaliasを貼りますか？ [y/N]"
+  
+  read -r RESPONSE
+  if [[ "$RESPONSE" =~ ^[Yy]$ ]]; then
+    vc alias $1 $VERCEL_PREVIEW_URL
+  else
+    echo "キャンセルしました"
+  fi
+'''
