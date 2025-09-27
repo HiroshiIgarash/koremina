@@ -3,20 +3,18 @@ import SearchForm from "@/components/feature/post/SearchForm";
 import SearchPagination from "@/components/feature/post/SearchPagination";
 import SkeletonPostItem from "@/components/feature/post/SkeletonPostItem";
 import prisma from "@/lib/db";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
-interface ISearchParams {
-  q: string;
-  page: string;
-}
-
-const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+const Page = async (props: PageProps<"/search">) => {
   const searchParams = await props.searchParams;
+  if (Array.isArray(searchParams?.page)) notFound();
+  if (Array.isArray(searchParams?.q)) notFound();
+
   const currentPage = parseInt(searchParams?.page || "1");
   const postsPerPage = 16;
 
-  if (!searchParams) {
+  if (!searchParams || !searchParams.q) {
     redirect("/");
   }
 

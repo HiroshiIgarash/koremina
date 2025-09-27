@@ -1,13 +1,12 @@
 import BookmarkContainer from "@/components/feature/bookmark/BookmarkContainer";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-interface ISearchParams {
-  page: string;
-}
-
-const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+const Page = async (props: PageProps<"/bookmark">) => {
   const searchParams = await props.searchParams;
+  if (Array.isArray(searchParams?.page)) notFound();
+
   const currentPage = parseInt(searchParams?.page || "1");
   const postsPerPage = 16;
 

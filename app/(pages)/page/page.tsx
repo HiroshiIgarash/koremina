@@ -2,15 +2,14 @@ import PostFilter from "@/components/feature/post/PostFilter";
 import PostFilterContainer from "@/components/feature/post/PostFilterContainer";
 import PostList from "@/components/feature/post/PostList";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-interface ISearchParams {
-  liver: string;
-  page: string;
-}
-
-const Page = async (props: { searchParams?: Promise<ISearchParams> }) => {
+const Page = async (props: PageProps<"/page">) => {
   const searchParams = await props.searchParams;
+  if (Array.isArray(searchParams?.liver)) notFound();
+  if (Array.isArray(searchParams?.page)) notFound();
+
   const filterLiver = searchParams?.liver;
 
   const currentPage = parseInt(searchParams?.page || "1");
