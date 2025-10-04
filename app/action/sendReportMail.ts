@@ -18,7 +18,7 @@ const sendReportMail = async (postId: string) => {
     from: user,
     to: user,
     subject: "【コレミナ】投稿が通報されました。",
-    text: `https://koremina.vercel.app/post/${postId} の投稿が通報されました。`,
+    text: `${process.env.NEXT_PUBLIC_BASE_URL}/post/${postId} の投稿が通報されました。`,
   });
 };
 

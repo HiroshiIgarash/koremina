@@ -34,6 +34,9 @@ export const sendNewPostEmails = async (postId: string) => {
         notifyNewPostByEmail: true, // メール通知ON
         notificationEmail: { not: null }, // 通知用メールアドレスあり
       },
+      select: {
+        notificationEmail: true,
+      },
     });
 
     if (targetUsers.length === 0) {
@@ -45,7 +48,12 @@ export const sendNewPostEmails = async (postId: string) => {
 
     // 各ユーザーにメール送信（リトライ付き）
     const results = await Promise.allSettled(
-      targetUsers.map(user => sendEmailWithRetry(user.notificationEmail!, post))
+      targetUsers
+        .filter(
+          (user): user is { notificationEmail: string } =>
+            user.notificationEmail !== null
+        )
+        .map(user => sendEmailWithRetry(user.notificationEmail, post))
     );
 
     // 結果を集計
@@ -83,7 +91,7 @@ const sendEmailWithRetry = async (
 
   try {
     await transporter.sendMail({
-      from: `"コレミナ" <${process.env.GMAIL_USER}>`,
+      from: `"コレミナ" <${process.env.MAILER_USER}>`,
       to: email,
       subject: "【コレミナ】新しい投稿があります",
       html: `
@@ -103,13 +111,13 @@ const sendEmailWithRetry = async (
                   ? `<p style="color: #888; font-size: 14px; line-height: 1.6;">${post.detailComment}</p>`
                   : ""
               }
-              <a href="${process.env.NEXT_PUBLIC_BASE_URL || "https://koremina.vercel.app"}/post/${post.id}"
+              <a href="${process.env.NEXT_PUBLIC_BASE_URL}/post/${post.id}"
                  style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #0ea5e9; color: white; text-decoration: none; border-radius: 6px;">
                 投稿を見る
               </a>
               <p style="color: #999; font-size: 12px; margin-top: 30px;">
                 このメールは コレミナ からの新規投稿通知です。<br>
-                通知設定は<a href="${process.env.NEXT_PUBLIC_BASE_URL || "https://koremina.vercel.app"}/setting">こちら</a>から変更できます。
+                通知設定は<a href="${process.env.NEXT_PUBLIC_BASE_URL}/setting">こちら</a>から変更できます。
               </p>
             </div>
           </body>
