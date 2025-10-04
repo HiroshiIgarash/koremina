@@ -78,6 +78,12 @@ export const sendNewPostEmails = async (postId: string) => {
   }
 };
 
+// メール送信リトライ設定
+const EMAIL_RETRY_CONFIG = {
+  MAX_RETRIES: 3,
+  BACKOFF_MS: [0, 2000, 5000], // 即座、2秒後、5秒後
+} as const;
+
 /**
  * メール送信（3回までリトライ）
  */
@@ -86,8 +92,6 @@ const sendEmailWithRetry = async (
   post: Video,
   retryCount = 0
 ): Promise<void> => {
-  const MAX_RETRIES = 3;
-  const BACKOFF_MS = [0, 2000, 5000]; // 即座、2秒後、5秒後
 
   try {
     await transporter.sendMail({
@@ -127,15 +131,16 @@ const sendEmailWithRetry = async (
 
     console.log(`メール送信成功: ${email}`);
   } catch (error) {
-    console.error(`メール送信失敗 (${retryCount + 1}回目): ${email}`, error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.error(`メール送信失敗 (${retryCount + 1}回目): ${email}`, errorMessage);
 
-    if (retryCount < MAX_RETRIES) {
+    if (retryCount < EMAIL_RETRY_CONFIG.MAX_RETRIES) {
       // リトライ
-      await new Promise(resolve => setTimeout(resolve, BACKOFF_MS[retryCount]));
+      await new Promise(resolve => setTimeout(resolve, EMAIL_RETRY_CONFIG.BACKOFF_MS[retryCount]));
       return sendEmailWithRetry(email, post, retryCount + 1);
     } else {
       // 最終失敗
-      throw error;
+      throw new Error(`メール送信最終失敗: ${email} - ${errorMessage}`);
     }
   }
 };
