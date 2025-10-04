@@ -69,16 +69,23 @@ export default async function Home() {
       <div className="w-full px-4 mb-8 md:mb-16 space-y-2 md:space-y-0 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-4">
         <div className="items-center w-full p-4 md:py-8 bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900 rounded-lg text-center gap-2 border-2 border-blue-500 shadow-lg">
           <p className="text-destructive font-bold text-xl mb-2">🎉 新機能</p>
-          <p className="text-lg font-bold mb-1">
-            メール通知機能を追加！
-          </p>
+          <p className="text-lg font-bold mb-1">メール通知機能を追加！</p>
           <p className="text-sm">
             新着投稿をメールで受け取れるようになりました
             <br />
-            <Link href="/setting" className="text-blue-600 dark:text-blue-300 underline font-bold">
-              設定ページ
-            </Link>
-            から登録できます
+            {session ? (
+              <>
+                <Link
+                  href="/setting"
+                  className="text-blue-600 dark:text-blue-300 underline font-bold"
+                >
+                  設定ページ
+                </Link>
+                から登録できます
+              </>
+            ) : (
+              <>ログイン後、設定ページから登録できます</>
+            )}
           </p>
         </div>
         <div className="flex flex-col items-center justify-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
