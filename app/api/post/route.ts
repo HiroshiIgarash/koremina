@@ -36,7 +36,7 @@ export const POST = async (req: Request) => {
   revalidateTag("get-post");
 
   // 新規投稿のメール通知を非同期で送信（awaitしない）
-  sendNewPostEmails(newPost.id).catch((err) => {
+  sendNewPostEmails(newPost.id).catch(err => {
     console.error("メール送信エラー:", err);
   });
 

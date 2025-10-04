@@ -92,7 +92,6 @@ const sendEmailWithRetry = async (
   post: Video,
   retryCount = 0
 ): Promise<void> => {
-
   try {
     await transporter.sendMail({
       from: `"コレミナ" <${process.env.MAILER_USER}>`,
@@ -131,12 +130,18 @@ const sendEmailWithRetry = async (
 
     console.log(`メール送信成功: ${email}`);
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    console.error(`メール送信失敗 (${retryCount + 1}回目): ${email}`, errorMessage);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.error(
+      `メール送信失敗 (${retryCount + 1}回目): ${email}`,
+      errorMessage
+    );
 
     if (retryCount < EMAIL_RETRY_CONFIG.MAX_RETRIES) {
       // リトライ
-      await new Promise(resolve => setTimeout(resolve, EMAIL_RETRY_CONFIG.BACKOFF_MS[retryCount]));
+      await new Promise(resolve =>
+        setTimeout(resolve, EMAIL_RETRY_CONFIG.BACKOFF_MS[retryCount])
+      );
       return sendEmailWithRetry(email, post, retryCount + 1);
     } else {
       // 最終失敗
