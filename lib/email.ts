@@ -1,8 +1,15 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import prisma from "@/lib/db";
 import type { Video } from "@prisma/client";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Gmail SMTP設定
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.MAILER_USER, // Gmailアドレス
+    pass: process.env.MAILER_PASS, // Googleアプリパスワード（16文字）
+  },
+});
 
 /**
  * 新規投稿時に全ユーザー（投稿者以外 & メール通知ON）にメール送信
@@ -75,8 +82,8 @@ const sendEmailWithRetry = async (
   const BACKOFF_MS = [0, 2000, 5000]; // 即座、2秒後、5秒後
 
   try {
-    await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
+    await transporter.sendMail({
+      from: `"コレミナ" <${process.env.GMAIL_USER}>`,
       to: email,
       subject: "【コレミナ】新しい投稿があります",
       html: `
@@ -102,7 +109,7 @@ const sendEmailWithRetry = async (
               </a>
               <p style="color: #999; font-size: 12px; margin-top: 30px;">
                 このメールは コレミナ からの新規投稿通知です。<br>
-                通知設定は<a href="${process.env.NEXT_PUBLIC_BASE_URL || "https://koremina.vercel.app"}/settings">こちら</a>から変更できます。
+                通知設定は<a href="${process.env.NEXT_PUBLIC_BASE_URL || "https://koremina.vercel.app"}/setting">こちら</a>から変更できます。
               </p>
             </div>
           </body>

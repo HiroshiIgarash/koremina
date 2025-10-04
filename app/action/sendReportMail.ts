@@ -3,16 +3,15 @@
 import nodemailer from "nodemailer";
 
 const sendReportMail = async (postId: string) => {
-  const host = process.env.MAILER_HOST;
   const user = process.env.MAILER_USER;
-  const pass = process.env.MAILER_PASS;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
-    host,
-    port: 465,
     secure: true,
-    auth: { user, pass },
+    auth: {
+      user: process.env.MAILER_USER, // Gmailアドレス
+      pass: process.env.MAILER_PASS, // Googleアプリパスワード（16文字）
+    },
   });
 
   await transporter.sendMail({
