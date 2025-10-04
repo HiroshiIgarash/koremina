@@ -192,9 +192,6 @@ importers:
       jest-environment-jsdom:
         specifier: ^30.1.2
         version: 30.2.0
-      npm-check-updates:
-        specifier: ^18.3.0
-        version: 18.3.1
       only-allow:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3654,11 +3651,6 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
-
-  npm-check-updates@18.3.1:
-    resolution: {integrity: sha512-5HwKPq7ybOOA1xB4FZg/1ToZZ5/i93U8m3co1mb3GYZAZPDkcxEFukQTTp/Abym+ZY6ShfrHl45Y0rCcwsNnQA==}
-    engines: {node: ^18.18.0 || >=20.0.0, npm: '>=8.12.1'}
-    hasBin: true
 
   npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
@@ -8728,8 +8720,6 @@ snapshots:
   nodemailer@7.0.6: {}
 
   normalize-path@3.0.0: {}
-
-  npm-check-updates@18.3.1: {}
 
   npm-run-path@4.0.1:
     dependencies:
