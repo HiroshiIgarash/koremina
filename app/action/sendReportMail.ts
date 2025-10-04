@@ -3,23 +3,22 @@
 import nodemailer from "nodemailer";
 
 const sendReportMail = async (postId: string) => {
-  const host = process.env.MAILER_HOST;
   const user = process.env.MAILER_USER;
-  const pass = process.env.MAILER_PASS;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
-    host,
-    port: 465,
     secure: true,
-    auth: { user, pass },
+    auth: {
+      user: process.env.MAILER_USER, // Gmailアドレス
+      pass: process.env.MAILER_PASS, // Googleアプリパスワード（16文字）
+    },
   });
 
   await transporter.sendMail({
     from: user,
     to: user,
     subject: "【コレミナ】投稿が通報されました。",
-    text: `https://koremina.vercel.app/post/${postId} の投稿が通報されました。`,
+    text: `${process.env.NEXT_PUBLIC_BASE_URL}/post/${postId} の投稿が通報されました。`,
   });
 };
 

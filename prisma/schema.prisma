@@ -43,6 +43,10 @@ model User {
   angelVideo   Video[]        @relation("angel")
   Bookmark     Bookmark[]
   Notification Notification[]
+
+  // 新規投稿のメール通知設定
+  notifyNewPostByEmail Boolean @default(true)
+  notificationEmail    String? // 通知専用メールアドレス
 }
 
 model Bookmark {

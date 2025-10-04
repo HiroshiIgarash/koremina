@@ -11,6 +11,20 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2025-10-04" className="font-bold">
+              2025/10/04
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                メール通知機能を追加しました。
+                <br />
+                新規投稿があった際に、メールで通知を受け取れるようになりました。
+                <br />
+                設定ページから通知用のメールアドレスを登録し、通知のON/OFFを切り替えることができます。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2025-09-23" className="font-bold">
               2025/09/23
             </time>

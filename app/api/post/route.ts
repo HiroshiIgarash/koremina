@@ -2,6 +2,7 @@ import getCurrentUser from "@/app/action/getCurrentUser";
 import prisma from "@/lib/db";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
+import { sendNewPostEmails } from "@/lib/email";
 
 export const POST = async (req: Request) => {
   const currentUser = await getCurrentUser();
@@ -33,6 +34,11 @@ export const POST = async (req: Request) => {
   });
 
   revalidateTag("get-post");
+
+  // 新規投稿のメール通知を非同期で送信（awaitしない）
+  sendNewPostEmails(newPost.id).catch((err) => {
+    console.error("メール送信エラー:", err);
+  });
 
   return NextResponse.json(newPost);
 };
