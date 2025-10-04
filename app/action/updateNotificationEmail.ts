@@ -9,7 +9,7 @@ import { z } from "zod";
 const emailSchema = z
   .string()
   .refine(
-    (val) => val === "" || z.string().email().safeParse(val).success,
+    val => val === "" || z.string().email().safeParse(val).success,
     "有効なメールアドレスを入力してください"
   );
 
