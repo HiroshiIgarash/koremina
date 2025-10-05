@@ -85,6 +85,30 @@ pnpm prisma:studio:dev       # Open Prisma Studio with local DB
 - Path alias: `@/*` maps to project root
 - Type definitions in `types/` directory
 
+## Git Workflow
+
+### Pull Requests
+
+- Base branch: `develop` (default for all PRs)
+- Branch naming: Use conventional prefixes (e.g., `feat/`, `fix/`, `chore/`)
+- Commit messages: Japanese with conventional prefixes
+
+### Automated Code Review
+
+- PRs trigger Claude Code Review automatically (see `.github/workflows/claude-code-review.yml`)
+- To skip automated review, add `[skip-review]` or `[WIP]` to PR title
+- Example: `[skip-review] chore: Update dependencies`
+
+### Creating PRs via CLI
+
+```bash
+# Skip automated review
+gh pr create --base develop --title "[skip-review] Your PR title" --body "Description"
+
+# Normal PR with review
+gh pr create --base develop --title "Your PR title" --body "Description"
+```
+
 ## Database Development
 
 ### Schema Changes
