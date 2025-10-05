@@ -8,31 +8,34 @@ This is a Japanese VTuber community platform called "koremina" where users can s
 
 ## Tech Stack
 
-- **Frontend**: Next.js 15.5.2 + TypeScript + React 19
-- **UI**: Tailwind CSS + shadcn/ui components + Framer Motion
-- **Authentication**: NextAuth.js v5 beta + Google OAuth
-- **Database**: PostgreSQL (Neon) + Prisma ORM
+- **Frontend**: Next.js 15.5.4 + TypeScript + React 19
+- **UI**: Tailwind CSS 4.1.13 + shadcn/ui components + Framer Motion
+- **Authentication**: NextAuth.js v5 beta.16 + Google OAuth
+- **Database**: PostgreSQL (Neon) + Prisma ORM 6.16.2
 - **Storage**: Vercel Blob for images
+- **Email**: Nodemailer for notifications
+- **Package Manager**: pnpm 10.18.0 (enforced via preinstall hook)
 - **Deployment**: Vercel
 
 ## Development Commands
 
 ```bash
 # Development
-npm run dev                    # Start dev server (localhost:3000)
-npm run dev:host              # Start dev server on local network
-npm run build                 # Build for production (includes Prisma generate)
+pnpm dev                     # Start dev server (localhost:3000)
+pnpm dev:host                # Start dev server on local network (192.168.11.31)
+pnpm dev:dbprod              # Dev with production database
+pnpm build                   # Build for production (includes Prisma SQL generation)
 
 # Code Quality (run these after making changes)
-npm run lint                  # ESLint check
-npm run format               # Format with Prettier
-npm run format:check         # Check formatting
-npm test                     # Run Jest tests
+pnpm lint                    # ESLint check
+pnpm format                  # Format with Prettier
+pnpm format:check            # Check formatting
+pnpm test                    # Run Jest tests
 
 # Database
 npx prisma generate          # Generate Prisma client
-npx prisma db push          # Push schema changes
-npm run prisma:studio:dev   # Open Prisma Studio with local DB
+npx prisma db push           # Push schema changes
+pnpm prisma:studio:dev       # Open Prisma Studio with local DB
 ```
 
 ## Code Architecture
@@ -46,11 +49,14 @@ npm run prisma:studio:dev   # Open Prisma Studio with local DB
 
 ### Key Models
 
-- **User**: Authentication + profile data, favorite livers
+- **User**: Authentication + profile data, favorite livers, email notification settings
 - **Video**: Posts with reactions (good, bad, love, funny, cry, angel)
-- **Liver**: VTuber/content creator profiles
+- **Liver**: VTuber/content creator profiles with retirement status and alias support
 - **Comment**: Video comments with author relations
 - **Bookmark**: User bookmarks for videos
+- **Notification**: User notifications with read status tracking
+- **Account/Session**: NextAuth.js authentication models
+- **VerificationToken**: Email verification tokens
 
 ### Authentication Flow
 
@@ -104,3 +110,27 @@ npm run prisma:studio:dev   # Open Prisma Studio with local DB
 - Image uploads via Vercel Blob storage
 - Uses Node.js 22.16.0 (volta managed)
 - Production builds include Prisma SQL generation
+- Email notifications via Nodemailer
+- SEO: next-sitemap for sitemap generation (outputs to public/)
+
+## Features
+
+### User Features
+- Google OAuth authentication
+- Profile customization (nickname, bio, profile image)
+- Favorite liver selection (most favorite + multiple favorites)
+- Email notification settings for new posts
+- Bookmark functionality
+
+### Video Features
+- YouTube video sharing
+- Six reaction types: good, bad, love, funny, cry, angel
+- Comment system
+- Video tracking (seen status)
+- Rich post details
+
+### Notification System
+- In-app notifications
+- Email notifications (configurable per user)
+- Separate notification email support
+- Read/unread status tracking
