@@ -27,12 +27,13 @@ export const sendNewPostEmails = async (postId: string) => {
       return;
     }
 
-    // 通知対象ユーザーを取得（投稿者以外 & メール通知ON & 通知用メールアドレスあり）
+    // 通知対象ユーザーを取得（投稿者以外 & メール通知ON & 通知用メールアドレスあり & 検証済み）
     const targetUsers = await prisma.user.findMany({
       where: {
         id: { not: post.postedUserId }, // 投稿者以外
         notifyNewPostByEmail: true, // メール通知ON
         notificationEmail: { not: null }, // 通知用メールアドレスあり
+        notificationEmailVerified: true, // 検証済み
       },
       select: {
         notificationEmail: true,
@@ -49,11 +50,8 @@ export const sendNewPostEmails = async (postId: string) => {
     // 各ユーザーにメール送信（リトライ付き）
     const results = await Promise.allSettled(
       targetUsers
-        .filter(
-          (user): user is { notificationEmail: string } =>
-            user.notificationEmail !== null
-        )
-        .map(user => sendEmailWithRetry(user.notificationEmail, post))
+        .filter(user => user.notificationEmail !== null)
+        .map(user => sendEmailWithRetry(user.notificationEmail!, post))
     );
 
     // 結果を集計
@@ -147,5 +145,62 @@ const sendEmailWithRetry = async (
       // 最終失敗
       throw new Error(`メール送信最終失敗: ${email} - ${errorMessage}`);
     }
+  }
+};
+
+/**
+ * メールアドレス確認用のメールを送信
+ *
+ * @param email 送信先メールアドレス
+ * @param confirmUrl 確認用URL
+ */
+export const sendVerificationEmail = async (
+  email: string,
+  confirmUrl: string
+) => {
+  try {
+    await transporter.sendMail({
+      from: `"コレミナ" <${process.env.MAILER_USER}>`,
+      to: email,
+      subject: "【コレミナ】メールアドレスの確認",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+          </head>
+          <body style="font-family: sans-serif; padding: 20px; background-color: #f5f5f5;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 8px;">
+              <h2 style="color: #333; margin-top: 0;">メールアドレスの確認</h2>
+              <p style="color: #666; font-size: 16px; line-height: 1.6;">
+                コレミナの通知用メールアドレスとして登録リクエストがありました。
+              </p>
+              <p style="color: #666; font-size: 16px; line-height: 1.6;">
+                以下のボタンをクリックして、メールアドレスの確認を完了してください。
+              </p>
+              <a href="${confirmUrl}"
+                 style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #0ea5e9; color: white; text-decoration: none; border-radius: 6px;">
+                メールアドレスを確認する
+              </a>
+              <p style="color: #999; font-size: 14px; margin-top: 30px;">
+                ボタンがクリックできない場合は、以下のURLをコピーしてブラウザに貼り付けてください：
+              </p>
+              <p style="color: #666; font-size: 12px; word-break: break-all;">
+                ${confirmUrl}
+              </p>
+              <p style="color: #999; font-size: 12px; margin-top: 30px;">
+                このリンクは48時間有効です。<br>
+                このメールに心当たりがない場合は、無視してください。
+              </p>
+            </div>
+          </body>
+        </html>
+      `,
+    });
+
+    console.log(`確認メール送信成功: ${email}`);
+  } catch (error) {
+    console.error(`確認メール送信失敗: ${email}`, error);
+    throw error;
   }
 };

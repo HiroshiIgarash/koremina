@@ -47,6 +47,13 @@ model User {
   // 新規投稿のメール通知設定
   notifyNewPostByEmail Boolean @default(true)
   notificationEmail    String? // 通知専用メールアドレス
+
+  // ダブルオプトイン検証フィールド
+  notificationEmailVerified       Boolean   @default(false) // 検証済みフラグ
+  notificationEmailTokenHash      String? // HMAC-SHA256 ハッシュ化されたトークン
+  notificationEmailTokenExpires   DateTime? // トークン有効期限
+  notificationEmailSendAttempts   Int       @default(0) // レート制限用カウンター
+  notificationEmailLastSentAt     DateTime? // 最終送信日時
 }
 
 model Bookmark {

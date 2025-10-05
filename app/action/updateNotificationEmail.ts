@@ -1,9 +1,9 @@
 "use server";
 
-import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";
+import { subscribeNotificationEmail } from "@/lib/notifications";
 
 // メールアドレスのバリデーションスキーマ（空文字列またはメールアドレス）
 const emailSchema = z
@@ -14,17 +14,18 @@ const emailSchema = z
   );
 
 /**
- * 通知用メールアドレスを更新
+ * 通知用メールアドレスを更新（ダブルオプトイン対応）
  */
 const updateNotificationEmail = async (email: string) => {
   try {
     const session = await auth();
 
     const currentUserId = session?.user?.id;
+    const sessionEmail = session?.user?.email;
 
     if (!currentUserId) {
       return {
-        error: "Unauthorized",
+        error: "認証が必要です",
       };
     }
 
@@ -33,28 +34,33 @@ const updateNotificationEmail = async (email: string) => {
     // メールアドレスのバリデーション
     emailSchema.parse(trimmedEmail);
 
-    // 空文字列の場合はnullに変換
-    const emailToSave = trimmedEmail === "" ? null : trimmedEmail;
+    // サービス層を呼び出し
+    const result = await subscribeNotificationEmail(
+      currentUserId,
+      trimmedEmail,
+      sessionEmail
+    );
 
-    await prisma.user.update({
-      where: {
-        id: currentUserId,
-      },
-      data: {
-        notificationEmail: emailToSave,
-      },
-    });
+    if (!result.success) {
+      return { error: result.error };
+    }
 
     revalidateTag("get-current-user");
 
-    return { success: true };
+    return {
+      success: true,
+      message: result.message,
+      requiresVerification: result.requiresVerification,
+    };
   } catch (error) {
-    console.log(error);
+    console.error("[updateNotificationEmail] エラー:", error);
+
     if (error instanceof z.ZodError) {
       return { error: "有効なメールアドレスを入力してください" };
     }
+
     return {
-      error: "Failed to update notification email",
+      error: "メールアドレスの更新に失敗しました",
     };
   }
 };
