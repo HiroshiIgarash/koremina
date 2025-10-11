@@ -163,7 +163,7 @@ importers:
         specifier: ^30.0.0
         version: 30.0.0
       '@types/node':
-        specifier: ^22
+        specifier: ^22.18.8
         version: 22.18.8
       '@types/nodemailer':
         specifier: ^7.0.0

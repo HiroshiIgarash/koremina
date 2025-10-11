@@ -69,7 +69,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/blueimp-load-image": "^5.16.6",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22",
+    "@types/node": "^22.18.8",
     "@types/nodemailer": "^7.0.0",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.1",
