@@ -1,4 +1,5 @@
 "use server";
+import { google } from "googleapis";
 interface getChannelIconProps {
   channelId: string;
   quality?: "default" | "medium" | "high";
@@ -8,56 +9,40 @@ const getChannelIcon = async ({
   channelId,
   quality = "default",
 }: getChannelIconProps) => {
-  const searchParams = new URLSearchParams();
-
-  searchParams.set("part", "snippet");
-  searchParams.set("key", process.env.YT_API_KEY!);
-  if (channelId.startsWith("@")) {
-    searchParams.set("forHandle", channelId);
-  } else {
-    searchParams.set("id", channelId);
-  }
-
   try {
-    let res = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
-      {
-        cache: "force-cache",
-        next: {
-          revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
-        },
-      }
-    );
-    if (res.status === 200) {
-      const data = await res.json();
-      const imageURL = data.items[0].snippet.thumbnails[quality].url;
+    const youtube = google.youtube({
+      version: "v3",
+      auth: process.env.YT_API_KEY!,
+    });
 
-      // サムネイルURLが有効かどうかチェック
-      if (await isURLAccessible(imageURL)) {
-        return imageURL;
-      }
+    const params = channelId.startsWith("@")
+      ? { part: ["snippet"], forHandle: channelId }
+      : { part: ["snippet"], id: [channelId] };
 
-      // 再フェッチ
-      res = await fetch(
-        `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
-        {
-          cache: "reload",
-          next: {
-            revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
-          },
+    let response = await youtube.channels.list(params);
+    
+    if (response.data.items && response.data.items.length > 0) {
+      const imageURL = response.data.items[0].snippet?.thumbnails?.[quality]?.url;
+      
+      if (imageURL) {
+        // サムネイルURLが有効かどうかチェック
+        if (await isURLAccessible(imageURL)) {
+          return imageURL;
         }
-      );
-      if (res.status === 200) {
-        const data = await res.json();
-        const imageURL = data.items[0].snippet.thumbnails[quality].url;
 
-        // 最悪404になるようにここでは有効性を確認しない
-        return imageURL;
+        // 再フェッチ（googleapis では新しいリクエストを作成）
+        response = await youtube.channels.list(params);
+        
+        if (response.data.items && response.data.items.length > 0) {
+          const newImageURL = response.data.items[0].snippet?.thumbnails?.[quality]?.url;
+          // 最悪404になるようにここでは有効性を確認しない
+          return newImageURL || imageURL;
+        }
       }
-
+      
       return imageURL;
     } else {
-      throw new Error();
+      throw new Error("Channel not found");
     }
   } catch (error) {
     console.log(error);
