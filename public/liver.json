@@ -734,7 +734,7 @@
     "aliasFirst": "すずはらるる",
     "aliasSecond": "",
     "channelHandle": "@LuluSuzuhara",
-    "isRetire": 1,
+    "isRetire": 0,
     "isOverseas": 0,
     "birthMonth": 6,
     "birthDate": 24
@@ -994,7 +994,7 @@
     "aliasFirst": "ぐうぇる・おす・がーる",
     "aliasSecond": "",
     "channelHandle": "@GweluOsGar",
-    "isRetire": 0,
+    "isRetire": 1,
     "isOverseas": 0,
     "birthMonth": 4,
     "birthDate": 22
@@ -1014,7 +1014,7 @@
     "aliasFirst": "ならか",
     "aliasSecond": "",
     "channelHandle": "@Naraka_nijisanji",
-    "isRetire": 0,
+    "isRetire": 1,
     "isOverseas": 0,
     "birthMonth": 7,
     "birthDate": 10
