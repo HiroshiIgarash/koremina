@@ -2568,5 +2568,25 @@
     "isOverseas": 0,
     "birthMonth": 5,
     "birthDate": 28
+  },
+  {
+    "name": "白砂あやね",
+    "aliasFirst": "しらさあやね",
+    "aliasSecond": "",
+    "channelHandle": "@ShirasaAyane",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDate": 9
+  },
+  {
+    "name": "水面まどか",
+    "aliasFirst": "みなもまどか",
+    "aliasSecond": "",
+    "channelHandle": "@MinamoMadoka",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 10,
+    "birthDate": 9
   }
 ]
