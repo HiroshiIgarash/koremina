@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import { auth } from "@/auth";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 /**
  * 新規投稿メール通知設定を更新
@@ -34,7 +34,7 @@ const updateNotifyNewPostByEmail = async (enabled: boolean) => {
       },
     });
 
-    revalidateTag("get-current-user");
+    updateTag("get-current-user");
 
     return { success: true };
   } catch (error) {

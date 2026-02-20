@@ -3,7 +3,7 @@
 import prisma from "@/lib/db";
 import { Reaction } from "@/types/type";
 import { NextResponse } from "next/server";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { User } from "@prisma/client";
 
 const updateReaction = async (
@@ -42,7 +42,7 @@ const updateReaction = async (
   });
 
   revalidatePath(`/post/${postId}`);
-  revalidateTag("get-post");
+  updateTag("get-post");
 };
 
 export default updateReaction;
