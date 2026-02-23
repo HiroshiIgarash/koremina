@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 const updateBookmark = async (
   postId: string,
@@ -38,7 +38,7 @@ const updateBookmark = async (
           update: {},
         });
 
-  revalidateTag("get-post");
+  updateTag("get-post");
   return bookmark;
 };
 

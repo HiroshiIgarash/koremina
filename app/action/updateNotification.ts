@@ -3,7 +3,7 @@
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
 import { NotificationType } from "@/types/type";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 interface updateNotificationProps {
   type: NotificationType;
@@ -61,7 +61,7 @@ const updateNotification = async ({
     console.log(error);
   }
 
-  revalidateTag(`get-notifications-${postedUserId}`);
+  updateTag(`get-notifications-${postedUserId}`);
 };
 
 export default updateNotification;

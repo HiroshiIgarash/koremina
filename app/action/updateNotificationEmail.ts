@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { z } from "zod";
 import { subscribeNotificationEmail } from "@/lib/notifications";
 
@@ -45,7 +45,7 @@ const updateNotificationEmail = async (email: string) => {
       return { error: result.error };
     }
 
-    revalidateTag("get-current-user");
+    updateTag("get-current-user");
 
     return {
       success: true,

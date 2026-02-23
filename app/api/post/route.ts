@@ -33,7 +33,7 @@ export const POST = async (req: Request) => {
     },
   });
 
-  revalidateTag("get-post");
+  revalidateTag("get-post", "max");
 
   // 新規投稿のメール通知を非同期で送信（awaitしない）
   sendNewPostEmails(newPost.id).catch(err => {
@@ -77,8 +77,8 @@ export const PUT = async (req: Request) => {
     },
   });
 
-  revalidateTag("get-post");
-  revalidateTag(`get-post-by-id:${newPost.id}`);
+  revalidateTag("get-post", "max");
+  revalidateTag(`get-post-by-id:${newPost.id}`, "max");
 
   return NextResponse.json(newPost);
 };
