@@ -11,6 +11,18 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2026-03-15" className="font-bold">
+              2026/03/15
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                サイト全体の表示速度を改善しました。
+                <br />
+                ページの読み込みがより速くなり、サクサク快適に使えるようになりました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2026-02-02" className="font-bold">
               2026/02/02
             </time>
