@@ -3,14 +3,20 @@ import PostItem from "./PostItem";
 import SkeletonPostItem from "./SkeletonPostItem";
 import prisma from "@/lib/db";
 import { getRandomPostIds as getRandomPostIdsSQL } from "@prisma/client/sql";
+import { cacheTag, cacheLife } from "next/cache";
 
-const getRandomPostIds = async ({
-  seed = Math.sin(Date.now()),
-  limit = 10,
-}) => {
+const getPickUpPosts = async () => {
+  "use cache";
+  cacheTag("get-post");
+  cacheLife("hours");
+
+  // 1000 * 60 * 60 * 12 ミリ秒 = 12時間ごとにseedが変わる
+  // -1 ~ 1 におさめるため、sinを用いる
+  const seed = Math.sin(Math.floor(Date.now() / (1000 * 60 * 60 * 12)));
+
   // ランダムに投稿を取得（id, detailComment）
   const randomPosts = await prisma.$queryRawTyped(
-    getRandomPostIdsSQL(seed, limit)
+    getRandomPostIdsSQL(seed, 10)
   );
 
   // detailComment が多い順に4つ取得
@@ -22,15 +28,7 @@ const getRandomPostIds = async ({
     )
     .slice(0, 4);
 
-  return pickUpRandomPosts.map(post => post.id);
-};
-
-const PickUpList = async () => {
-  // 1000 * 60 * 60 * 12 ミリ秒 = 12時間ごとにseedが変わる
-  // -1 ~ 1 におさめるため、sinを用いる
-  const seed = Math.sin(Math.floor(Date.now() / (1000 * 60 * 60 * 12)));
-
-  const randomPostIds = await getRandomPostIds({ seed });
+  const randomPostIds = pickUpRandomPosts.map(post => post.id);
 
   const posts = await prisma.video.findMany({
     where: {
@@ -45,7 +43,6 @@ const PickUpList = async () => {
           name: true,
         },
       },
-      Bookmark: true,
       _count: {
         select: {
           good: true,
@@ -55,11 +52,17 @@ const PickUpList = async () => {
           cry: true,
           angel: true,
           comments: true,
+          Bookmark: true,
         },
       },
-      seenUsers: true,
     },
   });
+
+  return posts;
+};
+
+const PickUpList = async () => {
+  const posts = await getPickUpPosts();
 
   return (
     <>
@@ -77,9 +80,8 @@ const PickUpList = async () => {
                 }
                 postedUser={post.postedUser}
                 livers={post.liver}
-                bookmark={post.Bookmark}
+                bookmarkCount={post._count.Bookmark}
                 reactionsCount={post._count}
-                seenUsersId={post.seenUsers.map(u => u.id)}
               />
             </Suspense>
           );

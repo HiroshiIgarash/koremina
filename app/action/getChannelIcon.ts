@@ -60,7 +60,7 @@ const getChannelIcon = async ({
       throw new Error();
     }
   } catch (error) {
-    console.log(error);
+    console.error("[getChannelIcon] エラー:", error);
     return { error: "Failed to get channel icon" };
   }
 };

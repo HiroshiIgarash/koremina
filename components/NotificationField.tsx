@@ -1,32 +1,27 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/db";
-import { unstable_cache } from "next/cache";
+import { cacheTag, cacheLife } from "next/cache";
 import Link from "next/link";
 import { Button } from "./ui/button";
+
+const getNotReadNotification = async (userId: string) => {
+  "use cache";
+  cacheTag(`get-notifications-${userId}`);
+  cacheLife("seconds");
+
+  return prisma.notification.findFirst({
+    where: {
+      userId,
+      isRead: false,
+    },
+  });
+};
 
 const NotificationField = async () => {
   const session = await auth();
   if (!session?.user?.id) return;
 
-  const getCachedNotReadNotification = unstable_cache(
-    async userId => {
-      console.log("get new notification!!");
-      return await prisma.notification.findFirst({
-        where: {
-          userId,
-          isRead: false,
-        },
-      });
-    },
-    [],
-    {
-      tags: [`get-notifications-${session.user.id}`],
-    }
-  );
-
-  const notReadNotification = await getCachedNotReadNotification(
-    session.user.id
-  );
+  const notReadNotification = await getNotReadNotification(session.user.id);
 
   return (
     <>

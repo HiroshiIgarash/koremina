@@ -78,9 +78,8 @@ const TopBookmarkList = async () => {
                       }
                       postedUser={post.postedUser}
                       livers={post.liver}
-                      bookmark={post.Bookmark}
+                      bookmarkCount={post._count.Bookmark}
                       reactionsCount={post._count}
-                      seenUsersId={post.seenUsers.map(u => u.id)}
                     />
                   </Suspense>
                 );

@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import { auth } from "@/auth";
-import { updateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 /**
  * 新規投稿メール通知設定を更新
@@ -34,11 +34,11 @@ const updateNotifyNewPostByEmail = async (enabled: boolean) => {
       },
     });
 
-    updateTag("get-current-user");
+    revalidateTag(`get-user:${currentUserId}`, "hours");
 
     return { success: true };
   } catch (error) {
-    console.log(error);
+    console.error("[updateNotifyNewPostByEmail] エラー:", error);
     return {
       error: "Failed to update notification settings",
     };

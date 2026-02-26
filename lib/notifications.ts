@@ -1,5 +1,6 @@
 "use server";
 
+import crypto from "crypto";
 import prisma from "@/lib/db";
 import {
   generateVerificationToken,
@@ -45,10 +46,6 @@ export async function subscribeNotificationEmail(
 
     // セッションのメールと完全一致する場合は即座に verified
     if (sessionEmail && trimmedEmail === sessionEmail.toLowerCase()) {
-      console.log(
-        `[subscribeNotificationEmail] セッションメールと一致: ${userId}`
-      );
-
       await prisma.user.update({
         where: { id: userId },
         data: {
@@ -102,8 +99,7 @@ export async function subscribeNotificationEmail(
       // メール列挙攻撃を防ぐため、成功メッセージを返す
       return {
         success: true,
-        message:
-          "確認メールを送信しました。メールボックスをご確認ください",
+        message: "確認メールを送信しました。メールボックスをご確認ください",
         requiresVerification: true,
       };
     }
@@ -114,9 +110,7 @@ export async function subscribeNotificationEmail(
     const tokenExpiry = getTokenExpiry();
 
     // レート制限カウンターの更新
-    const shouldReset = shouldResetRateLimit(
-      user.notificationEmailLastSentAt
-    );
+    const shouldReset = shouldResetRateLimit(user.notificationEmailLastSentAt);
     const newAttempts = shouldReset
       ? 1
       : user.notificationEmailSendAttempts + 1;
@@ -135,15 +129,12 @@ export async function subscribeNotificationEmail(
     });
 
     // 確認メール送信（非同期、エラーでも握りつぶす）
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const confirmUrl = `${baseUrl}/api/notifications/confirm?token=${rawToken}&userId=${userId}`;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    // クエリパラメータをエンコード（現在のトークン/IDは安全な文字のみだが、将来の変更に備えた防御的実装）
+    const confirmUrl = `${baseUrl}/api/notifications/confirm?token=${encodeURIComponent(rawToken)}&userId=${encodeURIComponent(userId)}`;
 
     try {
       await sendVerificationEmail(trimmedEmail, confirmUrl);
-      console.log(
-        `[subscribeNotificationEmail] 確認メール送信成功: ${trimmedEmail}`
-      );
     } catch (emailError) {
       console.error(
         `[subscribeNotificationEmail] メール送信エラー: ${trimmedEmail}`,
@@ -155,8 +146,7 @@ export async function subscribeNotificationEmail(
     // メール列挙攻撃を防ぐため、常に成功メッセージ
     return {
       success: true,
-      message:
-        "確認メールを送信しました。メールボックスをご確認ください",
+      message: "確認メールを送信しました。メールボックスをご確認ください",
       requiresVerification: true,
     };
   } catch (error) {
@@ -203,9 +193,6 @@ export async function confirmNotificationEmail(
 
     // すでに検証済みの場合（idempotent）
     if (user.notificationEmailVerified) {
-      console.log(
-        `[confirmNotificationEmail] すでに検証済み: ${userId}`
-      );
       return {
         success: true,
         message: "このメールアドレスはすでに確認済みです",
@@ -226,9 +213,7 @@ export async function confirmNotificationEmail(
 
     // 有効期限チェック
     if (isTokenExpired(user.notificationEmailTokenExpires)) {
-      console.warn(
-        `[confirmNotificationEmail] トークン期限切れ: ${userId}`
-      );
+      console.warn(`[confirmNotificationEmail] トークン期限切れ: ${userId}`);
       return {
         success: false,
         error: "確認リンクの有効期限が切れています",
@@ -236,9 +221,14 @@ export async function confirmNotificationEmail(
       };
     }
 
-    // トークンハッシュを比較
+    // トークンハッシュを比較（タイミング攻撃対策で定数時間比較を使用）
     const tokenHash = hashToken(token);
-    if (tokenHash !== user.notificationEmailTokenHash) {
+    const tokenHashBuf = Buffer.from(tokenHash, "hex");
+    const storedHashBuf = Buffer.from(user.notificationEmailTokenHash, "hex");
+    if (
+      tokenHashBuf.length !== storedHashBuf.length ||
+      !crypto.timingSafeEqual(tokenHashBuf, storedHashBuf)
+    ) {
       console.warn(
         `[confirmNotificationEmail] トークンが一致しません: ${userId}`
       );
@@ -258,8 +248,6 @@ export async function confirmNotificationEmail(
         notificationEmailTokenExpires: null,
       },
     });
-
-    console.log(`[confirmNotificationEmail] メール検証成功: ${userId}`);
 
     return {
       success: true,
@@ -296,8 +284,6 @@ export async function unsubscribeNotificationEmail(
         notificationEmailLastSentAt: null,
       },
     });
-
-    console.log(`[unsubscribeNotificationEmail] 配信停止: ${userId}`);
 
     return {
       success: true,

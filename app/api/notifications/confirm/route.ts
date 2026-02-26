@@ -18,13 +18,12 @@ export async function GET(request: NextRequest) {
   const token = searchParams.get("token");
   const userId = searchParams.get("userId");
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-
   // パラメータ検証
   if (!token || !userId) {
     console.warn("[GET /api/notifications/confirm] パラメータ不足");
-    return NextResponse.redirect(`${baseUrl}/notifications/invalid`);
+    return NextResponse.redirect(
+      new URL("/notifications/invalid", request.url)
+    );
   }
 
   // トークン確認処理
@@ -37,14 +36,17 @@ export async function GET(request: NextRequest) {
 
     // エラーコードに応じてリダイレクト先を変更
     if (result.code === "TOKEN_EXPIRED") {
-      return NextResponse.redirect(`${baseUrl}/notifications/expired`);
+      return NextResponse.redirect(
+        new URL("/notifications/expired", request.url)
+      );
     }
 
-    return NextResponse.redirect(`${baseUrl}/notifications/invalid`);
+    return NextResponse.redirect(
+      new URL("/notifications/invalid", request.url)
+    );
   }
 
-  console.log(
-    `[GET /api/notifications/confirm] 確認成功: userId=${userId}`
+  return NextResponse.redirect(
+    new URL("/notifications/confirmed", request.url)
   );
-  return NextResponse.redirect(`${baseUrl}/notifications/confirmed`);
 }

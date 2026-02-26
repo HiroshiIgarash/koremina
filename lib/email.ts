@@ -2,6 +2,19 @@ import nodemailer from "nodemailer";
 import prisma from "@/lib/db";
 import type { Video } from "@prisma/client";
 
+/**
+ * HTMLテンプレートに埋め込む文字列をエスケープする。
+ * ユーザー入力をHTMLメール内に表示する際、XSS（HTMLインジェクション）を防ぐために使用する。
+ * エスケープ対象: &, <, >, ", ' の5文字
+ */
+const escapeHtml = (str: string): string =>
+  str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
 // Gmail SMTP設定
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -41,25 +54,14 @@ export const sendNewPostEmails = async (postId: string) => {
     });
 
     if (targetUsers.length === 0) {
-      console.log("メール送信対象ユーザーがいません");
       return;
     }
-
-    console.log(`${targetUsers.length}人にメール送信開始`);
 
     // 各ユーザーにメール送信（リトライ付き）
     const results = await Promise.allSettled(
       targetUsers
         .filter(user => user.notificationEmail !== null)
         .map(user => sendEmailWithRetry(user.notificationEmail!, post))
-    );
-
-    // 結果を集計
-    const succeeded = results.filter(r => r.status === "fulfilled").length;
-    const failed = results.filter(r => r.status === "rejected").length;
-
-    console.log(
-      `メール送信完了: 成功=${succeeded}, 失敗=${failed}, 合計=${targetUsers.length}`
     );
 
     // 失敗をログに記録
@@ -105,11 +107,11 @@ const sendEmailWithRetry = async (
             <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 8px;">
               <h2 style="color: #333; margin-top: 0;">新しい投稿がありました</h2>
               <p style="color: #666; font-size: 16px; line-height: 1.6;">
-                「${post.comment}」
+                「${escapeHtml(post.comment)}」
               </p>
               ${
                 post.detailComment
-                  ? `<p style="color: #888; font-size: 14px; line-height: 1.6;">${post.detailComment}</p>`
+                  ? `<p style="color: #888; font-size: 14px; line-height: 1.6;">${escapeHtml(post.detailComment)}</p>`
                   : ""
               }
               <a href="${process.env.NEXT_PUBLIC_BASE_URL}/post/${post.id}"
@@ -125,8 +127,6 @@ const sendEmailWithRetry = async (
         </html>
       `,
     });
-
-    console.log(`メール送信成功: ${email}`);
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error";
@@ -197,8 +197,6 @@ export const sendVerificationEmail = async (
         </html>
       `,
     });
-
-    console.log(`確認メール送信成功: ${email}`);
   } catch (error) {
     console.error(`確認メール送信失敗: ${email}`, error);
     throw error;

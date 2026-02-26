@@ -11,7 +11,9 @@ const Page = async (props: PageProps<"/search">) => {
   if (Array.isArray(searchParams?.page)) notFound();
   if (Array.isArray(searchParams?.q)) notFound();
 
-  const currentPage = parseInt(searchParams?.page || "1");
+  // ページ番号のパース（非数値・負数・NaN の場合は1にフォールバック）
+  const parsedPage = parseInt(searchParams?.page || "1", 10);
+  const currentPage = isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
   const postsPerPage = 16;
 
   if (!searchParams || !searchParams.q) {
@@ -20,76 +22,58 @@ const Page = async (props: PageProps<"/search">) => {
 
   const searchList = searchParams.q.split(" ").filter(s => s !== "");
 
-  const count = await prisma.video.count({
-    where: {
-      AND: searchList.map(word => {
-        return {
-          OR: [
-            { comment: { contains: word } },
-            { detailComment: { contains: word } },
-            {
-              liver: {
-                some: {
-                  OR: [
-                    { name: { contains: word } },
-                    { aliasFirst: { contains: word } },
-                    { aliasSecond: { contains: word } },
-                  ],
-                },
+  // 検索条件を共通化（count と findMany で同一条件を使うため）
+  const whereCondition = {
+    AND: searchList.map(word => {
+      return {
+        OR: [
+          { comment: { contains: word } },
+          { detailComment: { contains: word } },
+          {
+            liver: {
+              some: {
+                OR: [
+                  { name: { contains: word } },
+                  { aliasFirst: { contains: word } },
+                  { aliasSecond: { contains: word } },
+                ],
               },
             },
-          ],
-        };
-      }),
-    },
-  });
+          },
+        ],
+      };
+    }),
+  };
 
-  const posts = await prisma.video.findMany({
-    where: {
-      AND: searchList.map(word => {
-        return {
-          OR: [
-            { comment: { contains: word } },
-            { detailComment: { contains: word } },
-            {
-              liver: {
-                some: {
-                  OR: [
-                    { name: { contains: word } },
-                    { aliasFirst: { contains: word } },
-                    { aliasSecond: { contains: word } },
-                  ],
-                },
-              },
-            },
-          ],
-        };
-      }),
-    },
-    include: {
-      postedUser: true,
-      liver: {
-        select: {
-          name: true,
+  // count と findMany を並列実行してレスポンスを高速化
+  const [count, posts] = await Promise.all([
+    prisma.video.count({ where: whereCondition }),
+    prisma.video.findMany({
+      where: whereCondition,
+      include: {
+        postedUser: true,
+        liver: {
+          select: {
+            name: true,
+          },
+        },
+        _count: {
+          select: {
+            good: true,
+            bad: true,
+            love: true,
+            funny: true,
+            cry: true,
+            angel: true,
+            comments: true,
+            Bookmark: true,
+          },
         },
       },
-      Bookmark: true,
-      _count: {
-        select: {
-          good: true,
-          bad: true,
-          love: true,
-          funny: true,
-          cry: true,
-          angel: true,
-          comments: true,
-        },
-      },
-      seenUsers: true,
-    },
-    skip: (currentPage - 1) * postsPerPage,
-    take: postsPerPage,
-  });
+      skip: (currentPage - 1) * postsPerPage,
+      take: postsPerPage,
+    }),
+  ]);
 
   return (
     <>
@@ -113,9 +97,8 @@ const Page = async (props: PageProps<"/search">) => {
                   }
                   postedUser={post.postedUser}
                   livers={post.liver}
-                  bookmark={post.Bookmark}
+                  bookmarkCount={post._count.Bookmark}
                   reactionsCount={post._count}
-                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </Suspense>
             ))}

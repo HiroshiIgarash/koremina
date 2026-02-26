@@ -4,7 +4,7 @@ import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { BioSchema, bioSchema } from "@/schema";
 import { z } from "zod";
-import { updateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 const updateBio = async (bio: BioSchema) => {
   try {
@@ -30,7 +30,7 @@ const updateBio = async (bio: BioSchema) => {
       },
     });
 
-    updateTag("get-current-user");
+    revalidateTag(`get-user:${currentUserId}`, "hours");
 
     // ユーザーが投稿した投稿IDを取得し、それぞれの投稿キャッシュを再検証
     const userPosts = await prisma.video.findMany({
@@ -38,10 +38,10 @@ const updateBio = async (bio: BioSchema) => {
       select: { id: true },
     });
     userPosts.forEach(post => {
-      updateTag(`get-post-by-id:${post.id}`);
+      revalidateTag(`get-post-by-id:${post.id}`, "max");
     });
   } catch (error) {
-    console.log(error);
+    console.error("[updateBio] エラー:", error);
     if (error instanceof z.ZodError) {
       return { error: { bio: "bio is invalid" } };
     }

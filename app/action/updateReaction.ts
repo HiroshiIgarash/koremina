@@ -2,16 +2,32 @@
 
 import prisma from "@/lib/db";
 import { Reaction } from "@/types/type";
-import { NextResponse } from "next/server";
-import { revalidatePath, updateTag } from "next/cache";
-import { User } from "@prisma/client";
+import { revalidateTag } from "next/cache";
+import getCurrentUser from "./getCurrentUser";
+
+// サーバーアクションは外部から任意の引数で呼び出せるため、ランタイムで許可値を検証する
+const VALID_REACTIONS: Reaction[] = [
+  "good",
+  "bad",
+  "love",
+  "funny",
+  "cry",
+  "angel",
+];
 
 const updateReaction = async (
   reaction: Reaction,
   postId: string,
-  active: boolean,
-  currentUser: User
+  active: boolean
 ) => {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) return { error: "Unauthorized" };
+
+  // 不正なリアクション値を拒否（TypeScriptの型は実行時に消失するため）
+  if (!VALID_REACTIONS.includes(reaction)) {
+    return { error: "Invalid reaction" };
+  }
+
   const reactionVideo = `${reaction}Video` as const;
   const includeVideo = Object.fromEntries([[reactionVideo, true]]);
 
@@ -23,7 +39,7 @@ const updateReaction = async (
   });
 
   if (!user) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return { error: "Unauthorized" };
   }
 
   const newReactionVideoIds = active
@@ -41,8 +57,8 @@ const updateReaction = async (
     data: updateData,
   });
 
-  revalidatePath(`/post/${postId}`);
-  updateTag("get-post");
+  revalidateTag("get-post", "minutes");
+  revalidateTag(`get-reactions:${postId}`, "seconds");
 };
 
 export default updateReaction;

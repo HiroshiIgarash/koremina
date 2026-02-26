@@ -21,7 +21,6 @@ const SpecialList = async () => {
           name: true,
         },
       },
-      Bookmark: true,
       _count: {
         select: {
           good: true,
@@ -31,9 +30,9 @@ const SpecialList = async () => {
           cry: true,
           angel: true,
           comments: true,
+          Bookmark: true,
         },
       },
-      seenUsers: true,
     },
     orderBy: {
       postedAt: "desc",
@@ -57,9 +56,8 @@ const SpecialList = async () => {
                   }
                   postedUser={post.postedUser}
                   livers={post.liver}
-                  bookmark={post.Bookmark}
+                  bookmarkCount={post._count.Bookmark}
                   reactionsCount={post._count}
-                  seenUsersId={post.seenUsers.map(u => u.id)}
                 />
               </Suspense>
             );

@@ -2,14 +2,12 @@
 
 import { auth } from "@/auth";
 import prisma from "@/lib/db";
-import { updateTag } from "next/cache";
-import { NextResponse } from "next/server";
-
+import { revalidateTag } from "next/cache";
 const updateReadAllNotifications = async () => {
   const session = await auth();
 
   if (!session?.user) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    throw new Error("Unauthorized");
   }
 
   await prisma.notification.updateMany({
@@ -22,7 +20,7 @@ const updateReadAllNotifications = async () => {
     },
   });
 
-  updateTag(`get-notifications-${session.user.id}`);
+  revalidateTag(`get-notifications-${session.user.id}`, "seconds");
 };
 
 export default updateReadAllNotifications;

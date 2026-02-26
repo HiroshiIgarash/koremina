@@ -11,36 +11,53 @@ import SearchForm from "@/components/feature/post/SearchForm";
 import SkeletonPostList from "@/components/feature/post/SkeletonPostList";
 import SkeletonPickUpList from "@/components/feature/post/SkeletonPickUpList";
 import SkeletonTopBookmarkList from "@/components/feature/post/SkeletonTopBookmarkList";
-import prisma from "@/lib/db";
+import getTotalPosts from "@/app/action/getTotalPosts";
 import { ChevronRight, Upload } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
 const CountPosts = async () => {
-  const count = prisma.video.count();
+  const count = await getTotalPosts();
   return <span className="text-destructive">{count}件</span>;
 };
 
-export default async function Home() {
+/**
+ * 認証状態に応じた表示を担当するコンポーネント
+ * auth() を Suspense 内に閉じ込め、静的シェルを汚染しない
+ */
+const AuthSection = async () => {
   const session = await auth();
+  return <>{!session && <FirstVisitDialog />}</>;
+};
 
-  const isDisplayDialog = !session;
+/**
+ * メール通知案内のセッション依存リンク
+ */
+const SettingLinkOrText = async () => {
+  const session = await auth();
+  if (session) {
+    return (
+      <>
+        <Link
+          href="/setting"
+          className="text-blue-600 dark:text-blue-300 underline font-bold"
+        >
+          設定ページ
+        </Link>
+        から登録できます
+      </>
+    );
+  }
+  return <>ログイン後、設定ページから登録できます</>;
+};
 
-  const hasBookmark =
-    session?.user &&
-    (await prisma.bookmark.findFirst({
-      where: {
-        userId: session.user.id,
-      },
-      select: {
-        id: true,
-      },
-    }));
-
+export default function Home() {
   return (
     <>
-      {isDisplayDialog && <FirstVisitDialog />}
+      <Suspense fallback={null}>
+        <AuthSection />
+      </Suspense>
       <div className="mb-10 text-center">
         <Image
           src="/kv_sp.png"
@@ -60,7 +77,9 @@ export default async function Home() {
       <Birthday />
       <div className="mt-10 mb-10">
         <p className="text-xl font-bold text-center">
-          <CountPosts />
+          <Suspense fallback={<span className="text-destructive">...件</span>}>
+            <CountPosts />
+          </Suspense>
           のおすすめ動画が
           <br className="md:hidden" />
           投稿されています!
@@ -73,19 +92,9 @@ export default async function Home() {
           <p className="text-sm">
             新着投稿をメールで受け取れるようになりました
             <br />
-            {session ? (
-              <>
-                <Link
-                  href="/setting"
-                  className="text-blue-600 dark:text-blue-300 underline font-bold"
-                >
-                  設定ページ
-                </Link>
-                から登録できます
-              </>
-            ) : (
-              <>ログイン後、設定ページから登録できます</>
-            )}
+            <Suspense fallback={<>ログイン後、設定ページから登録できます</>}>
+              <SettingLinkOrText />
+            </Suspense>
           </p>
         </div>
         <div className="flex flex-col items-center justify-center w-full p-4 md:py-8 bg-accent rounded-lg text-center gap-2">
@@ -113,7 +122,9 @@ export default async function Home() {
         </Link>
       </div>
       <div className="w-full px-4 mb-8 md:mb-16 max-w-7xl mx-auto text-center md:text-left empty:m-0">
-        <NotificationField />
+        <Suspense fallback={null}>
+          <NotificationField />
+        </Suspense>
       </div>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 md:mb-8 px-4 w-full max-w-7xl mx-auto">
@@ -140,11 +151,9 @@ export default async function Home() {
           <SearchForm />
         </div>
       </div>
-      {hasBookmark && (
-        <Suspense fallback={<SkeletonTopBookmarkList />}>
-          <TopBookmarkList />
-        </Suspense>
-      )}
+      <Suspense fallback={<SkeletonTopBookmarkList />}>
+        <TopBookmarkList />
+      </Suspense>
       <div className="w-full mb-8 md:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-4 px-4 w-full max-w-7xl mx-auto">
           Pick Up!

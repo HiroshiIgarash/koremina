@@ -38,7 +38,7 @@ const ReactionButton = ({
       if (!user) return;
       startTransition(() => addOptimisticReactionUsers(register));
 
-      updateReaction(reaction, post.id, register, user);
+      updateReaction(reaction, post.id, register);
       if (!register) {
         updateNotification({ type: "reaction", postId: post.id });
       }

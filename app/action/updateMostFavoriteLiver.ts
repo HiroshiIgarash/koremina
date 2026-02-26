@@ -1,21 +1,21 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { updateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { auth } from "@/auth";
 
 const updateMostFavoriteLiver = async (data: {
   liverId?: string | undefined;
 }) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    return {
+      error: "Unauthorized",
+    };
+  }
+
   try {
-    const session = await auth();
-
-    if (!session?.user?.id) {
-      return {
-        error: "Unauthorized",
-      };
-    }
-
     const { liverId } = data;
 
     const updateData = liverId
@@ -40,13 +40,13 @@ const updateMostFavoriteLiver = async (data: {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error("[updateMostFavoriteLiver] エラー:", error);
     return {
       error: "Failed to update most favorite liver",
     };
   }
 
-  updateTag("get-current-user");
+  revalidateTag(`get-user:${session.user.id}`, "hours");
 };
 
 export default updateMostFavoriteLiver;

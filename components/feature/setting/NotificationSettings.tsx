@@ -21,6 +21,7 @@ const NotificationSettings = ({ user }: NotificationSettingsProps) => {
   const [notificationEmail, setNotificationEmail] = useState(
     user.notificationEmail || ""
   );
+  const [savedEmail, setSavedEmail] = useState(user.notificationEmail || "");
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -51,9 +52,12 @@ const NotificationSettings = ({ user }: NotificationSettingsProps) => {
         toast.error(result.error);
       } else {
         if (result?.requiresVerification) {
-          toast.success("確認メールを送信しました。メールボックスをご確認ください", {
-            duration: 5000,
-          });
+          toast.success(
+            "確認メールを送信しました。メールボックスをご確認ください",
+            {
+              duration: 5000,
+            }
+          );
         } else {
           toast.success(
             emailToSave
@@ -61,6 +65,7 @@ const NotificationSettings = ({ user }: NotificationSettingsProps) => {
               : "メールアドレスを削除しました"
           );
         }
+        setSavedEmail(emailToSave);
         setIsEditingEmail(false);
       }
     });
@@ -164,7 +169,7 @@ const NotificationSettings = ({ user }: NotificationSettingsProps) => {
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  setNotificationEmail(user.notificationEmail || "");
+                  setNotificationEmail(savedEmail);
                   setIsEditingEmail(false);
                 }}
                 disabled={isPending}

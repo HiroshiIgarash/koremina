@@ -5,14 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "コレミナについて",
 };
 
-const Page = async () => {
+/**
+ * 未ログインユーザー向けのログインCTA
+ */
+const AboutCTA = async () => {
   const session = await auth();
+  if (session) return null;
+  return (
+    <div className="text-center">
+      <p className="mb-2">↓ログインはすぐおわるよ！</p>
+      <SignInButton variant="outline" size="lg">
+        ログイン
+      </SignInButton>
+    </div>
+  );
+};
 
+const Page = () => {
   return (
     <div className="px-4 w-full max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-20 text-center">コレミナについて</h1>
@@ -214,14 +229,9 @@ const Page = async () => {
         </p>
         <FadeIn margin="0px">
           <div className="mt-12 space-y-8">
-            {!session && (
-              <div className="text-center">
-                <p className="mb-2">↓ログインはすぐおわるよ！</p>
-                <SignInButton variant="outline" size="lg">
-                  ログイン
-                </SignInButton>
-              </div>
-            )}
+            <Suspense fallback={null}>
+              <AboutCTA />
+            </Suspense>
             <div className="text-center">
               <p className="mb-2">↓おすすめの動画を教えてね！</p>
               <Button asChild size="lg">

@@ -8,8 +8,13 @@ import NotificationSettings from "@/components/feature/setting/NotificationSetti
 import getCurrentUser from "@/app/action/getCurrentUser";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const Page = async () => {
+/**
+ * 設定ページの本体コンテンツ
+ * auth() を Suspense 内に閉じ込め、外枠を静的シェルとして残す
+ */
+const SettingContent = async () => {
   const session = await auth();
 
   if (!session) {
@@ -23,7 +28,7 @@ const Page = async () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 space-y-8">
+    <>
       <Suspense fallback={<SkeletonUserInfo />}>
         <UserInfo />
       </Suspense>
@@ -37,6 +42,23 @@ const Page = async () => {
           <RecentPostArea />
         </div>
       </div>
+    </>
+  );
+};
+
+const Page = () => {
+  return (
+    <div className="max-w-7xl mx-auto w-full px-4 space-y-8">
+      <Suspense
+        fallback={
+          <div className="space-y-8">
+            <SkeletonUserInfo />
+            <Skeleton className="h-48 w-full" />
+          </div>
+        }
+      >
+        <SettingContent />
+      </Suspense>
     </div>
   );
 };
