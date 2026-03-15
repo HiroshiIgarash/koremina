@@ -9,9 +9,9 @@ This is a Japanese VTuber community platform called "koremina" where users can s
 ## Tech Stack
 
 - **Frontend**: Next.js 16.1.6 + TypeScript + React 19.2.4
-- **UI**: Tailwind CSS 4.2.0 + shadcn/ui components + Framer Motion
+- **UI**: Tailwind CSS 4.2.0 + shadcn/ui components + Motion (formerly Framer Motion)
 - **Authentication**: NextAuth.js v5 beta.16 + Google OAuth + Twitter OAuth
-- **Database**: PostgreSQL (Neon) + Prisma ORM 6.16.2
+- **Database**: PostgreSQL (Neon) + Prisma ORM 7.0.0 + @prisma/adapter-pg (v7 driver adapter)
 - **Storage**: Vercel Blob for images
 - **Email**: Nodemailer for notifications
 - **Package Manager**: pnpm 10.32.1 (enforced via preinstall hook)
@@ -53,10 +53,10 @@ pnpm prisma:studio:dev       # Open Prisma Studio with local DB
 
 Server Actions are the primary data access layer, handling most database operations:
 
-- **Posts**: `getPosts`, `getPostById`, `getTotalPosts`, `deletePost`, etc.
-- **Users**: `getCurrentUser`, `getUserById`, `updateNickname`, `updateBio`, `updateAvatar`, etc.
-- **Reactions & Interactions**: `updateReaction`, `updateSeenUsers`, `postComment`, `deleteComment`
-- **Bookmarks**: `getBookmarksById`, `updateBookmark`
+- **Posts**: `getPosts`, `getPostById`, `getTotalPosts`, `getTotalUserPosts`, `getUserPosts`, `getRecentPostsByUserId`, `deletePost`, `getVideoImage`
+- **Users**: `getCurrentUser`, `getCurrentUserWithTag`, `getUserById`, `updateNickname`, `updateBio`, `updateAvatar`, `updateFavoriteLivers`, `updateMostFavoriteLiver`
+- **Reactions & Interactions**: `updateReaction`, `updateSeenUsers`, `postComment`, `deleteComment`, `getCommentsByPostId`, `getReactionsByPostId`, `sendReportMail`
+- **Bookmarks**: `getBookmarksById`, `getBookmarkInfoByPostId`, `getTotalBookmarksById`, `updateBookmark`
 - **Livers**: `getLivers`, `getBirthdayLivers`, `getChannelIcon`, `updateLivers`
 - **Notifications**: `updateNotification`, `updateReadAllNotifications`, `updateNotifyNewPostByEmail`, `updateNotificationEmail`
 
@@ -69,7 +69,6 @@ Used for operations that require HTTP endpoints:
 - `/liver` - Liver data endpoints
 - `/vercelblob` - Image upload to Vercel Blob
 - `/notifications/confirm` - Email verification confirmation
-- `/notifications` - Notification endpoints
 
 ### Key Models
 
@@ -198,3 +197,11 @@ gh pr create --base develop --title "Your PR title" --body "Description"
 - Email notifications (configurable per user)
 - Separate notification email support
 - Read/unread status tracking
+- Email confirmation flow with result pages (`/notifications/confirmed`, `/expired`, `/invalid`)
+
+### Other Pages
+- `/history` - Browsing history (seen videos)
+- `/faq` - Frequently asked questions
+- `/policy` - Privacy policy
+- `/about` - About the service
+- `/crop` - Profile image crop tool

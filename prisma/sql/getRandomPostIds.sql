@@ -1,6 +1,7 @@
--- @param {Int} $1:seed
+-- @param {Float} $1:seed
 -- @param {Int} $2:limit
-SELECT id, "detailComment", rand
-FROM (SELECT (SELECT setseed($1)::text), id, "detailComment", random() AS rand FROM "Video")
+WITH seeded AS (SELECT setseed($1))
+SELECT id, "detailComment", random() AS rand
+FROM "Video", seeded
 ORDER BY rand
 LIMIT $2;
