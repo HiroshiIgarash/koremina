@@ -219,7 +219,7 @@ gh pr create --base develop --title "Your PR title" --body "Description"
 - Email confirmation flow with result pages (`/notifications/confirmed`, `/expired`, `/invalid`)
 
 ### Other Pages
-- `/history` - Browsing history (seen videos)
+- `/history` - Service update history (changelog)
 - `/faq` - Frequently asked questions
 - `/policy` - Privacy policy
 - `/about` - About the service

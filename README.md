@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# koremina
 
-## Getting Started
+VTuber グループ「にじさんじ」のライバーを応援するコミュニティプラットフォームです。
+お気に入りの切り抜き動画や見どころ動画をみんなとシェアして、一緒に盛り上がりましょう。
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## できること
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 動画の投稿・共有
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+YouTube の動画 URL を貼り付けるだけで、おすすめの切り抜き・配信動画をコミュニティにシェアできます。
+どのライバーの動画か、どんな見どころがあるかをコメントを添えて投稿しましょう。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 6 種類のリアクション
 
-## Learn More
+動画に 6 種類のリアクションで気持ちを伝えられます。
 
-To learn more about Next.js, take a look at the following resources:
+| リアクション | 意味 |
+|------------|------|
+| 👍 good | いいね！ |
+| 😍 love | 大好き |
+| 🤣 funny | 笑える |
+| 😭 cry | 泣ける |
+| 😇 angel | 尊い |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### コメント
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+動画ページでほかのユーザーとコメントで語り合えます。
 
-## Deploy on Vercel
+### ブックマーク
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+気になった動画をブックマークに保存して、あとからすぐに見返せます。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### ライバー検索・一覧
+
+にじさんじライバーの一覧ページでお気に入りのライバーを探せます。
+誕生日のライバーもトップページでお知らせします。
+
+### お気に入りライバー登録
+
+プロフィールに「推しライバー」を登録できます。
+一番の推しと、複数のお気に入りライバーをそれぞれ設定可能です。
+
+### 動画検索
+
+キーワードでコミュニティに投稿された動画を検索できます。
+
+### メール通知
+
+新しい動画が投稿されたときにメールで通知を受け取れます（オプトイン制）。
+リアクションやコメントが付いたときも通知されます。
+
+---
+
+## 特徴
+
+- **ログイン不要で閲覧可能** — Google / Twitter アカウントでログインすると投稿・リアクションなどの機能が使えます
+- **スマホ・PC 両対応** — モバイルフレンドリーなレスポンシブデザイン
+- **ダーク / ライトモード** — お好みの表示に切り替え可能
+- **プロフィールカスタマイズ** — ニックネーム・自己紹介・アイコン画像を設定できます
+
+---
+
+## Tech Stack
+
+| カテゴリ | 技術 |
+|---------|------|
+| Framework | Next.js 16 + React 19 + TypeScript |
+| UI | Tailwind CSS 4 + shadcn/ui + Motion |
+| Auth | NextAuth.js v5 (Google / Twitter OAuth) |
+| Database | PostgreSQL (Neon) + Prisma ORM 7 |
+| Storage | Vercel Blob |
+| Email | Nodemailer (Gmail SMTP) |
+| Hosting | Vercel |
+
+---
+
+## 開発者向け
+
+セットアップや開発手順は [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) を参照してください。
+運用・デプロイ手順は [docs/RUNBOOK.md](docs/RUNBOOK.md) を参照してください。

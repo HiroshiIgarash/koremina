@@ -12,7 +12,7 @@
 /search                     page.tsx          # Video search
 /livers                     page.tsx          # VTuber directory
 /bookmark                   page.tsx          # User bookmarks
-/history                    page.tsx          # Browsing history (seen videos)
+/history                    page.tsx          # Service update history (changelog)
 /notification               page.tsx          # Notifications
 /user/[userId]              page.tsx          # User profile
 /user/[userId]/posts        page.tsx          # User's posts
