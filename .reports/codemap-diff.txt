@@ -1,0 +1,29 @@
+Codemap Analysis Report
+Generated: 2026-03-15
+================================================================================
+
+STATUS: Initial generation (no previous codemaps found)
+
+FILES SCANNED: ~120 source files
+
+CODEMAPS CREATED:
+  + docs/CODEMAPS/architecture.md  — System diagram, data flow, auth flow
+  + docs/CODEMAPS/backend.md       — API routes (5), Server Actions (30+)
+  + docs/CODEMAPS/frontend.md      — Pages (22), component hierarchy
+  + docs/CODEMAPS/data.md          — DB models (7), relations, constraints
+  + docs/CODEMAPS/dependencies.md  — External services (7), packages (~30)
+
+KEY ARCHITECTURE FINDINGS:
+  - Single Next.js 16 app (no monorepo)
+  - Server Actions are the primary data layer (not API routes)
+  - Next.js 16 "use cache" / cacheTag() used for server-side caching
+  - Prisma v7 with @prisma/adapter-pg (driver adapter pattern)
+  - 6-type reaction system (good/bad/love/funny/cry/angel) as M:N join tables
+  - Double opt-in email verification with HMAC tokens
+  - Feature-based component organization (post/comment/user/setting/livers/bookmark)
+
+STALENESS WARNINGS:
+  - None (initial generation)
+
+NEXT SCAN RECOMMENDED: After next major feature addition or refactoring
+================================================================================
