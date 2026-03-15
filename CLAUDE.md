@@ -149,8 +149,27 @@ gh pr create --base develop --title "Your PR title" --body "Description"
 
 ### Environment Variables
 
-- `POSTGRES_PRISMA_URL` - Connection pooling (production)
-- `POSTGRES_URL_NON_POOLING` - Direct connection (migrations)
+<!-- AUTO-GENERATED from .env.example — edit .env.example to update -->
+
+| 変数名 | 必須 | 説明 |
+|--------|------|------|
+| `DATABASE_URL` | Yes | PostgreSQL 接続文字列（接続プール） |
+| `DATABASE_URL_UNPOOLED` | Yes | PostgreSQL 直接接続（マイグレーション用） |
+| `POSTGRES_LOCAL_URL` | Dev | ローカル DB URL（prisma:studio:dev で使用） |
+| `AUTH_SECRET` | Yes | NextAuth.js シークレット（`openssl rand -base64 32`） |
+| `AUTH_GOOGLE_ID` | Yes | Google OAuth クライアント ID |
+| `AUTH_GOOGLE_SECRET` | Yes | Google OAuth クライアントシークレット |
+| `AUTH_TWITTER_ID` | Yes | Twitter/X OAuth クライアント ID |
+| `AUTH_TWITTER_SECRET` | Yes | Twitter/X OAuth クライアントシークレット |
+| `YT_API_KEY` | Yes | YouTube Data API v3 キー |
+| `BLOB_READ_WRITE_TOKEN` | Yes | Vercel Blob ストレージトークン |
+| `MAILER_USER` | Yes | Gmail アドレス（Nodemailer SMTP） |
+| `MAILER_PASS` | Yes | Gmail アプリパスワード |
+| `EMAIL_TOKEN_HMAC_SECRET` | Yes | メール確認用 HMAC シークレット（256bit 以上） |
+| `NEXT_PUBLIC_BASE_URL` | Yes | アプリのベース URL（例: `http://localhost:3000`） |
+| `VERCEL_PREVIEW_URL` | Preview | Vercel プレビュー環境 URL |
+
+<!-- END AUTO-GENERATED -->
 
 ## Testing
 
@@ -162,7 +181,7 @@ gh pr create --base develop --title "Your PR title" --body "Description"
 
 - Vercel deployment with automatic builds
 - Image uploads via Vercel Blob storage
-- Uses Node.js 22.16.0 (volta managed)
+- Uses Node.js v24.13.0 (mise managed via `.mise.toml`)
 - Production builds include Prisma SQL generation
 - Email notifications via Nodemailer
 - SEO: next-sitemap for sitemap generation (outputs to public/)
