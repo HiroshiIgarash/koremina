@@ -58,6 +58,22 @@ export default function Home() {
       <Suspense fallback={null}>
         <AuthSection />
       </Suspense>
+      {/* Xログイン不具合お知らせバナー */}
+      <div className="w-full px-4 mb-6 max-w-7xl mx-auto">
+        <div className="flex items-start gap-3 p-4 bg-yellow-50 dark:bg-yellow-950 border border-yellow-400 dark:border-yellow-600 rounded-lg text-yellow-800 dark:text-yellow-200">
+          <span className="text-xl shrink-0">⚠️</span>
+          <div>
+            <p className="font-bold">
+              【障害情報】X（Twitter）ログインが現在ご利用いただけません
+            </p>
+            <p className="text-sm mt-1">
+              現在、X（Twitter）アカウントでのログインに不具合が発生しています。
+              <br />
+              Googleアカウントでのログインはご利用いただけます。ご不便をおかけして申し訳ございません。
+            </p>
+          </div>
+        </div>
+      </div>
       <div className="mb-10 text-center">
         <Image
           src="/kv_sp.png"

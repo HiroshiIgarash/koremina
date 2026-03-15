@@ -3,6 +3,7 @@ import Google from "next-auth/providers/google";
 import Twitter from "next-auth/providers/twitter";
 
 export default {
+  trustHost: true,
   providers: [
     Google,
     Twitter({
