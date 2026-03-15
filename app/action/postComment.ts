@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { auth } from "@/auth";
 
 const postComment = async (postId: string, formData: FormData) => {
@@ -15,13 +15,14 @@ const postComment = async (postId: string, formData: FormData) => {
       comment: formData.get("comment"),
     };
 
-    if (!rawFormData.comment) {
+    const comment = rawFormData.comment?.toString() ?? "";
+    if (!comment || comment.length > 1000) {
       return { error: "InvalidData" };
     }
 
     await prisma.comment.create({
       data: {
-        content: rawFormData.comment.toString(),
+        content: comment,
         author: {
           connect: {
             id: session.user.id,
@@ -40,7 +41,7 @@ const postComment = async (postId: string, formData: FormData) => {
     };
   }
 
-  revalidatePath(`/post/${postId}`);
+  revalidateTag(`get-comments:${postId}`, "seconds");
 };
 
 export default postComment;

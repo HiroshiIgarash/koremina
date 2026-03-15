@@ -14,14 +14,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Reaction } from "@/types/type";
-import { Bookmark, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import BookmarkButton from "./BookMarkButton";
-import { auth } from "@/auth";
-import { cn } from "@/lib/utils";
 import getYoutubeTitleById from "@/utils";
 import { BookmarkIcon } from "lucide-react";
+import PostBookmarkButton from "./PostBookmarkButton";
+import { Suspense } from "react";
+import { cn } from "@/lib/utils";
 
 interface PostItemProps {
   id: string;
@@ -30,8 +30,7 @@ interface PostItemProps {
   postedUserName: string | null;
   postedUser: User;
   livers: { name: string }[];
-  bookmark: Bookmark[];
-  seenUsersId: string[];
+  bookmarkCount: number;
   reactionsCount: { [k in Reaction]: number } & { comments: number };
 }
 
@@ -42,38 +41,22 @@ const PostItem = async ({
   postedUserName,
   postedUser,
   livers,
-  bookmark,
+  bookmarkCount,
   reactionsCount,
-  seenUsersId,
 }: PostItemProps) => {
-  //動画タイトルの取得
-
-  const [session, title] = await Promise.all([
-    auth(),
-    getYoutubeTitleById(videoId),
-  ]);
+  const title = await getYoutubeTitleById(videoId);
 
   return (
     <div className="relative">
-      {session?.user?.id && (
-        <button className="absolute top-4 right-4">
-          <BookmarkButton
-            postId={id}
-            bookmarkedUsersId={bookmark.map(b => b.userId)}
-            userId={session.user.id}
-            seenUsersId={seenUsersId}
-          />
-        </button>
-      )}
+      <Suspense fallback={null}>
+        <div className="absolute top-4 right-4 z-10">
+          <PostBookmarkButton postId={id} />
+        </div>
+      </Suspense>
       <Link href={`/post/${id}`}>
         <Card className="flex flex-col h-full hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-accent transition">
           <CardHeader className="pb-2">
-            <CardTitle
-              className={cn(
-                "text-lg md:h-[4em] leading-tight",
-                session?.user?.id && "pr-6"
-              )}
-            >
+            <CardTitle className="text-lg md:h-[4em] leading-tight pr-6">
               {comment}
             </CardTitle>
             <div className="flex justify-end items-center gap-2">
@@ -141,7 +124,7 @@ const PostItem = async ({
                   size="1.4em"
                   className="inline-block align-bottom"
                 />{" "}
-                {`${bookmark.length}`}
+                {`${bookmarkCount}`}
               </span>
               <span className="rounded-full px-2">
                 💬 {`${reactionsCount.comments}`}

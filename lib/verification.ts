@@ -34,9 +34,7 @@ export function hashToken(token: string): string {
   const secret = process.env.EMAIL_TOKEN_HMAC_SECRET;
 
   if (!secret) {
-    throw new Error(
-      "EMAIL_TOKEN_HMAC_SECRET 環境変数が設定されていません"
-    );
+    throw new Error("EMAIL_TOKEN_HMAC_SECRET 環境変数が設定されていません");
   }
 
   return crypto.createHmac("sha256", secret).update(token).digest("hex");

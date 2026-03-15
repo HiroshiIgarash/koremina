@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
-import { updateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 const updateSeenUsers = async (
   postId: string,
@@ -45,7 +45,7 @@ const updateSeenUsers = async (
           },
         });
 
-  updateTag("get-post");
+  revalidateTag("get-post", "minutes");
   return seenUsers;
 };
 

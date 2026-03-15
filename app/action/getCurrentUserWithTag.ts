@@ -1,9 +1,13 @@
 "use server";
 
 import { auth } from "@/auth";
-import prisma from "@/lib/db";
-import { unstable_cache } from "next/cache";
+import getUserById from "./getUserById";
 
+/**
+ * 認証済みユーザーの情報をキャッシュ付きで取得する
+ * getUserById が "use cache" でキャッシュされるため、
+ * 実質的にユーザー情報はキャッシュから取得される
+ */
 const getCurrentUserWithTag = async () => {
   const session = await auth();
 
@@ -11,25 +15,7 @@ const getCurrentUserWithTag = async () => {
     return null;
   }
 
-  const getCurrentUser = unstable_cache(
-    async session => {
-      const user = await prisma.user.findUnique({
-        where: {
-          id: session.user.id,
-        },
-        include: {
-          mostFavoriteLiver: true,
-          favoriteLivers: true,
-        },
-      });
-
-      return user;
-    },
-    [],
-    { tags: ["get-current-user"], revalidate: 1 }
-  );
-
-  return await getCurrentUser(session);
+  return getUserById(session.user.id);
 };
 
 export default getCurrentUserWithTag;

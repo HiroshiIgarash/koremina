@@ -1,5 +1,5 @@
 import prisma from "@/lib/db";
-import { unstable_cache } from "next/cache";
+import { cacheTag, cacheLife } from "next/cache";
 
 interface getPostsProps {
   take?: number;
@@ -7,52 +7,49 @@ interface getPostsProps {
   filterLiver?: string;
 }
 
-const getPosts = unstable_cache(
-  async ({ take, skip, filterLiver }: getPostsProps = {}) => {
-    const posts = await prisma.video.findMany({
-      where: filterLiver
-        ? {
-            liver: {
-              some: {
-                id: filterLiver,
-              },
-            },
-          }
-        : {},
-      orderBy: {
-        postedAt: "desc",
-      },
-      include: {
-        postedUser: true,
-        liver: {
-          select: {
-            name: true,
-          },
-        },
-        Bookmark: true,
-        seenUsers: true,
-        _count: {
-          select: {
-            good: true,
-            bad: true,
-            love: true,
-            funny: true,
-            cry: true,
-            angel: true,
-            comments: true,
-          },
-        },
-      },
-      take,
-      skip,
-    });
+const getPosts = async ({ take, skip, filterLiver }: getPostsProps = {}) => {
+  "use cache";
+  cacheTag("get-post");
+  cacheLife("minutes");
 
-    return posts;
-  },
-  [],
-  {
-    tags: ["get-post"],
-  }
-);
+  const posts = await prisma.video.findMany({
+    where: filterLiver
+      ? {
+          liver: {
+            some: {
+              id: filterLiver,
+            },
+          },
+        }
+      : {},
+    orderBy: {
+      postedAt: "desc",
+    },
+    include: {
+      postedUser: true,
+      liver: {
+        select: {
+          name: true,
+        },
+      },
+      _count: {
+        select: {
+          good: true,
+          bad: true,
+          love: true,
+          funny: true,
+          cry: true,
+          angel: true,
+          comments: true,
+          Bookmark: true,
+        },
+      },
+    },
+    take,
+    skip,
+  });
+
+  return posts;
+};
 
 export default getPosts;

@@ -23,10 +23,28 @@ export async function generateMetadata(props: PageProps<"/post/[postId]">) {
   };
 }
 
+/**
+ * リアクション + 通報ボタンのセクション
+ * auth() を Suspense 内に閉じ込める
+ */
+const ReactionAndReportSection = async ({ postId }: { postId: string }) => {
+  const session = await auth();
+  return (
+    <div className="text-right">
+      <ReactionButtonList postId={postId} />
+      {session && (
+        <ReportDialog postId={postId}>
+          <button className="text-sm text-destructive mt-2 underline underline-offset-2">
+            通報する
+          </button>
+        </ReportDialog>
+      )}
+    </div>
+  );
+};
+
 const Page = async (props: PageProps<"/post/[postId]">) => {
   const { postId } = await props.params;
-
-  const session = await auth();
 
   return (
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
@@ -45,16 +63,7 @@ const Page = async (props: PageProps<"/post/[postId]">) => {
               </Suspense>
             </div>
             <Suspense fallback={<SkeletonReactionButtonList />}>
-              <div className="text-right">
-                <ReactionButtonList postId={postId} />
-                {session && (
-                  <ReportDialog postId={postId}>
-                    <button className="text-sm text-destructive mt-2 underline underline-offset-2">
-                      通報する
-                    </button>
-                  </ReportDialog>
-                )}
-              </div>
+              <ReactionAndReportSection postId={postId} />
             </Suspense>
           </div>
         </div>

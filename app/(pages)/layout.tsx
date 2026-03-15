@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import MobileFixedFooter from "@/components/MobileFixedFooter";
 import { Toaster } from "@/components/ui/sonner";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Suspense } from "react";
 
 export const noto = Noto_Sans_JP({ preload: true, subsets: ["latin"] });
 
@@ -47,7 +48,9 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
-            <MobileFixedFooter />
+            <Suspense>
+              <MobileFixedFooter />
+            </Suspense>
           </div>
           <Toaster position="top-center" richColors />
         </ThemeProvider>

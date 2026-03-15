@@ -18,8 +18,11 @@ const getBookmarksById = async ({ take, skip, userId }: IParam) => {
       post: {
         include: {
           postedUser: true,
-          liver: true,
-          Bookmark: true,
+          liver: {
+            select: {
+              name: true,
+            },
+          },
           _count: {
             select: {
               good: true,
@@ -29,6 +32,7 @@ const getBookmarksById = async ({ take, skip, userId }: IParam) => {
               cry: true,
               angel: true,
               comments: true,
+              Bookmark: true,
             },
           },
           seenUsers: true,

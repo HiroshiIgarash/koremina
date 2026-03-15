@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { cacheTag, cacheLife } from "next/cache";
 import dayjs from "@/utils/dayjs";
 
 interface getBirthdayLiversProps {
@@ -30,7 +31,7 @@ const getBirthdayLivers = async (
     });
     return livers;
   } catch (error) {
-    console.log(error);
+    console.error("[getBirthdayLivers] エラー:", error);
   }
 };
 
@@ -40,6 +41,10 @@ const getBirthdayLivers = async (
  * いない場合は最も近い未来の誕生日のライバーを返す
  */
 export const getNearestBirthdayLivers = async () => {
+  "use cache";
+  cacheTag("get-birthday-livers");
+  cacheLife("hours");
+
   try {
     const today = dayjs().tz();
     const currentMonth = today.month() + 1;
@@ -107,7 +112,7 @@ export const getNearestBirthdayLivers = async () => {
       isToday: false,
     };
   } catch (error) {
-    console.log(error);
+    console.error("[getBirthdayLivers] エラー:", error);
     return {
       livers: [],
       daysUntil: 0,
