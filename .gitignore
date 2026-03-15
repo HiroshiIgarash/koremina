@@ -36,6 +36,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Prisma v7 生成コード
+/prisma/generated
+
 # next-sitemap
 /public/robots.txt
 /public/sitemap*.xml
