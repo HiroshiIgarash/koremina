@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2026-03-22" className="font-bold">
+              2026/03/22
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                X（Twitter）アカウントでのログインができない不具合を修正しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2026-03-15" className="font-bold">
               2026/03/15
             </time>
