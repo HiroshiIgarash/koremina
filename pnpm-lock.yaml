@@ -145,7 +145,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.5
       '@tailwindcss/postcss':
-        specifier: ^4.2.0
+        specifier: ^4.2.1
         version: 4.2.1
       '@testing-library/jest-dom':
         specifier: ^6.8.0
@@ -208,7 +208,7 @@ importers:
         specifier: ^7.0.0
         version: 7.5.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       tailwindcss:
-        specifier: ^4.2.0
+        specifier: ^4.2.1
         version: 4.2.1
       ts-node:
         specifier: ^10.9.2
