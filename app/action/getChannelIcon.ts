@@ -1,15 +1,17 @@
 "use server";
-interface getChannelIconProps {
+
+interface GetChannelIconProps {
   channelId: string;
   quality?: "default" | "medium" | "high";
 }
 
+type GetChannelIconResult = string | { error: string };
+
 const getChannelIcon = async ({
   channelId,
   quality = "default",
-}: getChannelIconProps) => {
+}: GetChannelIconProps): Promise<GetChannelIconResult> => {
   const searchParams = new URLSearchParams();
-
   searchParams.set("part", "snippet");
   searchParams.set("key", process.env.YT_API_KEY!);
   if (channelId.startsWith("@")) {
@@ -19,59 +21,32 @@ const getChannelIcon = async ({
   }
 
   try {
-    let res = await fetch(
+    const res = await fetch(
       `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
       {
-        cache: "force-cache",
         next: {
-          revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
+          revalidate: 60 * 60 * 24 * 30 /** 1ヶ月ごとにrevalidate */,
+          tags: [`channel-icon-${channelId}`],
         },
       }
     );
-    if (res.status === 200) {
-      const data = await res.json();
-      const imageURL = data.items[0].snippet.thumbnails[quality].url;
 
-      // サムネイルURLが有効かどうかチェック
-      if (await isURLAccessible(imageURL)) {
-        return imageURL;
-      }
-
-      // 再フェッチ
-      res = await fetch(
-        `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
-        {
-          cache: "reload",
-          next: {
-            revalidate: 60 * 60 * 24 /** 24時間ごとにrevalidate */,
-          },
-        }
-      );
-      if (res.status === 200) {
-        const data = await res.json();
-        const imageURL = data.items[0].snippet.thumbnails[quality].url;
-
-        // 最悪404になるようにここでは有効性を確認しない
-        return imageURL;
-      }
-
-      return imageURL;
-    } else {
-      throw new Error();
+    if (!res.ok) {
+      throw new Error(`YouTube API エラー: status ${res.status}`);
     }
+
+    const data = await res.json();
+
+    // チャンネルが存在しない場合は items が空配列になる
+    const url = data.items?.[0]?.snippet?.thumbnails?.[quality]?.url;
+    if (!url) {
+      throw new Error(`アイコンURLが取得できません: ${channelId}`);
+    }
+
+    return url as string;
   } catch (error) {
     console.error("[getChannelIcon] エラー:", error);
     return { error: "Failed to get channel icon" };
-  }
-};
-
-// URLの有効性を確認するヘルパー関数
-const isURLAccessible = async (url: string) => {
-  try {
-    const res = await fetch(url, { method: "HEAD" });
-    return res.ok; // ステータスが200系ならtrue
-  } catch {
-    return false;
   }
 };
 
