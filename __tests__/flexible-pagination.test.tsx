@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FlexiblePagination from "@/components/shared/FlexiblePagination";
+import { Route } from "next";
 
 // URLごとのページネーション表示をテストするためのモックデータ
 const mockPaginationData = {
@@ -8,7 +9,7 @@ const mockPaginationData = {
   currentPage: 3,
   totalItems: 100,
   itemsPerPage: 10,
-  generateHref: (page: number) => `/test?page=${page}`,
+  generateHref: (page: number) => `/test?page=${page}` as Route,
 };
 
 describe("FlexiblePaginationコンポーネント", () => {
@@ -70,7 +71,9 @@ describe("FlexiblePaginationコンポーネント", () => {
   });
 
   test("generateHref関数が正しく呼ばれること", () => {
-    const mockGenerateHref = jest.fn((page: number) => `/custom/${page}`);
+    const mockGenerateHref = jest.fn(
+      (page: number) => `/custom/${page}` as Route
+    );
     const customData = {
       ...mockPaginationData,
       generateHref: mockGenerateHref,

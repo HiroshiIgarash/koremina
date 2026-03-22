@@ -3,7 +3,7 @@
 import { revalidateTag } from "next/cache";
 
 const revalidateChannelIcon = async (channelId: string): Promise<void> => {
-  revalidateTag(`channel-icon-${channelId}`);
+  revalidateTag(`channel-icon-${channelId}`, "max");
 };
 
 export default revalidateChannelIcon;
