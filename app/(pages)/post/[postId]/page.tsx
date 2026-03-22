@@ -11,6 +11,7 @@ import YoutubeLinkButton from "@/components/feature/post/YoutubeLinkButton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCachedPostById } from "./_utils/functions";
 import SkeletonPostDetailCard from "@/components/feature/post/SkeletonPostDetailCard";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata(props: PageProps<"/post/[postId]">) {
   const { postId } = await props.params;
@@ -45,6 +46,9 @@ const ReactionAndReportSection = async ({ postId }: { postId: string }) => {
 
 const Page = async (props: PageProps<"/post/[postId]">) => {
   const { postId } = await props.params;
+  const post = await getCachedPostById(postId);
+
+  if (!post) notFound();
 
   return (
     <div className="grid md:grid-cols-2 max-w-7xl mx-auto md:gap-x-4 gap-y-4 px-4 w-full">
