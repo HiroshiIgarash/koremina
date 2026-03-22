@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
@@ -96,7 +95,11 @@ const PostForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      await axios.post("/api/post", values).then(() => {
+      await fetch("/api/post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }).then(() => {
         toast.success("投稿が完了しました。");
         router.push("/");
         router.refresh();

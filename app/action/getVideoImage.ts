@@ -1,15 +1,11 @@
 "use server";
 
-import axios from "axios";
-
 const getVideoImage = async (id: string) => {
-  const res = await axios
-    .get(`https://i.ytimg.com/vi/${id}/hqdefault.jpg`)
-    .catch(() => {
-      return null;
-    });
+  const res = await fetch(`https://i.ytimg.com/vi/${id}/hqdefault.jpg`).catch(
+    () => null
+  );
 
-  if (!res) {
+  if (!res || !res.ok) {
     return null;
   }
 
