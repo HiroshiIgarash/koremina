@@ -36,7 +36,6 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@vercel/analytics": "^2.0.0",
     "@vercel/blob": "^2.0.0",
-    "axios": "^1.12.2",
     "blueimp-load-image": "^5.16.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
