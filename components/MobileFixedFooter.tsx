@@ -15,7 +15,7 @@ const MobileFixedFooter = async () => {
 
   return (
     <>
-      <div className="md:hidden sticky bottom-0 border-t shadow-2xl w-full bg-background">
+      <div className="md:hidden sticky bottom-0 border-t shadow-2xl w-full bg-background z-20">
         <div className="flex h-16">
           <Link
             href="/"
