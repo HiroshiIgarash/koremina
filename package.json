@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "prisma generate --sql",
+    "postinstall": "prisma generate",
     "dev": "next dev --turbo",
     "prisma:studio:dev": "export POSTGRES_PRISMA_URL=$(dotenv -- bash -c 'echo $POSTGRES_LOCAL_URL') && prisma studio",
     "dev:dbprod": "next dev",
