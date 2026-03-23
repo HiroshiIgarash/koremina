@@ -17,7 +17,7 @@ jobs:
     services:
       postgres:
         # CI専用の一時的なローカルコンテナ。外部に公開されず、ジョブ終了後に破棄される。
-        image: postgres:16
+        image: postgres:17
         env:
           POSTGRES_USER: admin
           POSTGRES_PASSWORD: password
