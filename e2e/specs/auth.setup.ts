@@ -71,7 +71,7 @@ setup("認証状態のセットアップ", async ({ page }) => {
         httpOnly: true,
         secure: false,
         sameSite: "Lax",
-        expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // 24時間
+        expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // 24時間（CI実行には十分な有効期限）
       },
     ]);
 
