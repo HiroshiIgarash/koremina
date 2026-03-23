@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import { Reaction } from "@/types/type";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import getCurrentUser from "./getCurrentUser";
 
 // サーバーアクションは外部から任意の引数で呼び出せるため、ランタイムで許可値を検証する
@@ -57,8 +57,8 @@ const updateReaction = async (
     data: updateData,
   });
 
-  revalidateTag("get-post", "minutes");
-  revalidateTag(`get-reactions:${postId}`, "seconds");
+  updateTag("get-post");
+  updateTag(`get-reactions:${postId}`);
 };
 
 export default updateReaction;
