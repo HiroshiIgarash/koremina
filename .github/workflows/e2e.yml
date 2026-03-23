@@ -1,0 +1,118 @@
+name: E2E Tests
+
+on:
+  pull_request:
+    branches: [develop]
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    # [skip-e2e] または [WIP] をタイトルに含むPRはスキップ
+    if: |
+      !contains(github.event.pull_request.title, '[skip-e2e]') &&
+      !contains(github.event.pull_request.title, '[WIP]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        # CI専用の一時的なローカルコンテナ。外部に公開されず、ジョブ終了後に破棄される。
+        image: postgres:17
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: koremina_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: Verify AUTH_SECRET_E2E is configured
+        env:
+          SECRET_CHECK: ${{ secrets.AUTH_SECRET_E2E }}
+        run: |
+          if [ -z "$SECRET_CHECK" ]; then
+            echo "::error::AUTH_SECRET_E2E が GitHub Secrets に設定されていません。本番の AUTH_SECRET との共有を避けるため、専用シークレットを発行してください。"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(pnpm exec playwright --version | awk '{print $2}')" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ steps.playwright-version.outputs.version }}-chromium
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install Playwright system deps (cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
+
+      - name: Push schema to test DB
+        run: npx prisma db push
+        env:
+          DATABASE_URL: postgresql://admin:password@localhost:5432/koremina_test
+
+      - name: Generate Prisma SQL client
+        run: npx prisma generate --sql
+        env:
+          DATABASE_URL: postgresql://admin:password@localhost:5432/koremina_test
+          DATABASE_URL_UNPOOLED: postgresql://admin:password@localhost:5432/koremina_test
+
+      - name: Run E2E tests
+        run: pnpm test:e2e
+        env:
+          DATABASE_URL: postgresql://admin:password@localhost:5432/koremina_test
+          DATABASE_URL_UNPOOLED: postgresql://admin:password@localhost:5432/koremina_test
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET_E2E }}
+          AUTH_GOOGLE_ID: "test-google-id"
+          AUTH_GOOGLE_SECRET: "test-google-secret"
+          AUTH_TWITTER_ID: "test-twitter-id"
+          AUTH_TWITTER_SECRET: "test-twitter-secret"
+          YT_API_KEY: "test-youtube-api-key"
+          BLOB_READ_WRITE_TOKEN: "vercel_blob_rw_test"
+          MAILER_USER: "test@example.com"
+          MAILER_PASS: "test-password"
+          # CI専用のダミー値。CI外部ネットワークから到達不可能な一時DBに対してのみ使用される。
+          EMAIL_TOKEN_HMAC_SECRET: "test-hmac-secret-at-least-32-characters-xxxx"
+          NEXT_PUBLIC_BASE_URL: "http://localhost:3000"
+          CI: "true"
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      - name: Upload test traces
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-traces
+          path: test-results/
+          retention-days: 3

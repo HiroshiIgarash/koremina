@@ -49,3 +49,9 @@ postgres_dev
 .vercel
 .serena
 .claude/settings.local.json
+
+# Playwright E2E
+.auth/
+playwright-report/
+test-results/
+.env.test

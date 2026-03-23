@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node16",
+    "paths": {
+      "@/*": ["./*"],
+      "@prisma/client": ["./prisma/generated/prisma/client/client"],
+      "@prisma/client/*": ["./prisma/generated/prisma/client/*"]
+    }
+  },
+  "include": ["e2e/**/*.ts", "playwright.config.ts"]
+}
