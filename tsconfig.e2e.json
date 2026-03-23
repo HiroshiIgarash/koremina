@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "paths": {
       "@/*": ["./*"],
       "@prisma/client": ["./prisma/generated/prisma/client/client"],
