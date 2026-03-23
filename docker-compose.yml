@@ -10,3 +10,13 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./postgres_dev:/var/lib/postgresql/data
+
+  db-test:
+    image: "postgres"
+    container_name: koremina_test
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: koremina_test
