@@ -76,6 +76,12 @@ jobs:
         env:
           DATABASE_URL: postgresql://admin:password@localhost:5432/koremina_test
 
+      - name: Generate Prisma SQL client
+        run: npx prisma generate --sql
+        env:
+          DATABASE_URL: postgresql://admin:password@localhost:5432/koremina_test
+          DATABASE_URL_UNPOOLED: postgresql://admin:password@localhost:5432/koremina_test
+
       - name: Run E2E tests
         run: pnpm test:e2e
         env:
