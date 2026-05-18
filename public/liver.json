@@ -2588,5 +2588,85 @@
     "isOverseas": 0,
     "birthMonth": 10,
     "birthDate": 9
+  },
+  {
+    "name": "Rei7",
+    "aliasFirst": "れいな",
+    "aliasSecond": "",
+    "channelHandle": "@Rei7_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDate": 27
+  },
+  {
+    "name": "男虎",
+    "aliasFirst": "おのとら",
+    "aliasSecond": "",
+    "channelHandle": "@Onotora_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 8,
+    "birthDate": 20
+  },
+  {
+    "name": "御子神琴音",
+    "aliasFirst": "みこがみことね",
+    "aliasSecond": "",
+    "channelHandle": "@MikogamiKotone_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 3,
+    "birthDate": 9
+  },
+  {
+    "name": "塚原大地",
+    "aliasFirst": "つかはらだいち",
+    "aliasSecond": "",
+    "channelHandle": "@TsukaharaDaichi_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDate": 18
+  },
+  {
+    "name": "千凛あゆむ",
+    "aliasFirst": "せんりあゆむ",
+    "aliasSecond": "",
+    "channelHandle": "@SenriAyumu_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 1,
+    "birthDate": 5
+  },
+  {
+    "name": "九里詠太",
+    "aliasFirst": "くりえいた",
+    "aliasSecond": "",
+    "channelHandle": "@KuriEita_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 12,
+    "birthDate": 19
+  },
+  {
+    "name": "小々波いるか",
+    "aliasFirst": "ここなみいるか",
+    "aliasSecond": "",
+    "channelHandle": "@KokonamiIruka_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 9,
+    "birthDate": 12
+  },
+  {
+    "name": "レヨン",
+    "aliasFirst": "れよん",
+    "aliasSecond": "",
+    "channelHandle": "@Rayon_Y4T4",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDate": 23
   }
 ]
