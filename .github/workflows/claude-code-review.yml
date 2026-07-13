@@ -43,8 +43,9 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_bots: "renovate" # renovateボットのみ許可
 
-          # Optional: Specify model (defaults to Claude Sonnet 4, uncomment for Claude Opus 4.1)
-          # model: "claude-opus-4-1-20250805"
+          # アクションのデフォルトモデル claude-sonnet-4-20250514 は 2026-06-15 に廃止され
+          # API が 404 を返すため、後継モデルを明示的に指定する
+          model: "claude-sonnet-5"
 
           # Direct prompt for automated review (no @claude mention needed)
           direct_prompt: |
