@@ -40,8 +40,9 @@ jobs:
           additional_permissions: |
             actions: read
 
-          # Optional: Specify model (defaults to Claude Sonnet 4, uncomment for Claude Opus 4.1)
-          # model: "claude-opus-4-1-20250805"
+          # アクションのデフォルトモデル claude-sonnet-4-20250514 は 2026-06-15 に廃止され
+          # API が 404 を返すため、後継モデルを明示的に指定する
+          model: "claude-sonnet-5"
 
           # Optional: Customize the trigger phrase (default: @claude)
           # trigger_phrase: "/claude"
