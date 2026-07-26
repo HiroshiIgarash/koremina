@@ -58,7 +58,7 @@ const AvatarDropZone = ({ file, setFile, disabled }: AvatarDropZoneProps) => {
       </div>
       {isError && (
         <p className="text-sm text-destructive">
-          もう一度画像を選択してください。複数選択されていたか、画像ファイルでなかった可能性があります。
+          画像ファイルではありません。もう一度選択してください。
         </p>
       )}
     </>

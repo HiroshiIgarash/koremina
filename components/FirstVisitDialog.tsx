@@ -1,28 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
 const FirstVisitDialog = () => {
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-    } else {
-      if (localStorage.getItem("isFirstVisit") === "false") {
-        setIsFirstVisit(false);
-      }
-    }
-
-    return () => {
-      if (isMounted) {
-        setLocalStorage();
-      }
-    };
-  }, [isMounted]);
+  const [isFirstVisit, setIsFirstVisit] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      localStorage.getItem("isFirstVisit") !== "false"
+  );
 
   const setLocalStorage = () => {
     setIsFirstVisit(false);
@@ -31,7 +19,7 @@ const FirstVisitDialog = () => {
 
   return (
     <>
-      {isMounted && isFirstVisit && (
+      {isFirstVisit && (
         <Dialog defaultOpen onOpenChange={setLocalStorage}>
           <DialogContent className="sm:max-w-md max-w-[90%]">
             <DialogHeader>
@@ -50,7 +38,9 @@ const FirstVisitDialog = () => {
             </div>
             <div className="text-center mt-8">
               <Button asChild size="lg">
-                <Link href="/post">あなたのおすすめ動画を投稿する</Link>
+                <Link href="/post" onClick={setLocalStorage}>
+                  あなたのおすすめ動画を投稿する
+                </Link>
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
                 （GoogleもしくはXアカウントでログインできます）
