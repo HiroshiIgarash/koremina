@@ -11,6 +11,16 @@ const Page = () => {
         <h1 className="text-3xl font-bold mb-16">更新履歴</h1>
         <div className="space-y-8">
           <div>
+            <time dateTime="2026-07-26" className="font-bold">
+              2026/07/26
+            </time>
+            <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+              <li>
+                「ぷりん・らら・もーど」「ぽめろ・ぱんち」の2名を追加しました。
+              </li>
+            </ul>
+          </div>
+          <div>
             <time dateTime="2026-05-18" className="font-bold">
               2026/05/18
             </time>
