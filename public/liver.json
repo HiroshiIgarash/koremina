@@ -2668,5 +2668,25 @@
     "isOverseas": 0,
     "birthMonth": 2,
     "birthDate": 23
+  },
+  {
+    "name": "ぷりん・らら・もーど",
+    "aliasFirst": "ぷりん・らら・もーど",
+    "aliasSecond": "",
+    "channelHandle": "@PurinLalaMode",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 2,
+    "birthDate": 25
+  },
+  {
+    "name": "ぽめろ・ぱんち",
+    "aliasFirst": "ぽめろ・ぱんち",
+    "aliasSecond": "",
+    "channelHandle": "@PomeloPunch",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDate": 5
   }
 ]
