@@ -2,14 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const Page = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const { resolvedTheme } = useTheme();
   const searchParams = useSearchParams();
 
   const callbackUrl = searchParams.get("callbackUrl") || undefined;
@@ -17,12 +13,6 @@ const Page = () => {
   const handleLogin = (provider: "google" | "twitter") => {
     signIn(provider, { callbackUrl });
   };
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
 
   return (
     <>
@@ -52,15 +42,18 @@ const Page = () => {
               className="rounded-full w-full"
             >
               <Image
-                src={
-                  resolvedTheme === "dark"
-                    ? "/x-logo-white.png"
-                    : "/x-logo-black.png"
-                }
+                src="/x-logo-black.png"
                 alt=""
                 width={16}
                 height={16}
-                className="mr-2 w-4 aspect-square"
+                className="mr-2 w-4 aspect-square dark:hidden"
+              />
+              <Image
+                src="/x-logo-white.png"
+                alt=""
+                width={16}
+                height={16}
+                className="mr-2 w-4 aspect-square hidden dark:block"
               />
               Xでログイン
             </Button>
