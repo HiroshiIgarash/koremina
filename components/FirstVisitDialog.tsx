@@ -6,8 +6,6 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 
 const FirstVisitDialog = () => {
-  // SSR では常に false（サーバーに localStorage が無いため）。
-  // Dialog はポータル描画なので hydration mismatch は起きない
   const [isFirstVisit, setIsFirstVisit] = useState(
     () =>
       typeof window !== "undefined" &&
@@ -40,7 +38,6 @@ const FirstVisitDialog = () => {
             </div>
             <div className="text-center mt-8">
               <Button asChild size="lg">
-                {/* ダイアログを閉じずに遷移した場合も表示済みとして記録する */}
                 <Link href="/post" onClick={setLocalStorage}>
                   あなたのおすすめ動画を投稿する
                 </Link>

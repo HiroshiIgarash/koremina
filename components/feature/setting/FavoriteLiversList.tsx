@@ -7,8 +7,6 @@ import getCurrentUserWithTag from "@/app/action/getCurrentUserWithTag";
  * データ取得を含むため、Suspenseで囲んで使用する
  */
 const FavoriteLiversList = async () => {
-  // JSX を try 内で構築するとレンダリング時エラーが catch されないため、
-  // データ取得のみを try で囲む（react-hooks/error-boundaries）
   let currentUser;
   try {
     currentUser = await getCurrentUserWithTag();

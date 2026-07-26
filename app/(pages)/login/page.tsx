@@ -41,7 +41,6 @@ const Page = () => {
               onClick={() => handleLogin("twitter")}
               className="rounded-full w-full"
             >
-              {/* テーマ別ロゴは CSS で切替（hydration mismatch 回避のため JS 判定しない） */}
               <Image
                 src="/x-logo-black.png"
                 alt=""
