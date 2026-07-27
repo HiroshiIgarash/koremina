@@ -46,6 +46,12 @@ const GroupRegisterButton = ({ listId }: RegisterButtonProps) => {
           case "isRetire":
             value = !!Number(value);
             break;
+          case "birthMonth":
+            value = value ? Number(value) : null;
+            break;
+          case "birthDate":
+            value = value ? Number(value) : null;
+            break;
         }
         pairs.push([key, value]);
       });
