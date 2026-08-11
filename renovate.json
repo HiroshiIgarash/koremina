@@ -2,8 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices"],
   "timezone": "Asia/Tokyo",
-  "schedule": [
-    "* 8 * * 1-5",
-    "* * * * 0,6"
+  "schedule": ["* 8 * * 1-5", "* * * * 0,6"],
+  "packageRules": [
+    {
+      "description": "本番の Neon が PostgreSQL 16 系のため、ローカル開発用 docker イメージも 16 系に固定する。16 系内の digest 更新は通常どおり受け取る",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["postgres"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
   ]
 }
