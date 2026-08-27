@@ -2,7 +2,7 @@ version: "3"
 services:
   db:
     # 既存データ(./postgres_dev)がPostgreSQL 16のため16系に固定（18はデータ配置が非互換）
-    image: "postgres:16@sha256:11a9d238fbb48bab14599c57e41123254452b1a2d93c6c8595bce96f346bd082"
+    image: "postgres:16@sha256:f1c3376c26f2609ab9f29f71f824103fe2fcd8ee0346485cb6122a4f93df6f94"
     container_name: koremina_dev
     ports:
       - "5432:5432"
