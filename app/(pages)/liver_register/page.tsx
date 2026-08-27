@@ -9,6 +9,7 @@ import updateLiver from "./updateLiver";
 import { ComponentPropsWithoutRef } from "react";
 import { Liver } from "@prisma/client";
 import { z } from "zod";
+import { normalizeLiverName } from "@/lib/normalizeLiverName";
 
 const Page = async () => {
   const livers = await getLivers();
@@ -16,6 +17,15 @@ const Page = async () => {
   if (process.env.NODE_ENV === "production") {
     notFound();
   }
+
+  // liver.json のどのエントリとも名前が一致しないDB行。過去に不可視文字の
+  // 表記揺れで照合が外れ、重複レコードが放置されたため明示的に警告する
+  const orphanLivers = livers.filter(
+    dbLiver =>
+      !liverData.some(
+        l => normalizeLiverName(l.name) === normalizeLiverName(dbLiver.name)
+      )
+  );
 
   return (
     <div className="px-4 w-full max-w-7xl mx-auto">
@@ -27,6 +37,24 @@ const Page = async () => {
         <br />
         ライバーを更新、登録するときはliverData.jsonで編集したのち、このページでDBのデータを更新すること。
       </p>
+      {orphanLivers.length > 0 && (
+        <div className="mb-16 border-2 border-red-600 p-4">
+          <h2 className="text-xl font-bold text-red-600 mb-2">
+            liverData.jsonに存在しないDBレコード
+          </h2>
+          <p className="mb-2 text-sm">
+            名前の表記揺れや重複登録の可能性があります。内容を確認して対処してください。
+          </p>
+          <ul className="text-sm space-y-1">
+            {orphanLivers.map(liver => (
+              <li key={liver.id}>
+                {liver.name}（id: {liver.id} / channelHandle:{" "}
+                {liver.channelHandle || "未設定"}）
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <h2 className="text-xl font-bold mt-4 mb-2">在籍にじさんじライバー</h2>
       <GroupRegisterButton listId="nijisanji" />
       <ul id="nijisanji" className="space-y-2">
@@ -77,8 +105,14 @@ const LiverFormItem = ({
   liver: (typeof liverData)[0];
   dbLivers: Awaited<ReturnType<typeof getLivers>>;
 }) => {
-  const liver_db = livers.find(l => l.name === liver.name);
-  const isLiverDuplicate = livers.filter(l => l.name === liver.name).length > 1;
+  // 不可視文字（NBSP等）の表記揺れで照合が外れないよう正規化して比較する
+  const liver_db = livers.find(
+    l => normalizeLiverName(l.name) === normalizeLiverName(liver.name)
+  );
+  const isLiverDuplicate =
+    livers.filter(
+      l => normalizeLiverName(l.name) === normalizeLiverName(liver.name)
+    ).length > 1;
   return (
     <li
       key={liver.name}
@@ -97,11 +131,7 @@ const LiverFormItem = ({
           className="w-12"
           defaultValue={liverData.findIndex(l => l.name === liver.name)}
         />
-        <LiverFormInput
-          name="id"
-          defaultValue={livers.find(l => l.name === liver.name)?.id}
-          readOnly
-        />
+        <LiverFormInput name="id" defaultValue={liver_db?.id} readOnly />
         <LiverFormInput name="name" liverDB={liver_db} liverJSON={liver} />
         <LiverFormInput
           name="aliasFirst"

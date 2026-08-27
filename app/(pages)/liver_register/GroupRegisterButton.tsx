@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Liver } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { useTransition } from "react";
+import { toast } from "sonner";
 
 interface RegisterButtonProps {
   listId?: string;
@@ -46,6 +47,12 @@ const GroupRegisterButton = ({ listId }: RegisterButtonProps) => {
           case "isRetire":
             value = !!Number(value);
             break;
+          case "birthMonth":
+            value = value ? Number(value) : null;
+            break;
+          case "birthDate":
+            value = value ? Number(value) : null;
+            break;
         }
         pairs.push([key, value]);
       });
@@ -53,10 +60,14 @@ const GroupRegisterButton = ({ listId }: RegisterButtonProps) => {
       liversJSON.push(obj);
     });
 
-    console.log(liversJSON);
-
     startTransition(async () => {
-      await updateLivers(liversJSON);
+      const { count, skipped } = await updateLivers(liversJSON);
+      if (skipped > 0) {
+        toast.warning(
+          `${skipped}件をスキップしました（DBに未登録の行）。新規登録は各行の登録ボタンから行ってください。`
+        );
+      }
+      toast.success(`${count}件を更新しました。`);
     });
   };
 
