@@ -2688,5 +2688,25 @@
     "isOverseas": 0,
     "birthMonth": 11,
     "birthDate": 5
+  },
+  {
+    "name": "神永タイガ",
+    "aliasFirst": "かみながたいが",
+    "aliasSecond": "",
+    "channelHandle": "@KaminagaTaiga",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 11,
+    "birthDate": 22
+  },
+  {
+    "name": "山田龍一郎",
+    "aliasFirst": "やまだりゅういちろう",
+    "aliasSecond": "",
+    "channelHandle": "@YamadaRyuichiro",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 7,
+    "birthDate": 6
   }
 ]
