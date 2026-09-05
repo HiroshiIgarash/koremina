@@ -58,22 +58,6 @@ export default function Home() {
       <Suspense fallback={null}>
         <AuthSection />
       </Suspense>
-      {/* Xログイン復旧お知らせバナー */}
-      <div className="w-full px-4 mb-6 max-w-7xl mx-auto">
-        <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-950 border border-green-400 dark:border-green-600 rounded-lg text-green-800 dark:text-green-200">
-          <span className="text-xl shrink-0">✅</span>
-          <div>
-            <p className="font-bold">
-              【復旧情報】X（Twitter）ログインの不具合が解消されました
-            </p>
-            <p className="text-sm mt-1">
-              X（Twitter）アカウントでのログインが正常にご利用いただけるようになりました。
-              <br />
-              ご不便をおかけして申し訳ございませんでした。
-            </p>
-          </div>
-        </div>
-      </div>
       <div className="mb-10 text-center">
         <Image
           src="/kv_sp.png"
