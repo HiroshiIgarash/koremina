@@ -1,4 +1,4 @@
-"use server";
+import { cacheLife, cacheTag } from "next/cache";
 
 interface GetChannelIconProps {
   channelId: string;
@@ -11,6 +11,12 @@ const getChannelIcon = async ({
   channelId,
   quality = "default",
 }: GetChannelIconProps): Promise<GetChannelIconResult> => {
+  "use cache";
+  // revalidateChannelIcon の updateTag と対応させる
+  cacheTag(`channel-icon-${channelId}`);
+  // 旧 fetch の revalidate（1ヶ月）に相当するプリセット
+  cacheLife("max");
+
   const searchParams = new URLSearchParams();
   searchParams.set("part", "snippet");
   searchParams.set("key", process.env.YT_API_KEY!);
@@ -22,13 +28,7 @@ const getChannelIcon = async ({
 
   try {
     const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`,
-      {
-        next: {
-          revalidate: 60 * 60 * 24 * 30 /** 1ヶ月ごとにrevalidate */,
-          tags: [`channel-icon-${channelId}`],
-        },
-      }
+      `https://www.googleapis.com/youtube/v3/channels?${searchParams.toString()}`
     );
 
     if (!res.ok) {
