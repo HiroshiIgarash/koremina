@@ -3,7 +3,7 @@
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
 import { NotificationType } from "@/types/type";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 interface updateNotificationProps {
   type: NotificationType;
@@ -64,7 +64,7 @@ const updateNotification = async ({
     }
 
     // upsert成功後にキャッシュを無効化（tryブロック内で実行し、エラー時の空タグrevalidateを防ぐ）
-    revalidateTag(`get-notifications-${post.postedUserId}`, "seconds");
+    updateTag(`get-notifications-${post.postedUserId}`);
   } catch (error) {
     console.error("[updateNotification] エラー:", error);
   }
