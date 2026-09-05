@@ -4,7 +4,8 @@ import { cacheTag, cacheLife } from "next/cache";
 const getReactionsByPostId = async (id: string) => {
   "use cache";
   cacheTag(`get-reactions:${id}`, "get-post");
-  cacheLife("seconds");
+  // タグ無効化（updateReaction）で即時更新されるため、時間ベースの再検証は不要
+  cacheLife("max");
   const post = await prisma.video.findUnique({
     where: {
       id,

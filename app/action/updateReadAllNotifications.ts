@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import prisma from "@/lib/db";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 const updateReadAllNotifications = async () => {
   const session = await auth();
 
@@ -20,7 +20,7 @@ const updateReadAllNotifications = async () => {
     },
   });
 
-  revalidateTag(`get-notifications-${session.user.id}`, "seconds");
+  updateTag(`get-notifications-${session.user.id}`);
 };
 
 export default updateReadAllNotifications;

@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import getCurrentUser from "./getCurrentUser";
 
 interface deleteCommentProps {
@@ -33,7 +33,7 @@ const deleteComment = async ({ commentId, postId }: deleteCommentProps) => {
     };
   }
 
-  revalidateTag(`get-comments:${postId}`, "seconds");
+  updateTag(`get-comments:${postId}`);
 };
 
 export default deleteComment;

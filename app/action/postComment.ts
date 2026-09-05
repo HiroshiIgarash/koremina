@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { auth } from "@/auth";
 
 const postComment = async (postId: string, formData: FormData) => {
@@ -41,7 +41,7 @@ const postComment = async (postId: string, formData: FormData) => {
     };
   }
 
-  revalidateTag(`get-comments:${postId}`, "seconds");
+  updateTag(`get-comments:${postId}`);
 };
 
 export default postComment;

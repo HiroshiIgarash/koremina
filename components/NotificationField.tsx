@@ -7,7 +7,8 @@ import { Button } from "./ui/button";
 const getNotReadNotification = async (userId: string) => {
   "use cache";
   cacheTag(`get-notifications-${userId}`);
-  cacheLife("seconds");
+  // タグ無効化（updateNotification / updateReadAllNotifications）で即時更新されるため、時間ベースの再検証は不要
+  cacheLife("max");
 
   return prisma.notification.findFirst({
     where: {
