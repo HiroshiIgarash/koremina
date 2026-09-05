@@ -14,8 +14,6 @@ const getChannelIcon = async ({
   "use cache";
   // revalidateChannelIcon の updateTag と対応させる
   cacheTag(`channel-icon-${channelId}`);
-  // 旧 fetch の revalidate（1ヶ月）に相当するプリセット
-  cacheLife("max");
 
   const searchParams = new URLSearchParams();
   searchParams.set("part", "snippet");
@@ -43,9 +41,16 @@ const getChannelIcon = async ({
       throw new Error(`アイコンURLが取得できません: ${channelId}`);
     }
 
+    // 旧 fetch の revalidate（1ヶ月）に相当するプリセット
+    cacheLife("max");
+
     return url as string;
   } catch (error) {
     console.error("[getChannelIcon] エラー:", error);
+    // 失敗結果も戻り値としてキャッシュされるため、短命にして自然に再取得させる。
+    // エラー時は ChannelIconImage を描画せず onError による自己修復が働かないので、
+    // ここを長期キャッシュにすると一時的な API 障害で No Image が固着する
+    cacheLife("minutes");
     return { error: "Failed to get channel icon" };
   }
 };
