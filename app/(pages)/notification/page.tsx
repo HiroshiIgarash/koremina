@@ -11,7 +11,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 const getNotifications = async (userId: string) => {
   "use cache";
   cacheTag(`get-notifications-${userId}`);
-  cacheLife("seconds");
+  // タグ無効化（updateNotification / updateReadAllNotifications）で即時更新されるため、時間ベースの再検証は不要
+  cacheLife("max");
 
   return prisma.notification.findMany({
     where: { userId },
