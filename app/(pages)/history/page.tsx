@@ -16,6 +16,9 @@ const Page = () => {
             </time>
             <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
               <li>「神永タイガ」「山田龍一郎」の2名を追加しました。</li>
+              <li>
+                ライバー一覧ページでエラーが発生し、一覧が表示されない不具合を修正しました。
+              </li>
             </ul>
           </div>
           <div>
