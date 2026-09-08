@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { z } from "zod";
 
 const updateLiverSchema = z.object({
@@ -66,6 +66,9 @@ const updateLiver = async (formData: FormData) => {
     },
   });
 
+  // getLivers の "use cache" を即時無効化しないと、登録済みの行が
+  // 古いキャッシュ上「未登録」のままになり再クリックで重複作成される
+  updateTag("get-livers");
   revalidatePath("/liver_register");
 };
 
