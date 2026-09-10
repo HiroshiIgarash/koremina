@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { cacheTag, cacheLife } from "next/cache";
 
 interface getRecentPostsByUserIdProps {
   userId: string;
@@ -9,6 +10,10 @@ const getRecentPostsByUserId = async ({
   userId,
   count,
 }: getRecentPostsByUserIdProps) => {
+  "use cache";
+  cacheTag(`get-user-posts:${userId}`, "get-post");
+  cacheLife("max");
+
   const posts = await prisma.video.findMany({
     where: {
       postedUserId: userId,

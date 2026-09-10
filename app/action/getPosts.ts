@@ -10,7 +10,7 @@ interface getPostsProps {
 const getPosts = async ({ take, skip, filterLiver }: getPostsProps = {}) => {
   "use cache";
   cacheTag("get-post");
-  cacheLife("minutes");
+  cacheLife("max");
 
   const posts = await prisma.video.findMany({
     where: filterLiver

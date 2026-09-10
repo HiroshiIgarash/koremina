@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 const updateBookmark = async (
   postId: string,
@@ -38,7 +38,11 @@ const updateBookmark = async (
           update: {},
         });
 
-  revalidateTag("get-post", "minutes");
+  // 投稿一覧が持つ _count.Bookmark も変わるため get-post も無効化する
+  updateTag("get-post");
+  updateTag(`bookmark-info:${postId}`);
+  updateTag(`bookmark:${currentUser.id}`);
+
   return bookmark;
 };
 

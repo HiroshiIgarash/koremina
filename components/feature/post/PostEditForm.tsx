@@ -31,6 +31,7 @@ import { Liver } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
 import getLivers from "@/app/action/getLivers";
+import updatePost from "@/app/action/updatePost";
 
 const formSchema = z.object({
   videoId: z
@@ -101,15 +102,16 @@ const PostEditForm = ({
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      await fetch("/api/post", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, postId }),
-      }).then(() => {
-        toast.success("投稿の更新が完了しました");
-        router.push(`/post/${postId}`);
-        router.refresh();
-      });
+      const result = await updatePost({ ...values, postId });
+
+      if (!result.ok) {
+        toast.error(result.error);
+        return;
+      }
+
+      toast.success("投稿の更新が完了しました");
+      router.push(`/post/${postId}`);
+      router.refresh();
     });
   }
 

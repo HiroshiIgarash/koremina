@@ -31,6 +31,7 @@ import { Liver } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
 import getLivers from "@/app/action/getLivers";
+import createPost from "@/app/action/createPost";
 import {
   Dialog,
   DialogContent,
@@ -95,15 +96,16 @@ const PostForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      await fetch("/api/post", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      }).then(() => {
-        toast.success("投稿が完了しました。");
-        router.push("/");
-        router.refresh();
-      });
+      const result = await createPost(values);
+
+      if (!result.ok) {
+        toast.error(result.error);
+        return;
+      }
+
+      toast.success("投稿が完了しました。");
+      router.push("/");
+      router.refresh();
     });
   }
 
