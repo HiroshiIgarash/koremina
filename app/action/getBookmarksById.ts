@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { cacheTag, cacheLife } from "next/cache";
 
 interface IParam {
   take?: number;
@@ -7,6 +8,10 @@ interface IParam {
 }
 
 const getBookmarksById = async ({ take, skip, userId }: IParam) => {
+  "use cache";
+  cacheTag(`bookmark:${userId}`, "get-post");
+  cacheLife("max");
+
   const bookmarks = await prisma.bookmark.findMany({
     where: {
       userId: userId,

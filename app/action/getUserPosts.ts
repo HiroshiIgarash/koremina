@@ -10,7 +10,7 @@ interface getUserPostsProps {
 const getUserPosts = async ({ userId, take, skip }: getUserPostsProps) => {
   "use cache";
   cacheTag(`get-user-posts:${userId}`, "get-post");
-  cacheLife("minutes");
+  cacheLife("max");
 
   const posts = await prisma.video.findMany({
     where: {

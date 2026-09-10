@@ -4,7 +4,7 @@ import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { BioSchema, bioSchema } from "@/schema";
 import { z } from "zod";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 const updateBio = async (bio: BioSchema) => {
   try {
@@ -30,7 +30,7 @@ const updateBio = async (bio: BioSchema) => {
       },
     });
 
-    revalidateTag(`get-user:${currentUserId}`, "hours");
+    updateTag(`get-user:${currentUserId}`);
 
     // ユーザーが投稿した投稿IDを取得し、それぞれの投稿キャッシュを再検証
     const userPosts = await prisma.video.findMany({
@@ -38,8 +38,12 @@ const updateBio = async (bio: BioSchema) => {
       select: { id: true },
     });
     userPosts.forEach(post => {
-      revalidateTag(`get-post-by-id:${post.id}`, "max");
+      updateTag(`get-post-by-id:${post.id}`);
     });
+
+    // 一覧（getPosts / getUserPosts など）は postedUser を含むため、
+    // ここを無効化しないと古いプロフィールが残り続ける
+    updateTag("get-post");
   } catch (error) {
     console.error("[updateBio] エラー:", error);
     if (error instanceof z.ZodError) {

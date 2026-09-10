@@ -8,7 +8,7 @@ interface getTotalPostsProps {
 const getTotalPosts = async ({ filterLiver }: getTotalPostsProps = {}) => {
   "use cache";
   cacheTag("get-post");
-  cacheLife("minutes");
+  cacheLife("max");
 
   const count = await prisma.video.count({
     where: filterLiver

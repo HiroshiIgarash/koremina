@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/db";
 import getCurrentUser from "./getCurrentUser";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 const updateSeenUsers = async (
   postId: string,
@@ -45,7 +45,12 @@ const updateSeenUsers = async (
           },
         });
 
-  revalidateTag("get-post", "minutes");
+  // 視聴済みの情報は get-post タグのキャッシュ（getPosts / getUserPosts など）には
+  // 含まれていないため、ここで get-post を無効化する必要はない。
+  // seenUsers を実際に読んでいるキャッシュだけを対象にする。
+  updateTag(`bookmark-info:${postId}`);
+  updateTag(`bookmark:${currentUser.id}`);
+
   return seenUsers;
 };
 
