@@ -80,7 +80,7 @@
     "jest": "30.5.1",
     "jest-environment-jsdom": "30.5.1",
     "only-allow": "1.2.2",
-    "postcss": "8.5.26",
+    "postcss": "8.5.28",
     "prettier": "3.9.6",
     "prisma": "7.10.0",
     "tailwindcss": "4.3.3",
