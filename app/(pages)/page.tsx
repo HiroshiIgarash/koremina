@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import Birthday from "@/components/Birthday";
+import SkeletonBirthday from "@/components/SkeletonBirthday";
 import FirstVisitDialog from "@/components/FirstVisitDialog";
 import NotificationField from "@/components/NotificationField";
 import TopBookmarkList from "@/components/feature/bookmark/TopBookMarkList";
@@ -74,7 +75,9 @@ export default function Home() {
           alt="コレミナ -にじさんじおすすめ動画共有サービス（非公式）-"
         />
       </div>
-      <Birthday />
+      <Suspense fallback={<SkeletonBirthday />}>
+        <Birthday />
+      </Suspense>
       <div className="mt-10 mb-10">
         <p className="text-xl font-bold text-center">
           <Suspense fallback={<span className="text-destructive">...件</span>}>
