@@ -4,15 +4,26 @@ import SkeletonPostItem from "./SkeletonPostItem";
 import prisma from "@/lib/db";
 import { getRandomPostIds as getRandomPostIdsSQL } from "@prisma/client/sql";
 import { cacheTag, cacheLife } from "next/cache";
+import { connection } from "next/server";
 
-const getPickUpPosts = async () => {
+// 1000 * 60 * 60 * 12 ミリ秒 = 12時間ごとに 1 つ進むバケット番号
+const PICK_UP_BUCKET_MS = 1000 * 60 * 60 * 12;
+
+const getCurrentBucket = () => Math.floor(Date.now() / PICK_UP_BUCKET_MS);
+
+const getPickUpPosts = async (bucket: number) => {
   "use cache";
-  cacheTag("get-post");
-  cacheLife("hours");
+  // get-post はリアクションやブックマークのたびに無効化されるため、ここでは使わない。
+  // 12 時間バケットの間は DB に到達させないことを優先し、投稿の削除だけを
+  // deletePost 側から明示的に反映させる。
+  cacheTag("get-pickup-post");
+  // bucket が変わるまで再取得しない。時間ベースで再検証すると 1 時間ごとに
+  // DB を起こすことになるため、バケット番号をキャッシュキーに含めて
+  // 12 時間ごとに 1 回だけ DB に到達させる。
+  cacheLife("max");
 
-  // 1000 * 60 * 60 * 12 ミリ秒 = 12時間ごとにseedが変わる
   // -1 ~ 1 におさめるため、sinを用いる
-  const seed = Math.sin(Math.floor(Date.now() / (1000 * 60 * 60 * 12)));
+  const seed = Math.sin(bucket);
 
   // ランダムに投稿を取得（id, detailComment）
   const randomPosts = await prisma.$queryRawTyped(
@@ -62,7 +73,10 @@ const getPickUpPosts = async () => {
 };
 
 const PickUpList = async () => {
-  const posts = await getPickUpPosts();
+  // Birthday と同じ理由で、現在時刻を読む前に connection() を待つ
+  await connection();
+
+  const posts = await getPickUpPosts(getCurrentBucket());
 
   return (
     <>

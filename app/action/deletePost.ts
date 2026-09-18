@@ -26,6 +26,8 @@ const deletePost = async ({ postId }: deletePostProps) => {
 
   updateTag("get-post");
   updateTag(`get-post-by-id:${postId}`);
+  // PickUp は get-post から切り離しているため個別に無効化する
+  updateTag("get-pickup-post");
 };
 
 export default deletePost;

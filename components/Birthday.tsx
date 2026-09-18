@@ -2,9 +2,18 @@ import { getNearestBirthdayLivers } from "@/app/action/getBirthdayLivers";
 import Link from "next/link";
 import ChannelIcon from "./feature/setting/ChannelIcon";
 import { cn } from "@/lib/utils";
+import dayjs from "@/utils/dayjs";
+import { connection } from "next/server";
 
 const Birthday = async ({ className }: { className?: string }) => {
-  const birthdayData = await getNearestBirthdayLivers();
+  // cacheComponents 環境では現在時刻を読む前に connection() が必要になる。
+  // これによりこのコンポーネントはリクエスト時評価になるが、DB への到達は
+  // 日付が変わった最初の 1 回だけに保たれる。
+  await connection();
+
+  // 日付をキャッシュキーとして渡す。日付が変わった最初の 1 回だけ DB に到達する
+  const todayKey = dayjs().tz().format("YYYY-MM-DD");
+  const birthdayData = await getNearestBirthdayLivers(todayKey);
   const { livers, daysUntil, isToday } = birthdayData;
 
   // セクションタイトルを動的に決定

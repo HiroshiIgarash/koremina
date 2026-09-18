@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { auth } from "@/auth";
 
 const updateFavoriteLivers = async (liversId: string[]) => {
@@ -39,7 +39,7 @@ const updateFavoriteLivers = async (liversId: string[]) => {
     };
   }
 
-  revalidateTag(`get-user:${session.user.id}`, "hours");
+  updateTag(`get-user:${session.user.id}`);
 };
 
 export default updateFavoriteLivers;

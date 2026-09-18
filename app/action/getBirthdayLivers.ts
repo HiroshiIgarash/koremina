@@ -40,13 +40,16 @@ const getBirthdayLivers = async (
  * 今日誕生日のライバーがいる場合はそれを返す
  * いない場合は最も近い未来の誕生日のライバーを返す
  */
-export const getNearestBirthdayLivers = async () => {
+export const getNearestBirthdayLivers = async (todayKey: string) => {
   "use cache";
   cacheTag("get-birthday-livers");
-  cacheLife("hours");
+  // todayKey が変わるまで再取得しない。時間ベースで再検証すると
+  // その都度 DB を起こすことになるため、日付をキャッシュキーに含めて
+  // 日付が変わった最初の 1 回だけ DB に到達させる。
+  cacheLife("max");
 
   try {
-    const today = dayjs().tz();
+    const today = dayjs.tz(todayKey);
     const currentMonth = today.month() + 1;
     const currentDate = today.date();
 
@@ -81,9 +84,8 @@ export const getNearestBirthdayLivers = async () => {
     for (const liver of allLivers) {
       if (!liver.birthMonth || !liver.birthDate) continue;
 
-      // 今年の誕生日
-      let thisBirthday = dayjs()
-        .tz()
+      // 今年の誕生日（todayKey と基準を揃える）
+      let thisBirthday = today
         .month(liver.birthMonth - 1)
         .date(liver.birthDate);
 

@@ -4,7 +4,7 @@ import { cacheTag, cacheLife } from "next/cache";
 const getUserById = async (id: string) => {
   "use cache";
   cacheTag(`get-user:${id}`);
-  cacheLife("hours");
+  cacheLife("max");
 
   const user = await prisma.user.findUnique({
     where: { id },
