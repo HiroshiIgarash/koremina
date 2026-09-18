@@ -32,6 +32,8 @@ const updateLivers = async (liversJSON: Liver[]) => {
   const result = await prisma.$transaction([...query]);
 
   updateTag("get-livers");
+  // 誕生日も更新対象に含まれるため Birthday ウィジェットも無効化する
+  updateTag("get-birthday-livers");
 
   return { count: result.length, skipped };
 };
