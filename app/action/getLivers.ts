@@ -1,4 +1,5 @@
-"use cache";
+// インメモリの "use cache" はインスタンスが入れ替わるたびに消えて DB を起こすため、共有キャッシュに置く
+"use cache: remote";
 
 import prisma from "@/lib/db";
 import { cacheTag, cacheLife } from "next/cache";

@@ -66,7 +66,7 @@ const updateLiver = async (formData: FormData) => {
     },
   });
 
-  // getLivers の "use cache" を即時無効化しないと、登録済みの行が
+  // getLivers のキャッシュを即時無効化しないと、登録済みの行が
   // 古いキャッシュ上「未登録」のままになり再クリックで重複作成される
   updateTag("get-livers");
   // 誕生日も更新対象に含まれるため Birthday ウィジェットも無効化する

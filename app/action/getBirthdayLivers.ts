@@ -41,7 +41,8 @@ const getBirthdayLivers = async (
  * いない場合は最も近い未来の誕生日のライバーを返す
  */
 export const getNearestBirthdayLivers = async (todayKey: string) => {
-  "use cache";
+  // インメモリの "use cache" はインスタンスが入れ替わるたびに消えて DB を起こすため、共有キャッシュに置く
+  "use cache: remote";
   cacheTag("get-birthday-livers");
   // todayKey が変わるまで再取得しない。時間ベースで再検証すると
   // その都度 DB を起こすことになるため、日付をキャッシュキーに含めて
