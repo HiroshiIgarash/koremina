@@ -3,7 +3,8 @@ import { cacheTag } from "next/cache";
 import { cacheLife } from "next/cache";
 
 const getPostById = async (id: string) => {
-  "use cache";
+  // インメモリの "use cache" はインスタンスが入れ替わるたびに消えて DB を起こすため、共有キャッシュに置く
+  "use cache: remote";
   cacheTag(`get-post-by-id:${id}`);
   cacheLife("max");
 

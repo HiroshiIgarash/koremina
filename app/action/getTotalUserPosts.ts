@@ -6,7 +6,8 @@ interface getTotalUserPostsProps {
 }
 
 const getTotalUserPosts = async ({ userId }: getTotalUserPostsProps) => {
-  "use cache";
+  // インメモリの "use cache" はインスタンスが入れ替わるたびに消えて DB を起こすため、共有キャッシュに置く
+  "use cache: remote";
   cacheTag(`get-user-posts:${userId}`, "get-post");
   cacheLife("max");
 

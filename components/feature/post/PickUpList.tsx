@@ -12,7 +12,8 @@ const PICK_UP_BUCKET_MS = 1000 * 60 * 60 * 12;
 const getCurrentBucket = () => Math.floor(Date.now() / PICK_UP_BUCKET_MS);
 
 const getPickUpPosts = async (bucket: number) => {
-  "use cache";
+  // インメモリの "use cache" はインスタンスが入れ替わるたびに消えて DB を起こすため、共有キャッシュに置く
+  "use cache: remote";
   // get-post はリアクションやブックマークのたびに無効化されるため、ここでは使わない。
   // 12 時間バケットの間は DB に到達させないことを優先し、投稿の削除だけを
   // deletePost 側から明示的に反映させる。
