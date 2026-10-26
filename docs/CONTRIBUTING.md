@@ -70,7 +70,7 @@ __tests__/
 テスト作成のルール:
 - **実装詳細ではなく振る舞いをテスト**
 - テスト間の依存を避け、任意の順序で実行可能にする
-- `@testing-library/react` + `@testing-library/user-event` を使用
+- `@testing-library/react` を使用
 
 ## コードスタイル
 
