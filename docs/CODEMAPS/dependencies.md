@@ -19,9 +19,9 @@
 
 | Package | Version | Role |
 |---------|---------|------|
-| next | 16.1.6 | Framework (App Router, Server Actions, Cache Components) |
-| react | 19.2.4 | UI library |
-| typescript | ^5 | Type safety |
+| next | 16.4.1 | Framework (App Router, Server Actions, Cache Components) |
+| react | 19.2.8 | UI library |
+| typescript | 6.0.3 | Type safety |
 | @prisma/client | ^7.0.0 | ORM client |
 | @prisma/adapter-pg | ^7.0.0 | v7 driver adapter (pg-based) |
 | next-auth | ^5.0.0-beta.16 | Authentication |
@@ -31,10 +31,10 @@
 
 | Package | Version | Role |
 |---------|---------|------|
-| tailwindcss | ^4.2.0 | Utility CSS |
+| tailwindcss | 4.3.3 | Utility CSS |
 | @radix-ui/* | various | Headless UI primitives (shadcn/ui base) |
-| motion | ^12.x | Animation (formerly Framer Motion) |
-| lucide-react | ^0.577.0 | Icons |
+| motion | ^13.0.0 | Animation (formerly Framer Motion) |
+| lucide-react | ^1.0.0 | Icons |
 | react-icons | ^5.5.0 | Additional icons |
 | next-themes | ^0.4.6 | Dark/light mode |
 | class-variance-authority | ^0.7.1 | Component variants |
@@ -54,33 +54,30 @@
 
 | Package | Version | Role |
 |---------|---------|------|
-| sharp | ^0.34.4 | Server-side image processing |
+| sharp | ^0.35.0 | Server-side image processing |
 | react-image-crop | ^11.0.10 | Client-side image crop |
-| react-dropzone | ^15.0.0 | File drag-and-drop upload |
-| blueimp-load-image | ^5.16.0 | EXIF orientation fix |
+| react-dropzone | ^20.0.0 | File drag-and-drop upload |
 
 ## Utilities
 
 | Package | Version | Role |
 |---------|---------|------|
-| axios | ^1.12.2 | HTTP client (YouTube API calls) |
 | dayjs | ^1.11.18 | Date formatting |
-| nodemailer | ^7.0.0 | Email sending |
-| next-sitemap | ^4.2.3 | SEO sitemap generation |
+| nodemailer | ^10.0.0 | Email sending |
 | cmdk | ^1.1.1 | Command palette (search UI) |
 
 ## Dev Tools
 
 | Package | Version | Role |
 |---------|---------|------|
-| jest | ^30.2.0 | Test runner |
-| @testing-library/react | ^16.3.0 | Component testing |
-| eslint | ^9.37.0 | Linting |
-| prettier | ^3.8.1 | Formatting |
-| dotenv-cli | ^11.0.0 | Env var injection for scripts |
-| only-allow | ^1.2.1 | Enforces pnpm usage |
+| jest | 30.5.2 | Test runner |
+| @testing-library/react | 16.3.3 | Component testing |
+| eslint | 10.13.0 | Linting |
+| prettier | 3.9.10 | Formatting |
+| dotenv-cli | 11.0.0 | Env var injection for scripts |
+| only-allow | 1.2.2 | Enforces pnpm usage |
 
 ## Package Manager
 
-- **pnpm** 10.32.1 (enforced via `preinstall` hook)
-- **Node.js** v24.13.0 (mise managed, `.mise.toml`)
+- **pnpm** 10.34.7 (enforced via `preinstall` hook)
+- **Node.js** v24.22.0 (mise managed, `.mise.toml`)

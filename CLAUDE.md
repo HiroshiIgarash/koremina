@@ -184,7 +184,7 @@ gh pr create --base develop --title "Your PR title" --body "Description"
 - Uses Node.js v24.13.0 (mise managed via `.mise.toml`)
 - Production builds include Prisma SQL generation
 - Email notifications via Nodemailer
-- SEO: next-sitemap for sitemap generation (outputs to public/)
+- SEO: sitemap generation via `app/sitemap.ts` (App Router native)
 
 ## Features
 
