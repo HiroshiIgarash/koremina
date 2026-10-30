@@ -84,7 +84,7 @@
   "packageManager": "pnpm@10.34.7",
   "pnpm": {
     "overrides": {
-      "zod@<4.6.6": "4.6.6"
+      "zod@<4.6.6": "4.6.7"
     }
   }
 }
