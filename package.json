@@ -81,7 +81,7 @@
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   },
-  "packageManager": "pnpm@10.34.7",
+  "packageManager": "pnpm@10.34.9",
   "pnpm": {
     "overrides": {
       "zod@<4.6.6": "4.6.6"
