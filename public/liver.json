@@ -2708,5 +2708,25 @@
     "isOverseas": 0,
     "birthMonth": 7,
     "birthDate": 6
+  },
+  {
+    "name": "リュール・ファクトゥール",
+    "aliasFirst": "りゅーる・ふぁくとぅーる",
+    "aliasSecond": "",
+    "channelHandle": "@FAC2RS",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDate": 23
+  },
+  {
+    "name": "ロビュスト・ファクトゥール",
+    "aliasFirst": "ろびゅすと・ふぁくとぅーる",
+    "aliasSecond": "",
+    "channelHandle": "@FAC2RS",
+    "isRetire": 0,
+    "isOverseas": 0,
+    "birthMonth": 4,
+    "birthDate": 23
   }
 ]
